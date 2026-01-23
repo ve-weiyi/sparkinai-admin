@@ -18,7 +18,7 @@
 
 ## 📚 项目简介
 
-ve-admin-element 是一个现代化的博客后台管理系统，基于 Vue 3.5 + TypeScript + Element Plus 构建。项目采用最新的前端技术栈，提供了丰富的功能组件和优雅的用户界面。
+ve-admin-element 是一个现代化的后台管理系统，基于 Vue 3.5 + TypeScript + Element Plus 构建。项目采用最新的前端技术栈，提供了丰富的功能组件和优雅的用户界面。
 
 ## ✨ 项目预览
 
@@ -72,9 +72,9 @@ ve-admin-element 是一个现代化的博客后台管理系统，基于 Vue 3.5 
 
 | 项目               | 功能     | Github                                                               |                                                                     |
 |------------------|--------|----------------------------------------------------------------------|---------------------------------------------------------------------|
-| ve-blog-golang   | 博客后端服务 | [ve-blog-golang](https://github.com/ve-weiyi/ve-blog-golang.git)     | [ve-blog-golang](https://gitee.com/ve-weiyi/ve-blog-golang.git)     |
-| ve-blog-naive    | 博客前台展示 | [ve-blog-naive](https://github.com/ve-weiyi/ve-blog-naive.git)       | [ve-blog-naive](https://gitee.com/ve-weiyi/ve-blog-naive.git)       |
-| ve-admin-element | 博客后台管理 | [ve-admin-element](https://github.com/ve-weiyi/ve-admin-element.git) | [ve-admin-element](https://gitee.com/ve-weiyi/ve-admin-element.git) |
+| ve-blog-golang   | 后端服务 | [ve-blog-golang](https://github.com/ve-weiyi/ve-blog-golang.git)     | [ve-blog-golang](https://gitee.com/ve-weiyi/ve-blog-golang.git)     |
+| ve-blog-naive    | 前台展示 | [ve-blog-naive](https://github.com/ve-weiyi/ve-blog-naive.git)       | [ve-blog-naive](https://gitee.com/ve-weiyi/ve-blog-naive.git)       |
+| ve-admin-element | 后台管理 | [ve-admin-element](https://github.com/ve-weiyi/ve-admin-element.git) | [ve-admin-element](https://gitee.com/ve-weiyi/ve-admin-element.git) |
 
 ## 🏗️ 项目结构
 
@@ -151,7 +151,7 @@ ghcr.io/ve-weiyi/ve-admin-element:latest
 
 - [x] API接口文件重构
 - [x] 登录页面修改
-- [x] 博客管理页面移植
+- [x] 管理页面移植
 
 ### 🚧 开发中功能
 

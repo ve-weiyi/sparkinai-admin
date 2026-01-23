@@ -2,6 +2,22 @@ import { defineMock } from "./base";
 
 export default defineMock([
   {
+    url: "/admin-api/v1/get_client_info",
+    method: ["GET"],
+    body: {
+      code: 200,
+      data: {
+        id: 1,
+        terminal_id: "mock-terminal-id-123456",
+        os: "macOS",
+        browser: "Chrome",
+        ip_address: "127.0.0.1",
+        ip_source: "本地",
+      },
+      msg: "一切ok",
+    },
+  },
+  {
     url: "/admin-api/v1/get_captcha_code",
     method: ["POST"],
     body: {
@@ -106,6 +122,84 @@ export default defineMock([
       code: 200,
       data: {},
       msg: "验证码发送成功",
+    },
+  },
+  {
+    url: "/admin-api/v1/send_phone_verify_code",
+    method: ["POST"],
+    body: {
+      code: 200,
+      data: {},
+      msg: "验证码发送成功",
+    },
+  },
+  {
+    url: "/admin-api/v1/reset_password",
+    method: ["POST"],
+    body: {
+      code: 200,
+      data: {},
+      msg: "密码重置成功",
+    },
+  },
+  {
+    url: "/admin-api/v1/refresh_token",
+    method: ["POST"],
+    body: {
+      code: 200,
+      data: {
+        user_id: "1",
+        scope: "admin",
+        token: {
+          token_type: "Bearer",
+          access_token: "new_access_token",
+          expires_in: 7200,
+          refresh_token: "new_refresh_token",
+          refresh_expires_in: 604800,
+          refresh_expires_at: 1735797052,
+        },
+      },
+      msg: "刷新成功",
+    },
+  },
+  {
+    url: "/admin-api/v1/get_oauth_authorize_url",
+    method: ["POST"],
+    body: {
+      code: 200,
+      data: {
+        authorize_url: "https://oauth.example.com/authorize?client_id=xxx&redirect_uri=xxx",
+      },
+      msg: "一切ok",
+    },
+  },
+  {
+    url: "/admin-api/v1/third_login",
+    method: ["POST"],
+    body: {
+      code: 200,
+      data: {
+        user_id: "1",
+        scope: "admin",
+        token: {
+          token_type: "Bearer",
+          access_token: "third_party_access_token",
+          expires_in: 7200,
+          refresh_token: "third_party_refresh_token",
+          refresh_expires_in: 604800,
+          refresh_expires_at: 1735797052,
+        },
+      },
+      msg: "登录成功",
+    },
+  },
+  {
+    url: "/admin-api/v1/logoff",
+    method: ["POST"],
+    body: {
+      code: 200,
+      data: {},
+      msg: "注销成功",
     },
   },
 ]);

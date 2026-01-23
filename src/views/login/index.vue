@@ -15,9 +15,9 @@
           <span class="auth-feature__dot" />
           Blog Management System
         </div>
-        <h1 class="auth-feature__title">博客管理系统</h1>
+        <h1 class="auth-feature__title">管理系统</h1>
         <p class="auth-feature__subtitle">
-          基于 Vue 3 + TypeScript 构建的现代化博客管理平台，提供优雅的写作体验和强大的内容管理能力。
+          基于 Vue 3 + TypeScript 构建的现代化管理平台，提供优雅的写作体验和强大的内容管理能力。
         </p>
         <ul class="auth-feature__highlights">
           <li>
@@ -98,11 +98,11 @@ let notificationInstance: ReturnType<typeof ElNotification> | null = null;
 
 const showVoteNotification = () => {
   notificationInstance = ElNotification({
-    title: "欢迎使用博客管理系统",
+    title: "欢迎使用管理系统",
     message: `
 开始你的创作之旅，记录生活点滴，分享技术心得~
 <br/>
-<a href="https://blog.veweiyi.com" target="_blank" style="color: var(--el-color-primary); text-decoration: none; font-weight: 500;">📖 访问博客前台</a>
+<a href="https://blog.veweiyi.com" target="_blank" style="color: var(--el-color-primary); text-decoration: none; font-weight: 500;">📖 访问前台</a>
 <br/>
 <a href="https://admin.veweiyi.com" target="_blank" style="color: var(--el-color-primary); text-decoration: none; font-weight: 500;">⚙️ 进入管理后台</a>
 `,

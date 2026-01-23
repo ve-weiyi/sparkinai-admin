@@ -3,6 +3,14 @@ export interface BatchResp {
   success_count: number;
 }
 
+export interface AddNoticeReq {
+  title: string; // 通知标题
+  content: string; // 通知内容
+  type: string; // 通知类型
+  level: string; // 通知等级
+  app_name?: string; // 目标应用名称
+}
+
 export interface DeleteUserBindThirdPartyReq {
   platform: string; // 平台
 }
@@ -62,6 +70,14 @@ export interface GetOauthAuthorizeUrlResp {
   authorize_url: string; // 授权地址
 }
 
+export interface IdReq {
+  id: number;
+}
+
+export interface IdsReq {
+  ids: number[];
+}
+
 export interface ListUploadFileReq {
   file_path?: string; // 文件路径
   limit?: number; // 限制
@@ -85,6 +101,21 @@ export interface MultiUploadFileReq {
   file_path?: string; // 文件路径
 }
 
+export interface NoticeBackVO {
+  id?: number; // 主键ID
+  title: string; // 通知标题
+  content: string; // 通知内容
+  type: string; // 通知类型
+  level: string; // 通知等级
+  app_name: string; // 目标应用名称
+  publisher_id: string; // 发布人ID
+  publish_status: number; // 发布状态
+  publish_time: number; // 发布时间
+  revoke_time: number; // 撤回时间
+  created_at: number; // 创建时间
+  updated_at: number; // 更新时间
+}
+
 export interface PageQuery {
   page?: number; // 当前页码
   page_size?: number; // 每页数量
@@ -103,7 +134,16 @@ export interface PhoneLoginReq {
   verify_code: string; // 验证码
 }
 
+export interface QueryNoticeReq extends PageQuery {
+  type?: string; // 通知类型
+  level?: string; // 通知等级
+  publish_status?: number; // 发布状态
+  app_name?: string; // 目标应用名称
+}
+
 export interface QueryUserLoginHistoryReq extends PageQuery {}
+
+export interface QueryUserNoticeReq extends PageQuery {}
 
 export interface RefreshTokenReq {
   user_id: string; // 用户id
@@ -149,6 +189,21 @@ export interface Token {
   refresh_expires_in: number; // RefreshToken 有效期（秒），如 604800（7天）
   refresh_expires_at: number; // RefreshToken 过期时间戳（秒）
 }
+
+export interface UpdateNoticeReq {
+  id: number; // 主键ID
+  title: string; // 通知标题
+  content: string; // 通知内容
+  type: string; // 通知类型
+  level: string; // 通知等级
+  app_name?: string; // 目标应用名称
+}
+
+export interface UpdateNoticeStatusReq {
+  id: number; // 主键ID
+  publish_status: number; // 发布状态
+}
+
 
 export interface UpdateUserAvatarReq {
   avatar: string; // 头像

@@ -1,0 +1,440 @@
+import { defineMock } from "./base";
+
+export default defineMock([
+  {
+    url: "/admin-api/v1/admin/find_user_list",
+    method: ["POST"],
+    body: {
+      code: 200,
+      data: {
+        list: [
+          {
+            id: 1,
+            username: "user1",
+            phone: "13800138001",
+            email: "user1@example.com",
+            balance: 1000,
+            status: 1,
+            created_at: 1640000000,
+            updated_at: 1640000000,
+          },
+          {
+            id: 2,
+            username: "user2",
+            phone: "13800138002",
+            email: "user2@example.com",
+            balance: 2000,
+            status: 1,
+            created_at: 1640000000,
+            updated_at: 1640000000,
+          },
+        ],
+        total: 2,
+        page: 1,
+        page_size: 10,
+      },
+      msg: "success",
+    },
+  },
+  {
+    url: "/admin-api/v1/admin/recharge",
+    method: ["POST"],
+    body: {
+      code: 200,
+      data: {
+        id: 1,
+        username: "user1",
+        phone: "13800138001",
+        email: "user1@example.com",
+        balance: 1500,
+        status: 1,
+        created_at: 1640000000,
+        updated_at: 1640000000,
+      },
+      msg: "success",
+    },
+  },
+  {
+    url: "/admin-api/v1/admin/deletes_user",
+    method: ["DELETE"],
+    body: {
+      code: 200,
+      data: {
+        success_count: 2,
+        fail_count: 0,
+      },
+      msg: "success",
+    },
+  },
+  {
+    url: "/admin-api/v1/provider/find_provider_list",
+    method: ["POST"],
+    body: {
+      code: 200,
+      data: {
+        list: [
+          {
+            id: 1,
+            name: "OpenAI",
+            code: "openai",
+            status: 1,
+            created_at: 1640000000,
+            updated_at: 1640000000,
+          },
+          {
+            id: 2,
+            name: "Claude",
+            code: "claude",
+            status: 1,
+            created_at: 1640000000,
+            updated_at: 1640000000,
+          },
+        ],
+        total: 2,
+        page: 1,
+        page_size: 10,
+      },
+      msg: "success",
+    },
+  },
+  {
+    url: "/admin-api/v1/provider/add_provider",
+    method: ["POST"],
+    body: {
+      code: 200,
+      data: {
+        id: 3,
+        name: "Gemini",
+        code: "gemini",
+        status: 1,
+        created_at: 1640000000,
+        updated_at: 1640000000,
+      },
+      msg: "success",
+    },
+  },
+  {
+    url: "/admin-api/v1/provider/update_provider",
+    method: ["PUT"],
+    body: {
+      code: 200,
+      data: {
+        id: 1,
+        name: "OpenAI",
+        code: "openai",
+        status: 1,
+        created_at: 1640000000,
+        updated_at: 1640000000,
+      },
+      msg: "success",
+    },
+  },
+  {
+    url: "/admin-api/v1/provider/deletes_provider",
+    method: ["DELETE"],
+    body: {
+      code: 200,
+      data: {
+        success_count: 1,
+        fail_count: 0,
+      },
+      msg: "success",
+    },
+  },
+  {
+    url: "/admin-api/v1/model/find_model_list",
+    method: ["POST"],
+    body: {
+      code: 200,
+      data: {
+        list: [
+          {
+            id: 1,
+            provider_id: 1,
+            name: "GPT-4",
+            code: "gpt-4",
+            status: 1,
+            created_at: 1640000000,
+            updated_at: 1640000000,
+          },
+          {
+            id: 2,
+            provider_id: 1,
+            name: "GPT-3.5",
+            code: "gpt-3.5-turbo",
+            status: 1,
+            created_at: 1640000000,
+            updated_at: 1640000000,
+          },
+        ],
+        total: 2,
+        page: 1,
+        page_size: 10,
+      },
+      msg: "success",
+    },
+  },
+  {
+    url: "/admin-api/v1/model/add_model",
+    method: ["POST"],
+    body: {
+      code: 200,
+      data: {
+        id: 3,
+        provider_id: 2,
+        name: "Claude-3",
+        code: "claude-3",
+        status: 1,
+        created_at: 1640000000,
+        updated_at: 1640000000,
+      },
+      msg: "success",
+    },
+  },
+  {
+    url: "/admin-api/v1/model/update_model",
+    method: ["PUT"],
+    body: {
+      code: 200,
+      data: {
+        id: 1,
+        provider_id: 1,
+        name: "GPT-4",
+        code: "gpt-4",
+        status: 1,
+        created_at: 1640000000,
+        updated_at: 1640000000,
+      },
+      msg: "success",
+    },
+  },
+  {
+    url: "/admin-api/v1/model/deletes_model",
+    method: ["DELETE"],
+    body: {
+      code: 200,
+      data: {
+        success_count: 1,
+        fail_count: 0,
+      },
+      msg: "success",
+    },
+  },
+  {
+    url: "/admin-api/v1/apikey/find_apikey_list",
+    method: ["POST"],
+    body: {
+      code: 200,
+      data: {
+        list: [
+          {
+            id: 1,
+            provider_id: 1,
+            name: "OpenAI Key 1",
+            key: "sk-***",
+            priority: 1,
+            status: 1,
+            created_at: 1640000000,
+            updated_at: 1640000000,
+          },
+          {
+            id: 2,
+            provider_id: 1,
+            name: "OpenAI Key 2",
+            key: "sk-***",
+            priority: 2,
+            status: 1,
+            created_at: 1640000000,
+            updated_at: 1640000000,
+          },
+        ],
+        total: 2,
+        page: 1,
+        page_size: 10,
+      },
+      msg: "success",
+    },
+  },
+  {
+    url: "/admin-api/v1/apikey/add_apikey",
+    method: ["POST"],
+    body: {
+      code: 200,
+      data: {
+        id: 3,
+        provider_id: 2,
+        name: "Claude Key 1",
+        key: "sk-***",
+        priority: 1,
+        status: 1,
+        created_at: 1640000000,
+        updated_at: 1640000000,
+      },
+      msg: "success",
+    },
+  },
+  {
+    url: "/admin-api/v1/apikey/update_apikey",
+    method: ["PUT"],
+    body: {
+      code: 200,
+      data: {
+        id: 1,
+        provider_id: 1,
+        name: "OpenAI Key 1",
+        key: "sk-***",
+        priority: 1,
+        status: 1,
+        created_at: 1640000000,
+        updated_at: 1640000000,
+      },
+      msg: "success",
+    },
+  },
+  {
+    url: "/admin-api/v1/apikey/deletes_apikey",
+    method: ["DELETE"],
+    body: {
+      code: 200,
+      data: {
+        success_count: 1,
+        fail_count: 0,
+      },
+      msg: "success",
+    },
+  },
+  {
+    url: "/admin-api/v1/engine/find_config_list",
+    method: ["POST"],
+    body: {
+      code: 200,
+      data: {
+        list: [
+          {
+            id: 1,
+            type: "chat",
+            name: "Chat Engine",
+            prompt: "You are a helpful assistant",
+            model_id: 1,
+            params: { temperature: 0.7 },
+            status: 1,
+            created_at: 1640000000,
+            updated_at: 1640000000,
+          },
+        ],
+        total: 1,
+        page: 1,
+        page_size: 10,
+      },
+      msg: "success",
+    },
+  },
+  {
+    url: "/admin-api/v1/engine/add_config",
+    method: ["POST"],
+    body: {
+      code: 200,
+      data: {
+        id: 2,
+        type: "completion",
+        name: "Completion Engine",
+        prompt: "Complete the following text",
+        model_id: 2,
+        params: { temperature: 0.5 },
+        status: 1,
+        created_at: 1640000000,
+        updated_at: 1640000000,
+      },
+      msg: "success",
+    },
+  },
+  {
+    url: "/admin-api/v1/engine/update_config",
+    method: ["PUT"],
+    body: {
+      code: 200,
+      data: {
+        id: 1,
+        type: "chat",
+        name: "Chat Engine",
+        prompt: "You are a helpful assistant",
+        model_id: 1,
+        params: { temperature: 0.7 },
+        status: 1,
+        created_at: 1640000000,
+        updated_at: 1640000000,
+      },
+      msg: "success",
+    },
+  },
+  {
+    url: "/admin-api/v1/engine/deletes_config",
+    method: ["DELETE"],
+    body: {
+      code: 200,
+      data: {
+        success_count: 1,
+        fail_count: 0,
+      },
+      msg: "success",
+    },
+  },
+  {
+    url: "/admin-api/v1/system/find_config_list",
+    method: ["POST"],
+    body: {
+      code: 200,
+      data: {
+        list: [
+          {
+            id: 1,
+            key: "site_name",
+            value: "Kopro",
+            description: "Site name",
+            created_at: 1640000000,
+            updated_at: 1640000000,
+          },
+          {
+            id: 2,
+            key: "site_url",
+            value: "https://kopro.com",
+            description: "Site URL",
+            created_at: 1640000000,
+            updated_at: 1640000000,
+          },
+        ],
+        total: 2,
+        page: 1,
+        page_size: 10,
+      },
+      msg: "success",
+    },
+  },
+  {
+    url: "/admin-api/v1/system/update_config",
+    method: ["PUT"],
+    body: {
+      code: 200,
+      data: {
+        id: 1,
+        key: "site_name",
+        value: "Kopro",
+        description: "Site name",
+        created_at: 1640000000,
+        updated_at: 1640000000,
+      },
+      msg: "success",
+    },
+  },
+  {
+    url: "/admin-api/v1/system/fill_template",
+    method: ["POST"],
+    body: {
+      code: 200,
+      data: {
+        result: "Filled template content",
+      },
+      msg: "success",
+    },
+  },
+]);
