@@ -19,7 +19,7 @@ export default defineMock([
         intro: "系统管理员",
         website: "https://veweiyi.cn",
         third_party: [],
-        roles: ["admin"],
+        roles: ["root"],
         perms: ["*:*:*"],
       },
       msg: "一切ok",
