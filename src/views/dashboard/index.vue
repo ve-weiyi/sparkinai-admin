@@ -7,7 +7,7 @@
             <img class="w-20 h-20 mr-5 rounded-full" :src="userStore.userInfo.avatar || 'https://via.placeholder.com/80'" />
             <div>
               <p class="text-lg font-bold">{{ greetings }}</p>
-              <p class="text-sm text-gray-500">欢迎使用kopro内容生成平台</p>
+              <p class="text-sm text-gray-500">欢迎使用sparkinai内容生成平台</p>
             </div>
           </div>
         </el-col>

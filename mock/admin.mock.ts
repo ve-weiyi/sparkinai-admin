@@ -397,7 +397,7 @@ export default defineMock([
           {
             id: 2,
             key: "site_url",
-            value: "https://kopro.com",
+            value: "https://sparkinai.com",
             description: "Site URL",
             created_at: 1640000000,
             updated_at: 1640000000,

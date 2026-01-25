@@ -1,7 +1,7 @@
 <div align=center>
-  <img alt="ve-admin-element" width="64" height="64" src="./public/favicon.ico">
+  <img alt="sparkinai-admin" width="64" height="64" src="./public/favicon.ico">
 
-  <h1>ve-admin-element</h1>
+  <h1>sparkinai-admin</h1>
 
   <img src="https://img.shields.io/badge/Vue-3.5.13-brightgreen.svg"/>
   <img src="https://img.shields.io/badge/Vite-6.2.6-green.svg"/>
@@ -18,7 +18,7 @@
 
 ## 📚 项目简介
 
-ve-admin-element 是一个现代化的后台管理系统，基于 Vue 3.5 + TypeScript + Element Plus 构建。项目采用最新的前端技术栈，提供了丰富的功能组件和优雅的用户界面。
+sparkinai-admin 是一个现代化的后台管理系统，基于 Vue 3.5 + TypeScript + Element Plus 构建。项目采用最新的前端技术栈，提供了丰富的功能组件和优雅的用户界面。
 
 ## ✨ 项目预览
 
@@ -74,12 +74,12 @@ ve-admin-element 是一个现代化的后台管理系统，基于 Vue 3.5 + Type
 |------------------|--------|----------------------------------------------------------------------|---------------------------------------------------------------------|
 | ve-blog-golang   | 后端服务 | [ve-blog-golang](https://github.com/ve-weiyi/ve-blog-golang.git)     | [ve-blog-golang](https://gitee.com/ve-weiyi/ve-blog-golang.git)     |
 | ve-blog-naive    | 前台展示 | [ve-blog-naive](https://github.com/ve-weiyi/ve-blog-naive.git)       | [ve-blog-naive](https://gitee.com/ve-weiyi/ve-blog-naive.git)       |
-| ve-admin-element | 后台管理 | [ve-admin-element](https://github.com/ve-weiyi/ve-admin-element.git) | [ve-admin-element](https://gitee.com/ve-weiyi/ve-admin-element.git) |
+| sparkinai-admin | 后台管理 | [sparkinai-admin](https://github.com/ve-weiyi/sparkinai-admin.git) | [sparkinai-admin](https://gitee.com/ve-weiyi/sparkinai-admin.git) |
 
 ## 🏗️ 项目结构
 
 ```
-ve-admin-element
+sparkinai-admin
 ├── .github/           # GitHub 工作流配置
 ├── public/            # 静态资源
 ├── src/               # 源代码
@@ -116,10 +116,10 @@ ve-admin-element
 
 ```bash
 # 克隆项目
-git clone https://github.com/ve-weiyi/ve-admin-element.git
+git clone https://github.com/ve-weiyi/sparkinai-admin.git
 
 # 进入项目目录
-cd ve-admin-element
+cd sparkinai-admin
 
 # 安装依赖
 pnpm install
@@ -139,10 +139,10 @@ pnpm build
 
 ```bash
 docker run -d \
---name ve-admin-element \
+--name sparkinai-admin \
 --restart always \
 -p 9421:80 \
-ghcr.io/ve-weiyi/ve-admin-element:latest
+ghcr.io/ve-weiyi/sparkinai-admin:latest
 ```
 
 ## 📋 开发计划
