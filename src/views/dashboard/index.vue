@@ -26,8 +26,8 @@
           <div class="flex justify-between items-center mt-2">
             <div>
               <span class="text-2xl font-bold">{{ stats.total_users }}</span>
-              <span class="text-xs ml-2" :class="stats.total_users_change < 0 ? 'text-red-500' : 'text-green-500'">
-                {{ stats.total_users_change > 0 ? '+' : '' }}{{ stats.total_users_change }}
+              <span class="text-xs ml-2 text-green-500">
+                +{{ stats.new_users_today }} 今日
               </span>
             </div>
             <el-icon class="text-3xl text-blue-500"><User /></el-icon>
@@ -39,13 +39,13 @@
         <el-card shadow="never" class="h-full">
           <template #header>
             <div class="flex justify-between">
-              <span class="text-gray-500">总内容生产数</span>
+              <span class="text-gray-500">总生成次数</span>
               <el-tag type="success" size="small">累计</el-tag>
             </div>
           </template>
           <div class="flex justify-between items-center mt-2">
             <div>
-              <span class="text-2xl font-bold">{{ stats.total_content }}</span>
+              <span class="text-2xl font-bold">{{ stats.total_generations }}</span>
               <span class="text-xs text-gray-500 ml-2">累计生成</span>
             </div>
             <el-icon class="text-3xl text-green-500"><DocumentCopy /></el-icon>
@@ -57,14 +57,14 @@
         <el-card shadow="never" class="h-full">
           <template #header>
             <div class="flex justify-between">
-              <span class="text-gray-500">新增用户数</span>
+              <span class="text-gray-500">今日活跃用户</span>
               <el-tag type="warning" size="small">今日</el-tag>
             </div>
           </template>
           <div class="flex justify-between items-center mt-2">
             <div>
-              <span class="text-2xl font-bold">{{ stats.new_users_today }}</span>
-              <span class="text-xs text-gray-500 ml-2">今日新增</span>
+              <span class="text-2xl font-bold">{{ stats.active_users_today }}</span>
+              <span class="text-xs text-gray-500 ml-2">今日活跃</span>
             </div>
             <el-icon class="text-3xl text-purple-500"><UserFilled /></el-icon>
           </div>
@@ -75,70 +75,84 @@
         <el-card shadow="never" class="h-full">
           <template #header>
             <div class="flex justify-between">
-              <span class="text-gray-500">今日内容生产</span>
+              <span class="text-gray-500">今日生成次数</span>
               <el-tag type="info" size="small">日</el-tag>
             </div>
           </template>
           <div class="flex justify-between items-center mt-2">
             <div>
-              <span class="text-2xl font-bold">{{ stats.content_today }}</span>
-              <span class="text-xs text-gray-500 ml-2">无变化</span>
+              <span class="text-2xl font-bold">{{ stats.generations_today }}</span>
+              <span class="text-xs text-gray-500 ml-2">今日生成</span>
             </div>
             <el-icon class="text-3xl text-orange-500"><DocumentAdd /></el-icon>
           </div>
         </el-card>
       </el-col>
-
-      <el-col :xs="12" :sm="12" :md="8" :lg="6">
+      
+      <el-col :xs="12" :sm="12" :md="8" :lg="6" class="mt-4">
         <el-card shadow="never" class="h-full">
           <template #header>
             <div class="flex justify-between">
-              <span class="text-gray-500">消耗次数情况</span>
-              <el-tag type="info" size="small">累计</el-tag>
+              <span class="text-gray-500">生成成功率</span>
+              <el-tag type="success" size="small">整体</el-tag>
             </div>
           </template>
           <div class="flex justify-between items-center mt-2">
             <div>
-              <span class="text-2xl font-bold">{{ stats.total_consume }}</span>
-              <span class="text-xs text-gray-500 ml-2">累计消耗次数</span>
+              <span class="text-2xl font-bold">{{ (stats.success_rate * 100).toFixed(1) }}%</span>
             </div>
-            <el-icon class="text-3xl text-red-500"><Delete /></el-icon>
+            <el-icon class="text-3xl text-teal-500"><Check /></el-icon>
           </div>
         </el-card>
       </el-col>
 
-      <el-col :xs="12" :sm="12" :md="8" :lg="6">
+      <el-col :xs="12" :sm="12" :md="8" :lg="6" class="mt-4">
         <el-card shadow="never" class="h-full">
           <template #header>
             <div class="flex justify-between">
-              <span class="text-gray-500">今日收入</span>
-              <el-tag type="success" size="small">日</el-tag>
+              <span class="text-gray-500">今日消耗Token</span>
+              <el-tag type="warning" size="small">今日</el-tag>
             </div>
           </template>
           <div class="flex justify-between items-center mt-2">
             <div>
-              <span class="text-2xl font-bold">¥{{ (stats.today_income / 100).toFixed(2) }}</span>
-              <span class="text-xs text-gray-500 ml-2">待接入计算</span>
+              <span class="text-2xl font-bold">{{ stats.tokens_consumed_today }}</span>
             </div>
-            <el-icon class="text-3xl text-yellow-500"><Money /></el-icon>
+            <el-icon class="text-3xl text-yellow-500"><Coin /></el-icon>
           </div>
         </el-card>
       </el-col>
 
-      <el-col :xs="12" :sm="12" :md="8" :lg="6">
+      <el-col :xs="12" :sm="12" :md="8" :lg="6" class="mt-4">
         <el-card shadow="never" class="h-full">
           <template #header>
             <div class="flex justify-between">
-              <span class="text-gray-500">API消耗成本</span>
-              <el-tag type="danger" size="small">日</el-tag>
+              <span class="text-gray-500">平均生成耗时</span>
+              <el-tag type="info" size="small">平均</el-tag>
             </div>
           </template>
           <div class="flex justify-between items-center mt-2">
             <div>
-              <span class="text-2xl font-bold">¥{{ (stats.today_cost / 100).toFixed(2) }}</span>
-              <span class="text-xs text-gray-500 ml-2">待接入计算</span>
+              <span class="text-2xl font-bold">{{ stats.avg_generation_time }}s</span>
             </div>
-            <el-icon class="text-3xl text-cyan-500"><CreditCard /></el-icon>
+            <el-icon class="text-3xl text-gray-500"><Timer /></el-icon>
+          </div>
+        </el-card>
+      </el-col>
+
+      <el-col :xs="12" :sm="12" :md="8" :lg="6" class="mt-4">
+        <el-card shadow="never" class="h-full">
+          <template #header>
+            <div class="flex justify-between">
+              <span class="text-gray-500">总消耗Token</span>
+              <el-tag type="danger" size="small">累计</el-tag>
+            </div>
+          </template>
+          <div class="flex justify-between items-center mt-2">
+            <div>
+              <span class="text-2xl font-bold">{{ (stats.total_tokens_consumed / 1000).toFixed(1) }}k</span>
+            </div>
+            <el-icon class="text-3xl text-red-500"><Money /></el-icon>
           </div>
         </el-card>
       </el-col>
@@ -147,51 +161,53 @@
 </template>
 
 <script setup lang="ts">
-import { ref, computed, onMounted } from "vue";
-import { ElMessage } from "element-plus";
-import { User, DocumentCopy, UserFilled, DocumentAdd, Delete, Money, CreditCard } from "@element-plus/icons-vue";
-import { DashboardAPI, type DashboardStats } from "@/api/dashboard";
-import { useUserStore } from "@/store";
-
-defineOptions({ name: "Dashboard" });
+import { ref, onMounted, computed } from "vue";
+import { useUserStore } from "@/store/modules/user";
+import { StatsAPI, type DashboardStatsResp } from "@/api/stats";
 
 const userStore = useUserStore();
 
-const stats = ref<DashboardStats>({
-  total_users: 0,
-  total_users_change: 0,
-  total_content: 0,
-  new_users_today: 0,
-  content_today: 0,
-  total_consume: 0,
-  today_income: 0,
-  today_cost: 0,
-});
-
 const greetings = computed(() => {
-  const hours = new Date().getHours();
-  if (hours >= 6 && hours < 8) return "晨起披衣出草堂，轩窗已自喜微凉🌅";
-  if (hours >= 8 && hours < 12) return `上午好，${userStore.userInfo.nickname}！`;
-  if (hours >= 12 && hours < 18) return `下午好，${userStore.userInfo.nickname}！`;
-  if (hours >= 18 && hours < 24) return `晚上好，${userStore.userInfo.nickname}！`;
-  return "偷偷向银河要了一把碎星，只等你闭上眼睛撒入你的梦中，晚安🌛";
+  const hour = new Date().getHours();
+  if (hour < 6) return "凌晨好！";
+  if (hour < 9) return "早上好！";
+  if (hour < 12) return "上午好！";
+  if (hour < 14) return "中午好！";
+  if (hour < 17) return "下午好！";
+  if (hour < 19) return "傍晚好！";
+  return "晚上好！";
 });
 
-const loadStats = async () => {
+const stats = ref<DashboardStatsResp>({
+  total_users: 0,
+  new_users_today: 0,
+  active_users_today: 0,
+  total_generations: 0,
+  generations_today: 0,
+  success_rate: 0,
+  total_revenue: 0,
+  revenue_today: 0,
+  total_tokens_consumed: 0,
+  tokens_consumed_today: 0,
+  avg_generation_time: 0,
+});
+
+const fetchStats = async () => {
   try {
-    const res = await DashboardAPI.getStatsApi();
+    const res = await StatsAPI.getDashboardStats();
     stats.value = res.data;
-  } catch {
-    ElMessage.error("加载统计数据失败");
+  } catch (error) {
+    console.error(error);
   }
 };
 
-onMounted(() => loadStats());
+onMounted(() => {
+  fetchStats();
+});
 </script>
 
-<style lang="scss" scoped>
+<style scoped>
 .dashboard-container {
-  padding: 24px;
-  background: var(--el-bg-color-page);
+  padding: 20px;
 }
 </style>

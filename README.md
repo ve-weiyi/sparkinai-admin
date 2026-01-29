@@ -141,7 +141,7 @@ pnpm build
 docker run -d \
 --name sparkinai-admin \
 --restart always \
--p 9421:80 \
+-p 19521:80 \
 ghcr.io/ve-weiyi/sparkinai-admin:latest
 ```
 

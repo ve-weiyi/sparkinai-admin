@@ -1,24 +1,39 @@
-import type {IContentConfig} from "@/components/CURD/types";
-import {ApiKeyAPI} from "@/api/apikey";
+import type { IContentConfig } from "@/components/CURD/types";
+import { ApiKeyAPI } from "@/api/apikey";
 
 const contentConfig: IContentConfig = {
   pageTitle: "API密钥管理",
   permPrefix: "admin:apikey",
-  table: {border: true, highlightCurrentRow: true},
-  pagination: {background: true, layout: "prev,pager,next,jumper,total,sizes", pageSize: 10, pageSizes: [10, 20, 50]},
-  parseData: (res) => ({total: res.data.total, list: res.data.list || []}),
-  deleteAction: (ids) => ApiKeyAPI.deletesApiKeyApi({ids: ids.split(",").map(Number)}),
-  indexAction: (query) => ApiKeyAPI.findApiKeyListApi(query),
-  modifyAction: (data) => ApiKeyAPI.updateApiKeyStatusApi({id: data.id, status: data.value}),
+  table: { border: true, highlightCurrentRow: true },
+  pagination: { background: true, layout: "prev,pager,next,jumper,total,sizes", pageSize: 10, pageSizes: [10, 20, 50] },
+  parseData: (res) => ({ total: res.data.total, list: res.data.list || [] }),
+  modifyAction: (row, field, value) => {
+    return ApiKeyAPI.updateApiKey({ id: row.id, [field]: value });
+  },
+  deleteAction: (ids) => {
+    const idList = ids.split(",");
+    if (idList.length === 1) {
+      return ApiKeyAPI.deleteApiKey({ id: parseInt(idList[0]) });
+    }
+    return Promise.all(idList.map(id => ApiKeyAPI.deleteApiKey({ id: parseInt(id) }))).then(() => ({
+      code: 0,
+      message: "success"
+    }));
+  },
+  indexAction: (query) => ApiKeyAPI.getApiKeyList(query),
   pk: "id",
   toolbar: ["add", "delete"],
   defaultToolbar: ["refresh", "filter", "search"],
   cols: [
-    {type: "selection", label: "批量操作", width: 50, align: "center"},
-    {label: "ID", prop: "id", width: 80, align: "center"},
-    {label: "服务商", prop: "provider_name", width: 120, align: "center"},
-    {label: "密钥名称", prop: "name", width: 150, align: "center"},
-    {label: "优先级", prop: "priority", width: 80, align: "center"},
+    { type: "selection", label: "批量操作", width: 50, align: "center" },
+    { label: "ID", prop: "id", width: 80, align: "center" },
+    { label: "服务商", prop: "provider_name", width: 120, align: "center" },
+    { label: "名称", prop: "name", width: 150, align: "center" },
+    { label: "API Key", prop: "api_key", width: 200, align: "center", showOverflowTooltip: true },
+    { label: "Profile", prop: "profile", width: 100, align: "center" },
+    { label: "优先级", prop: "priority", width: 80, align: "center" },
+    { label: "配额限制", prop: "quota_limit", width: 100, align: "center" },
+    { label: "已用配额", prop: "quota_used", width: 100, align: "center" },
     {
       label: "状态",
       prop: "status",
@@ -26,27 +41,21 @@ const contentConfig: IContentConfig = {
       align: "center",
       templet: "switch",
       activeValue: 1,
-      inactiveValue: 0,
-      activeText: "禁用",
-      inactiveText: "启用"
+      inactiveValue: 2,
+      activeText: "启用",
+      inactiveText: "禁用"
     },
-    {
-      label: "创建时间",
-      prop: "created_at",
-      width: 170,
-      align: "center",
-      templet: "date",
-      dateFormat: "YYYY/MM/DD HH:mm:ss"
-    },
+    { label: "最后使用", prop: "last_used_at", width: 170, align: "center", templet: "date", dateFormat: "YYYY/MM/DD HH:mm:ss" },
     {
       label: "操作",
       align: "center",
       fixed: "right",
-      width: 120,
+      width: 200,
       templet: "tool",
       operat: [
-        {name: "edit", text: "编辑", perm: "edit", attrs: {icon: "edit", type: "primary"}},
-        {name: "delete", text: "删除", perm: "delete", attrs: {icon: "delete", type: "danger"}},
+        { name: "edit", text: "编辑", perm: "edit", attrs: { icon: "edit", type: "primary" } },
+        { name: "test", text: "测试", perm: "edit", attrs: { icon: "video-play", type: "success" } },
+        { name: "delete", text: "删除", perm: "delete", attrs: { icon: "delete", type: "danger" } },
       ],
     },
   ],

@@ -1,5 +1,9 @@
 import { store } from "@/store";
-import { AdminUserAPI, ProviderAPI, ModelAPI, EngineConfigAPI, SystemConfigAPI } from "@/api/admin";
+import { UserAPI } from "@/api/user";
+import { ProviderAPI } from "@/api/provider";
+import { ModelAPI } from "@/api/model";
+import { EngineAPI } from "@/api/engine";
+import { SystemConfigAPI } from "@/api/system";
 import { ApiKeyAPI } from "@/api/apikey";
 
 export const useAdminStore = defineStore("admin", () => {
@@ -33,7 +37,7 @@ export const useAdminStore = defineStore("admin", () => {
   async function fetchUsers(query?: any) {
     usersLoading.value = true;
     try {
-      const res = await AdminUserAPI.findUserListApi(query);
+      const res = await UserAPI.getUserList(query);
       users.value = res.data.list || [];
       return res.data;
     } finally {
@@ -44,19 +48,19 @@ export const useAdminStore = defineStore("admin", () => {
   /**
    * 用户充值
    */
-  async function rechargeUser(userId: number, amount: number, remark?: string) {
-    return AdminUserAPI.rechargeApi({
-      user_id: userId,
-      amount,
-      remark,
+  async function rechargeUser(userId: string, amount: number, description?: string) {
+    return UserAPI.rechargeUser({
+      id: userId,
+      token_amount: amount,
+      description,
     });
   }
 
   /**
    * 删除用户
    */
-  async function deleteUsers(ids: number[]) {
-    return AdminUserAPI.deletesUserApi({ ids });
+  async function deleteUsers(ids: string[]) {
+    return UserAPI.batchDeleteUsers({ ids });
   }
 
   /**
@@ -65,7 +69,7 @@ export const useAdminStore = defineStore("admin", () => {
   async function fetchProviders(query?: any) {
     providersLoading.value = true;
     try {
-      const res = await ProviderAPI.findProviderListApi(query);
+      const res = await ProviderAPI.getProviderList(query);
       providers.value = res.data.list || [];
       return res.data;
     } finally {
@@ -79,7 +83,7 @@ export const useAdminStore = defineStore("admin", () => {
   async function fetchModels(query?: any) {
     modelsLoading.value = true;
     try {
-      const res = await ModelAPI.findModelListApi(query);
+      const res = await ModelAPI.getModelList(query);
       models.value = res.data.list || [];
       return res.data;
     } finally {
@@ -93,7 +97,7 @@ export const useAdminStore = defineStore("admin", () => {
   async function fetchApikeys(query?: any) {
     apikeysLoading.value = true;
     try {
-      const res = await ApiKeyAPI.findApiKeyListApi(query);
+      const res = await ApiKeyAPI.getApiKeyList(query);
       apikeys.value = res.data.list || [];
       return res.data;
     } finally {
@@ -107,7 +111,7 @@ export const useAdminStore = defineStore("admin", () => {
   async function fetchEngineConfigs(query?: any) {
     engineConfigsLoading.value = true;
     try {
-      const res = await EngineConfigAPI.findEngineConfigListApi(query);
+      const res = await EngineAPI.getEngineConfigList(query);
       engineConfigs.value = res.data.list || [];
       return res.data;
     } finally {
@@ -121,7 +125,7 @@ export const useAdminStore = defineStore("admin", () => {
   async function fetchSystemConfigs(query?: any) {
     systemConfigsLoading.value = true;
     try {
-      const res = await SystemConfigAPI.findSystemConfigListApi(query);
+      const res = await SystemConfigAPI.getSystemConfigList(query);
       systemConfigs.value = res.data.list || [];
       return res.data;
     } finally {

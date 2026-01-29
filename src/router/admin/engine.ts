@@ -3,10 +3,10 @@ import type { RouteRecordRaw } from "vue-router";
 const Layout = () => import("@/layouts/index.vue");
 
 export default {
-  path: "/engine",
-  name: "",
+  path: "/admin/engine",
+  name: "AdminEngineRoot",
   component: Layout,
-  redirect: "/engine/list",
+  redirect: "/admin/engine/list",
   meta: {
     title: "引擎配置",
     icon: "setting",
@@ -14,7 +14,7 @@ export default {
   },
   children: [
     {
-      path: "/engine/list",
+      path: "list",
       component: () => import("@/views/admin/engine/index.vue"),
       name: "Engine",
       meta: { title: "引擎配置", keepAlive: true },

@@ -1,74 +1,81 @@
 import request from "@/utils/request";
-import type { PageQuery, PageResp, IdsReq, BatchResp } from "./types";
+import type { PageQuery } from "./types";
 
-export interface ApiKey {
-  id: number;
-  provider_id: number;
-  provider_name?: string;
-  name: string;
-  key: string;
-  status: number;
-  priority: number;
-  created_at: number;
-  updated_at: number;
-}
-
-export interface QueryApiKeyReq extends PageQuery {
+export interface GetApiKeyListReq extends PageQuery {
   provider_id?: number;
+  status?: number;
+  keyword?: string;
 }
 
-export interface NewApiKeyReq {
-  id?: number;
+export interface ApiKeyItem {
+  id: number;
+  provider_id: number;
+  provider_name: string;
+  name: string;
+  profile: string;
+  api_key: string;
+  priority: number;
+  quota_limit: number;
+  quota_used: number;
+  quota_reset_at: string;
+  status: number;
+  last_used_at: string;
+  created_at: string;
+  updated_at: string;
+}
+
+export interface GetApiKeyListResp {
+  page: number;
+  page_size: number;
+  total: number;
+  list: ApiKeyItem[];
+}
+
+export interface CreateApiKeyReq {
   provider_id: number;
   name: string;
-  key: string;
-  status: number;
-  priority: number;
+  profile?: string;
+  api_key: string;
+  secret_key?: string;
+  priority?: number;
+  quota_limit?: number;
+  status?: number;
 }
 
-export interface UpdateApiKeyStatusReq {
+export interface UpdateApiKeyReq {
   id: number;
-  status: number;
+  name?: string;
+  api_key?: string;
+  secret_key?: string;
+  priority?: number;
+  quota_limit?: number;
+  status?: number;
+}
+
+export interface TestApiKeyReq {
+  id: number;
+}
+
+export interface TestApiKeyResp {
+  success: boolean;
+  message: string;
+  latency: number;
 }
 
 export const ApiKeyAPI = {
-  findApiKeyListApi(data?: QueryApiKeyReq): Promise<IApiResponse<PageResp>> {
-    return request({
-      url: "/admin-api/v1/apikey/find_apikey_list",
-      method: "POST",
-      data,
-    });
+  getApiKeyList(params?: GetApiKeyListReq): Promise<IApiResponse<GetApiKeyListResp>> {
+    return request({ url: "/admin-api/v1/api-keys", method: "GET", params });
   },
-
-  addApiKeyApi(data: NewApiKeyReq): Promise<IApiResponse<ApiKey>> {
-    return request({
-      url: "/admin-api/v1/apikey/add_apikey",
-      method: "POST",
-      data,
-    });
+  createApiKey(data: CreateApiKeyReq): Promise<IApiResponse<{ id: number }>> {
+    return request({ url: "/admin-api/v1/api-keys", method: "POST", data });
   },
-
-  updateApiKeyApi(data: NewApiKeyReq): Promise<IApiResponse<ApiKey>> {
-    return request({
-      url: "/admin-api/v1/apikey/update_apikey",
-      method: "PUT",
-      data,
-    });
+  updateApiKey(data: UpdateApiKeyReq): Promise<IApiResponse<any>> {
+    return request({ url: `/admin-api/v1/api-keys/${data.id}`, method: "PUT", data });
   },
-
-  deletesApiKeyApi(data: IdsReq): Promise<IApiResponse<BatchResp>> {
-    return request({
-      url: "/admin-api/v1/apikey/deletes_apikey",
-      method: "DELETE",
-      data,
-    });
+  deleteApiKey(data: { id: number }): Promise<IApiResponse<any>> {
+    return request({ url: `/admin-api/v1/api-keys/${data.id}`, method: "DELETE" });
   },
-
-  updateApiKeyStatusApi(data: UpdateApiKeyStatusReq): Promise<IApiResponse<ApiKey>> {
-    return request({
-      url: "/admin-api/v1/apikey/update_apikey_status",
-      method: "PUT",
-      data,
-    });
-  },
+  testApiKey(data: TestApiKeyReq): Promise<IApiResponse<TestApiKeyResp>> {
+    return request({ url: `/admin-api/v1/api-keys/${data.id}/test`, method: "POST" });
+  }
 };

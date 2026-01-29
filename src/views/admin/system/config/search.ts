@@ -1,13 +1,18 @@
-import type {ISearchConfig} from "@/components/CURD/types";
+import type { ISearchConfig } from "@/components/CURD/types";
 
 const searchConfig: ISearchConfig = {
-  permPrefix: "admin:system",
   formItems: [
     {
       type: "input",
-      label: "配置键",
-      prop: "key",
-      attrs: {placeholder: "请输入", clearable: true, style: {width: "150px"}},
+      label: "关键词",
+      prop: "keyword",
+      attrs: { placeholder: "请输入配置键/描述" }
+    },
+    {
+      type: "input",
+      label: "分类",
+      prop: "category",
+      attrs: { placeholder: "请输入分类" }
     },
   ],
 };

@@ -12,7 +12,7 @@ import type {
   UserInfoResp,
 } from "@/api/types";
 import { AuthAPI } from "@/api/auth";
-import { UserAPI } from "@/api/user";
+import { UserAPI } from "@/api/user_profile";
 
 export const useUserStore = defineStore("user", () => {
   // 用户信息

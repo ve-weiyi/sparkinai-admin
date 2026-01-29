@@ -1,15 +1,24 @@
-import type {IModalConfig} from "@/components/CURD/types";
-import {SystemConfigAPI} from "@/api/admin";
+import type { IModalConfig } from "@/components/CURD/types";
+import { SystemConfigAPI } from "@/api/system";
 
-const modalConfig: IModalConfig = {
+const modalConfig: IModalConfig<any> = {
   permPrefix: "admin:system",
-  dialog: {title: "编辑配置", width: 500, draggable: true},
-  form: {labelWidth: 100},
-  formAction: (data) => SystemConfigAPI.updateSystemConfigApi(data),
+  component: "dialog",
+  dialog: { title: "编辑系统配置", width: 600, draggable: true },
+  form: { labelWidth: 100 },
+  formAction: (data) => {
+    return SystemConfigAPI.updateSystemConfig(data);
+  },
   formItems: [
-    {label: "配置键", prop: "key", type: "input", attrs: {disabled: true}},
-    {label: "配置值", prop: "value", type: "input", attrs: {type: "textarea", rows: 4}},
-    {label: "描述", prop: "description", type: "input", attrs: {type: "textarea", rows: 2}},
+    { label: "配置键", prop: "config_key", type: "input", attrs: { disabled: true } },
+    { label: "配置值", prop: "config_value", type: "input", attrs: { type: "textarea", rows: 3 }, rules: [{ required: true, message: "请输入配置值" }] },
+    { label: "描述", prop: "description", type: "input", attrs: { type: "textarea" } },
+    {
+      label: "公开",
+      prop: "is_public",
+      type: "switch",
+      attrs: { activeValue: 1, inactiveValue: 0, activeText: "是", inactiveText: "否" },
+    },
   ],
 };
 

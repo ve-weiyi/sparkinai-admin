@@ -11,7 +11,7 @@
 
 <script setup lang="ts">
 import { useUserStore } from "@/store";
-import { UserAPI } from "@/api/user";
+import { UserAPI } from "@/api/user_profile";
 
 const userStore = useUserStore();
 const router = useRouter();

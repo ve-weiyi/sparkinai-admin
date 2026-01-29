@@ -3,10 +3,10 @@ import type { RouteRecordRaw } from "vue-router";
 const Layout = () => import("@/layouts/index.vue");
 
 export default {
-  path: "/provider",
-  name: "",
+  path: "/admin/provider",
+  name: "AdminProviderRoot",
   component: Layout,
-  redirect: "/provider/list",
+  redirect: "/admin/provider/list",
   meta: {
     title: "服务商管理",
     icon: "system",
@@ -14,7 +14,7 @@ export default {
   },
   children: [
     {
-      path: "/provider/list",
+      path: "list",
       component: () => import("@/views/admin/provider/index.vue"),
       name: "Provider",
       meta: { title: "服务商管理", keepAlive: true },

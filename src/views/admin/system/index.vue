@@ -1,47 +1,56 @@
 <template>
-  <div class="app-container">
-    <page-search ref="searchRef" :search-config="searchConfig" @query-click="handleQueryClick"
-                 @reset-click="handleResetClick"/>
-    <page-content ref="contentRef" :content-config="contentConfig" @toolbar-click="handleToolbarClick"
-                  @edit-click="handleEditClick" @search-click="handleSearchClick" @filter-change="handleFilterChange"/>
-    <page-modal ref="editModalRef" :modal-config="editModalConfig" @submit-click="handleSubmitClick"/>
+  <div class="h-full">
+    <PageSearch
+      :search-config="searchConfig"
+      @search-click="handleSearchClick"
+      @reset-click="handleResetClick"
+    />
+    <PageContent
+      ref="contentRef"
+      :content-config="contentConfig"
+      @add-click="handleAddClick"
+      @edit-click="handleEditClick"
+      @operate-click="handleOperateClick"
+      @toolbar-click="handleToolbarClick"
+    >
+      <template #is_encrypted="{ row }">
+        <el-tag :type="row.is_encrypted ? 'success' : 'info'">{{ row.is_encrypted ? '是' : '否' }}</el-tag>
+      </template>
+    </PageContent>
+    <PageModal
+      ref="modalRef"
+      :modal-config="modalConfig"
+      @submit-click="handleSubmitClick"
+    />
   </div>
 </template>
 
 <script setup lang="ts">
-import usePage from "@/components/CURD/usePage";
 import PageSearch from "@/components/CURD/PageSearch.vue";
 import PageContent from "@/components/CURD/PageContent.vue";
 import PageModal from "@/components/CURD/PageModal.vue";
 import searchConfig from "./config/search";
 import contentConfig from "./config/content";
-import editModalConfig from "./config/edit";
-import {SystemConfigAPI} from "@/api/admin";
+import addConfig from "./config/add";
+import editConfig from "./config/edit";
+import { usePage } from "@/hooks/usePage";
+import type { IOperateData } from "@/components/CURD/types";
 
 const {
-  searchRef,
   contentRef,
-  editModalRef,
-  handleQueryClick,
+  modalRef,
+  modalConfig,
+  handleSearchClick,
   handleResetClick,
+  handleAddClick,
   handleEditClick,
   handleSubmitClick,
-  handleSearchClick,
-  handleFilterChange
-} = usePage();
+  handleToolbarClick
+} = usePage(addConfig, editConfig);
 
-function handleToolbarClick(name: string) {
-  if (name === "fillTemplate") {
-    ElMessageBox.confirm("确定要填充模板吗？", "提示", {type: "warning"})
-      .then(() => {
-        SystemConfigAPI.fillTemplateApi({type: "default"}).then(() => {
-          ElMessage.success("模板填充成功");
-          const queryParams = searchRef.value?.getQueryParams();
-          contentRef.value?.fetchPageData(queryParams, true);
-        });
-      })
-      .catch(() => {
-      });
+const handleOperateClick = async (data: IOperateData) => {
+  if (data.name === "edit") {
+    handleEditClick(data.row);
   }
-}
+};
 </script>

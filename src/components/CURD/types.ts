@@ -175,9 +175,9 @@ export interface IModalConfig<T = any> {
   // 组件类型(默认：dialog)
   component?: "dialog" | "drawer";
   // dialog组件属性
-  dialog?: Partial<Omit<DialogProps, "modelValue">>;
+  dialog?: IObject;
   // drawer组件属性
-  drawer?: Partial<Omit<DrawerProps, "modelValue">>;
+  drawer?: IObject;
   // form组件属性
   form?: IForm;
   // 表单项

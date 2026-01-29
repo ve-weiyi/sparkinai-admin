@@ -13,28 +13,28 @@
       <section class="auth-feature">
         <div class="auth-feature__badge">
           <span class="auth-feature__dot" />
-          Blog Management System
+          SparkInAI Content Platform
         </div>
-        <h1 class="auth-feature__title">管理系统</h1>
+        <h1 class="auth-feature__title">SparkInAI 内容平台</h1>
         <p class="auth-feature__subtitle">
-          基于 Vue 3 + TypeScript 构建的现代化管理平台，提供优雅的写作体验和强大的内容管理能力。
+          基于 AI 驱动的现代化内容创作与管理平台，提供智能化的内容生成与高效的管理体验。
         </p>
         <ul class="auth-feature__highlights">
           <li>
             <span>✓</span>
-            多种登录方式灵活切换
+            AI 智能内容生成
           </li>
           <li>
             <span>✓</span>
-            角色权限与安全管控
+            多平台一键发布
           </li>
           <li>
             <span>✓</span>
-            文章分类与标签管理
+            可视化数据分析
           </li>
           <li>
             <span>✓</span>
-            评论互动与访客统计
+            完善的权限管理
           </li>
         </ul>
       </section>
@@ -69,8 +69,8 @@
 
         <footer class="auth-panel__footer">
           <el-text size="small">
-            Copyright © 2022 - 2025 与梦
-            <a href="http://beian.miit.gov.cn/" target="_blank">桂ICP备2023013735号-1</a>
+            Copyright © 2026 SparkInAI
+            <!-- <a href="http://beian.miit.gov.cn/" target="_blank">备案号占位</a> -->
           </el-text>
         </footer>
       </section>
@@ -98,13 +98,13 @@ let notificationInstance: ReturnType<typeof ElNotification> | null = null;
 
 const showVoteNotification = () => {
   notificationInstance = ElNotification({
-    title: "欢迎使用管理系统",
+    title: "欢迎使用 SparkInAI",
     message: `
-开始你的创作之旅，记录生活点滴，分享技术心得~
+开启智能创作之旅，释放 AI 生产力...
 <br/>
-<a href="https://blog.veweiyi.com" target="_blank" style="color: var(--el-color-primary); text-decoration: none; font-weight: 500;">📖 访问前台</a>
+<a href="#" target="_blank" style="color: var(--el-color-primary); text-decoration: none; font-weight: 500;">📖 访问官网</a>
 <br/>
-<a href="https://admin.veweiyi.com" target="_blank" style="color: var(--el-color-primary); text-decoration: none; font-weight: 500;">⚙️ 进入管理后台</a>
+<a href="#" target="_blank" style="color: var(--el-color-primary); text-decoration: none; font-weight: 500;">⚙️ 进入控制台</a>
 `,
     type: "success",
     position: "bottom-left",

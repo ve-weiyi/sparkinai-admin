@@ -1,4 +1,4 @@
-﻿<template>
+<template>
   <div class="profile-container">
     <el-row :gutter="20">
       <!-- 左侧个人信息卡片 -->
@@ -319,7 +319,7 @@ import {
   UpdateUserBindEmailReq,
   UpdateUserBindPhoneReq,
 } from "@/api/types";
-import { UserAPI } from "@/api/user";
+import { UserAPI } from "@/api/user_profile";
 import { AuthAPI } from "@/api/auth";
 import { ref } from "vue";
 import { ElMessage } from "element-plus";

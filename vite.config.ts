@@ -59,7 +59,7 @@ export default defineConfig(({ mode }: ConfigEnv): UserConfig => {
     plugins: [
       vue(),
       env.VITE_MOCK_DEV_SERVER === "true"
-        ? mockDevServerPlugin({ include: ["mock/**/*.ts"] })
+        ? mockDevServerPlugin()
         : null,
       UnoCSS(),
       // 自动导入配置 https://github.com/sxzz/element-plus-best-practices/blob/main/vite.config.ts
@@ -98,7 +98,6 @@ export default defineConfig(({ mode }: ConfigEnv): UserConfig => {
         "axios",
         "@vueuse/core",
         "@element-plus/icons-vue",
-        "codemirror-editor-vue3",
         "default-passive-events",
         "nprogress",
         "qs",

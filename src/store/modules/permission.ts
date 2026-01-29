@@ -1,7 +1,7 @@
 import type { RouteRecordRaw } from "vue-router";
 import router, { constantRoutes } from "@/router";
 import { store } from "@/store";
-import { UserAPI } from "@/api/user";
+import { UserAPI } from "@/api/user_profile";
 import type { UserMenu } from "@/api/types";
 
 export const usePermissionStore = defineStore("permission", () => {

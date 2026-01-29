@@ -1,45 +1,66 @@
-import type {IContentConfig} from "@/components/CURD/types";
-import {SystemConfigAPI} from "@/api/admin";
+import type { IContentConfig } from "@/components/CURD/types";
+import { SystemConfigAPI } from "@/api/system";
 
 const contentConfig: IContentConfig = {
-  pageTitle: "系统配置",
-  permPrefix: "admin:system",
-  table: {border: true, highlightCurrentRow: true},
-  pagination: {background: true, layout: "prev,pager,next,jumper,total,sizes", pageSize: 10, pageSizes: [10, 20, 50]},
-  parseData: (res) => ({total: res.data.total, list: res.data.list || []}),
-  indexAction: (query) => SystemConfigAPI.findSystemConfigListApi(query),
+  pageTitle: "系统配置管理",
   pk: "id",
-  toolbar: [{
-    name: "fillTemplate",
-    text: "填充模板",
-    perm: "fillTemplate",
-    attrs: {icon: "document-copy", type: "success"}
-  }],
-  defaultToolbar: ["refresh", "filter", "search"],
   cols: [
-    {label: "ID", prop: "id", width: 80, align: "center"},
-    {label: "配置键", prop: "key", width: 150, align: "center"},
-    {label: "配置值", prop: "value", width: 200, align: "center"},
-    {label: "描述", prop: "description", width: 200, align: "center"},
+    { label: "ID", prop: "id", width: 80, align: "center" },
+    { label: "配置键", prop: "config_key", width: 200, align: "center" },
+    { label: "配置值", prop: "config_value", minWidth: 200, align: "center", showOverflowTooltip: true },
+    { label: "配置类型", prop: "config_type", width: 100, align: "center" },
+    { label: "分类", prop: "category", width: 100, align: "center" },
+    { label: "描述", prop: "description", width: 200, align: "center", showOverflowTooltip: true },
+    {
+      label: "公开",
+      prop: "is_public",
+      width: 80,
+      align: "center",
+      component: "switch",
+      attrs: { activeValue: 1, inactiveValue: 0 }
+    },
+    {
+      label: "加密",
+      prop: "is_encrypted",
+      width: 80,
+      align: "center",
+      templet: "custom",
+      slotName: "is_encrypted"
+    },
     {
       label: "创建时间",
       prop: "created_at",
-      width: 170,
+      width: 180,
       align: "center",
-      templet: "date",
-      dateFormat: "YYYY/MM/DD HH:mm:ss"
     },
     {
       label: "操作",
+      width: 150,
       align: "center",
       fixed: "right",
-      width: 100,
       templet: "tool",
       operat: [
-        {name: "edit", text: "编辑", perm: "edit", attrs: {icon: "edit", type: "primary"}},
-      ],
-    },
+        { name: "edit", text: "编辑", attrs: { type: "primary" } },
+        { name: "delete", text: "删除", attrs: { type: "danger" } }
+      ]
+    }
   ],
+  indexAction: function (params) {
+    return SystemConfigAPI.getSystemConfigList(params);
+  },
+  modifyAction: (row, field, value) => {
+    return SystemConfigAPI.updateSystemConfig({ id: row.id, [field]: value });
+  },
+  deleteAction: (ids) => {
+    const idList = ids.split(",");
+    if (idList.length === 1) {
+      return SystemConfigAPI.deleteSystemConfig({ id: parseInt(idList[0]) });
+    }
+    return Promise.all(idList.map(id => SystemConfigAPI.deleteSystemConfig({ id: parseInt(id) }))).then(() => ({
+      code: 0,
+      message: "success"
+    }));
+  }
 };
 
 export default contentConfig;

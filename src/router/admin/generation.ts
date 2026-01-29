@@ -1,20 +1,20 @@
 import type { RouteRecordRaw } from 'vue-router'
 
-const contentRoutes: RouteRecordRaw = {
-  path: '/admin/content',
+const generationRoutes: RouteRecordRaw = {
+  path: '/admin/generation',
   component: () => import('@/layouts/index.vue'),
-  redirect: '/admin/content/generations',
+  redirect: '/admin/generation',
   name: 'AdminContent',
   meta: {
     title: '内容管理',
     icon: 'document',
-    roles: ['ADMIN']
+    rank: 7
   },
   children: [
     {
-      path: 'generations',
-      component: () => import('@/views/admin/content/index.vue'),
-      name: 'ContentGenerations',
+      path: 'generation',
+      component: () => import('@/views/admin/generation/index.vue'),
+      name: 'Generation',
       meta: {
         title: '生成记录',
         icon: 'document'
@@ -23,4 +23,4 @@ const contentRoutes: RouteRecordRaw = {
   ]
 }
 
-export default contentRoutes
+export default generationRoutes

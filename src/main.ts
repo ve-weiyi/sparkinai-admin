@@ -23,9 +23,6 @@ import { setupStore } from "@/store";
 // ===== 全局组件 =====
 import * as ElementPlusIcons from "@element-plus/icons-vue";
 
-// ===== 第三方插件 =====
-import { InstallCodeMirror } from "codemirror-editor-vue3";
-
 // ===== 路由守卫 =====
 import { setupPermissionGuard } from "@/permission";
 
@@ -39,9 +36,6 @@ setupStore(app);
 
 // 2️⃣ 全局组件（Element Plus 图标）
 Object.entries(ElementPlusIcons).forEach(([name, comp]) => app.component(name, comp));
-
-// 3️⃣ 第三方插件
-app.use(InstallCodeMirror);
 
 // 4️⃣ 路由守卫
 setupPermissionGuard();

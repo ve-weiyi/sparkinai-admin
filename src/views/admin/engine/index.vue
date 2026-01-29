@@ -1,35 +1,64 @@
 <template>
-  <div class="app-container">
-    <page-search ref="searchRef" :search-config="searchConfig" @query-click="handleQueryClick"
-                 @reset-click="handleResetClick"/>
-    <page-content ref="contentRef" :content-config="contentConfig" @add-click="handleAddClick"
-                  @edit-click="handleEditClick" @search-click="handleSearchClick" @filter-change="handleFilterChange"/>
-    <page-modal ref="addModalRef" :modal-config="addModalConfig" @submit-click="handleSubmitClick"/>
-    <page-modal ref="editModalRef" :modal-config="editModalConfig" @submit-click="handleSubmitClick"/>
+  <div class="h-full">
+    <PageSearch
+      :search-config="searchConfig"
+      @search-click="handleSearchClick"
+      @reset-click="handleResetClick"
+    />
+    <PageContent
+      ref="contentRef"
+      :content-config="contentConfig"
+      @add-click="handleAddClick"
+      @edit-click="handleEditClick"
+      @operate-click="handleOperateClick"
+      @toolbar-click="handleToolbarClick"
+    />
+    <PageModal
+      ref="modalRef"
+      :modal-config="modalConfig"
+      @submit-click="handleSubmitClick"
+    />
   </div>
 </template>
 
 <script setup lang="ts">
-import usePage from "@/components/CURD/usePage";
+import { ref } from "vue";
 import PageSearch from "@/components/CURD/PageSearch.vue";
 import PageContent from "@/components/CURD/PageContent.vue";
 import PageModal from "@/components/CURD/PageModal.vue";
 import searchConfig from "./config/search";
 import contentConfig from "./config/content";
-import addModalConfig from "./config/add";
-import editModalConfig from "./config/edit";
+import addConfig from "./config/add";
+import editConfig from "./config/edit";
+import { usePage } from "@/hooks/usePage";
+import { EngineAPI } from "@/api/engine";
+import { ElMessage } from "element-plus";
+import type { IOperateData } from "@/components/CURD/types";
 
 const {
-  searchRef,
   contentRef,
-  addModalRef,
-  editModalRef,
-  handleQueryClick,
+  modalRef,
+  modalConfig,
+  handleSearchClick,
   handleResetClick,
   handleAddClick,
   handleEditClick,
   handleSubmitClick,
-  handleSearchClick,
-  handleFilterChange
-} = usePage();
+  handleToolbarClick
+} = usePage(addConfig, editConfig);
+
+// 处理自定义操作
+const handleOperateClick = async (data: IOperateData) => {
+  if (data.name === "set_default") {
+    try {
+      await EngineAPI.setDefaultEngineConfig({ id: data.row.id });
+      ElMessage.success("设置默认成功");
+      contentRef.value?.handleRefresh();
+    } catch (error) {
+      console.error(error);
+    }
+  } else if (data.name === "edit") {
+    handleEditClick(data.row);
+  }
+};
 </script>
