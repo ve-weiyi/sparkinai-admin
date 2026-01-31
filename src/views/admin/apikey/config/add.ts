@@ -1,5 +1,5 @@
 import type { IModalConfig } from "@/components/CURD/types";
-import { ApiKeyAPI } from "@/api/apikey";
+import { ApikeyAPI } from "@/api/apikey";
 import { ProviderAPI } from "@/api/provider";
 
 const modalConfig: IModalConfig<any> = {
@@ -7,7 +7,7 @@ const modalConfig: IModalConfig<any> = {
   component: "dialog",
   dialog: { title: "新增API密钥", width: 600, draggable: true },
   form: { labelWidth: 100 },
-  formAction: (data) => ApiKeyAPI.createApiKey(data),
+  formAction: (data) => ApikeyAPI.createApiKey(data),
   formItems: [
     {
       label: "服务商",

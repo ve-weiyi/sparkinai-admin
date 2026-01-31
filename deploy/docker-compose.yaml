@@ -6,8 +6,8 @@ services:
     build:
       context: ../
       dockerfile: deploy/Dockerfile
-    image: shadcn-vue-demo:latest  # 设置新的镜像名称和标签
-    container_name: shadcn-vue-demo
+    image: sparkinai-admin:latest  # 设置新的镜像名称和标签
+    container_name: sparkinai-admin
     restart: always
     ports:
       - "19521:80"

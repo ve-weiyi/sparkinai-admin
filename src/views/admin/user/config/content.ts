@@ -7,7 +7,6 @@ const contentConfig: IContentConfig = {
   table: {border: true, highlightCurrentRow: true},
   pagination: {background: true, layout: "prev,pager,next,jumper,total,sizes", pageSize: 10, pageSizes: [10, 20, 50]},
   parseData: (res) => ({total: res.data.total, list: res.data.list || []}),
-  deleteAction: (ids) => UserAPI.batchDeleteUsers({ids: ids.split(",")}),
   indexAction: (query) => UserAPI.getUserList(query),
   pk: "id",
   toolbar: ["add"],

@@ -2,13 +2,13 @@ import type { RouteRecordRaw } from "vue-router";
 import NProgress from "@/plugins/nprogress";
 import router from "@/router";
 import { usePermissionStoreHook, useUserStoreHook } from "@/store";
-import { AuthAPI } from "@/api/auth.ts";
-import { AuthStorage } from "@/utils/auth.ts";
+import { AuthAPI } from "@/api/auth";
+import { AuthStorage } from "@/utils/auth";
 
 // 获取客户端信息
 const getClientInfo = async (): Promise<void> => {
   try {
-    const res = await AuthAPI.getClientInfoApi();
+    const res = await AuthAPI.getClientInfo();
     AuthStorage.setTerminalId(res.data.terminal_id);
   } catch {
     console.error("获取客户端信息失败");

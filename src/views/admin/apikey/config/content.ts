@@ -1,5 +1,5 @@
 import type { IContentConfig } from "@/components/CURD/types";
-import { ApiKeyAPI } from "@/api/apikey";
+import { ApikeyAPI } from "@/api/apikey";
 
 const contentConfig: IContentConfig = {
   pageTitle: "API密钥管理",
@@ -8,19 +8,19 @@ const contentConfig: IContentConfig = {
   pagination: { background: true, layout: "prev,pager,next,jumper,total,sizes", pageSize: 10, pageSizes: [10, 20, 50] },
   parseData: (res) => ({ total: res.data.total, list: res.data.list || [] }),
   modifyAction: (row, field, value) => {
-    return ApiKeyAPI.updateApiKey({ id: row.id, [field]: value });
+    return ApikeyAPI.updateApiKey({ id: row.id, [field]: value });
   },
   deleteAction: (ids) => {
     const idList = ids.split(",");
     if (idList.length === 1) {
-      return ApiKeyAPI.deleteApiKey({ id: parseInt(idList[0]) });
+      return ApikeyAPI.deleteApiKey({ id: parseInt(idList[0]) });
     }
-    return Promise.all(idList.map(id => ApiKeyAPI.deleteApiKey({ id: parseInt(id) }))).then(() => ({
+    return Promise.all(idList.map(id => ApikeyAPI.deleteApiKey({ id: parseInt(id) }))).then(() => ({
       code: 0,
       message: "success"
     }));
   },
-  indexAction: (query) => ApiKeyAPI.getApiKeyList(query),
+  indexAction: (query) => ApikeyAPI.getApiKeyList(query),
   pk: "id",
   toolbar: ["add", "delete"],
   defaultToolbar: ["refresh", "filter", "search"],

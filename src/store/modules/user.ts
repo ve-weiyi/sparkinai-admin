@@ -9,14 +9,14 @@ import type {
   PhoneLoginReq,
   RefreshTokenReq,
   ThirdLoginReq,
-  UserInfoResp,
-} from "@/api/types";
+} from "@/api/auth";
 import { AuthAPI } from "@/api/auth";
-import { UserAPI } from "@/api/user_profile";
+import {UserVO}from "@/api/me";
+import { MeAPI } from "@/api/me";
 
 export const useUserStore = defineStore("user", () => {
   // 用户信息
-  const userInfo = ref<UserInfoResp>({} as UserInfoResp);
+  const userInfo = ref<UserVO>({} as UserVO);
   // 记住我状态
   const rememberMe = ref(AuthStorage.getRememberMe());
 
@@ -25,7 +25,7 @@ export const useUserStore = defineStore("user", () => {
    */
   function login(loginData: LoginReq) {
     return new Promise<LoginResp>((resolve, reject) => {
-      AuthAPI.loginApi(loginData)
+      AuthAPI.login(loginData)
         .then((res) => {
           console.log("login", res);
           AuthStorage.setTokens(
@@ -46,7 +46,7 @@ export const useUserStore = defineStore("user", () => {
    */
   function emailLogin(loginData: EmailLoginReq) {
     return new Promise<LoginResp>((resolve, reject) => {
-      AuthAPI.emailLoginApi(loginData)
+      AuthAPI.emailLogin(loginData)
         .then((res) => {
           console.log("emailLogin", res);
           AuthStorage.setTokens(
@@ -67,7 +67,7 @@ export const useUserStore = defineStore("user", () => {
    */
   function phoneLogin(loginData: PhoneLoginReq) {
     return new Promise<LoginResp>((resolve, reject) => {
-      AuthAPI.phoneLoginApi(loginData)
+      AuthAPI.phoneLogin(loginData)
         .then((res) => {
           console.log("phoneLogin", res);
           AuthStorage.setTokens(
@@ -88,7 +88,7 @@ export const useUserStore = defineStore("user", () => {
    */
   function thirdLogin(loginData: ThirdLoginReq) {
     return new Promise<LoginResp>((resolve, reject) => {
-      AuthAPI.thirdLoginApi(loginData)
+      AuthAPI.thirdLogin(loginData)
         .then((res) => {
           console.log("thirdLogin", res);
           AuthStorage.setTokens(
@@ -108,8 +108,8 @@ export const useUserStore = defineStore("user", () => {
    * 获取用户信息
    */
   function getUserInfo() {
-    return new Promise<UserInfoResp>((resolve, reject) => {
-      UserAPI.getUserInfoApi()
+    return new Promise<UserVO>((resolve, reject) => {
+      MeAPI.getUserProfile()
         .then((res) => {
           if (!res) {
             reject("Verification failed, please Login again.");
@@ -129,7 +129,7 @@ export const useUserStore = defineStore("user", () => {
    */
   function logout() {
     return new Promise<void>((resolve, reject) => {
-      AuthAPI.logoutApi()
+      AuthAPI.logout()
         .then(() => {
           // 重置所有系统状态
           resetAllState();
@@ -178,7 +178,7 @@ export const useUserStore = defineStore("user", () => {
     }
 
     return new Promise<LoginResp>((resolve, reject) => {
-      AuthAPI.refreshTokenApi(refreshData)
+      AuthAPI.refreshToken(refreshData)
         .then((res) => {
           // 更新令牌，保持当前记住我状态
           AuthStorage.setTokens(

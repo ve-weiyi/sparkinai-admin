@@ -88,7 +88,7 @@
           </div>
         </el-card>
       </el-col>
-      
+
       <el-col :xs="12" :sm="12" :md="8" :lg="6" class="mt-4">
         <el-card shadow="never" class="h-full">
           <template #header>
@@ -163,7 +163,8 @@
 <script setup lang="ts">
 import { ref, onMounted, computed } from "vue";
 import { useUserStore } from "@/store/modules/user";
-import { StatsAPI, type DashboardStatsResp } from "@/api/stats";
+import { StatsAPI } from "@/api/stats";
+import type { GetDashboardStatsResp } from "@/api/stats";
 
 const userStore = useUserStore();
 
@@ -178,7 +179,7 @@ const greetings = computed(() => {
   return "晚上好！";
 });
 
-const stats = ref<DashboardStatsResp>({
+const stats = ref<GetDashboardStatsResp>({
   total_users: 0,
   new_users_today: 0,
   active_users_today: 0,

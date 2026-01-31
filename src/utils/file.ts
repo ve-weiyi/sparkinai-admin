@@ -1,5 +1,5 @@
 import * as imageConversion from "image-conversion";
-import { UploadAPI } from "@/api/upload_file";
+import { FileAPI } from "@/api/file";
 
 export function compressImage(rawFile: Blob) {
   return new Promise<Blob>((resolve, reject) => {
@@ -26,7 +26,7 @@ export function uploadFile(blob: Blob, path: string) {
     file: blob,
     file_path: path,
   };
-  return UploadAPI.uploadFileApi(data);
+  return FileAPI.uploadFile(data);
 }
 
 export async function multipleUploadFile(files: Blob[], path: string) {
@@ -43,7 +43,7 @@ export async function multipleUploadFile(files: Blob[], path: string) {
     files: files,
     file_path: path,
   };
-  return UploadAPI.multiUploadFileApi(data);
+  return FileAPI.multiUploadFiles(data);
 }
 
 export const calculateFileSize = (size: number, isInteger = false) => {

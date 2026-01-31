@@ -61,27 +61,12 @@
           <el-descriptions :column="1" border>
             <el-descriptions-item label="用户名">
               {{ userProfile.username }}
-              <el-icon v-if="userProfile.gender === 0" class="gender-icon male">
-                <Loading />
-              </el-icon>
-              <el-icon v-else-if="userProfile.gender === 1" class="gender-icon male">
-                <Male />
-              </el-icon>
-              <el-icon v-else class="gender-icon female">
-                <Female />
-              </el-icon>
             </el-descriptions-item>
             <el-descriptions-item label="手机号码">
               {{ userProfile.phone || "未绑定" }}
             </el-descriptions-item>
             <el-descriptions-item label="邮箱">
               {{ userProfile.email || "未绑定" }}
-            </el-descriptions-item>
-            <el-descriptions-item label="个人介绍">
-              {{ userProfile.intro }}
-            </el-descriptions-item>
-            <el-descriptions-item label="个人网站">
-              {{ userProfile.website }}
             </el-descriptions-item>
             <el-descriptions-item label="创建时间">
               {{ userProfile.created_at }}
@@ -222,19 +207,6 @@
         <el-form-item label="昵称">
           <el-input v-model="userProfileForm.nickname" />
         </el-form-item>
-        <el-form-item label="性别">
-          <el-select v-model="userProfileForm.gender">
-            <el-option label="保密" :value="0" />
-            <el-option label="男" :value="1" />
-            <el-option label="女" :value="2" />
-          </el-select>
-        </el-form-item>
-        <el-form-item label="个人简介">
-          <el-input v-model="userProfileForm.intro" />
-        </el-form-item>
-        <el-form-item label="个人网站">
-          <el-input v-model="userProfileForm.website" />
-        </el-form-item>
       </el-form>
 
       <!-- 修改密码 -->
@@ -314,12 +286,12 @@
 import { Camera, Edit, Female, Loading, Male } from "@element-plus/icons-vue";
 import {
   UpdateUserPasswordReq,
-  UpdateUserInfoReq,
-  UserInfoResp,
+  UpdateUserProfileReq,
+  UserVO,
   UpdateUserBindEmailReq,
   UpdateUserBindPhoneReq,
-} from "@/api/types";
-import { UserAPI } from "@/api/user_profile";
+} from "@/api/me";
+import { MeAPI } from "@/api/me";
 import { AuthAPI } from "@/api/auth";
 import { ref } from "vue";
 import { ElMessage } from "element-plus";
@@ -327,7 +299,7 @@ import { useRoute } from "vue-router";
 import { useDateFormat } from "@vueuse/core";
 import { uploadFile } from "@/utils/file";
 
-const userProfile = ref<UserInfoResp>(<UserInfoResp>{});
+const userProfile = ref<UserVO>(<UserVO>{});
 
 const enum DialogType {
   ACCOUNT = "account",
@@ -344,7 +316,7 @@ const dialog = reactive({
   type: "" as DialogType, // 修改账号资料,修改密码、绑定手机、绑定邮箱
 });
 
-const userProfileForm = reactive<UpdateUserInfoReq>(<UpdateUserInfoReq>{});
+const userProfileForm = reactive<UpdateUserProfileReq>(<UpdateUserProfileReq>{});
 const passwordChangeForm = reactive<UpdateUserPasswordReq>(<UpdateUserPasswordReq>{});
 const mobileUpdateForm = reactive<UpdateUserBindPhoneReq>(<UpdateUserBindPhoneReq>{});
 const emailUpdateForm = reactive<UpdateUserBindEmailReq>(<UpdateUserBindEmailReq>{});
@@ -400,9 +372,6 @@ const handleOpenDialog = (type: DialogType) => {
       dialog.title = "账号资料";
       // 初始化表单数据
       userProfileForm.nickname = userProfile.value.nickname;
-      userProfileForm.gender = userProfile.value.gender;
-      userProfileForm.intro = userProfile.value.intro;
-      userProfileForm.website = userProfile.value.website;
       break;
     case DialogType.PASSWORD:
       dialog.title = "修改密码";
@@ -434,7 +403,7 @@ function handleSendMobileCode() {
     return;
   }
   // 发送短信验证码
-  AuthAPI.sendPhoneVerifyCodeApi({
+  AuthAPI.sendPhoneVerifyCode({
     phone: mobileUpdateForm.phone,
     type: "bind_phone",
   }).then(() => {
@@ -468,7 +437,7 @@ function handleSendEmailCode() {
   }
 
   // 发送邮箱验证码
-  AuthAPI.sendEmailVerifyCodeApi({
+  AuthAPI.sendEmailVerifyCode({
     email: emailUpdateForm.email,
     type: "bind_email",
   }).then(() => {
@@ -490,7 +459,7 @@ function handleSendEmailCode() {
  */
 const handleSubmit = async () => {
   if (dialog.type === DialogType.ACCOUNT) {
-    UserAPI.updateUserInfoApi(userProfileForm).then(() => {
+    MeAPI.updateUserProfile(userProfileForm).then(() => {
       ElMessage.success("账号资料修改成功");
       dialog.visible = false;
       loadUserProfile();
@@ -500,18 +469,18 @@ const handleSubmit = async () => {
       ElMessage.error("两次输入的密码不一致");
       return;
     }
-    UserAPI.updateUserPasswordApi(passwordChangeForm).then(() => {
+    MeAPI.updateUserPassword(passwordChangeForm).then(() => {
       ElMessage.success("密码修改成功");
       dialog.visible = false;
     });
   } else if (dialog.type === DialogType.MOBILE) {
-    UserAPI.updateUserBindPhoneApi(mobileUpdateForm).then(() => {
+    MeAPI.bindUserPhone(mobileUpdateForm).then(() => {
       ElMessage.success("手机号绑定成功");
       dialog.visible = false;
       loadUserProfile();
     });
   } else if (dialog.type === DialogType.EMAIL) {
-    UserAPI.updateUserBindEmailApi(emailUpdateForm).then(() => {
+    MeAPI.bindUserEmail(emailUpdateForm).then(() => {
       ElMessage.success("邮箱绑定成功");
       dialog.visible = false;
       loadUserProfile();
@@ -535,7 +504,7 @@ const handleFileChange = async (event: Event) => {
         // 更新用户头像
         userProfile.value.avatar = res.data.file_url;
         // 更新用户信息
-        UserAPI.updateUserAvatarApi({
+        MeAPI.updateUserAvatar({
           avatar: res.data.file_url,
         }).then(() => {
           ElMessage.success("头像上传成功");
@@ -549,7 +518,7 @@ const handleFileChange = async (event: Event) => {
 
 /** 加载用户信息 */
 const loadUserProfile = async () => {
-  const res = await UserAPI.getUserInfoApi();
+  const res = await MeAPI.getUserProfile();
   userProfile.value = res.data;
 };
 
@@ -608,7 +577,7 @@ const handleUnbindAccount = (platform: string) => {
     }
   )
     .then(() => {
-      UserAPI.deleteUserBindThirdPartyApi({
+      MeAPI.unbindUserThirdParty({
         platform: platform,
       })
         .then(() => {
@@ -628,7 +597,7 @@ const handleBindAccount = (platform: string) => {
   console.log("绑定平台:", platform);
   // 这里添加绑定逻辑
   const state = route.query.redirect as string;
-  AuthAPI.getOauthAuthorizeUrlApi({
+  AuthAPI.getOauthAuthorizeUrl({
     platform: platform,
     state: "bind_account",
   })

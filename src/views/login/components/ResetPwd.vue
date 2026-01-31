@@ -79,8 +79,8 @@
 </template>
 <script setup lang="ts">
 import type { FormInstance, FormRules } from "element-plus";
-import { ResetPasswordReq } from "@/api/types.ts";
-import { AuthAPI } from "@/api/auth.ts";
+import { ResetPasswordReq } from "@/api/auth";
+import { AuthAPI } from "@/api/auth";
 import { Lock, Message } from "@element-plus/icons-vue";
 
 const emit = defineEmits(["update:modelValue"]);
@@ -114,7 +114,7 @@ function checkCapsLock(event: KeyboardEvent) {
 const submit = async () => {
   formRef.value?.validate(async (valid) => {
     if (valid) {
-      AuthAPI.resetPasswordApi(model.value).then(() => {
+      AuthAPI.resetPassword(model.value).then(() => {
         ElMessage.success("重置密码成功");
         emit("update:modelValue", "login");
       });
@@ -141,7 +141,7 @@ function startCountdown() {
 }
 
 function sendCaptchaCode() {
-  AuthAPI.sendEmailVerifyCodeApi({
+  AuthAPI.sendEmailVerifyCode({
     email: model.value.email,
     type: "reset_password",
   }).then(() => {

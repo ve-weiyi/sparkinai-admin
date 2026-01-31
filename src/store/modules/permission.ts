@@ -1,8 +1,8 @@
 import type { RouteRecordRaw } from "vue-router";
 import router, { constantRoutes } from "@/router";
 import { store } from "@/store";
-import { UserAPI } from "@/api/user_profile";
-import type { UserMenu } from "@/api/types";
+import { MeAPI } from "@/api/me";
+import type { UserMenu } from "@/api/me";
 
 export const usePermissionStore = defineStore("permission", () => {
   // 所有路由（静态路由 + 动态路由）
@@ -21,7 +21,7 @@ export const usePermissionStore = defineStore("permission", () => {
         dynamicRoutes = getMockRoutes();
       } else {
         try {
-          const res = await UserAPI.getUserMenusApi();
+          const res = await MeAPI.getUserMenus();
           const list = res?.data?.list ?? [];
           dynamicRoutes = list.length == 0 ? getMockRoutes() : transformRoutes(list);
         } catch (error) {

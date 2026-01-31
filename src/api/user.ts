@@ -1,162 +1,112 @@
 import request from "@/utils/request";
-import type { PageQuery, PageResp } from "./types";
 
-export interface UserItem {
-  id: string;
-  phone: string;
-  nickname: string;
-  avatar: string;
-  status: number;
-  free_usage: number;
-  token_balance: number;
-  total_generations: number;
-  last_login_at: string;
-  last_login_ip: string;
-  created_at: string;
-}
-
-export interface GetUserListReq extends PageQuery {
-  phone?: string;
-  status?: number;
-  keyword?: string;
-}
-
-export interface GetUserListResp extends PageResp {
-  list: UserItem[];
-}
 
 export interface GetUserDetailReq {
-  id: string;
+  id: string; // 用户ID
 }
 
 export interface GetUserDetailResp extends UserItem {
-  updated_at: string;
+  updated_at: number; // 更新时间
 }
 
-export interface CreateUserReq {
-  phone: string;
-  password?: string;
-  nickname?: string;
-  free_usage?: number;
-  token_balance?: number;
+export interface GetUserListReq extends PageQuery {
+  phone?: string; // 手机号筛选
+  status?: number; // 状态筛选
+  keyword?: string; // 关键词搜索（昵称/手机号）
 }
 
-export interface CreateUserResp {
-  id: string;
+export interface GetUserListResp {
+  page: number; 
+  page_size: number; 
+  total: number; 
+  list: UserItem[]; 
 }
 
-export interface UpdateUserReq {
-  id: string;
-  nickname?: string;
-  status?: number;
-}
-
-export interface UpdateUserResp {
-  success: boolean;
-  message: string;
+export interface PageQuery {
+  page?: number; // 当前页码
+  page_size?: number; // 每页数量
+  sorts?: string[]; // 排序
 }
 
 export interface RechargeUserReq {
-  id: string;
-  token_amount: number;
-  description?: string;
+  id: string; // 用户ID
+  token_amount: number; // 充值token数量
+  description?: string; // 充值说明
 }
 
 export interface RechargeUserResp {
-  success: boolean;
-  token_balance: number;
+  success: boolean; 
+  token_balance: number; // 充值后余额
 }
 
 export interface ResetUserPasswordReq {
-  id: string;
-  new_password: string;
+  id: string; // 用户ID
+  new_password: string; // 新密码
 }
 
 export interface ResetUserPasswordResp {
-  success: boolean;
-  message: string;
+  success: boolean; 
 }
 
-export interface DeleteUserReq {
-  id: string;
+export interface UserItem {
+  id: string; // 用户ID (UUID)
+  user_id: string; // 用户ID (UUID)
+  username: string; //  用户名
+  nickname: string; // 用户昵称
+  avatar: string; // 用户头像
+  phone?: string; // 用户手机号
+  email?: string; // 用户邮箱
+  status: number; // 状态：0-禁用 1-正常 2-冻结
+  free_usage: number; // 免费使用次数
+  token_balance: number; // Token余额
+  total_generations: number; // 累计生成次数
+  last_login_at: number; // 最后登录时间（时间戳）
+  last_login_ip: string; // 最后登录IP
+  created_at: number; // 创建时间（时间戳）
+  role_labels: UserRoleLabel[]; 
 }
 
-export interface DeleteUserResp {
-  success: boolean;
-  message: string;
+export interface UserRoleLabel {
+  role_id: number; 
+  role_key: string; 
+  role_label: string; 
 }
 
-export interface BatchDeleteUsersReq {
-  ids: string[];
-}
-
-export interface BatchDeleteUsersResp {
-  success_count: number;
-}
 
 export const UserAPI = {
-  getUserList(params?: GetUserListReq): Promise<IApiResponse<GetUserListResp>> {
+  /** 获取用户列表 */
+  getUserList(data?: GetUserListReq): Promise<IApiResponse<GetUserListResp>> {
     return request({
       url: "/admin-api/v1/users",
       method: "GET",
-      params,
+      data: data,
     });
   },
 
-  getUserDetail(params: GetUserDetailReq): Promise<IApiResponse<GetUserDetailResp>> {
+  /** 获取用户详情 */
+  getUserDetail(data?: GetUserDetailReq): Promise<IApiResponse<GetUserDetailResp>> {
     return request({
-      url: `/admin-api/v1/users/${params.id}`,
+      url: "/admin-api/v1/users/:id",
       method: "GET",
+      data: data,
     });
   },
 
-  createUser(data: CreateUserReq): Promise<IApiResponse<CreateUserResp>> {
+  /** 用户充值 */
+  rechargeUser(data?: RechargeUserReq): Promise<IApiResponse<RechargeUserResp>> {
     return request({
-      url: "/admin-api/v1/users",
+      url: "/admin-api/v1/users/:id/recharge",
       method: "POST",
-      data,
+      data: data,
     });
   },
 
-  updateUser(data: UpdateUserReq): Promise<IApiResponse<UpdateUserResp>> {
-    const { id, ...rest } = data;
+  /** 重置用户密码 */
+  resetUserPassword(data?: ResetUserPasswordReq): Promise<IApiResponse<ResetUserPasswordResp>> {
     return request({
-      url: `/admin-api/v1/users/${id}`,
-      method: "PUT",
-      data: rest,
-    });
-  },
-
-  rechargeUser(data: RechargeUserReq): Promise<IApiResponse<RechargeUserResp>> {
-    const { id, ...rest } = data;
-    return request({
-      url: `/admin-api/v1/users/${id}/recharge`,
+      url: "/admin-api/v1/users/:id/reset-password",
       method: "POST",
-      data: rest,
-    });
-  },
-
-  resetUserPassword(data: ResetUserPasswordReq): Promise<IApiResponse<ResetUserPasswordResp>> {
-    const { id, ...rest } = data;
-    return request({
-      url: `/admin-api/v1/users/${id}/reset-password`,
-      method: "POST",
-      data: rest,
-    });
-  },
-
-  deleteUser(data: DeleteUserReq): Promise<IApiResponse<DeleteUserResp>> {
-    return request({
-      url: `/admin-api/v1/users/${data.id}`,
-      method: "DELETE",
-    });
-  },
-
-  batchDeleteUsers(data: BatchDeleteUsersReq): Promise<IApiResponse<BatchDeleteUsersResp>> {
-    return request({
-      url: "/admin-api/v1/users/batch-delete",
-      method: "POST",
-      data,
+      data: data,
     });
   },
 };

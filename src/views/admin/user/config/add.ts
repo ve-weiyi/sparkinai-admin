@@ -6,7 +6,6 @@ const modalConfig: IModalConfig = {
   component: "dialog",
   dialog: {title: "新增用户", width: 500, draggable: true},
   form: {labelWidth: 100},
-  formAction: (data) => UserAPI.createUser(data),
   formItems: [
     {
       label: "手机号",

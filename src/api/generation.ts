@@ -1,106 +1,123 @@
 import request from "@/utils/request";
-import type { PageQuery, PageResp } from "./types";
 
-export interface GenerationItem {
-  id: string;
-  user_id: string;
-  user_phone: string;
-  product_name: string;
-  description: string;
-  image_url: string;
-  copy_result: string;
-  image_urls: string[];
-  generation_type: string;
-  status: number;
-  error_message: string;
-  cost_tokens: number;
-  generation_time: number;
-  engine_config_id: number;
-  created_at: string;
-  updated_at: string;
-}
-
-export interface GetGenerationListReq extends PageQuery {
-  user_id?: string;
-  status?: number;
-  generation_type?: string;
-  start_date?: string;
-  end_date?: string;
-  keyword?: string;
-}
-
-export interface GetGenerationListResp extends PageResp {
-  list: GenerationItem[];
-}
-
-export interface GetGenerationDetailReq {
-  id: string;
-}
-
-export interface GetGenerationDetailResp extends GenerationItem {}
-
-export interface DeleteGenerationReq {
-  id: string;
-}
-
-export interface DeleteGenerationResp {
-  success: boolean;
-  message: string;
-}
 
 export interface BatchDeleteGenerationsReq {
-  ids: string[];
+  ids: string[]; // 生成记录ID列表
 }
 
 export interface BatchDeleteGenerationsResp {
-  success_count: number;
+  success_count: number; // 成功删除数量
+}
+
+export interface DeleteGenerationReq {
+  id: string; // 生成记录ID
+}
+
+export interface DeleteGenerationResp {
+  success: boolean; 
+}
+
+export interface GenerationItem {
+  id: string; // 生成记录ID
+  user_id: string; // 用户ID
+  user_phone: string; // 用户手机号
+  product_name: string; // 产品名称
+  description: string; // 产品描述
+  image_url: string; // 上传的产品图片URL
+  copy_result: string; // 生成的文案结果（JSON）
+  image_urls: string[]; // 生成的图片URL列表
+  generation_type: string; // 生成类型
+  status: number; // 生成状态
+  error_message: string; // 错误信息
+  cost_tokens: number; // 消耗的token数量
+  generation_time: number; // 生成耗时（秒）
+  engine_config_id: number; // 使用的引擎配置ID
+  created_at: number; // 创建时间
+  updated_at: number; // 更新时间
+}
+
+export interface GetGenerationDetailReq {
+  id: string; // 生成记录ID
+}
+
+export interface GetGenerationDetailResp extends GenerationItem {
+}
+
+export interface GetGenerationListReq extends PageQuery {
+  user_id?: string; // 用户ID筛选
+  status?: number; // 生成状态筛选
+  generation_type?: string; // 生成类型筛选
+  start_date?: string; // 开始日期 YYYY-MM-DD
+  end_date?: string; // 结束日期 YYYY-MM-DD
+  keyword?: string; // 关键词搜索（产品名称）
+}
+
+export interface GetGenerationListResp {
+  page: number; 
+  page_size: number; 
+  total: number; 
+  list: GenerationItem[]; 
+}
+
+export interface PageQuery {
+  page?: number; // 当前页码
+  page_size?: number; // 每页数量
+  sorts?: string[]; // 排序
 }
 
 export interface RegenerateReq {
-  id: string;
+  id: string; // 生成记录ID
 }
 
 export interface RegenerateResp {
-  success: boolean;
-  generation_id: string;
+  success: boolean; 
+  generation_id: string; // 新的生成记录ID
 }
 
-export class GenerationAPI {
-  static getGenerationList(params: GetGenerationListReq) {
-    return request<GetGenerationListResp>({
+
+export const GenerationAPI = {
+  /** 获取生成记录列表 */
+  getGenerationList(data?: GetGenerationListReq): Promise<IApiResponse<GetGenerationListResp>> {
+    return request({
       url: "/admin-api/v1/generations",
-      method: "get",
-      params,
+      method: "GET",
+      data: data,
     });
-  }
+  },
 
-  static getGenerationDetail(params: GetGenerationDetailReq) {
-    return request<GetGenerationDetailResp>({
-      url: `/admin-api/v1/generations/${params.id}`,
-      method: "get",
+  /** 获取生成记录详情 */
+  getGenerationDetail(data?: GetGenerationDetailReq): Promise<IApiResponse<GetGenerationDetailResp>> {
+    return request({
+      url: "/admin-api/v1/generations/:id",
+      method: "GET",
+      data: data,
     });
-  }
+  },
 
-  static deleteGeneration(params: DeleteGenerationReq) {
-    return request<DeleteGenerationResp>({
-      url: `/admin-api/v1/generations/${params.id}`,
-      method: "delete",
+  /** 删除生成记录 */
+  deleteGeneration(data?: DeleteGenerationReq): Promise<IApiResponse<DeleteGenerationResp>> {
+    return request({
+      url: "/admin-api/v1/generations/:id",
+      method: "DELETE",
+      data: data,
     });
-  }
+  },
 
-  static batchDeleteGenerations(data: BatchDeleteGenerationsReq) {
-    return request<BatchDeleteGenerationsResp>({
+  /** 重新生成 */
+  regenerate(data?: RegenerateReq): Promise<IApiResponse<RegenerateResp>> {
+    return request({
+      url: "/admin-api/v1/generations/:id/regenerate",
+      method: "POST",
+      data: data,
+    });
+  },
+
+  /** 批量删除生成记录 */
+  batchDeleteGenerations(data?: BatchDeleteGenerationsReq): Promise<IApiResponse<BatchDeleteGenerationsResp>> {
+    return request({
       url: "/admin-api/v1/generations/batch",
-      method: "delete",
-      data,
+      method: "DELETE",
+      data: data,
     });
-  }
-
-  static regenerate(data: RegenerateReq) {
-    return request<RegenerateResp>({
-      url: "/admin-api/v1/generations/regenerate",
-      method: "post",
-      data,
-    });
-  }
-}
+  },
+};

@@ -1,5 +1,5 @@
 import type { IContentConfig } from "@/components/CURD/types";
-import { SystemConfigAPI } from "@/api/system";
+import { ConfigAPI } from "@/api/config";
 
 const contentConfig: IContentConfig = {
   pageTitle: "系统配置管理",
@@ -46,17 +46,17 @@ const contentConfig: IContentConfig = {
     }
   ],
   indexAction: function (params) {
-    return SystemConfigAPI.getSystemConfigList(params);
+    return ConfigAPI.getSystemConfigList(params);
   },
   modifyAction: (row, field, value) => {
-    return SystemConfigAPI.updateSystemConfig({ id: row.id, [field]: value });
+    return ConfigAPI.updateSystemConfig({ id: row.id, [field]: value });
   },
   deleteAction: (ids) => {
     const idList = ids.split(",");
     if (idList.length === 1) {
-      return SystemConfigAPI.deleteSystemConfig({ id: parseInt(idList[0]) });
+      return ConfigAPI.deleteSystemConfig({ id: parseInt(idList[0]) });
     }
-    return Promise.all(idList.map(id => SystemConfigAPI.deleteSystemConfig({ id: parseInt(id) }))).then(() => ({
+    return Promise.all(idList.map(id => ConfigAPI.deleteSystemConfig({ id: parseInt(id) }))).then(() => ({
       code: 0,
       message: "success"
     }));

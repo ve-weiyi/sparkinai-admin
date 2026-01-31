@@ -1,5 +1,5 @@
 import type { IModalConfig } from "@/components/CURD/types";
-import { ApiKeyAPI } from "@/api/apikey";
+import { ApikeyAPI } from "@/api/apikey";
 import { ProviderAPI } from "@/api/provider";
 
 const modalConfig: IModalConfig<any> = {
@@ -11,7 +11,7 @@ const modalConfig: IModalConfig<any> = {
     const updateData = { ...data };
     if (!updateData.api_key) delete updateData.api_key;
     if (!updateData.secret_key) delete updateData.secret_key;
-    return ApiKeyAPI.updateApiKey(updateData);
+    return ApikeyAPI.updateApiKey(updateData);
   },
   formItems: [
     {

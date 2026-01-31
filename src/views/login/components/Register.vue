@@ -86,7 +86,7 @@
 <script setup lang="ts">
 import type { FormInstance, FormRules } from "element-plus";
 import { Lock, Message } from "@element-plus/icons-vue";
-import { RegisterReq } from "@/api/types";
+import { RegisterReq } from "@/api/auth";
 import { AuthAPI } from "@/api/auth";
 
 const emit = defineEmits(["update:modelValue"]);
@@ -179,7 +179,7 @@ function startCountdown() {
 }
 
 function sendCaptchaCode() {
-  AuthAPI.sendEmailVerifyCodeApi({
+  AuthAPI.sendEmailVerifyCode({
     email: model.value.email,
     type: "register",
   })
@@ -214,10 +214,7 @@ const submit = async () => {
   }
   await formRef.value?.validate();
   loading.value = true;
-  AuthAPI.registerApi({
-    username: model.value.email,
-    ...model.value,
-  })
+  AuthAPI.register(model.value)
     .then(() => {
       ElMessage.success("注册成功");
       toLogin();

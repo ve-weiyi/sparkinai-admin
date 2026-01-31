@@ -1,5 +1,5 @@
 import type { IModalConfig } from "@/components/CURD/types";
-import { SystemConfigAPI } from "@/api/system";
+import { ConfigAPI } from "@/api/config";
 
 const modalConfig: IModalConfig<any> = {
   permPrefix: "admin:system",
@@ -7,7 +7,7 @@ const modalConfig: IModalConfig<any> = {
   dialog: { title: "新增系统配置", width: 600, draggable: true },
   form: { labelWidth: 100 },
   formAction: (data) => {
-    return SystemConfigAPI.createSystemConfig(data);
+    return ConfigAPI.createSystemConfig(data);
   },
   formItems: [
     { label: "配置键", prop: "config_key", type: "input", rules: [{ required: true, message: "请输入配置键" }] },

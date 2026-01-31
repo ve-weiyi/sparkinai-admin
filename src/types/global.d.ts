@@ -7,6 +7,19 @@ declare global {
   type TagView = import("@/types/ui").TagView;
   type AppSettings = import("@/types/ui").AppSettings;
 
+  interface PageQuery {
+    page?: number;
+    page_size?: number;
+    sorts?: string[];
+  }
+
+  interface PageResp<T> {
+    list: T;
+    page: number;
+    page_size: number;
+    total: number;
+  }
+
   interface IApiResponse<T = any> {
     flag: number;
     code: number;

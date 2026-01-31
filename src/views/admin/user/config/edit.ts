@@ -6,7 +6,6 @@ const modalConfig: IModalConfig = {
   component: "dialog",
   dialog: {title: "编辑用户", width: 500, draggable: true},
   form: {labelWidth: 100},
-  formAction: (data) => UserAPI.updateUser(data),
   formItems: [
     {
       label: "手机号",

@@ -144,7 +144,7 @@ import type { FormInstance, FormRules } from "element-plus";
 import router from "@/router";
 import { useUserStore } from "@/store";
 import { AuthStorage } from "@/utils/auth";
-import { EmailLoginReq } from "@/api/types";
+import { EmailLoginReq } from "@/api/auth";
 import { AuthAPI } from "@/api/auth";
 import { Message } from "@element-plus/icons-vue";
 
@@ -214,7 +214,7 @@ const codeLoading = ref(false);
 
 function getCaptcha() {
   codeLoading.value = true;
-  AuthAPI.getCaptchaCodeApi({
+  AuthAPI.getCaptchaCode({
     height: 40,
     width: 120,
   })
@@ -307,7 +307,7 @@ const setLoginCredentials = (email: string, password: string) => {
 // 跳转第三方登录地址
 const onThirdPartyLogin = (platform: string) => {
   const state = route.query.redirect as string;
-  AuthAPI.getOauthAuthorizeUrlApi({
+  AuthAPI.getOauthAuthorizeUrl({
     platform: platform,
     state: state,
   })

@@ -30,7 +30,7 @@ import contentConfig from "./config/content";
 import addConfig from "./config/add";
 import editConfig from "./config/edit";
 import { usePage } from "@/hooks/usePage";
-import { ApiKeyAPI } from "@/api/apikey";
+import { ApikeyAPI } from "@/api/apikey";
 import { ElMessage } from "element-plus";
 import type { IOperateData } from "@/components/CURD/types";
 
@@ -55,7 +55,7 @@ const handleOperateClick = async (data: IOperateData) => {
         message: '正在测试API Key...',
         duration: 0,
       });
-      const res = await ApiKeyAPI.testApiKey({ id: data.row.id });
+      const res = await ApikeyAPI.testApiKey({ id: data.row.id });
       loading.close();
       if (res.data.success) {
         ElMessage.success(`测试成功，延迟: ${res.data.latency}ms`);

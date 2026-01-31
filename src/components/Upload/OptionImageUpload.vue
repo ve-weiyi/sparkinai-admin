@@ -20,18 +20,17 @@
   >
     <el-option v-for="item in options" :key="item.value" :label="item.label" :value="item.value">
       <div class="flex items-center">
-        <img :src="item.isDir ? dirIcon : item.value" class="w-6 h-6 mr-2" />
+        <img :src="item.isDir ? dirIcon : item.value" class="w-6 h-6 mr-2"/>
         <span>{{ item.label }}</span>
       </div>
     </el-option>
   </el-select>
-  <el-input v-else v-model="imgUrl" placeholder="请输入图片链接" />
+  <el-input v-else v-model="imgUrl" placeholder="请输入图片链接"/>
 </template>
 
 <script setup lang="ts">
-import { nextTick, ref } from "vue";
-import type { ListUploadFileReq } from "@/api/types";
-import { UploadAPI } from "@/api/upload_file";
+import {nextTick, ref} from "vue";
+import {ListFileReq, FileAPI} from "@/api/file";
 import dirIcon from "@/assets/images/dir.png";
 import SingleImageUpload from "@/components/Upload/SingleImageUpload.vue";
 
@@ -97,12 +96,12 @@ const fetchFileList = (query: string) => {
   currentPath.value = query;
   loading.value = true;
 
-  const data: ListUploadFileReq = {
+  const data: ListFileReq = {
     file_path: query,
     limit: 20,
   };
 
-  UploadAPI.listUploadFileApi(data)
+  FileAPI.listFile(data)
     .then((res) => {
       options.value = res.data.list.map((item) => ({
         value: item.file_url,
