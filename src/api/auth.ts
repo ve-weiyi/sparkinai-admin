@@ -60,6 +60,11 @@ export interface LoginResp {
   token?: Token; 
 }
 
+export interface OauthLoginReq {
+  platform: string; // 平台
+  code?: string; // 授权码
+}
+
 export interface PhoneLoginReq {
   phone: string; // 手机号
   verify_code: string; // 验证码
@@ -74,15 +79,15 @@ export interface RefreshTokenReq {
 export interface RegisterReq {
   email: string; // 邮箱
   password: string; // 密码
-  confirm_password: string; // 确认密码
   verify_code: string; // 验证码
+  confirm_password?: string; // 确认密码（仅用于前端验证）
 }
 
 export interface ResetPasswordReq {
   email: string; // 邮箱
-  password: string; // 密码
-  confirm_password: string; // 确认密码
+  password: string; // 新密码
   verify_code: string; // 验证码
+  confirm_password?: string; // 确认密码（仅用于前端验证）
 }
 
 export interface SendEmailVerifyCodeReq {
@@ -97,7 +102,8 @@ export interface SendPhoneVerifyCodeReq {
 
 export interface ThirdLoginReq {
   platform: string; // 平台
-  code?: string; // 授权码
+  code: string; // 授权码
+  state?: string; // 状态
 }
 
 export interface Token {
@@ -132,7 +138,16 @@ export const AuthAPI = {
   /** 邮箱登录 */
   emailLogin(data?: EmailLoginReq): Promise<IApiResponse<LoginResp>> {
     return request({
-      url: "/admin-api/v1/auth/email-login",
+      url: "/admin-api/v1/auth/email/login",
+      method: "POST",
+      data: data,
+    });
+  },
+
+  /** 发送邮件验证码 */
+  sendEmailVerifyCode(data?: SendEmailVerifyCodeReq): Promise<IApiResponse<EmptyResp>> {
+    return request({
+      url: "/admin-api/v1/auth/email/verify-code",
       method: "POST",
       data: data,
     });
@@ -150,8 +165,35 @@ export const AuthAPI = {
   /** 第三方登录授权地址 */
   getOauthAuthorizeUrl(data?: GetOauthAuthorizeUrlReq): Promise<IApiResponse<GetOauthAuthorizeUrlResp>> {
     return request({
-      url: "/admin-api/v1/auth/oauth-authorize-url",
+      url: "/admin-api/v1/auth/oauth/authorize-url",
       method: "GET",
+      data: data,
+    });
+  },
+
+  /** 第三方登录 */
+  oauthLogin(data?: OauthLoginReq): Promise<IApiResponse<LoginResp>> {
+    return request({
+      url: "/admin-api/v1/auth/oauth/login",
+      method: "POST",
+      data: data,
+    });
+  },
+
+  /** 第三方登录 */
+  thirdLogin(data?: ThirdLoginReq): Promise<IApiResponse<LoginResp>> {
+    return request({
+      url: "/admin-api/v1/auth/third/login",
+      method: "POST",
+      data: data,
+    });
+  },
+
+  /** 重置密码 */
+  resetPassword(data?: ResetPasswordReq): Promise<IApiResponse<EmptyResp>> {
+    return request({
+      url: "/admin-api/v1/auth/password/reset",
+      method: "POST",
       data: data,
     });
   },
@@ -159,7 +201,16 @@ export const AuthAPI = {
   /** 手机登录 */
   phoneLogin(data?: PhoneLoginReq): Promise<IApiResponse<LoginResp>> {
     return request({
-      url: "/admin-api/v1/auth/phone-login",
+      url: "/admin-api/v1/auth/phone/login",
+      method: "POST",
+      data: data,
+    });
+  },
+
+  /** 发送手机验证码 */
+  sendPhoneVerifyCode(data?: SendPhoneVerifyCodeReq): Promise<IApiResponse<EmptyResp>> {
+    return request({
+      url: "/admin-api/v1/auth/phone/verify-code",
       method: "POST",
       data: data,
     });
@@ -178,42 +229,6 @@ export const AuthAPI = {
   register(data?: RegisterReq): Promise<IApiResponse<EmptyResp>> {
     return request({
       url: "/admin-api/v1/auth/register",
-      method: "POST",
-      data: data,
-    });
-  },
-
-  /** 重置密码 */
-  resetPassword(data?: ResetPasswordReq): Promise<IApiResponse<EmptyResp>> {
-    return request({
-      url: "/admin-api/v1/auth/reset-password",
-      method: "POST",
-      data: data,
-    });
-  },
-
-  /** 第三方登录 */
-  thirdLogin(data?: ThirdLoginReq): Promise<IApiResponse<LoginResp>> {
-    return request({
-      url: "/admin-api/v1/auth/third-login",
-      method: "POST",
-      data: data,
-    });
-  },
-
-  /** 发送邮件验证码 */
-  sendEmailVerifyCode(data?: SendEmailVerifyCodeReq): Promise<IApiResponse<EmptyResp>> {
-    return request({
-      url: "/admin-api/v1/auth/verify-code/email",
-      method: "POST",
-      data: data,
-    });
-  },
-
-  /** 发送手机验证码 */
-  sendPhoneVerifyCode(data?: SendPhoneVerifyCodeReq): Promise<IApiResponse<EmptyResp>> {
-    return request({
-      url: "/admin-api/v1/auth/verify-code/phone",
       method: "POST",
       data: data,
     });

@@ -1,5 +1,5 @@
 import * as imageConversion from "image-conversion";
-import { FileAPI } from "@/api/file";
+import { UploadAPI } from "@/api/upload";
 
 export function compressImage(rawFile: Blob) {
   return new Promise<Blob>((resolve, reject) => {
@@ -11,39 +11,56 @@ export function compressImage(rawFile: Blob) {
   });
 }
 
-export function uploadFile(blob: Blob, path: string) {
-  if (path.startsWith("/")) {
-    ElMessage.error("上传路径不能以'/'开头，不能包含连续的 '/'");
-    return;
-  }
+/**
+ * 使用上传凭证上传文件（前端直传）
+ */
+export async function uploadFileWithToken(file: File, fileName?: string): Promise<string> {
+  try {
+    // 获取上传凭证
+    const { data: tokenData } = await UploadAPI.getUploadToken({
+      file_name: fileName || file.name
+    })
 
-  if (!path.endsWith("/")) {
-    ElMessage.error("上传路径必须以'/'结尾");
-    return;
-  }
+    // 构建上传表单数据
+    const formData = new FormData()
+    formData.append('token', tokenData.token)
+    formData.append('policy', tokenData.policy)
+    formData.append('signature', tokenData.signature)
+    formData.append('key', tokenData.file_key)
+    
+    // 添加额外数据
+    Object.entries(tokenData.extra_data || {}).forEach(([key, value]) => {
+      formData.append(key, String(value))
+    })
+    
+    formData.append('file', file)
 
-  const data = {
-    file: blob,
-    file_path: path,
-  };
-  return FileAPI.uploadFile(data);
+    // 直接上传到第三方存储
+    const response = await fetch(tokenData.upload_url, {
+      method: 'POST',
+      body: formData,
+      headers: {
+        'Authorization': `Bearer ${tokenData.token}`
+      }
+    })
+
+    if (!response.ok) {
+      throw new Error('上传失败')
+    }
+
+    return tokenData.access_url
+  } catch (error) {
+    console.error('上传失败:', error)
+    throw error
+  }
 }
 
-export async function multipleUploadFile(files: Blob[], path: string) {
-  if (path.startsWith("/")) {
-    ElMessage.error("上传路径不能以'/'开头，不能包含连续的 '/'");
-    return;
-  }
-
-  if (!path.endsWith("/")) {
-    ElMessage.error("上传路径必须以'/'结尾");
-    return;
-  }
-  const data = {
-    files: files,
-    file_path: path,
-  };
-  return FileAPI.multiUploadFiles(data);
+/**
+ * 批量上传文件（使用上传凭证）
+ */
+export async function multipleUploadFileWithToken(files: File[]): Promise<string[]> {
+  const uploadPromises = files.map(file => uploadFileWithToken(file))
+  return Promise.all(uploadPromises)
 }
 
 export const calculateFileSize = (size: number, isInteger = false) => {

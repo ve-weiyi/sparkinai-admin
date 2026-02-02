@@ -297,7 +297,7 @@ import { ref } from "vue";
 import { ElMessage } from "element-plus";
 import { useRoute } from "vue-router";
 import { useDateFormat } from "@vueuse/core";
-import { uploadFile } from "@/utils/file";
+import { uploadFileWithToken } from "@/utils/file";
 
 const userProfile = ref<UserVO>(<UserVO>{});
 
@@ -500,16 +500,14 @@ const handleFileChange = async (event: Event) => {
   if (file) {
     // 调用文件上传API
     try {
-      uploadFile(file, "blog/avatar/").then((res) => {
-        // 更新用户头像
-        userProfile.value.avatar = res.data.file_url;
-        // 更新用户信息
-        MeAPI.updateUserAvatar({
-          avatar: res.data.file_url,
-        }).then(() => {
-          ElMessage.success("头像上传成功");
-        });
+      const fileUrl = await uploadFileWithToken(file);
+      // 更新用户头像
+      userProfile.value.avatar = fileUrl;
+      // 更新用户信息
+      await MeAPI.updateUserAvatar({
+        avatar: fileUrl,
       });
+      ElMessage.success("头像上传成功");
     } catch (error) {
       ElMessage.error("头像上传失败" + error);
     }

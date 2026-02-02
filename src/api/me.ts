@@ -12,18 +12,18 @@ export interface EmptyResp {
 }
 
 export interface GetUserApisResp {
-  list: UserApi[];
+  list: UserApi[]; 
 }
 
 export interface GetUserMenusResp {
-  list: UserMenu[];
+  list: UserMenu[]; 
 }
 
-export interface GetUserReq {
+export interface GetUserProfileReq {
 }
 
 export interface GetUserRolesResp {
-  list: UserRole[];
+  list: UserRole[]; 
 }
 
 export interface PageQuery {
@@ -33,10 +33,10 @@ export interface PageQuery {
 }
 
 export interface PageResp {
-  page: number;
-  page_size: number;
-  total: number;
-  list: any;
+  page: number; 
+  page_size: number; 
+  total: number; 
+  list: any; 
 }
 
 export interface QueryUserLoginHistoryReq extends PageQuery {
@@ -69,7 +69,7 @@ export interface UpdateUserPasswordReq {
 }
 
 export interface UpdateUserProfileReq {
-  nickname: string;
+  nickname: string; 
   avatar: string; // 用户头像
 }
 
@@ -81,7 +81,7 @@ export interface UserApi {
   method: string; // api请求方法
   created_at: number; // 创建时间
   updated_at: number; // 更新时间
-  children: UserApi[];
+  children: UserApi[]; 
 }
 
 export interface UserMenu {
@@ -92,19 +92,19 @@ export interface UserMenu {
   component: string; // Layout组件
   redirect: string; // 路由重定向
   meta: UserMenuMeta; // meta配置
-  children?: UserMenu[];
+  children?: UserMenu[]; 
   created_at: number; // 创建时间
   updated_at: number; // 更新时间
 }
 
 export interface UserMenuMeta {
-  title?: string;
-  icon?: string;
-  hidden?: boolean;
-  always_show?: boolean;
-  affix?: boolean;
-  keep_alive?: boolean;
-  breadcrumb?: boolean;
+  title?: string; 
+  icon?: string; 
+  hidden?: boolean; 
+  always_show?: boolean; 
+  affix?: boolean; 
+  keep_alive?: boolean; 
+  breadcrumb?: boolean; 
 }
 
 export interface UserRole {
@@ -136,8 +136,8 @@ export interface UserVO {
   created_at: number; // 创建时间（毫秒时间戳）
   updated_at: number; // 更新时间（毫秒时间戳）
   third_party: UserThirdPartyInfo[]; // 第三方绑定
-  roles: string[];
-  perms: string[];
+  roles: string[]; 
+  perms: string[]; 
 }
 
 
@@ -233,7 +233,7 @@ export const MeAPI = {
   },
 
   /** // ==================== 基础信息 ====================获取当前用户信息 */
-  getUserProfile(data?: GetUserReq): Promise<IApiResponse<UserVO>> {
+  getUserProfile(data?: GetUserProfileReq): Promise<IApiResponse<UserVO>> {
     return request({
       url: "/admin-api/v1/users/me/profile",
       method: "GET",

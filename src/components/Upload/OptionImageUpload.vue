@@ -30,7 +30,7 @@
 
 <script setup lang="ts">
 import {nextTick, ref} from "vue";
-import {ListFileReq, FileAPI} from "@/api/file";
+import {ListFilesReq, UploadAPI} from "@/api/upload";
 import dirIcon from "@/assets/images/dir.png";
 import SingleImageUpload from "@/components/Upload/SingleImageUpload.vue";
 
@@ -96,12 +96,12 @@ const fetchFileList = (query: string) => {
   currentPath.value = query;
   loading.value = true;
 
-  const data: ListFileReq = {
+  const data: ListFilesReq = {
     file_path: query,
     limit: 20,
   };
 
-  FileAPI.listFile(data)
+  UploadAPI.listFiles(data)
     .then((res) => {
       options.value = res.data.list.map((item) => ({
         value: item.file_url,

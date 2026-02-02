@@ -51,7 +51,7 @@
 <script setup lang="ts">
 import { UploadFile, UploadRawFile, UploadRequestOptions } from "element-plus";
 import { ref } from "vue";
-import { compressImage, uploadFile } from "@/utils/file";
+import { compressImage, uploadFileWithToken } from "@/utils/file";
 
 const props = defineProps({
   uploadPath: {
@@ -119,9 +119,14 @@ function handleBeforeUpload(file: UploadRawFile) {
 /**
  * 上传中
  */
-function handleHttpRequest(options: UploadRequestOptions) {
+async function handleHttpRequest(options: UploadRequestOptions) {
   console.log("handleHttpRequest", options.filename);
-  return uploadFile(options.file, props.uploadPath);
+  try {
+    const url = await uploadFileWithToken(options.file as File);
+    return { data: { file_url: url } };
+  } catch (error) {
+    throw error;
+  }
 }
 
 /**
