@@ -8,10 +8,10 @@ import type {
   LoginResp,
   PhoneLoginReq,
   RefreshTokenReq,
-  ThirdLoginReq,
-} from "@/api/auth";
+  OauthLoginReq,
+} from "@/api/types";
 import { AuthAPI } from "@/api/auth";
-import {UserVO}from "@/api/me";
+import {UserVO}from "@/api/types";
 import { MeAPI } from "@/api/me";
 
 export const useUserStore = defineStore("user", () => {
@@ -86,11 +86,11 @@ export const useUserStore = defineStore("user", () => {
   /**
    * 第三方登录
    */
-  function thirdLogin(loginData: ThirdLoginReq) {
+  function oauthLogin(loginData: OauthLoginReq) {
     return new Promise<LoginResp>((resolve, reject) => {
-      AuthAPI.thirdLogin(loginData)
+      AuthAPI.oauthLogin(loginData)
         .then((res) => {
-          console.log("thirdLogin", res);
+          console.log("oauthLogin", res);
           AuthStorage.setTokens(
             res.data.user_id,
             res.data.token?.access_token,
@@ -203,7 +203,7 @@ export const useUserStore = defineStore("user", () => {
     login,
     emailLogin,
     phoneLogin,
-    thirdLogin,
+    oauthLogin,
     logout,
     resetAllState,
     resetUserState,

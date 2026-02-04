@@ -86,7 +86,7 @@
 <script setup lang="ts">
 import type { FormInstance, FormRules } from "element-plus";
 import { Lock, Message } from "@element-plus/icons-vue";
-import { RegisterReq } from "@/api/auth";
+import { RegisterReq } from "@/api/types";
 import { AuthAPI } from "@/api/auth";
 
 const emit = defineEmits(["update:modelValue"]);

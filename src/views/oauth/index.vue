@@ -46,7 +46,7 @@ onMounted(() => {
       break;
     default:
       userStore
-        .thirdLogin({
+        .oauthLogin({
           platform: platform,
           code: code,
         })

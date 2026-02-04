@@ -164,7 +164,7 @@
 import { ref, onMounted, computed } from "vue";
 import { useUserStore } from "@/store/modules/user";
 import { StatsAPI } from "@/api/stats";
-import type { GetDashboardStatsResp } from "@/api/stats";
+import type { GetDashboardStatsResp } from "@/api/types";
 
 const userStore = useUserStore();
 

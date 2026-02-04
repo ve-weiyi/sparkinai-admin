@@ -290,7 +290,7 @@ import {
   UserVO,
   UpdateUserBindEmailReq,
   UpdateUserBindPhoneReq,
-} from "@/api/me";
+} from "@/api/types";
 import { MeAPI } from "@/api/me";
 import { AuthAPI } from "@/api/auth";
 import { ref } from "vue";

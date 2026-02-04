@@ -79,7 +79,7 @@
 </template>
 <script setup lang="ts">
 import type { FormInstance, FormRules } from "element-plus";
-import { ResetPasswordReq } from "@/api/auth";
+import { ResetPasswordReq } from "@/api/types";
 import { AuthAPI } from "@/api/auth";
 import { Lock, Message } from "@element-plus/icons-vue";
 

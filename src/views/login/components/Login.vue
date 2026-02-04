@@ -144,7 +144,7 @@ import type { FormInstance, FormRules } from "element-plus";
 import router from "@/router";
 import { useUserStore } from "@/store";
 import { AuthStorage } from "@/utils/auth";
-import { EmailLoginReq } from "@/api/auth";
+import { EmailLoginReq } from "@/api/types";
 import { AuthAPI } from "@/api/auth";
 import { Message } from "@element-plus/icons-vue";
 

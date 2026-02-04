@@ -2,7 +2,7 @@ import type { RouteRecordRaw } from "vue-router";
 import router, { constantRoutes } from "@/router";
 import { store } from "@/store";
 import { MeAPI } from "@/api/me";
-import type { UserMenu } from "@/api/me";
+import type { UserMenu } from "@/api/types";
 
 export const usePermissionStore = defineStore("permission", () => {
   // 所有路由（静态路由 + 动态路由）

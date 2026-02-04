@@ -30,7 +30,8 @@
 
 <script setup lang="ts">
 import {nextTick, ref} from "vue";
-import {ListFilesReq, UploadAPI} from "@/api/upload";
+import type {ListFilesReq} from "@/api/types";
+import {UploadAPI} from "@/api/upload";
 import dirIcon from "@/assets/images/dir.png";
 import SingleImageUpload from "@/components/Upload/SingleImageUpload.vue";
 

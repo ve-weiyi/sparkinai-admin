@@ -46,7 +46,7 @@ import { LocationQuery, RouteLocationRaw, useRoute } from "vue-router";
 import router from "@/router";
 import { useUserStore } from "@/store";
 import { AuthAPI } from "@/api/auth";
-import { PhoneLoginReq } from "@/api/auth";
+import { PhoneLoginReq } from "@/api/types";
 import { Iphone } from "@element-plus/icons-vue";
 
 const userStore = useUserStore();
