@@ -84,7 +84,7 @@ function pushMenuOptions(list: MenuVO[]): OptionType[] {
 }
 
 const getMenuOptions = () => {
-  MenuAPI.getMenus().then((res) => {
+  MenuAPI.getMenuList().then((res) => {
     menuOptions.value = pushMenuOptions(res.data.list);
   });
 };

@@ -1,12 +1,14 @@
 import request from "@/utils/request";
 import type {
-  GetUserDetailReq,
-  GetUserDetailResp,
   GetUserListReq,
   GetUserListResp,
   RechargeUserReq,
   RechargeUserResp,
   ResetUserPasswordReq,
+  UpdateUserStatusReq,
+  UpdateUserStatusResp,
+  GetUserDetailReq,
+  GetUserDetailResp,
   ResetUserPasswordResp,
 } from "./types";
 
@@ -44,6 +46,15 @@ export const UserAPI = {
     return request({
       url: `/admin-api/v1/users/${data.user_id}/reset-password`,
       method: "POST",
+      data: data,
+    });
+  },
+
+  /** 更新用户状态 */
+  updateUserStatus(data?: UpdateUserStatusReq): Promise<IApiResponse<UpdateUserStatusResp>> {
+    return request({
+      url: `/admin-api/v1/users/${data.user_id}/status`,
+      method: "PUT",
       data: data,
     });
   },

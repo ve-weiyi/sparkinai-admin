@@ -1,15 +1,15 @@
 import request from "@/utils/request";
 import type {
-  BatchDeleteGenerationsReq,
-  BatchDeleteGenerationsResp,
-  DeleteGenerationReq,
   DeleteGenerationResp,
-  GetGenerationDetailReq,
-  GetGenerationDetailResp,
-  GetGenerationListReq,
-  GetGenerationListResp,
   RegenerateReq,
   RegenerateResp,
+  BatchDeleteGenerationsReq,
+  GetGenerationListReq,
+  GetGenerationDetailReq,
+  GetGenerationDetailResp,
+  BatchDeleteGenerationsResp,
+  GetGenerationListResp,
+  DeleteGenerationReq,
 } from "./types";
 
 /** 生成记录管理 */

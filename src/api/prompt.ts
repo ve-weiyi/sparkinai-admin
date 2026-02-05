@@ -1,13 +1,13 @@
 import request from "@/utils/request";
 import type {
-  CreatePromptReq,
-  CreatePromptResp,
+  UpdatePromptResp,
   DeletePromptReq,
   DeletePromptResp,
   GetPromptListReq,
   GetPromptListResp,
+  CreatePromptReq,
+  CreatePromptResp,
   UpdatePromptReq,
-  UpdatePromptResp,
 } from "./types";
 
 /** 提示词管理 */

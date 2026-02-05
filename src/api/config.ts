@@ -1,19 +1,19 @@
 import request from "@/utils/request";
 import type {
-  BatchUpdateSystemConfigReq,
-  BatchUpdateSystemConfigResp,
   CreateSystemConfigReq,
   CreateSystemConfigResp,
-  DeleteSystemConfigReq,
-  DeleteSystemConfigResp,
-  GetPublicConfigReq,
-  GetPublicConfigResp,
-  GetSystemConfigListReq,
-  GetSystemConfigListResp,
   GetSystemConfigReq,
+  DeleteSystemConfigReq,
+  BatchUpdateSystemConfigResp,
+  GetPublicConfigReq,
+  GetSystemConfigListResp,
   GetSystemConfigResp,
   UpdateSystemConfigReq,
   UpdateSystemConfigResp,
+  DeleteSystemConfigResp,
+  BatchUpdateSystemConfigReq,
+  GetPublicConfigResp,
+  GetSystemConfigListReq,
 } from "./types";
 
 /** 系统配置管理 */

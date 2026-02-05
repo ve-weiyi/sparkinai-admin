@@ -1,11 +1,11 @@
 import request from "@/utils/request";
 import type {
-  CreateProviderReq,
-  CreateProviderResp,
   DeleteProviderReq,
   DeleteProviderResp,
   GetProviderListReq,
   GetProviderListResp,
+  CreateProviderReq,
+  CreateProviderResp,
   UpdateProviderReq,
   UpdateProviderResp,
 } from "./types";

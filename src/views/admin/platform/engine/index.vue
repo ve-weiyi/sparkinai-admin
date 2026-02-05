@@ -49,16 +49,19 @@ function handleToolbarClick(name: string) {
 
 // 处理自定义操作
 const handleOperateClick = async (data: IOperateData) => {
-  if (data.name === "set_default") {
-    try {
-      await EngineAPI.setDefaultEngineConfig({ id: data.row.id });
-      ElMessage.success("设置默认成功");
-      contentRef.value?.handleRefresh();
-    } catch (error) {
-      console.error(error);
-    }
-  } else if (data.name === "edit") {
-    handleEditClick(data.row);
+  switch (data.name) {
+    case "set_default":
+      try {
+        await EngineAPI.setDefaultEngineConfig({ id: data.row.id });
+        ElMessage.success("设置默认成功");
+        contentRef.value?.handleRefresh();
+      } catch (error) {
+        console.error(error);
+      }
+      break;
+    case "edit":
+      handleEditClick(data.row);
+      break;
   }
 };
 </script>

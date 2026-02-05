@@ -1,21 +1,21 @@
 import request from "@/utils/request";
 import type {
-  ExportStatsReportReq,
-  ExportStatsReportResp,
-  GetDashboardStatsReq,
-  GetDashboardStatsResp,
-  GetGenerationTrendReq,
-  GetGenerationTrendResp,
-  GetModelUsageStatsReq,
   GetModelUsageStatsResp,
-  GetPopularProductsReq,
   GetPopularProductsResp,
   GetRevenueTrendReq,
   GetRevenueTrendResp,
   GetUserActivityRankingReq,
-  GetUserActivityRankingResp,
+  GetDashboardStatsResp,
+  GetGenerationTrendResp,
   GetUserGrowthTrendReq,
+  GetDashboardStatsReq,
+  ExportStatsReportReq,
+  GetPopularProductsReq,
+  GetUserActivityRankingResp,
   GetUserGrowthTrendResp,
+  ExportStatsReportResp,
+  GetGenerationTrendReq,
+  GetModelUsageStatsReq,
 } from "./types";
 
 /** 统计分析 */

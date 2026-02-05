@@ -51,8 +51,10 @@ function handleToolbarClick(name: string) {
 }
 
 const handleOperateClick = async (data: IOperateData) => {
-  if (data.name === "edit") {
-    handleEditClick(data.row);
+  switch (data.name) {
+    case "edit":
+      handleEditClick(data.row);
+      break;
   }
 };
 </script>

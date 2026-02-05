@@ -1,9 +1,9 @@
 import type { IContentConfig } from "@/components/CURD/types";
-import type { QueryApiReq } from "@/api/types";
+import type { GetApiListReq } from "@/api/types";
 import { ApiAPI } from "@/api/api";
 import { ApiTraceableEnum } from "@/enums/blog";
 
-const contentConfig: IContentConfig<QueryApiReq> = {
+const contentConfig: IContentConfig<GetApiListReq> = {
   pageTitle: "接口管理",
   permPrefix: "sys:api",
   table: {
@@ -32,8 +32,8 @@ const contentConfig: IContentConfig<QueryApiReq> = {
       ids: ids.split(",").map((id) => parseInt(id)),
     });
   },
-  indexAction: function (params: QueryApiReq) {
-    return ApiAPI.getApis(params);
+  indexAction: function (params: GetApiListReq) {
+    return ApiAPI.getApiList(params);
   },
   modifyAction(row, field, value) {
     const data = Object.assign(row);

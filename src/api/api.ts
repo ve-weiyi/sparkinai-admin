@@ -1,24 +1,24 @@
 import request from "@/utils/request";
 import type {
-  ApiVO,
-  BatchDeleteApisReq,
-  BatchDeleteApisResp,
-  CleanApisResp,
   CreateApiReq,
-  DeleteApiReq,
-  EmptyReq,
-  EmptyResp,
-  GetApiReq,
-  PageResp,
-  QueryApiReq,
-  SyncApisResp,
+  BatchDeleteApisReq,
   UpdateApiReq,
+  CleanApisResp,
+  SyncApisResp,
+  GetApiListReq,
+  PageResp,
+  ApiVO,
+  BatchDeleteApisResp,
+  GetApiReq,
+  DeleteApiReq,
+  EmptyResp,
+  EmptyReq,
 } from "./types";
 
 /** 接口管理 */
 export const ApiAPI = {
   /** 获取接口列表 */
-  getApis(params?: QueryApiReq): Promise<IApiResponse<PageResp>> {
+  getApiList(params?: GetApiListReq): Promise<IApiResponse<PageResp>> {
     return request({
       url: `/admin-api/v1/apis`,
       method: "GET",

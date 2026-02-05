@@ -1,15 +1,15 @@
 import request from "@/utils/request";
 import type {
+  GetApiKeyListReq,
   CreateApiKeyReq,
-  CreateApiKeyResp,
+  UpdateApiKeyResp,
   DeleteApiKeyReq,
   DeleteApiKeyResp,
-  GetApiKeyListReq,
-  GetApiKeyListResp,
-  TestApiKeyReq,
   TestApiKeyResp,
+  GetApiKeyListResp,
+  CreateApiKeyResp,
   UpdateApiKeyReq,
-  UpdateApiKeyResp,
+  TestApiKeyReq,
 } from "./types";
 
 /** API密钥管理 */

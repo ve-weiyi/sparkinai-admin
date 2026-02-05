@@ -442,6 +442,13 @@ export interface GetApiKeyListResp {
   list: ApiKeyItem[];
 }
 
+export interface GetApiListReq extends PageQuery {
+  name?: string; // api名称
+  path?: string; // api路径
+  method?: string; // api请求方法
+  status?: number; // 状态
+}
+
 export interface GetApiReq {
   id: number; // 主键id
 }
@@ -536,6 +543,12 @@ export interface GetGenerationTrendReq {
 // 获取生成统计趋势响应
 export interface GetGenerationTrendResp {
   list: GenerationTrendItem[]; // 趋势数据列表
+}
+
+export interface GetMenuListReq extends PageQuery {
+  name?: string; // 路由名字
+  title?: string; // 菜单标题
+  status?: number; // 状态
 }
 
 export interface GetMenuReq {
@@ -635,6 +648,13 @@ export interface GetRevenueTrendReq {
 // 获取收入统计趋势响应
 export interface GetRevenueTrendResp {
   list: RevenueTrendItem[]; // 趋势数据列表
+}
+
+// 角色列表查询请求
+export interface GetRoleListReq extends PageQuery {
+  role_key?: string; // 角色标识（模糊查询）
+  role_label?: string; // 角色名称（模糊查询）
+  status?: number; // 状态 0-正常 1-禁用（精确查询）
 }
 
 // 获取角色权限请求
@@ -902,26 +922,6 @@ export interface ProviderItem {
   sort_order: number; // 排序顺序
   created_at: number; // 创建时间
   updated_at: number; // 更新时间
-}
-
-export interface QueryApiReq extends PageQuery {
-  name?: string; // api名称
-  path?: string; // api路径
-  method?: string; // api请求方法
-  status?: number; // 状态
-}
-
-export interface QueryMenuReq extends PageQuery {
-  name?: string; // 路由名字
-  title?: string; // 菜单标题
-  status?: number; // 状态
-}
-
-// 角色列表查询请求
-export interface QueryRoleReq extends PageQuery {
-  role_key?: string; // 角色标识（模糊查询）
-  role_label?: string; // 角色名称（模糊查询）
-  status?: number; // 状态 0-正常 1-禁用（精确查询）
 }
 
 export interface QueryUserLoginHistoryReq extends PageQuery {}
@@ -1267,6 +1267,17 @@ export interface UpdateUserPasswordReq {
 export interface UpdateUserProfileReq {
   nickname: string;
   avatar: string; // 用户头像
+}
+
+// 更新用户状态请求
+export interface UpdateUserStatusReq {
+  user_id: string; // 用户ID (UUID)
+  status: number; // 状态：0-禁用 1-正常 2-冻结
+}
+
+// 更新用户状态响应
+export interface UpdateUserStatusResp {
+  success: boolean;
 }
 
 export interface UploadFilesReq {

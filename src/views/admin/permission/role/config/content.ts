@@ -1,9 +1,9 @@
 import type { IContentConfig } from "@/components/CURD/types";
-import type { QueryRoleReq } from "@/api/types";
+import type { GetRoleListReq } from "@/api/types";
 import { RoleAPI } from "@/api/role";
 import { RoleDefaultEnum } from "@/enums/blog";
 
-const contentConfig: IContentConfig<QueryRoleReq> = {
+const contentConfig: IContentConfig<GetRoleListReq> = {
   pageTitle: "角色管理",
   permPrefix: "sys:role",
   table: {
@@ -27,8 +27,8 @@ const contentConfig: IContentConfig<QueryRoleReq> = {
       ids: ids.split(",").map((id) => parseInt(id)),
     });
   },
-  indexAction: function (params: QueryRoleReq) {
-    return RoleAPI.getRoles(params);
+  indexAction: function (params: GetRoleListReq) {
+    return RoleAPI.getRoleList(params);
   },
   modifyAction(row, field, value) {
     const data = Object.assign(row);

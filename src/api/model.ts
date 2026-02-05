@@ -1,13 +1,13 @@
 import request from "@/utils/request";
 import type {
-  CreateModelReq,
-  CreateModelResp,
-  DeleteModelReq,
-  DeleteModelResp,
   GetModelListReq,
   GetModelListResp,
+  CreateModelReq,
+  CreateModelResp,
   UpdateModelReq,
   UpdateModelResp,
+  DeleteModelReq,
+  DeleteModelResp,
 } from "./types";
 
 /** AI模型管理 */

@@ -1,10 +1,10 @@
 import request from "@/utils/request";
 import type {
+  UpdateAdminPasswordReq,
   EmptyResp,
+  UpdateAdminRolesReq,
   GetAdminListReq,
   PageResp,
-  UpdateAdminPasswordReq,
-  UpdateAdminRolesReq,
   UpdateAdminStatusReq,
 } from "./types";
 

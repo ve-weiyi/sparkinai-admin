@@ -78,7 +78,7 @@ const modalConfig: IModalConfig<UpdateAdminRolesReq> = {
       },
       options: [],
       async initFn(item) {
-        const res = await RoleAPI.getRoles();
+        const res = await RoleAPI.getRoleList();
         item.options = res.data.list.map((role) => ({
           label: role.role_label,
           value: role.id,

@@ -64,27 +64,31 @@ const imageDialogVisible = ref(false);
 const currentImages = ref<string[]>([]);
 
 const handleOperateClick = async (data: IOperateData) => {
-  if (data.name === "view_copy") {
-    currentCopy.value = data.row.copy_result || "暂无文案";
-    copyDialogVisible.value = true;
-  } else if (data.name === "view_images") {
-    currentImages.value = data.row.image_urls || [];
-    imageDialogVisible.value = true;
-  } else if (data.name === "regenerate") {
-    try {
-      await ElMessageBox.confirm("确定要重新生成吗？这将会消耗新的Token。", "提示", {
-        type: "warning",
-      });
-      const res = await GenerationAPI.regenerate({ id: data.row.id });
-      if (res.data.success) {
-        ElMessage.success("已提交重试请求");
-        contentRef.value?.handleRefresh();
-      } else {
-        ElMessage.error("重试请求失败");
+  switch (data.name) {
+    case "view_copy":
+      currentCopy.value = data.row.copy_result || "暂无文案";
+      copyDialogVisible.value = true;
+      break;
+    case "view_images":
+      currentImages.value = data.row.image_urls || [];
+      imageDialogVisible.value = true;
+      break;
+    case "regenerate":
+      try {
+        await ElMessageBox.confirm("确定要重新生成吗？这将会消耗新的Token。", "提示", {
+          type: "warning",
+        });
+        const res = await GenerationAPI.regenerate({ id: data.row.id });
+        if (res.data.success) {
+          ElMessage.success("已提交重试请求");
+          contentRef.value?.handleRefresh();
+        } else {
+          ElMessage.error("重试请求失败");
+        }
+      } catch (error) {
+        console.error(error);
       }
-    } catch (error) {
-      console.error(error);
-    }
+      break;
   }
 };
 </script>

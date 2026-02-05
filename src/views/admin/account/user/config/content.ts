@@ -13,15 +13,25 @@ const contentConfig: IContentConfig = {
   },
   parseData: (res) => ({ total: res.data.total, list: res.data.list || [] }),
   indexAction: (query) => UserAPI.getUserList(query),
+  modifyAction(row, field, value) {
+    switch (field) {
+      case "status":
+        return UserAPI.updateUserStatus({
+          user_id: row.id,
+          status: row.status,
+        });
+    }
+    return Promise.reject("unknown action");
+  },
   pk: "id",
-  toolbar: ["add"],
   defaultToolbar: ["refresh", "filter", "search"],
   cols: [
     { type: "selection", label: "批量操作", width: 50, align: "center" },
     { label: "ID", prop: "id", width: 180, align: "center" },
     { label: "昵称", prop: "nickname", width: 120, align: "center" },
-    { label: "手机号", prop: "phone", width: 130, align: "center" },
     { label: "头像", prop: "avatar", width: 80, align: "center", templet: "image" },
+    { label: "邮箱", prop: "email", width: 130, align: "center" },
+    { label: "手机号", prop: "phone", width: 130, align: "center" },
     { label: "Token余额", prop: "token_balance", width: 100, align: "center" },
     { label: "免费次数", prop: "free_usage", width: 100, align: "center" },
     { label: "累计生成", prop: "total_generations", width: 100, align: "center" },
@@ -32,9 +42,9 @@ const contentConfig: IContentConfig = {
       align: "center",
       templet: "switch",
       activeValue: 1,
-      inactiveValue: 2,
-      activeText: "正常",
-      inactiveText: "禁用",
+      inactiveValue: 0,
+      activeText: "禁用",
+      inactiveText: "正常",
     },
     {
       label: "注册时间",
@@ -43,6 +53,7 @@ const contentConfig: IContentConfig = {
       align: "center",
       templet: "date",
       dateFormat: "YYYY/MM/DD HH:mm:ss",
+      show: false,
     },
     {
       label: "最后登录",
@@ -51,6 +62,7 @@ const contentConfig: IContentConfig = {
       align: "center",
       templet: "date",
       dateFormat: "YYYY/MM/DD HH:mm:ss",
+      show: false,
     },
     {
       label: "操作",

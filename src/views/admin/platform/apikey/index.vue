@@ -48,25 +48,28 @@ function handleToolbarClick(name: string) {
 
 // 处理自定义操作
 const handleOperateClick = async (data: IOperateData) => {
-  if (data.name === "test") {
-    try {
-      const loading = ElMessage({
-        type: "info",
-        message: "正在测试API Key...",
-        duration: 0,
-      });
-      const res = await ApikeyAPI.testApiKey({ id: data.row.id });
-      loading.close();
-      if (res.data.success) {
-        ElMessage.success(`测试成功，延迟: ${res.data.latency}ms`);
-      } else {
-        ElMessage.error(`测试失败: ${res.data.message}`);
+  switch (data.name) {
+    case "test":
+      try {
+        const loading = ElMessage({
+          type: "info",
+          message: "正在测试API Key...",
+          duration: 0,
+        });
+        const res = await ApikeyAPI.testApiKey({ id: data.row.id });
+        loading.close();
+        if (res.data.success) {
+          ElMessage.success(`测试成功，延迟: ${res.data.latency}ms`);
+        } else {
+          ElMessage.error(`测试失败: ${res.data.message}`);
+        }
+      } catch (error) {
+        console.error(error);
       }
-    } catch (error) {
-      console.error(error);
-    }
-  } else if (data.name === "edit") {
-    handleEditClick(data.row);
+      break;
+    case "edit":
+      handleEditClick(data.row);
+      break;
   }
 };
 </script>

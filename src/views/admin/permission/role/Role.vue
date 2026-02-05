@@ -163,11 +163,11 @@ const onApiChange = (value: any) => {
 
 const openDrawer = (v: any) => {
   if (!apiList.value) {
-    ApiAPI.getApis({}).then((res) => {
+    ApiAPI.getApiList({}).then((res) => {
       apiList.value = res.data.list;
     });
 
-    MenuAPI.getMenus({}).then((res) => {
+    MenuAPI.getMenuList({}).then((res) => {
       menuList.value = res.data.list;
     });
   }

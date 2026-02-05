@@ -1,8 +1,8 @@
 import type { IContentConfig } from "@/components/CURD/types";
-import type { QueryMenuReq } from "@/api/types";
+import type { GetMenuListReq } from "@/api/types";
 import { MenuAPI } from "@/api/menu";
 
-const contentConfig: IContentConfig<QueryMenuReq> = {
+const contentConfig: IContentConfig<GetMenuListReq> = {
   pageTitle: "菜单管理",
   permPrefix: "sys:menu",
   table: {
@@ -30,12 +30,12 @@ const contentConfig: IContentConfig<QueryMenuReq> = {
       ids: ids.split(",").map((id) => parseInt(id)),
     });
   },
-  indexAction: function (params: QueryMenuReq) {
+  indexAction: function (params: GetMenuListReq) {
     if (!params.sorts) {
       params.sorts = [`id desc`];
     }
 
-    return MenuAPI.getMenus(params);
+    return MenuAPI.getMenuList(params);
   },
   pk: "id",
   toolbar: [

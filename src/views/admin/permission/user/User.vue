@@ -105,6 +105,7 @@ function handleOperateClick(data: IOperateData) {
           ElMessage.success("密码重置成功，新密码是：" + result.value);
         });
       });
+      break;
   }
 }
 </script>

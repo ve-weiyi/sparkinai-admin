@@ -46,8 +46,10 @@ function handleToolbarClick(name: string) {
 
 // 处理自定义操作
 const handleOperateClick = async (data: IOperateData) => {
-  if (data.name === "edit") {
-    handleEditClick(data.row);
+  switch (data.name) {
+    case "edit":
+      handleEditClick(data.row);
+      break;
   }
 };
 </script>

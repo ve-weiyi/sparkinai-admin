@@ -1,25 +1,25 @@
 import request from "@/utils/request";
 import type {
-  BatchDeleteRolesReq,
-  BatchDeleteRolesResp,
-  CreateRoleReq,
-  DeleteRoleReq,
+  UpdateRoleReq,
   EmptyResp,
   GetRolePermissionsReq,
-  GetRoleReq,
-  PageResp,
-  QueryRoleReq,
-  RolePermissionsResp,
-  RoleVO,
   UpdateRoleApiPermissionsReq,
+  PageResp,
+  CreateRoleReq,
+  RoleVO,
+  BatchDeleteRolesResp,
+  GetRoleReq,
+  DeleteRoleReq,
+  RolePermissionsResp,
   UpdateRoleMenuPermissionsReq,
-  UpdateRoleReq,
+  GetRoleListReq,
+  BatchDeleteRolesReq,
 } from "./types";
 
 /** 角色管理 */
 export const RoleAPI = {
   /** 获取角色列表 */
-  getRoles(params?: QueryRoleReq): Promise<IApiResponse<PageResp>> {
+  getRoleList(params?: GetRoleListReq): Promise<IApiResponse<PageResp>> {
     return request({
       url: `/admin-api/v1/roles`,
       method: "GET",

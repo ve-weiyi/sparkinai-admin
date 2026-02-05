@@ -1,25 +1,25 @@
 import request from "@/utils/request";
 import type {
-  BatchDeleteMenusReq,
+  CleanMenusResp,
+  PageResp,
+  CreateMenuReq,
+  MenuVO,
   BatchDeleteMenusResp,
   CleanMenusReq,
-  CleanMenusResp,
-  CreateMenuReq,
-  DeleteMenuReq,
-  EmptyResp,
-  GetMenuReq,
-  MenuVO,
-  PageResp,
-  QueryMenuReq,
   SyncMenusReq,
   SyncMenusResp,
+  GetMenuListReq,
+  BatchDeleteMenusReq,
+  GetMenuReq,
   UpdateMenuReq,
+  DeleteMenuReq,
+  EmptyResp,
 } from "./types";
 
 /** 菜单管理 */
 export const MenuAPI = {
   /** 获取菜单列表 */
-  getMenus(params?: QueryMenuReq): Promise<IApiResponse<PageResp>> {
+  getMenuList(params?: GetMenuListReq): Promise<IApiResponse<PageResp>> {
     return request({
       url: `/admin-api/v1/menus`,
       method: "GET",
