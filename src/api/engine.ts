@@ -1,5 +1,16 @@
 import request from "@/utils/request";
-import type { GetEngineConfigListReq, CreateEngineConfigReq, UpdateEngineConfigReq, DeleteEngineConfigReq, DeleteEngineConfigResp, SetDefaultEngineConfigReq, GetEngineConfigListResp, CreateEngineConfigResp, UpdateEngineConfigResp, SetDefaultEngineConfigResp } from "./types";
+import type {
+  CreateEngineConfigReq,
+  CreateEngineConfigResp,
+  DeleteEngineConfigReq,
+  DeleteEngineConfigResp,
+  GetEngineConfigListReq,
+  GetEngineConfigListResp,
+  SetDefaultEngineConfigReq,
+  SetDefaultEngineConfigResp,
+  UpdateEngineConfigReq,
+  UpdateEngineConfigResp
+} from "./types";
 
 /** 引擎配置管理 */
 export const EngineAPI = {

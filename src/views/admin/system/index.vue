@@ -18,8 +18,13 @@
       </template>
     </PageContent>
     <PageModal
-      ref="modalRef"
-      :modal-config="modalConfig"
+      ref="addModalRef"
+      :modal-config="addConfig"
+      @submit-click="handleSubmitClick"
+    />
+    <PageModal
+      ref="editModalRef"
+      :modal-config="editConfig"
       @submit-click="handleSubmitClick"
     />
   </div>
@@ -33,20 +38,23 @@ import searchConfig from "./config/search";
 import contentConfig from "./config/content";
 import addConfig from "./config/add";
 import editConfig from "./config/edit";
-import { usePage } from "@/hooks/usePage";
+import usePage from "@/components/CURD/usePage.ts";
 import type { IOperateData } from "@/components/CURD/types";
 
 const {
   contentRef,
-  modalRef,
-  modalConfig,
+  addModalRef,
+  editModalRef,
   handleSearchClick,
   handleResetClick,
   handleAddClick,
   handleEditClick,
   handleSubmitClick,
-  handleToolbarClick
-} = usePage(addConfig, editConfig);
+} = usePage();
+
+function handleToolbarClick(name: string) {
+  console.log(name);
+}
 
 const handleOperateClick = async (data: IOperateData) => {
   if (data.name === "edit") {

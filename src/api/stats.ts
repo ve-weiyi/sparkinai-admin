@@ -1,5 +1,22 @@
 import request from "@/utils/request";
-import type { GetDashboardStatsReq, ExportStatsReportReq, ExportStatsReportResp, GetGenerationTrendReq, GetPopularProductsReq, GetRevenueTrendReq, GetUserActivityRankingReq, GetDashboardStatsResp, GetModelUsageStatsReq, GetUserGrowthTrendResp, GetGenerationTrendResp, GetModelUsageStatsResp, GetPopularProductsResp, GetRevenueTrendResp, GetUserGrowthTrendReq, GetUserActivityRankingResp } from "./types";
+import type {
+  ExportStatsReportReq,
+  ExportStatsReportResp,
+  GetDashboardStatsReq,
+  GetDashboardStatsResp,
+  GetGenerationTrendReq,
+  GetGenerationTrendResp,
+  GetModelUsageStatsReq,
+  GetModelUsageStatsResp,
+  GetPopularProductsReq,
+  GetPopularProductsResp,
+  GetRevenueTrendReq,
+  GetRevenueTrendResp,
+  GetUserActivityRankingReq,
+  GetUserActivityRankingResp,
+  GetUserGrowthTrendReq,
+  GetUserGrowthTrendResp
+} from "./types";
 
 /** 统计分析 */
 export const StatsAPI = {

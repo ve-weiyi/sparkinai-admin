@@ -1,5 +1,5 @@
-import type {IContentConfig} from "@/components/CURD/types";
-import {UserAPI} from "@/api/user";
+import type {IContentConfig} from "@/components/CURD/types.ts";
+import {UserAPI} from "@/api/user.ts";
 
 const contentConfig: IContentConfig = {
   pageTitle: "用户管理",

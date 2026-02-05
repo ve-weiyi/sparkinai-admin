@@ -1,4 +1,4 @@
-import type {ISearchConfig} from "@/components/CURD/types";
+import type {ISearchConfig} from "@/components/CURD/types.ts";
 
 const searchConfig: ISearchConfig = {
   permPrefix: "admin:user",

@@ -3,10 +3,10 @@ import type { RouteRecordRaw } from "vue-router";
 const Layout = () => import("@/layouts/index.vue");
 
 export default {
-  path: "/admin/user",
-  name: "AdminUserRoot",
+  path: "/user",
+  name: "UserRoot",
   component: Layout,
-  redirect: "/admin/user/list",
+  redirect: "/user/list",
   meta: {
     title: "用户管理",
     icon: "role",
@@ -15,8 +15,8 @@ export default {
   children: [
     {
       path: "list",
-      component: () => import("@/views/admin/user/index.vue"),
-      name: "AdminUser",
+      component: () => import("@/views/admin/account/user/index.vue"),
+      name: "User",
       meta: { title: "用户管理", keepAlive: true },
     },
   ],

@@ -1,5 +1,14 @@
 import request from "@/utils/request";
-import type { RechargeUserReq, RechargeUserResp, ResetUserPasswordReq, ResetUserPasswordResp, GetUserListReq, GetUserListResp, GetUserDetailReq, GetUserDetailResp } from "./types";
+import type {
+  GetUserDetailReq,
+  GetUserDetailResp,
+  GetUserListReq,
+  GetUserListResp,
+  RechargeUserReq,
+  RechargeUserResp,
+  ResetUserPasswordReq,
+  ResetUserPasswordResp
+} from "./types";
 
 /** 用户管理 */
 export const UserAPI = {

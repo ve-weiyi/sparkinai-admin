@@ -46,23 +46,23 @@ export const constantRoutes: RouteRecordRaw[] = [
           keepAlive: true,
         },
       },
-      {
-        path: "401",
-        component: () => import("@/views/error/401.vue"),
-        meta: { hidden: true },
-      },
-      {
-        path: "404",
-        component: () => import("@/views/error/404.vue"),
-        meta: { hidden: true },
-      },
-      {
-        path: "profile",
-        name: "Profile",
-        component: () => import("@/views/profile/index.vue"),
-        meta: { title: "个人中心", icon: "user", hidden: true },
-      },
     ],
+  },
+  {
+    path: "/401",
+    component: () => import("@/views/error/401.vue"),
+    meta: { hidden: true },
+  },
+  {
+    path: "/404",
+    component: () => import("@/views/error/404.vue"),
+    meta: { hidden: true },
+  },
+  {
+    path: "/profile",
+    name: "Profile",
+    component: () => import("@/views/profile/index.vue"),
+    meta: { title: "个人中心", icon: "user", hidden: true },
   },
 ];
 

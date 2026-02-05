@@ -1,5 +1,14 @@
 import request from "@/utils/request";
-import type { UpdateModelResp, DeleteModelReq, DeleteModelResp, GetModelListReq, GetModelListResp, CreateModelReq, CreateModelResp, UpdateModelReq } from "./types";
+import type {
+  CreateModelReq,
+  CreateModelResp,
+  DeleteModelReq,
+  DeleteModelResp,
+  GetModelListReq,
+  GetModelListResp,
+  UpdateModelReq,
+  UpdateModelResp
+} from "./types";
 
 /** AI模型管理 */
 export const ModelAPI = {

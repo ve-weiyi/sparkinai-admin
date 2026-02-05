@@ -3,10 +3,10 @@ import type { RouteRecordRaw } from "vue-router";
 const Layout = () => import("@/layouts/index.vue");
 
 export default {
-  path: "/admin/platform",
-  name: "AdminPlatformRoot",
+  path: "/platform",
+  name: "PlatformRoot",
   component: Layout,
-  redirect: "/admin/platform/provider",
+  redirect: "/platform/provider",
   meta: {
     title: "平台管理",
     icon: "setting",
@@ -26,16 +26,22 @@ export default {
       meta: { title: "模型管理", keepAlive: true },
     },
     {
+      path: "apikey",
+      component: () => import("@/views/admin/platform/apikey/index.vue"),
+      name: "ApiKey",
+      meta: { title: "密钥管理", keepAlive: true },
+    },
+    {
+      path: "prompt",
+      component: () => import("@/views/admin/platform/prompt/index.vue"),
+      name: "Prompt",
+      meta: { title: "提示词管理", keepAlive: true },
+    },
+    {
       path: "engine",
       component: () => import("@/views/admin/platform/engine/index.vue"),
       name: "Engine",
       meta: { title: "引擎配置", keepAlive: true },
-    },
-    {
-      path: "apikey",
-      component: () => import("@/views/admin/platform/apikey/index.vue"),
-      name: "ApiKey",
-      meta: { title: "API密钥管理", keepAlive: true },
     },
   ],
 } satisfies RouteRecordRaw;

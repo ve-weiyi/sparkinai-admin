@@ -1,5 +1,16 @@
 import request from "@/utils/request";
-import type { DeleteGenerationResp, RegenerateResp, BatchDeleteGenerationsReq, GetGenerationDetailReq, GetGenerationDetailResp, DeleteGenerationReq, RegenerateReq, BatchDeleteGenerationsResp, GetGenerationListReq, GetGenerationListResp } from "./types";
+import type {
+  BatchDeleteGenerationsReq,
+  BatchDeleteGenerationsResp,
+  DeleteGenerationReq,
+  DeleteGenerationResp,
+  GetGenerationDetailReq,
+  GetGenerationDetailResp,
+  GetGenerationListReq,
+  GetGenerationListResp,
+  RegenerateReq,
+  RegenerateResp
+} from "./types";
 
 /** 生成记录管理 */
 export const GenerationAPI = {

@@ -1,5 +1,14 @@
 import request from "@/utils/request";
-import type { CreateProviderReq, CreateProviderResp, UpdateProviderReq, UpdateProviderResp, DeleteProviderReq, DeleteProviderResp, GetProviderListReq, GetProviderListResp } from "./types";
+import type {
+  CreateProviderReq,
+  CreateProviderResp,
+  DeleteProviderReq,
+  DeleteProviderResp,
+  GetProviderListReq,
+  GetProviderListResp,
+  UpdateProviderReq,
+  UpdateProviderResp
+} from "./types";
 
 /** AI供应商管理 */
 export const ProviderAPI = {

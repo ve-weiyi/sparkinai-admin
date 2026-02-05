@@ -1,6 +1,6 @@
-export interface AccountInfoDetail {
-  user_id: string; // 用户ID（UUID）
-  username: string; // 用户名
+export interface AdminInfoDetail {
+  user_id: string; // 管理员ID（UUID）
+  username: string; // 管理员名
   nickname: string; // 真实姓名
   email: string; // 邮箱
   phone: string; // 手机号
@@ -9,10 +9,10 @@ export interface AccountInfoDetail {
   last_login_ip: string; // 最后登录IP
   created_at: number; // 创建时间（毫秒时间戳）
   updated_at: number; // 更新时间（毫秒时间戳）
-  roles: AccountRoleLabel[];
+  roles: AdminRoleLabel[];
 }
 
-export interface AccountRoleLabel {
+export interface AdminRoleLabel {
   role_id: number;
   role_key: string;
   role_label: string;
@@ -36,6 +36,27 @@ export interface ApiKeyItem {
   updated_at: number; // 更新时间
 }
 
+export interface ApiVO {
+  id?: number; // 主键id
+  parent_id: number; // 分组id
+  name: string; // api名称
+  path: string; // api路径
+  method: string; // api请求方法
+  traceable: number; // 是否追溯操作记录 0不需要，1需要
+  status: number; // 状态 0正常 1禁用
+  created_at: number; // 创建时间
+  updated_at: number; // 更新时间
+  children?: ApiVO[];
+}
+
+export interface BatchDeleteApisReq {
+  ids: number[]; // 接口ID列表
+}
+
+export interface BatchDeleteApisResp {
+  success_count: number; // 删除成功数量
+}
+
 // 批量删除生成记录请求
 export interface BatchDeleteGenerationsReq {
   ids: string[]; // 生成记录ID列表
@@ -44,6 +65,24 @@ export interface BatchDeleteGenerationsReq {
 // 批量删除生成记录响应
 export interface BatchDeleteGenerationsResp {
   success_count: number; // 成功删除数量
+}
+
+export interface BatchDeleteMenusReq {
+  ids: number[]; // 菜单ID列表
+}
+
+export interface BatchDeleteMenusResp {
+  success_count: number; // 删除成功数量
+}
+
+// 批量删除角色请求
+export interface BatchDeleteRolesReq {
+  ids: number[]; // 角色ID列表
+}
+
+// 批量删除角色响应
+export interface BatchDeleteRolesResp {
+  success_count: number; // 删除成功数量
 }
 
 export interface BatchResp {
@@ -58,6 +97,17 @@ export interface BatchUpdateSystemConfigReq {
 // 批量更新系统配置响应
 export interface BatchUpdateSystemConfigResp {
   success_count: number; // 成功更新数量
+}
+
+export interface CleanApisResp {
+  success_count: number; // 清空成功数量
+}
+
+export interface CleanMenusReq {
+}
+
+export interface CleanMenusResp {
+  success_count: number; // 清空成功数量
 }
 
 export interface ClientInfoVO {
@@ -85,6 +135,15 @@ export interface CreateApiKeyResp {
   id: number; // API密钥ID
 }
 
+export interface CreateApiReq {
+  parent_id: number; // 分组id
+  name: string; // api名称
+  path: string; // api路径
+  method: string; // api请求方法
+  traceable: number; // 是否追溯操作记录 0不需要，1需要
+  status: number; // 状态 0正常 1禁用
+}
+
 // 创建引擎配置请求
 export interface CreateEngineConfigReq {
   name: string; // 配置名称
@@ -107,6 +166,14 @@ export interface CreateEngineConfigResp {
   id: number; // 引擎配置ID
 }
 
+export interface CreateMenuReq extends MenuMeta {
+  parent_id: number; // 父id
+  path: string; // 路由地址
+  name: string; // 路由名字
+  component: string; // Layout组件
+  redirect?: string; // 路由重定向
+}
+
 // 创建模型请求
 export interface CreateModelReq {
   provider_id: number; // 供应商ID
@@ -125,6 +192,22 @@ export interface CreateModelResp {
   id: number; // 模型ID
 }
 
+// 创建提示词请求
+export interface CreatePromptReq {
+  name: string; // 名称
+  page_name: string; // 页面名称
+  scene: string; // 场景
+  content: string; // 内容
+  sort_order?: number; // 排序顺序
+  version?: number; // 版本号
+  language?: string; // 语言
+}
+
+// 创建提示词响应
+export interface CreatePromptResp {
+  id: number; // 提示词ID
+}
+
 // 创建供应商请求
 export interface CreateProviderReq {
   name: string; // 供应商名称
@@ -138,6 +221,16 @@ export interface CreateProviderReq {
 // 创建供应商响应
 export interface CreateProviderResp {
   id: number; // 供应商ID
+}
+
+// 角色创建请求
+export interface CreateRoleReq {
+  parent_id?: number; // 父角色ID（可选，默认顶级角色）
+  role_key: string; // 角色标识（必填，唯一）
+  role_label: string; // 角色名称（必填）
+  role_comment: string; // 角色备注（必填）
+  is_default: number; // 是否默认角色 0-否 1-是（必填）
+  status: number; // 状态 0-正常 1-禁用（必填）
 }
 
 // 创建系统配置请求
@@ -166,6 +259,10 @@ export interface DeleteApiKeyResp {
   success: boolean;
 }
 
+export interface DeleteApiReq {
+  id: number; // 主键id
+}
+
 // 删除引擎配置请求
 export interface DeleteEngineConfigReq {
   id: number; // 引擎配置ID
@@ -186,6 +283,10 @@ export interface DeleteGenerationResp {
   success: boolean;
 }
 
+export interface DeleteMenuReq {
+  id: number; // 主键
+}
+
 // 删除模型请求
 export interface DeleteModelReq {
   id: number; // 模型ID
@@ -193,6 +294,16 @@ export interface DeleteModelReq {
 
 // 删除模型响应
 export interface DeleteModelResp {
+  success: boolean;
+}
+
+// 删除提示词请求
+export interface DeletePromptReq {
+  id: number; // 提示词ID
+}
+
+// 删除提示词响应
+export interface DeletePromptResp {
   success: boolean;
 }
 
@@ -204,6 +315,11 @@ export interface DeleteProviderReq {
 // 删除供应商响应
 export interface DeleteProviderResp {
   success: boolean;
+}
+
+// 删除角色请求
+export interface DeleteRoleReq {
+  id: number; // 主键ID
 }
 
 // 删除系统配置请求
@@ -306,12 +422,12 @@ export interface GenerationTrendItem {
   failed_generations: number; // 失败生成次数
 }
 
-export interface GetAccountListReq extends PageQuery {
+export interface GetAdminListReq extends PageQuery {
   username?: string;
   email?: string;
   phone?: string;
   status?: number; // 状态: -1删除 0正常 1禁用
-  user_ids?: string[]; // 用户ID
+  user_ids?: string[]; // 管理员ID
 }
 
 // API密钥列表查询请求
@@ -327,6 +443,10 @@ export interface GetApiKeyListResp {
   page_size: number;
   total: number;
   list: ApiKeyItem[];
+}
+
+export interface GetApiReq {
+  id: number; // 主键id
 }
 
 export interface GetCaptchaCodeReq {
@@ -424,6 +544,10 @@ export interface GetGenerationTrendResp {
   list: GenerationTrendItem[]; // 趋势数据列表
 }
 
+export interface GetMenuReq {
+  id: number; // 主键
+}
+
 // 模型列表查询请求
 export interface GetModelListReq extends PageQuery {
   provider_id?: number; // 供应商ID筛选
@@ -470,6 +594,22 @@ export interface GetPopularProductsResp {
   list: PopularProductItem[]; // 热门产品列表
 }
 
+// 提示词列表查询请求
+export interface GetPromptListReq extends PageQuery {
+  scene?: string; // 场景筛选
+  language?: string; // 语言筛选
+  status?: number; // 状态筛选
+  keyword?: string; // 关键词搜索
+}
+
+// 提示词列表响应
+export interface GetPromptListResp {
+  page: number;
+  page_size: number;
+  total: number;
+  list: PromptItem[];
+}
+
 // 供应商列表查询请求
 export interface GetProviderListReq extends PageQuery {
   status?: number; // 状态筛选
@@ -502,6 +642,16 @@ export interface GetRevenueTrendReq {
 // 获取收入统计趋势响应
 export interface GetRevenueTrendResp {
   list: RevenueTrendItem[]; // 趋势数据列表
+}
+
+// 获取角色权限请求
+export interface GetRolePermissionsReq {
+  role_id: number; // 角色ID
+}
+
+// 获取角色详情请求
+export interface GetRoleReq {
+  id: number; // 主键ID
 }
 
 // 系统配置列表查询请求
@@ -635,6 +785,36 @@ export interface LoginResp {
   token: Token;
 }
 
+export interface MenuMeta {
+  type: string; // 菜单类型（0代表目录、1代表菜单、2代表按钮、3代表外链）
+  title?: string; // 菜单标题
+  icon?: string; // 菜单图标
+  rank?: number; // 排序
+  perm?: string; // 权限标识
+  params?: MenuMetaParams[]; // 参数
+  keep_alive?: number; // 是否缓存
+  always_show?: number; // 是否一直显示菜单
+  visible?: number; // 菜单是否可见
+  status: number; // 状态 0正常 1禁用
+}
+
+export interface MenuMetaParams {
+  key: string;
+  value: string;
+}
+
+export interface MenuVO extends MenuMeta {
+  id?: number; // 主键
+  parent_id: number; // 父id
+  path: string; // 路由地址
+  name: string; // 路由名字
+  component: string; // Layout组件
+  redirect?: string; // 路由重定向
+  created_at: number; // 创建时间
+  updated_at: number; // 更新时间
+  children?: MenuVO[];
+}
+
 // 模型信息项
 export interface ModelItem {
   id: number; // 模型ID
@@ -706,6 +886,21 @@ export interface PopularProductItem {
   last_generated_at: number; // 最后生成时间
 }
 
+// 提示词信息项
+export interface PromptItem {
+  id: number; // 提示词ID
+  name: string; // 名称
+  page_name: string; // 页面名称
+  scene: string; // 场景
+  content: string; // 内容
+  sort_order: number; // 排序顺序
+  version: number; // 版本号
+  language: string; // 语言
+  status: number; // 状态
+  created_at: number; // 创建时间
+  updated_at: number; // 更新时间
+}
+
 // 供应商信息项
 export interface ProviderItem {
   id: number; // 供应商ID
@@ -717,6 +912,26 @@ export interface ProviderItem {
   sort_order: number; // 排序顺序
   created_at: number; // 创建时间
   updated_at: number; // 更新时间
+}
+
+export interface QueryApiReq extends PageQuery {
+  name?: string; // api名称
+  path?: string; // api路径
+  method?: string; // api请求方法
+  status?: number; // 状态
+}
+
+export interface QueryMenuReq extends PageQuery {
+  name?: string; // 路由名字
+  title?: string; // 菜单标题
+  status?: number; // 状态
+}
+
+// 角色列表查询请求
+export interface QueryRoleReq extends PageQuery {
+  role_key?: string; // 角色标识（模糊查询）
+  role_label?: string; // 角色名称（模糊查询）
+  status?: number; // 状态 0-正常 1-禁用（精确查询）
 }
 
 export interface QueryUserLoginHistoryReq extends PageQuery {
@@ -785,6 +1000,26 @@ export interface RevenueTrendItem {
   revenue: number; // 收入金额
 }
 
+// 角色资源权限响应
+export interface RolePermissionsResp {
+  role_id: number; // 角色ID
+  api_ids: number[]; // 绑定的接口权限ID列表
+  menu_ids: number[]; // 绑定的菜单权限ID列表
+}
+
+// 角色信息VO - 后端返回视图对象
+export interface RoleVO {
+  id?: number; // 主键ID
+  parent_id: number; // 父角色ID
+  role_key: string; // 角色标识（唯一）
+  role_label: string; // 角色名称（展示用）
+  role_comment: string; // 角色备注说明
+  is_default: number; // 是否默认角色 0-否 1-是
+  status: number; // 状态 0-正常 1-禁用
+  created_at: number; // 创建时间（时间戳）
+  updated_at: number; // 更新时间（时间戳）
+}
+
 export interface SendEmailVerifyCodeReq {
   email: string; // 邮箱
   type: string; // 类型 register,reset_password,bind_email,bind_phone
@@ -803,6 +1038,18 @@ export interface SetDefaultEngineConfigReq {
 // 设置默认引擎配置响应
 export interface SetDefaultEngineConfigResp {
   success: boolean;
+}
+
+export interface SyncApisResp {
+  success_count: number; // 同步成功数量
+}
+
+export interface SyncMenusReq {
+  menus: CreateMenuReq[];
+}
+
+export interface SyncMenusResp {
+  success_count: number; // 同步成功数量
 }
 
 // 系统配置信息项
@@ -846,17 +1093,17 @@ export interface Token {
   refresh_expires_at: number; // RefreshToken 过期时间戳（秒）
 }
 
-export interface UpdateAccountPasswordReq {
+export interface UpdateAdminPasswordReq {
   user_id: string;
   password: string;
 }
 
-export interface UpdateAccountRolesReq {
+export interface UpdateAdminRolesReq {
   user_id: string;
   role_ids: number[];
 }
 
-export interface UpdateAccountStatusReq {
+export interface UpdateAdminStatusReq {
   user_id: string;
   status: number; // 状态: -1删除 0正常 1禁用
 }
@@ -875,6 +1122,16 @@ export interface UpdateApiKeyReq {
 // 更新API密钥响应
 export interface UpdateApiKeyResp {
   success: boolean;
+}
+
+export interface UpdateApiReq {
+  id: number; // 主键id
+  parent_id: number; // 分组id
+  name: string; // api名称
+  path: string; // api路径
+  method: string; // api请求方法
+  traceable: number; // 是否追溯操作记录 0不需要，1需要
+  status: number; // 状态 0正常 1禁用
 }
 
 // 更新引擎配置请求
@@ -898,6 +1155,15 @@ export interface UpdateEngineConfigResp {
   success: boolean;
 }
 
+export interface UpdateMenuReq extends MenuMeta {
+  id: number; // 主键
+  parent_id: number; // 父id
+  path: string; // 路由地址
+  name: string; // 路由名字
+  component: string; // Layout组件
+  redirect?: string; // 路由重定向
+}
+
 // 更新模型请求
 export interface UpdateModelReq {
   id: number; // 模型ID
@@ -914,6 +1180,24 @@ export interface UpdateModelResp {
   success: boolean;
 }
 
+// 更新提示词请求
+export interface UpdatePromptReq {
+  id: number; // 提示词ID
+  name?: string; // 名称
+  page_name?: string; // 页面名称
+  scene?: string; // 场景
+  content?: string; // 内容
+  sort_order?: number; // 排序顺序
+  version?: number; // 版本号
+  language?: string; // 语言
+  status?: number; // 状态
+}
+
+// 更新提示词响应
+export interface UpdatePromptResp {
+  success: boolean;
+}
+
 // 更新供应商请求
 export interface UpdateProviderReq {
   id: number; // 供应商ID
@@ -927,6 +1211,29 @@ export interface UpdateProviderReq {
 // 更新供应商响应
 export interface UpdateProviderResp {
   success: boolean;
+}
+
+// 更新角色接口权限请求
+export interface UpdateRoleApiPermissionsReq {
+  role_id: number; // 角色ID（必填）
+  api_ids: number[]; // 接口权限ID列表（必填，空数组表示清空权限）
+}
+
+// 更新角色菜单权限请求
+export interface UpdateRoleMenuPermissionsReq {
+  role_id: number; // 角色ID（必填）
+  menu_ids: number[]; // 菜单权限ID列表（必填，空数组表示清空权限）
+}
+
+// 角色更新请求
+export interface UpdateRoleReq {
+  id: number; // 主键ID（必填）
+  parent_id?: number; // 父角色ID（可选）
+  role_key: string; // 角色标识（必填，唯一）
+  role_label: string; // 角色名称（必填）
+  role_comment: string; // 角色备注（必填）
+  is_default: number; // 是否默认角色 0-否 1-是（必填）
+  status: number; // 状态 0-正常 1-禁用（必填）
 }
 
 // 更新系统配置请求

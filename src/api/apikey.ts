@@ -1,5 +1,16 @@
 import request from "@/utils/request";
-import type { GetApiKeyListReq, UpdateApiKeyReq, DeleteApiKeyResp, TestApiKeyReq, TestApiKeyResp, GetApiKeyListResp, CreateApiKeyReq, CreateApiKeyResp, UpdateApiKeyResp, DeleteApiKeyReq } from "./types";
+import type {
+  CreateApiKeyReq,
+  CreateApiKeyResp,
+  DeleteApiKeyReq,
+  DeleteApiKeyResp,
+  GetApiKeyListReq,
+  GetApiKeyListResp,
+  TestApiKeyReq,
+  TestApiKeyResp,
+  UpdateApiKeyReq,
+  UpdateApiKeyResp
+} from "./types";
 
 /** API密钥管理 */
 export const ApikeyAPI = {

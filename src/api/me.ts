@@ -1,5 +1,22 @@
 import request from "@/utils/request";
-import type { EmptyReq, UpdateUserAvatarReq, PageResp, GetUserApisResp, UpdateUserBindThirdPartyReq, UpdateUserBindPhoneReq, EmptyResp, DeleteUserBindThirdPartyReq, UpdateUserBindEmailReq, UpdateUserPasswordReq, GetUserProfileReq, UpdateUserProfileReq, GetUserMenusResp, GetUserRolesResp, QueryUserLoginHistoryReq, UserVO } from "./types";
+import type {
+  DeleteUserBindThirdPartyReq,
+  EmptyReq,
+  EmptyResp,
+  GetUserApisResp,
+  GetUserMenusResp,
+  GetUserProfileReq,
+  GetUserRolesResp,
+  PageResp,
+  QueryUserLoginHistoryReq,
+  UpdateUserAvatarReq,
+  UpdateUserBindEmailReq,
+  UpdateUserBindPhoneReq,
+  UpdateUserBindThirdPartyReq,
+  UpdateUserPasswordReq,
+  UpdateUserProfileReq,
+  UserVO
+} from "./types";
 
 /** 个人中心 */
 export const MeAPI = {

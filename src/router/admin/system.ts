@@ -3,13 +3,13 @@ import type { RouteRecordRaw } from "vue-router";
 const Layout = () => import("@/layouts/index.vue");
 
 export default {
-  path: "/admin/system",
-  name: "AdminSystemRoot",
+  path: "/system",
+  name: "SystemRoot",
   component: Layout,
-  redirect: "/admin/system/list",
+  redirect: "/system/list",
   meta: {
     title: "系统配置",
-    icon: "monitor",
+    icon: "system",
     rank: 6,
   },
   children: [

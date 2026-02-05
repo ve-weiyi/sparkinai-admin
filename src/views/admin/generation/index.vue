@@ -47,7 +47,7 @@ import searchConfig from "./config/search.ts";
 import contentConfig from "./config/content.ts";
 import addConfig from "./config/add.ts";
 import editConfig from "./config/edit.ts";
-import { usePage } from "@/hooks/usePage.ts";
+import usePage from "@/components/CURD/usePage.ts";
 import { GenerationAPI } from "@/api/generation.ts";
 import { ElMessage, ElMessageBox } from "element-plus";
 import type { IOperateData } from "@/components/CURD/types.ts";
@@ -56,8 +56,11 @@ const {
   contentRef,
   handleSearchClick,
   handleResetClick,
-  handleToolbarClick
-} = usePage(addConfig, editConfig);
+} = usePage();
+
+function handleToolbarClick(name: string) {
+  console.log(name);
+}
 
 const copyDialogVisible = ref(false);
 const currentCopy = ref("");

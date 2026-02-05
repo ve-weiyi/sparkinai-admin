@@ -1,5 +1,20 @@
 import request from "@/utils/request";
-import type { CreateSystemConfigReq, GetSystemConfigReq, BatchUpdateSystemConfigReq, GetPublicConfigReq, GetPublicConfigResp, GetSystemConfigListResp, CreateSystemConfigResp, GetSystemConfigResp, UpdateSystemConfigReq, UpdateSystemConfigResp, DeleteSystemConfigReq, DeleteSystemConfigResp, BatchUpdateSystemConfigResp, GetSystemConfigListReq } from "./types";
+import type {
+  BatchUpdateSystemConfigReq,
+  BatchUpdateSystemConfigResp,
+  CreateSystemConfigReq,
+  CreateSystemConfigResp,
+  DeleteSystemConfigReq,
+  DeleteSystemConfigResp,
+  GetPublicConfigReq,
+  GetPublicConfigResp,
+  GetSystemConfigListReq,
+  GetSystemConfigListResp,
+  GetSystemConfigReq,
+  GetSystemConfigResp,
+  UpdateSystemConfigReq,
+  UpdateSystemConfigResp
+} from "./types";
 
 /** 系统配置管理 */
 export const ConfigAPI = {

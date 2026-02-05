@@ -1,10 +1,10 @@
 import type { RouteRecordRaw } from "vue-router";
 
 const generationRoutes: RouteRecordRaw = {
-  path: "/admin/generation",
+  path: "/generation",
   component: () => import("@/layouts/index.vue"),
-  redirect: "/admin/generation",
-  name: "AdminContent",
+  redirect: "/generation",
+  name: "Content",
   meta: {
     title: "内容管理",
     icon: "document",
