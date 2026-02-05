@@ -9,13 +9,15 @@ import type {
   SetDefaultEngineConfigReq,
   SetDefaultEngineConfigResp,
   UpdateEngineConfigReq,
-  UpdateEngineConfigResp
+  UpdateEngineConfigResp,
 } from "./types";
 
 /** 引擎配置管理 */
 export const EngineAPI = {
   /** 获取引擎配置列表 */
-  getEngineConfigList(params?: GetEngineConfigListReq): Promise<IApiResponse<GetEngineConfigListResp>> {
+  getEngineConfigList(
+    params?: GetEngineConfigListReq
+  ): Promise<IApiResponse<GetEngineConfigListResp>> {
     return request({
       url: `/admin-api/v1/engines`,
       method: "GET",
@@ -51,12 +53,13 @@ export const EngineAPI = {
   },
 
   /** 设置默认引擎配置 */
-  setDefaultEngineConfig(data?: SetDefaultEngineConfigReq): Promise<IApiResponse<SetDefaultEngineConfigResp>> {
+  setDefaultEngineConfig(
+    data?: SetDefaultEngineConfigReq
+  ): Promise<IApiResponse<SetDefaultEngineConfigResp>> {
     return request({
       url: `/admin-api/v1/engines/${data.id}/default`,
       method: "PUT",
       data: data,
     });
   },
-
 };

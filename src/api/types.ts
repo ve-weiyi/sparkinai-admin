@@ -103,8 +103,7 @@ export interface CleanApisResp {
   success_count: number; // 清空成功数量
 }
 
-export interface CleanMenusReq {
-}
+export interface CleanMenusReq {}
 
 export interface CleanMenusResp {
   success_count: number; // 清空成功数量
@@ -343,11 +342,9 @@ export interface EmailLoginReq {
   captcha_code?: string; // 验证码
 }
 
-export interface EmptyReq {
-}
+export interface EmptyReq {}
 
-export interface EmptyResp {
-}
+export interface EmptyResp {}
 
 // 引擎配置信息项
 export interface EngineConfigItem {
@@ -460,8 +457,7 @@ export interface GetCaptchaCodeResp {
   captcha_code: string; // 验证码
 }
 
-export interface GetClientInfoReq {
-}
+export interface GetClientInfoReq {}
 
 export interface GetClientInfoResp {
   id: number; // 访客唯一ID
@@ -473,8 +469,7 @@ export interface GetClientInfoResp {
 }
 
 // 获取仪表盘统计数据请求
-export interface GetDashboardStatsReq {
-}
+export interface GetDashboardStatsReq {}
 
 // 仪表盘统计数据响应
 export interface GetDashboardStatsResp {
@@ -512,8 +507,7 @@ export interface GetGenerationDetailReq {
 }
 
 // 生成记录详情响应
-export interface GetGenerationDetailResp extends GenerationItem {
-}
+export interface GetGenerationDetailResp extends GenerationItem {}
 
 // 生成记录列表查询请求
 export interface GetGenerationListReq extends PageQuery {
@@ -625,8 +619,7 @@ export interface GetProviderListResp {
 }
 
 // 获取公开配置请求（无需认证）
-export interface GetPublicConfigReq {
-}
+export interface GetPublicConfigReq {}
 
 // 获取公开配置响应
 export interface GetPublicConfigResp {
@@ -674,8 +667,7 @@ export interface GetSystemConfigReq {
 }
 
 // 获取系统配置响应
-export interface GetSystemConfigResp extends SystemConfigItem {
-}
+export interface GetSystemConfigResp extends SystemConfigItem {}
 
 // 获取上传凭证请求
 export interface GetUploadTokenReq {
@@ -749,8 +741,7 @@ export interface GetUserMenusResp {
   list: UserMenu[];
 }
 
-export interface GetUserProfileReq {
-}
+export interface GetUserProfileReq {}
 
 export interface GetUserRolesResp {
   list: UserRole[];
@@ -867,8 +858,7 @@ export interface PhoneLoginReq {
   verify_code: string; // 验证码
 }
 
-export interface PingReq {
-}
+export interface PingReq {}
 
 export interface PingResp {
   env: string;
@@ -934,8 +924,7 @@ export interface QueryRoleReq extends PageQuery {
   status?: number; // 状态 0-正常 1-禁用（精确查询）
 }
 
-export interface QueryUserLoginHistoryReq extends PageQuery {
-}
+export interface QueryUserLoginHistoryReq extends PageQuery {}
 
 // 用户充值请求
 export interface RechargeUserReq {
@@ -1393,4 +1382,3 @@ export interface UserVO {
   roles: string[];
   perms: string[];
 }
-

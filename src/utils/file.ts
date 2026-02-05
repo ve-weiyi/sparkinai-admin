@@ -18,40 +18,40 @@ export async function uploadFileWithToken(file: File, fileName?: string): Promis
   try {
     // 获取上传凭证
     const { data: tokenData } = await UploadAPI.getUploadToken({
-      file_name: fileName || file.name
-    })
+      file_name: fileName || file.name,
+    });
 
     // 构建上传表单数据
-    const formData = new FormData()
-    formData.append('token', tokenData.token)
-    formData.append('policy', tokenData.policy)
-    formData.append('signature', tokenData.signature)
-    formData.append('key', tokenData.file_key)
-    
+    const formData = new FormData();
+    formData.append("token", tokenData.token);
+    formData.append("policy", tokenData.policy);
+    formData.append("signature", tokenData.signature);
+    formData.append("key", tokenData.file_key);
+
     // 添加额外数据
     Object.entries(tokenData.extra_data || {}).forEach(([key, value]) => {
-      formData.append(key, String(value))
-    })
-    
-    formData.append('file', file)
+      formData.append(key, String(value));
+    });
+
+    formData.append("file", file);
 
     // 直接上传到第三方存储
     const response = await fetch(tokenData.upload_url, {
-      method: 'POST',
+      method: "POST",
       body: formData,
       headers: {
-        'Authorization': `Bearer ${tokenData.token}`
-      }
-    })
+        Authorization: `Bearer ${tokenData.token}`,
+      },
+    });
 
     if (!response.ok) {
-      throw new Error('上传失败')
+      throw new Error("上传失败");
     }
 
-    return tokenData.access_url
+    return tokenData.access_url;
   } catch (error) {
-    console.error('上传失败:', error)
-    throw error
+    console.error("上传失败:", error);
+    throw error;
   }
 }
 
@@ -59,8 +59,8 @@ export async function uploadFileWithToken(file: File, fileName?: string): Promis
  * 批量上传文件（使用上传凭证）
  */
 export async function multipleUploadFileWithToken(files: File[]): Promise<string[]> {
-  const uploadPromises = files.map(file => uploadFileWithToken(file))
-  return Promise.all(uploadPromises)
+  const uploadPromises = files.map((file) => uploadFileWithToken(file));
+  return Promise.all(uploadPromises);
 }
 
 export const calculateFileSize = (size: number, isInteger = false) => {

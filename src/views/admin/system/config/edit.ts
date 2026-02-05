@@ -11,7 +11,13 @@ const modalConfig: IModalConfig<any> = {
   },
   formItems: [
     { label: "配置键", prop: "config_key", type: "input", attrs: { disabled: true } },
-    { label: "配置值", prop: "config_value", type: "input", attrs: { type: "textarea", rows: 3 }, rules: [{ required: true, message: "请输入配置值" }] },
+    {
+      label: "配置值",
+      prop: "config_value",
+      type: "input",
+      attrs: { type: "textarea", rows: 3 },
+      rules: [{ required: true, message: "请输入配置值" }],
+    },
     { label: "描述", prop: "description", type: "input", attrs: { type: "textarea" } },
     {
       label: "公开",

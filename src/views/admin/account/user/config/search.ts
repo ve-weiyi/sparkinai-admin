@@ -1,4 +1,4 @@
-import type {ISearchConfig} from "@/components/CURD/types.ts";
+import type { ISearchConfig } from "@/components/CURD/types.ts";
 
 const searchConfig: ISearchConfig = {
   permPrefix: "admin:user",
@@ -7,17 +7,21 @@ const searchConfig: ISearchConfig = {
       type: "input",
       label: "关键词",
       prop: "keyword",
-      attrs: {placeholder: "请输入手机号/昵称", clearable: true, style: {width: "180px"}},
+      attrs: {
+        placeholder: "请输入手机号/昵称",
+        clearable: true,
+        style: { width: "180px" },
+      },
     },
     {
       type: "select",
       label: "状态",
       prop: "status",
-      attrs: {placeholder: "请选择", clearable: true, style: {width: "120px"}},
+      attrs: { placeholder: "请选择", clearable: true, style: { width: "120px" } },
       options: [
-        {label: "正常", value: 1},
-        {label: "禁用", value: 2},
-      ]
+        { label: "正常", value: 1 },
+        { label: "禁用", value: 2 },
+      ],
     },
   ],
 };

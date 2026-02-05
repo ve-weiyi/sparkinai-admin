@@ -7,7 +7,13 @@ const contentConfig: IContentConfig = {
   cols: [
     { label: "ID", prop: "id", width: 150, align: "center", showOverflowTooltip: true },
     { label: "用户手机", prop: "user_phone", width: 120, align: "center" },
-    { label: "产品名称", prop: "product_name", width: 150, align: "center", showOverflowTooltip: true },
+    {
+      label: "产品名称",
+      prop: "product_name",
+      width: 150,
+      align: "center",
+      showOverflowTooltip: true,
+    },
     { label: "生成类型", prop: "generation_type", width: 100, align: "center" },
     {
       label: "状态",
@@ -15,7 +21,7 @@ const contentConfig: IContentConfig = {
       width: 100,
       align: "center",
       templet: "custom",
-      slotName: "status"
+      slotName: "status",
     },
     { label: "Token消耗", prop: "cost_tokens", width: 100, align: "center" },
     { label: "耗时(s)", prop: "generation_time", width: 100, align: "center" },
@@ -35,9 +41,9 @@ const contentConfig: IContentConfig = {
         { name: "view_copy", text: "文案", attrs: { type: "primary", plain: true } },
         { name: "view_images", text: "图片", attrs: { type: "success", plain: true } },
         { name: "regenerate", text: "重试", attrs: { type: "warning", plain: true } },
-        { name: "delete", text: "删除", attrs: { type: "danger", plain: true } }
-      ]
-    }
+        { name: "delete", text: "删除", attrs: { type: "danger", plain: true } },
+      ],
+    },
   ],
   indexAction: function (params) {
     return GenerationAPI.getGenerationList(params);
@@ -49,9 +55,9 @@ const contentConfig: IContentConfig = {
     }
     return GenerationAPI.batchDeleteGenerations({ ids: idList }).then((res) => ({
       code: 0,
-      message: `成功删除 ${res.data.success_count} 条记录`
+      message: `成功删除 ${res.data.success_count} 条记录`,
     }));
-  }
+  },
 };
 
 export default contentConfig;

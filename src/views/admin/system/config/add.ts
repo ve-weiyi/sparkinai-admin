@@ -10,8 +10,19 @@ const modalConfig: IModalConfig<any> = {
     return ConfigAPI.createSystemConfig(data);
   },
   formItems: [
-    { label: "配置键", prop: "config_key", type: "input", rules: [{ required: true, message: "请输入配置键" }] },
-    { label: "配置值", prop: "config_value", type: "input", attrs: { type: "textarea", rows: 3 }, rules: [{ required: true, message: "请输入配置值" }] },
+    {
+      label: "配置键",
+      prop: "config_key",
+      type: "input",
+      rules: [{ required: true, message: "请输入配置键" }],
+    },
+    {
+      label: "配置值",
+      prop: "config_value",
+      type: "input",
+      attrs: { type: "textarea", rows: 3 },
+      rules: [{ required: true, message: "请输入配置值" }],
+    },
     {
       label: "配置类型",
       prop: "config_type",
@@ -22,9 +33,14 @@ const modalConfig: IModalConfig<any> = {
         { label: "数字", value: "number" },
         { label: "布尔值", value: "boolean" },
       ],
-      initialValue: "string"
+      initialValue: "string",
     },
-    { label: "分类", prop: "category", type: "input", attrs: { placeholder: "例如: general" } },
+    {
+      label: "分类",
+      prop: "category",
+      type: "input",
+      attrs: { placeholder: "例如: general" },
+    },
     { label: "描述", prop: "description", type: "input", attrs: { type: "textarea" } },
     {
       label: "公开",

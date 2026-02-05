@@ -7,7 +7,6 @@ export enum NoticePublishStatusEnum {
   REVOKED = 3, // 已撤回
 }
 
-
 /**
  * 用户状态枚举
  */
@@ -82,7 +81,6 @@ export enum ApiTraceableEnum {
   NO = 0, // 不记录
   YES = 1, // 记录
 }
-
 
 /**
  * 通知类型枚举

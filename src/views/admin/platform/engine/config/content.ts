@@ -5,7 +5,12 @@ const contentConfig: IContentConfig = {
   pageTitle: "引擎配置",
   permPrefix: "admin:engine",
   table: { border: true, highlightCurrentRow: true },
-  pagination: { background: true, layout: "prev,pager,next,jumper,total,sizes", pageSize: 10, pageSizes: [10, 20, 50] },
+  pagination: {
+    background: true,
+    layout: "prev,pager,next,jumper,total,sizes",
+    pageSize: 10,
+    pageSizes: [10, 20, 50],
+  },
   parseData: (res) => ({ total: res.data.total, list: res.data.list || [] }),
   modifyAction: (row, field, value) => {
     return EngineAPI.updateEngineConfig({ id: row.id, [field]: value });
@@ -13,12 +18,14 @@ const contentConfig: IContentConfig = {
   deleteAction: (ids) => {
     const idList = ids.split(",");
     if (idList.length === 1) {
-      return EngineAPI.deleteEngineConfig({id: parseInt(idList[0])});
+      return EngineAPI.deleteEngineConfig({ id: parseInt(idList[0]) });
     }
-    return Promise.all(idList.map(id => EngineAPI.deleteEngineConfig({id: parseInt(id)}))).then(() => ({
-      code: 0,
-      message: "success"
-    }));
+    return Promise.all(idList.map((id) => EngineAPI.deleteEngineConfig({ id: parseInt(id) }))).then(
+      () => ({
+        code: 0,
+        message: "success",
+      })
+    );
   },
   indexAction: (query) => EngineAPI.getEngineConfigList(query),
   pk: "id",
@@ -40,10 +47,27 @@ const contentConfig: IContentConfig = {
       inactiveValue: 0,
       activeText: "是",
       inactiveText: "否",
-      disabled: true // Usually set via specific action, not directly editable here unless we impl modifyAction
+      disabled: true, // Usually set via specific action, not directly editable here unless we impl modifyAction
     },
-    { label: "状态", prop: "status", width: 80, align: "center", templet: "switch", activeValue: 1, inactiveValue: 2, activeText: "启用", inactiveText: "禁用" },
-    { label: "创建时间", prop: "created_at", width: 170, align: "center", templet: "date", dateFormat: "YYYY/MM/DD HH:mm:ss" },
+    {
+      label: "状态",
+      prop: "status",
+      width: 80,
+      align: "center",
+      templet: "switch",
+      activeValue: 1,
+      inactiveValue: 2,
+      activeText: "启用",
+      inactiveText: "禁用",
+    },
+    {
+      label: "创建时间",
+      prop: "created_at",
+      width: 170,
+      align: "center",
+      templet: "date",
+      dateFormat: "YYYY/MM/DD HH:mm:ss",
+    },
     {
       label: "操作",
       align: "center",
@@ -51,15 +75,25 @@ const contentConfig: IContentConfig = {
       width: 150,
       templet: "tool",
       operat: [
-        { name: "edit", text: "编辑", perm: "edit", attrs: { icon: "edit", type: "primary" } },
-        { name: "delete", text: "删除", perm: "delete", attrs: { icon: "delete", type: "danger" } },
+        {
+          name: "edit",
+          text: "编辑",
+          perm: "edit",
+          attrs: { icon: "edit", type: "primary" },
+        },
+        {
+          name: "delete",
+          text: "删除",
+          perm: "delete",
+          attrs: { icon: "delete", type: "danger" },
+        },
         {
           name: "set_default",
           text: "设为默认",
           perm: "edit",
           attrs: { type: "success", size: "small" },
           render: (row) => row.is_default === 0,
-        }
+        },
       ],
     },
   ],

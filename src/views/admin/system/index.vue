@@ -14,19 +14,13 @@
       @toolbar-click="handleToolbarClick"
     >
       <template #is_encrypted="{ row }">
-        <el-tag :type="row.is_encrypted ? 'success' : 'info'">{{ row.is_encrypted ? '是' : '否' }}</el-tag>
+        <el-tag :type="row.is_encrypted ? 'success' : 'info'">
+          {{ row.is_encrypted ? "是" : "否" }}
+        </el-tag>
       </template>
     </PageContent>
-    <PageModal
-      ref="addModalRef"
-      :modal-config="addConfig"
-      @submit-click="handleSubmitClick"
-    />
-    <PageModal
-      ref="editModalRef"
-      :modal-config="editConfig"
-      @submit-click="handleSubmitClick"
-    />
+    <PageModal ref="addModalRef" :modal-config="addConfig" @submit-click="handleSubmitClick" />
+    <PageModal ref="editModalRef" :modal-config="editConfig" @submit-click="handleSubmitClick" />
   </div>
 </template>
 

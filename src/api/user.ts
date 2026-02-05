@@ -7,7 +7,7 @@ import type {
   RechargeUserReq,
   RechargeUserResp,
   ResetUserPasswordReq,
-  ResetUserPasswordResp
+  ResetUserPasswordResp,
 } from "./types";
 
 /** 用户管理 */
@@ -47,5 +47,4 @@ export const UserAPI = {
       data: data,
     });
   },
-
 };

@@ -159,7 +159,7 @@ onClickOutside(iconSelectRef, () => (popoverVisible.value = false), {
 });
 
 /**
- * 清空已选图�?
+ * 清空已选图�?
  */
 function clearSelectedIcon() {
   selectedIcon.value = "";

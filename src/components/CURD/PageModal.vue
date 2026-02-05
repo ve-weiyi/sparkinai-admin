@@ -60,7 +60,9 @@
 
         <template #footer>
           <el-button v-if="!formDisable" type="primary" @click="handleSubmit">确 定</el-button>
-          <el-button @click="handleClose">{{ !formDisable ? "取 消" : "关闭" }}</el-button>
+          <el-button @click="handleClose">
+            {{ !formDisable ? "取 消" : "关闭" }}
+          </el-button>
         </template>
       </el-drawer>
     </template>
@@ -125,7 +127,9 @@
 
         <template #footer>
           <el-button v-if="!formDisable" type="primary" @click="handleSubmit">确 定</el-button>
-          <el-button @click="handleClose">{{ !formDisable ? "取 消" : "关闭" }}</el-button>
+          <el-button @click="handleClose">
+            {{ !formDisable ? "取 消" : "关闭" }}
+          </el-button>
         </template>
       </el-dialog>
     </template>

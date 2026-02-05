@@ -11,7 +11,7 @@ import type {
   OauthLoginReq,
 } from "@/api/types";
 import { AuthAPI } from "@/api/auth";
-import {UserVO}from "@/api/types";
+import { UserVO } from "@/api/types";
 import { MeAPI } from "@/api/me";
 
 export const useUserStore = defineStore("user", () => {

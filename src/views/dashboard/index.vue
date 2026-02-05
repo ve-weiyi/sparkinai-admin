@@ -4,7 +4,10 @@
       <el-row class="h-80px">
         <el-col :span="18" :xs="24">
           <div class="flex items-center">
-            <img class="w-20 h-20 mr-5 rounded-full" :src="userStore.userInfo.avatar || 'https://via.placeholder.com/80'" />
+            <img
+              class="w-20 h-20 mr-5 rounded-full"
+              :src="userStore.userInfo.avatar || 'https://via.placeholder.com/80'"
+            />
             <div>
               <p class="text-lg font-bold">{{ greetings }}</p>
               <p class="text-sm text-gray-500">欢迎使用sparkinai内容生成平台</p>
@@ -26,9 +29,7 @@
           <div class="flex justify-between items-center mt-2">
             <div>
               <span class="text-2xl font-bold">{{ stats.total_users }}</span>
-              <span class="text-xs ml-2 text-green-500">
-                +{{ stats.new_users_today }} 今日
-              </span>
+              <span class="text-xs ml-2 text-green-500">+{{ stats.new_users_today }} 今日</span>
             </div>
             <el-icon class="text-3xl text-blue-500"><User /></el-icon>
           </div>
@@ -150,7 +151,9 @@
           </template>
           <div class="flex justify-between items-center mt-2">
             <div>
-              <span class="text-2xl font-bold">{{ (stats.total_tokens_consumed / 1000).toFixed(1) }}k</span>
+              <span class="text-2xl font-bold">
+                {{ (stats.total_tokens_consumed / 1000).toFixed(1) }}k
+              </span>
             </div>
             <el-icon class="text-3xl text-red-500"><Money /></el-icon>
           </div>

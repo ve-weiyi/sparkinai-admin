@@ -122,7 +122,11 @@ const showNumber = computed(() =>
 );
 // 卡片组件自定义属性（阴影、自定义边距样式等）
 const cardAttrs = computed<IObject>(() => {
-  return { shadow: "never", style: { "margin-bottom": "12px" }, ...props.searchConfig?.cardAttrs };
+  return {
+    shadow: "never",
+    style: { "margin-bottom": "12px" },
+    ...props.searchConfig?.cardAttrs,
+  };
 });
 // 表单组件自定义属性（label位置、宽度、对齐方式等）
 const formAttrs = computed<IForm>(() => {

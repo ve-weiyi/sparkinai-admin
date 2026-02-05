@@ -15,7 +15,7 @@ import type {
   UpdateUserBindThirdPartyReq,
   UpdateUserPasswordReq,
   UpdateUserProfileReq,
-  UserVO
+  UserVO,
 } from "./types";
 
 /** 个人中心 */
@@ -127,5 +127,4 @@ export const MeAPI = {
       data: data,
     });
   },
-
 };

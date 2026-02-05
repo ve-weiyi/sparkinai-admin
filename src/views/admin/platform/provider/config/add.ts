@@ -8,17 +8,47 @@ const modalConfig: IModalConfig<any> = {
   form: { labelWidth: 100 },
   formAction: (data) => ProviderAPI.createProvider(data),
   formItems: [
-    { label: "服务商名称", prop: "name", type: "input", rules: [{ required: true, message: "请输入服务商名称" }] },
-    { label: "代码", prop: "code", type: "input", rules: [{ required: true, message: "请输入代码" }] },
-    { label: "Base URL", prop: "base_url", type: "input", rules: [{ required: true, message: "请输入Base URL" }] },
-    { label: "描述", prop: "description", type: "input", attrs: { type: "textarea", rows: 3 } },
-    { label: "排序", prop: "sort_order", type: "input-number", attrs: { min: 0, step: 1 } },
+    {
+      label: "服务商名称",
+      prop: "name",
+      type: "input",
+      rules: [{ required: true, message: "请输入服务商名称" }],
+    },
+    {
+      label: "代码",
+      prop: "code",
+      type: "input",
+      rules: [{ required: true, message: "请输入代码" }],
+    },
+    {
+      label: "Base URL",
+      prop: "base_url",
+      type: "input",
+      rules: [{ required: true, message: "请输入Base URL" }],
+    },
+    {
+      label: "描述",
+      prop: "description",
+      type: "input",
+      attrs: { type: "textarea", rows: 3 },
+    },
+    {
+      label: "排序",
+      prop: "sort_order",
+      type: "input-number",
+      attrs: { min: 0, step: 1 },
+    },
     {
       label: "状态",
       prop: "status",
       type: "switch",
-      attrs: { activeValue: 1, inactiveValue: 2, activeText: "启用", inactiveText: "禁用" },
-      initialValue: 1
+      attrs: {
+        activeValue: 1,
+        inactiveValue: 2,
+        activeText: "启用",
+        inactiveText: "禁用",
+      },
+      initialValue: 1,
     },
   ],
 };

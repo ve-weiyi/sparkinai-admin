@@ -13,7 +13,9 @@ interface ButtonInfo {
  * 从配置文件收集按钮权限
  */
 export function collectButtonsFromConfigs() {
-  const modules = import.meta.glob("/src/views/admin/**/config/content.ts", { eager: true });
+  const modules = import.meta.glob("/src/views/admin/**/config/content.ts", {
+    eager: true,
+  });
   const result: Record<string, ButtonInfo[]> = {};
 
   for (const [path, module] of Object.entries(modules)) {

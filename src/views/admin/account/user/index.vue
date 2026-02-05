@@ -13,16 +13,8 @@
       @operate-click="handleOperateClick"
       @toolbar-click="handleToolbarClick"
     />
-    <PageModal
-      ref="addModalRef"
-      :modal-config="addConfig"
-      @submit-click="handleSubmitClick"
-    />
-    <PageModal
-      ref="editModalRef"
-      :modal-config="editConfig"
-      @submit-click="handleSubmitClick"
-    />
+    <PageModal ref="addModalRef" :modal-config="addConfig" @submit-click="handleSubmitClick" />
+    <PageModal ref="editModalRef" :modal-config="editConfig" @submit-click="handleSubmitClick" />
   </div>
 </template>
 
@@ -35,9 +27,9 @@ import contentConfig from "./config/content.ts";
 import addConfig from "./config/add.ts";
 import editConfig from "./config/edit.ts";
 import usePage from "@/components/CURD/usePage.ts";
-import {UserAPI} from "@/api/user.ts";
-import {ElMessage, ElMessageBox} from "element-plus";
-import type {IOperateData} from "@/components/CURD/types.ts";
+import { UserAPI } from "@/api/user.ts";
+import { ElMessage, ElMessageBox } from "element-plus";
+import type { IOperateData } from "@/components/CURD/types.ts";
 
 const {
   contentRef,
@@ -62,7 +54,7 @@ const handleOperateClick = (data: IOperateData) => {
       cancelButtonText: "取消",
       inputType: "number",
       inputPattern: /^\d+$/,
-      inputErrorMessage: "请输入有效的正整数"
+      inputErrorMessage: "请输入有效的正整数",
     })
       .then((result: any) => {
         // 校验输入值有效性
@@ -73,7 +65,10 @@ const handleOperateClick = (data: IOperateData) => {
         }
 
         // 继续链式调用接口请求
-        return UserAPI.rechargeUser({user_id: data.row.user_id, token_amount: tokenAmount});
+        return UserAPI.rechargeUser({
+          user_id: data.row.user_id,
+          token_amount: tokenAmount,
+        });
       })
       .then(() => {
         ElMessage.success("充值成功");
@@ -90,11 +85,14 @@ const handleOperateClick = (data: IOperateData) => {
       confirmButtonText: "确定",
       cancelButtonText: "取消",
       inputPattern: /^.{6,}$/,
-      inputErrorMessage: '密码长度至少6位',
-      inputType: 'password'
+      inputErrorMessage: "密码长度至少6位",
+      inputType: "password",
     })
       .then((result: any) => {
-        return UserAPI.resetUserPassword({user_id: data.row.user_id, new_password: result.value});
+        return UserAPI.resetUserPassword({
+          user_id: data.row.user_id,
+          new_password: result.value,
+        });
       })
       .then(() => {
         ElMessage.success("重置密码成功");

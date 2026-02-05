@@ -13,16 +13,8 @@
       @operate-click="handleOperateClick"
       @toolbar-click="handleToolbarClick"
     />
-    <PageModal
-      ref="addModalRef"
-      :modal-config="addConfig"
-      @submit-click="handleSubmitClick"
-    />
-    <PageModal
-      ref="editModalRef"
-      :modal-config="editConfig"
-      @submit-click="handleSubmitClick"
-    />
+    <PageModal ref="addModalRef" :modal-config="addConfig" @submit-click="handleSubmitClick" />
+    <PageModal ref="editModalRef" :modal-config="editConfig" @submit-click="handleSubmitClick" />
   </div>
 </template>
 

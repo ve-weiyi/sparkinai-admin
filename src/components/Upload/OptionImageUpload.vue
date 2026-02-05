@@ -20,18 +20,18 @@
   >
     <el-option v-for="item in options" :key="item.value" :label="item.label" :value="item.value">
       <div class="flex items-center">
-        <img :src="item.isDir ? dirIcon : item.value" class="w-6 h-6 mr-2"/>
+        <img :src="item.isDir ? dirIcon : item.value" class="w-6 h-6 mr-2" />
         <span>{{ item.label }}</span>
       </div>
     </el-option>
   </el-select>
-  <el-input v-else v-model="imgUrl" placeholder="请输入图片链接"/>
+  <el-input v-else v-model="imgUrl" placeholder="请输入图片链接" />
 </template>
 
 <script setup lang="ts">
-import {nextTick, ref} from "vue";
-import type {ListFilesReq} from "@/api/types";
-import {UploadAPI} from "@/api/upload";
+import { nextTick, ref } from "vue";
+import type { ListFilesReq } from "@/api/types";
+import { UploadAPI } from "@/api/upload";
 import dirIcon from "@/assets/images/dir.png";
 import SingleImageUpload from "@/components/Upload/SingleImageUpload.vue";
 

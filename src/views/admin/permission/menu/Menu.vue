@@ -289,7 +289,7 @@ function handleOperateClick(data: IOperateData) {
         visible: MenuVisibleEnum.VISIBLE,
         status: ApiStatusEnum.NORMAL,
         always_show: 1,
-        rank: 1
+        rank: 1,
       };
       addOrUpdate.value = true;
       break;

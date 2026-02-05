@@ -7,7 +7,7 @@ import type {
   GetPromptListReq,
   GetPromptListResp,
   UpdatePromptReq,
-  UpdatePromptResp
+  UpdatePromptResp,
 } from "./types";
 
 /** 提示词管理 */
@@ -47,5 +47,4 @@ export const PromptAPI = {
       data: data,
     });
   },
-
 };

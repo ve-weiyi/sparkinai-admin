@@ -925,7 +925,13 @@ function saveXlsx(fileData: any, fileName: string) {
 }
 
 // 暴露的属性和方法
-defineExpose({ fetchPageData, exportPageData, getFilterParams, getSelectionData, handleRefresh });
+defineExpose({
+  fetchPageData,
+  exportPageData,
+  getFilterParams,
+  getSelectionData,
+  handleRefresh,
+});
 </script>
 
 <style lang="scss" scoped>

@@ -52,11 +52,7 @@ import { GenerationAPI } from "@/api/generation.ts";
 import { ElMessage, ElMessageBox } from "element-plus";
 import type { IOperateData } from "@/components/CURD/types.ts";
 
-const {
-  contentRef,
-  handleSearchClick,
-  handleResetClick,
-} = usePage();
+const { contentRef, handleSearchClick, handleResetClick } = usePage();
 
 function handleToolbarClick(name: string) {
   console.log(name);

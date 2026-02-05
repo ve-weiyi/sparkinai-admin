@@ -7,7 +7,11 @@ const searchConfig: ISearchConfig = {
       type: "input",
       label: "关键词",
       prop: "keyword",
-      attrs: { placeholder: "搜索名称/Key...", clearable: true, style: { width: "150px" } },
+      attrs: {
+        placeholder: "搜索名称/Key...",
+        clearable: true,
+        style: { width: "150px" },
+      },
     },
     {
       type: "select",
@@ -17,8 +21,8 @@ const searchConfig: ISearchConfig = {
       options: [],
       initFn: async (item) => {
         const res = await ProviderAPI.getProviderList({ page: 1, page_size: 100 });
-        item.options = res.data.list.map(p => ({ label: p.name, value: p.id }));
-      }
+        item.options = res.data.list.map((p) => ({ label: p.name, value: p.id }));
+      },
     },
     {
       type: "select",

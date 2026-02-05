@@ -13,16 +13,8 @@
       @operate-click="handleOperateClick"
       @toolbar-click="handleToolbarClick"
     />
-    <PageModal
-      ref="addModalRef"
-      :modal-config="addConfig"
-      @submit-click="handleSubmitClick"
-    />
-    <PageModal
-      ref="editModalRef"
-      :modal-config="editConfig"
-      @submit-click="handleSubmitClick"
-    />
+    <PageModal ref="addModalRef" :modal-config="addConfig" @submit-click="handleSubmitClick" />
+    <PageModal ref="editModalRef" :modal-config="editConfig" @submit-click="handleSubmitClick" />
   </div>
 </template>
 
@@ -59,8 +51,8 @@ const handleOperateClick = async (data: IOperateData) => {
   if (data.name === "test") {
     try {
       const loading = ElMessage({
-        type: 'info',
-        message: '正在测试API Key...',
+        type: "info",
+        message: "正在测试API Key...",
         duration: 0,
       });
       const res = await ApikeyAPI.testApiKey({ id: data.row.id });

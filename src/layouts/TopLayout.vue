@@ -7,7 +7,11 @@
           <LayoutLogo :collapse="isLogoCollapsed" />
         </div>
         <div class="layout__header-menu">
-          <LayoutSidebar :data="topMenuItems as RouteRecordRaw[]" menu-mode="horizontal" base-path="" />
+          <LayoutSidebar
+            :data="topMenuItems as RouteRecordRaw[]"
+            menu-mode="horizontal"
+            base-path=""
+          />
         </div>
       </div>
       <div class="layout__header-right">
