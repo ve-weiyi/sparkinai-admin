@@ -11,6 +11,7 @@ const contentConfig: IContentConfig = {
     pageSize: 10,
     pageSizes: [10, 20, 50],
   },
+  indexAction: (query) => ModelAPI.getModelList(query),
   parseData: (res) => ({ total: res.data.total, list: res.data.list || [] }),
   modifyAction: (row, field, value) => {
     return ModelAPI.updateModel({ id: row.id, [field]: value });
@@ -25,7 +26,6 @@ const contentConfig: IContentConfig = {
       message: "success",
     }));
   },
-  indexAction: (query) => ModelAPI.getModelList(query),
   pk: "id",
   toolbar: ["add", "delete"],
   defaultToolbar: ["refresh", "filter", "search"],

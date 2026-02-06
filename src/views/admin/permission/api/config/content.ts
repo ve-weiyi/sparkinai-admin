@@ -21,23 +21,23 @@ const contentConfig: IContentConfig<GetApiListReq> = {
     pageSize: 10,
     pageSizes: [10, 20, 30, 50],
   },
+  indexAction: function (params: GetApiListReq) {
+    return ApiAPI.getApiList(params);
+  },
   parseData: (res) => {
     return {
       total: -1,
       list: res.data.list || [],
     };
   },
+  modifyAction(row, field, value) {
+    const data = Object.assign(row);
+    return ApiAPI.updateApi(data);
+  },
   deleteAction: function (ids: string) {
     return ApiAPI.batchDeleteApis({
       ids: ids.split(",").map((id) => parseInt(id)),
     });
-  },
-  indexAction: function (params: GetApiListReq) {
-    return ApiAPI.getApiList(params);
-  },
-  modifyAction(row, field, value) {
-    const data = Object.assign(row);
-    return ApiAPI.updateApi(data);
   },
   pk: "id",
   toolbar: [

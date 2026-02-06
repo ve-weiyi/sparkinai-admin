@@ -1,5 +1,6 @@
 import type {IContentConfig} from "@/components/CURD/types";
 import {EngineAPI} from "@/api/engine";
+import {UpdateEngineReq} from "@/api/types.ts";
 
 const contentConfig: IContentConfig = {
   pageTitle: "引擎配置",
@@ -11,13 +12,15 @@ const contentConfig: IContentConfig = {
     pageSize: 10,
     pageSizes: [10, 20, 50],
   },
+  indexAction: (query) => EngineAPI.getEngineList(query),
   parseData: (res) => ({total: res.data.total, list: res.data.list || []}),
   modifyAction: (row, field, value) => {
     switch (field) {
       case "is_default":
         return EngineAPI.setDefaultEngine({id: row.id, is_default: row.is_default});
     }
-    return EngineAPI.updateEngine({id: row.id, [field]: value});
+
+    return EngineAPI.updateEngine(row as UpdateEngineReq);
   },
   deleteAction: (ids) => {
     const idList = ids.split(",");
@@ -31,7 +34,6 @@ const contentConfig: IContentConfig = {
       })
     );
   },
-  indexAction: (query) => EngineAPI.getEngineList(query),
   pk: "id",
   toolbar: ["add", "delete"],
   defaultToolbar: ["refresh", "filter", "search"],

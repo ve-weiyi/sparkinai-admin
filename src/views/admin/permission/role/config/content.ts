@@ -16,23 +16,23 @@ const contentConfig: IContentConfig<GetRoleListReq> = {
     pageSize: 10,
     pageSizes: [10, 20, 30, 50],
   },
+  indexAction: function (params: GetRoleListReq) {
+    return RoleAPI.getRoleList(params);
+  },
   parseData: (res) => {
     return {
       total: res.data.total,
       list: res.data.list || [],
     };
   },
+  modifyAction(row, field, value) {
+    const data = Object.assign(row);
+    return RoleAPI.updateRole(data);
+  },
   deleteAction: function (ids: string) {
     return RoleAPI.batchDeleteRoles({
       ids: ids.split(",").map((id) => parseInt(id)),
     });
-  },
-  indexAction: function (params: GetRoleListReq) {
-    return RoleAPI.getRoleList(params);
-  },
-  modifyAction(row, field, value) {
-    const data = Object.assign(row);
-    return RoleAPI.updateRole(data);
   },
   pk: "id",
   toolbar: [

@@ -17,6 +17,9 @@ const contentConfig: IContentConfig<GetAdminListReq> = {
     pageSize: 10,
     pageSizes: [10, 20, 30, 50],
   },
+  indexAction: function (query: GetAdminListReq) {
+    return AdminuserAPI.getAdminList(query);
+  },
   parseData: (res) => {
     return {
       total: res.data.total,
@@ -28,9 +31,6 @@ const contentConfig: IContentConfig<GetAdminListReq> = {
       user_id: row.user_id,
       status: row.status,
     });
-  },
-  indexAction: function (query: GetAdminListReq) {
-    return AdminuserAPI.getAdminList(query);
   },
   pk: "user_id",
   toolbar: [],

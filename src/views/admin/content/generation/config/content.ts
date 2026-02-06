@@ -4,7 +4,6 @@ import { GenerationAPI } from "@/api/generation.ts";
 const contentConfig: IContentConfig = {
   pageTitle: "生成记录管理",
   permPrefix: "admin:generation",
-  pk: "id",
   table: {
     border: true,
     highlightCurrentRow: true,
@@ -15,15 +14,35 @@ const contentConfig: IContentConfig = {
     pageSize: 10,
     pageSizes: [10, 20, 30, 50],
   },
+  indexAction: function (params) {
+    return GenerationAPI.getGenerationList(params);
+  },
   parseData: (res) => {
     return {
       total: res.data.total,
       list: res.data.list || [],
     };
   },
+  deleteAction: (ids) => {
+    const idList = ids.split(",");
+    if (idList.length === 1) {
+      return GenerationAPI.deleteGeneration({ id: idList[0] });
+    }
+    return GenerationAPI.batchDeleteGenerations({ ids: idList }).then((res) => ({
+      code: 0,
+      message: `成功删除 ${res.data.success_count} 条记录`,
+    }));
+  },
+  pk: "id",
   cols: [
     { label: "ID", prop: "id", width: 150, align: "center",  },
-    { label: "用户手机", prop: "user_phone", width: 120, align: "center" },
+    {
+      label: "用户",
+      prop: "user_info",
+      width: 150,
+      align: "center",
+      templet: "custom",
+    },
     {
       label: "产品名称",
       prop: "product_name",
@@ -63,19 +82,6 @@ const contentConfig: IContentConfig = {
       ],
     },
   ],
-  indexAction: function (params) {
-    return GenerationAPI.getGenerationList(params);
-  },
-  deleteAction: (ids) => {
-    const idList = ids.split(",");
-    if (idList.length === 1) {
-      return GenerationAPI.deleteGeneration({ id: idList[0] });
-    }
-    return GenerationAPI.batchDeleteGenerations({ ids: idList }).then((res) => ({
-      code: 0,
-      message: `成功删除 ${res.data.success_count} 条记录`,
-    }));
-  },
 };
 
 export default contentConfig;

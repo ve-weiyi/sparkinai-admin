@@ -11,6 +11,7 @@ const contentConfig: IContentConfig = {
     pageSize: 10,
     pageSizes: [10, 20, 50],
   },
+  indexAction: (query) => ApikeyAPI.getApiKeyList(query),
   parseData: (res) => ({ total: res.data.total, list: res.data.list || [] }),
   modifyAction: (row, field, value) => {
     return ApikeyAPI.updateApiKey({ id: row.id, [field]: value });
@@ -27,7 +28,6 @@ const contentConfig: IContentConfig = {
       })
     );
   },
-  indexAction: (query) => ApikeyAPI.getApiKeyList(query),
   pk: "id",
   toolbar: ["add", "delete"],
   defaultToolbar: ["refresh", "filter", "search"],

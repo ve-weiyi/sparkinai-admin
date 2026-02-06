@@ -4,7 +4,6 @@ import { ConfigAPI } from "@/api/config";
 const contentConfig: IContentConfig = {
   pageTitle: "系统配置管理",
   permPrefix: "sys:config",
-  pk: "id",
   table: {
     border: true,
     highlightCurrentRow: true,
@@ -15,12 +14,31 @@ const contentConfig: IContentConfig = {
     pageSize: 10,
     pageSizes: [10, 20, 30, 50],
   },
+  indexAction: function (params) {
+    return ConfigAPI.getSystemConfigList(params);
+  },
   parseData: (res) => {
     return {
       total: res.data.total,
       list: res.data.list || [],
     };
   },
+  modifyAction: (row, field, value) => {
+    return ConfigAPI.updateSystemConfig({ id: row.id, [field]: value });
+  },
+  deleteAction: (ids) => {
+    const idList = ids.split(",");
+    if (idList.length === 1) {
+      return ConfigAPI.deleteSystemConfig({ id: parseInt(idList[0]) });
+    }
+    return Promise.all(idList.map((id) => ConfigAPI.deleteSystemConfig({ id: parseInt(id) }))).then(
+      () => ({
+        code: 0,
+        message: "success",
+      })
+    );
+  },
+  pk: "id",
   toolbar: [
     {
       name: "add",
@@ -94,24 +112,6 @@ const contentConfig: IContentConfig = {
       ],
     },
   ],
-  indexAction: function (params) {
-    return ConfigAPI.getSystemConfigList(params);
-  },
-  modifyAction: (row, field, value) => {
-    return ConfigAPI.updateSystemConfig({ id: row.id, [field]: value });
-  },
-  deleteAction: (ids) => {
-    const idList = ids.split(",");
-    if (idList.length === 1) {
-      return ConfigAPI.deleteSystemConfig({ id: parseInt(idList[0]) });
-    }
-    return Promise.all(idList.map((id) => ConfigAPI.deleteSystemConfig({ id: parseInt(id) }))).then(
-      () => ({
-        code: 0,
-        message: "success",
-      })
-    );
-  },
 };
 
 export default contentConfig;

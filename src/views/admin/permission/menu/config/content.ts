@@ -19,6 +19,13 @@ const contentConfig: IContentConfig<GetMenuListReq> = {
     pageSize: 10,
     pageSizes: [10, 20, 30, 50],
   },
+  indexAction: function (params: GetMenuListReq) {
+    if (!params.sorts) {
+      params.sorts = [`id desc`];
+    }
+
+    return MenuAPI.getMenuList(params);
+  },
   parseData: (res) => {
     return {
       total: -1,
@@ -29,13 +36,6 @@ const contentConfig: IContentConfig<GetMenuListReq> = {
     return MenuAPI.batchDeleteMenus({
       ids: ids.split(",").map((id) => parseInt(id)),
     });
-  },
-  indexAction: function (params: GetMenuListReq) {
-    if (!params.sorts) {
-      params.sorts = [`id desc`];
-    }
-
-    return MenuAPI.getMenuList(params);
   },
   pk: "id",
   toolbar: [

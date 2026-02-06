@@ -11,8 +11,8 @@ const contentConfig: IContentConfig = {
     pageSize: 10,
     pageSizes: [10, 20, 50],
   },
-  parseData: (res) => ({ total: res.data.total, list: res.data.list || [] }),
   indexAction: (query) => UserAPI.getUserList(query),
+  parseData: (res) => ({ total: res.data.total, list: res.data.list || [] }),
   modifyAction(row, field, value) {
     switch (field) {
       case "status":

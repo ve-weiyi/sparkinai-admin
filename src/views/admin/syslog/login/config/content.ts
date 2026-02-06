@@ -4,7 +4,6 @@ import { SyslogAPI } from "@/api/syslog.ts";
 const contentConfig: IContentConfig = {
   pageTitle: "登录日志",
   permPrefix: "syslog:login",
-  pk: "id",
   table: {
     border: true,
     highlightCurrentRow: true,
@@ -15,37 +14,88 @@ const contentConfig: IContentConfig = {
     pageSize: 10,
     pageSizes: [10, 20, 30, 50],
   },
+  indexAction: (params) => SyslogAPI.getUserLoginLogList(params),
   parseData: (res) => {
     return {
       total: res.data.total,
       list: res.data.list || [],
     };
   },
-  cols: [
-    { label: "ID", prop: "id", width: 80, align: "center" },
-    { label: "用户ID", prop: "user_id", width: 200, align: "center",  },
-    { label: "设备ID", prop: "terminal_id", width: 200, align: "center",  },
-    { label: "登录类型", prop: "login_type", width: 120, align: "center" },
-    { label: "登录状态", prop: "status", width: 100, align: "center", templet: "custom", slotName: "status" },
-    { label: "失败原因", prop: "fail_reason", minWidth: 150,  },
+  deleteAction: (ids) => SyslogAPI.batchDeleteUserLoginLogs({ ids: ids.split(",").map(Number) }),
+  pk: "id",
+  toolbar: [
     {
-      label: "登出时间",
-      prop: "logout_at",
-      width: 180,
+      name: "delete",
+      text: "删除",
+      perm: "delete",
+      attrs: {
+        icon: "delete",
+        type: "danger",
+      },
+    },
+  ],
+  defaultToolbar: ["refresh", "filter", "search"],
+  cols: [
+    {
+      type: "selection",
+      label: "批量操作",
+      width: 50,
       align: "center",
-      templet: "date",
-      dateFormat: "YYYY/MM/DD HH:mm:ss",
+    },
+    {
+      label: "id",
+      prop: "id",
+      width: 70,
+      align: "center",
+      sortable: true,
+      show: true,
+    },
+    {
+      label: "用户",
+      prop: "user_info",
+      width: 150,
+      align: "center",
+      templet: "custom",
+    },
+    {
+      label: "客户端",
+      prop: "client_info",
+      width: 150,
+      align: "center",
+      templet: "custom",
+    },
+    {
+      label: "登录类型",
+      prop: "login_type",
+      width: 120,
+      align: "center",
+      templet: "custom",
     },
     {
       label: "登录时间",
       prop: "created_at",
-      width: 180,
+      width: 140,
       align: "center",
       templet: "date",
       dateFormat: "YYYY/MM/DD HH:mm:ss",
     },
+    {
+      label: "登出时间",
+      prop: "logout_at",
+      width: 140,
+      align: "center",
+      templet: "date",
+      dateFormat: "YYYY/MM/DD HH:mm:ss",
+    },
+    {
+      label: "操作栏",
+      align: "center",
+      fixed: "right",
+      width: 160,
+      templet: "tool",
+      operat: ["delete"],
+    },
   ],
-  indexAction: (params) => SyslogAPI.getUserLoginLogList(params),
 };
 
 export default contentConfig;

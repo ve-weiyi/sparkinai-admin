@@ -95,6 +95,16 @@ export interface BatchDeleteRolesResp {
   success_count: number; // 删除成功数量
 }
 
+// 批量删除请求
+export interface BatchDeleteSyslogReq {
+  ids: number[]; // 日志ID列表
+}
+
+// 批量删除响应
+export interface BatchDeleteSyslogResp {
+  success_count: number; // 成功删除数量
+}
+
 export interface BatchResp {
   success_count: number;
 }
@@ -392,7 +402,6 @@ export interface FileInfoVO {
 export interface GenerationItem {
   id: string; // 生成记录ID
   user_id: string; // 用户ID
-  user_phone: string; // 用户手机号
   product_name: string; // 产品名称
   description: string; // 产品描述
   image_url: string; // 上传的产品图片URL
@@ -406,6 +415,7 @@ export interface GenerationItem {
   engine_id: number; // 使用的引擎配置ID
   created_at: number; // 创建时间
   updated_at: number; // 更新时间
+  user_info: UserInfoVO; // 用户信息
 }
 
 // 生成统计趋势数据项
@@ -956,6 +966,8 @@ export interface OperationLogItem {
   response_status: number; // 响应状态码
   cost: string; // 耗时（ms）
   created_at: number; // 创建时间
+  user_info: UserInfoVO; // 用户信息
+  client_info: ClientInfoVO; // 客户端信息
 }
 
 export interface PageQuery {
@@ -1407,6 +1419,8 @@ export interface UploadLogItem {
   file_size: number; // 文件大小
   file_url: string; // 上传路径
   created_at: number; // 创建时间
+  user_info: UserInfoVO; // 用户信息
+  client_info: ClientInfoVO; // 客户端信息
 }
 
 // 用户活跃度排行数据项
@@ -1435,6 +1449,14 @@ export interface UserGrowthTrendItem {
   date: string; // 日期
   new_users: number; // 新增用户数
   active_users: number; // 活跃用户数
+}
+
+export interface UserInfoVO {
+  user_id: string;
+  username: string;
+  avatar: string;
+  nickname: string;
+  user_type: string;
 }
 
 // 用户信息项
@@ -1466,6 +1488,8 @@ export interface UserLoginLogItem {
   fail_reason: string; // 失败原因
   logout_at: number; // 登出时间
   created_at: number; // 创建时间
+  user_info: UserInfoVO; // 用户信息
+  client_info: ClientInfoVO; // 客户端信息
 }
 
 export interface UserMenu {

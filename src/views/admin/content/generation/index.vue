@@ -11,6 +11,9 @@
       @operate-click="handleOperateClick"
       @toolbar-click="handleToolbarClick"
     >
+      <template #user_info="scope">
+        <UserInfo :user="scope.row.user_info" />
+      </template>
       <template #status="{ row }">
         <el-tag v-if="row.status === 1" type="success">成功</el-tag>
         <el-tag v-else-if="row.status === 2" type="danger">失败</el-tag>
@@ -51,6 +54,7 @@ import usePage from "@/components/CURD/usePage.ts";
 import { GenerationAPI } from "@/api/generation.ts";
 import { ElMessage, ElMessageBox } from "element-plus";
 import type { IOperateData } from "@/components/CURD/types.ts";
+import UserInfo from "@/components/UserInfo/index.vue";
 
 const { contentRef, handleSearchClick, handleResetClick } = usePage();
 

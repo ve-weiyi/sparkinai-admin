@@ -4,10 +4,8 @@ import { SyslogAPI } from "@/api/syslog.ts";
 const contentConfig: IContentConfig = {
   pageTitle: "文件上传日志",
   permPrefix: "syslog:upload",
-  pk: "id",
-  defaultToolbar: ["refresh", "filter"],
   table: {
-    border: true,
+    border: false,
     highlightCurrentRow: true,
   },
   pagination: {
@@ -16,29 +14,132 @@ const contentConfig: IContentConfig = {
     pageSize: 10,
     pageSizes: [10, 20, 30, 50],
   },
+  indexAction: (params) => SyslogAPI.getUploadLogList(params),
   parseData: (res) => {
     return {
       total: res.data.total,
       list: res.data.list || [],
     };
   },
-  cols: [
-    { label: "ID", prop: "id", width: 80, align: "center" },
-    { label: "用户ID", prop: "user_id", width: 200, align: "center",  },
-    { label: "文件名称", prop: "file_name", minWidth: 150,  },
-    { label: "文件类型", prop: "file_type", width: 120, align: "center" },
-    { label: "文件大小", prop: "file_size", width: 120, align: "center" },
-    { label: "文件URL", prop: "file_url", minWidth: 200, align: "center", templet: "url" },
+  deleteAction: (ids) => SyslogAPI.batchDeleteUploadLogs({ ids: ids.split(",").map(Number) }),
+  pk: "id",
+  toolbar: [
     {
-      label: "上传时间",
-      prop: "created_at",
-      width: 180,
+      name: "delete",
+      text: "删除",
+      perm: "delete",
+      attrs: {
+        icon: "delete",
+        type: "danger",
+      },
+    },
+  ],
+  defaultToolbar: ["refresh", "filter"],
+  cols: [
+    {
+      type: "selection",
+      label: "批量操作",
+      width: 50,
       align: "center",
+    },
+    {
+      label: "id",
+      prop: "id",
+      width: 70,
+      align: "center",
+      sortable: true,
+      show: false,
+    },
+    {
+      label: "预览",
+      prop: "icon",
+      width: 80,
+      align: "center",
+      templet: "custom",
+    },
+    {
+      label: "文件目录",
+      prop: "file_path",
+      width: 140,
+      align: "left",
+    },
+    {
+      label: "文件名",
+      prop: "file_name",
+      minWidth: 200,
+      align: "left",
+      templet: "custom",
+    },
+    {
+      label: "文件类型",
+      prop: "file_type",
+      width: 80,
+      align: "center",
+    },
+    {
+      label: "文件大小",
+      prop: "file_size",
+      width: 120,
+      align: "center",
+      templet: "custom",
+    },
+    {
+      label: "创建者",
+      prop: "user_info",
+      width: 150,
+      align: "left",
+      templet: "custom",
+    },
+    {
+      label: "创建时间",
+      prop: "created_at",
+      width: 170,
+      align: "center",
+      sortable: true,
       templet: "date",
       dateFormat: "YYYY/MM/DD HH:mm:ss",
     },
+    {
+      label: "更新时间",
+      prop: "updated_at",
+      width: 170,
+      align: "center",
+      sortable: true,
+      templet: "date",
+      dateFormat: "YYYY/MM/DD HH:mm:ss",
+      show: false,
+    },
+    {
+      label: "操作栏",
+      align: "center",
+      fixed: "right",
+      width: 160,
+      templet: "tool",
+      operat: [
+        {
+          name: "download",
+          text: "下载",
+          perm: "download",
+          attrs: {
+            icon: "download",
+            type: "primary",
+          },
+          render(row) {
+            return row.file_type != "";
+          },
+        },
+        {
+          name: "delete",
+          text: "删除",
+          perm: "delete",
+          attrs: {
+            icon: "delete",
+            type: "danger",
+          },
+        },
+      ],
+    },
   ],
-  indexAction: (params) => SyslogAPI.getUploadLogList(params),
 };
 
 export default contentConfig;

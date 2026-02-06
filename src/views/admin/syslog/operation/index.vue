@@ -1,20 +1,75 @@
 <template>
-  <div class="h-full">
-    <PageSearch
+  <div class="app-container">
+    <!-- 搜索 -->
+    <page-search
+      ref="searchRef"
       :search-config="searchConfig"
-      @search-click="handleSearchClick"
+      @query-click="handleQueryClick"
       @reset-click="handleResetClick"
     />
-    <PageContent ref="contentRef" :content-config="contentConfig" />
+
+    <!-- 列表 -->
+    <page-content
+      ref="contentRef"
+      :content-config="contentConfig"
+      @add-click="handleAddClick"
+      @edit-click="handleEditClick"
+      @export-click="handleExportClick"
+      @search-click="handleSearchClick"
+      @toolbar-click="handleToolbarClick"
+      @operate-click="handleOperateClick"
+      @filter-change="handleFilterChange"
+    >
+      <template #user_info="scope">
+        <UserInfo :user="scope.row.user_info" />
+      </template>
+      <template #client_info="scope">
+        <ClientInfo :client="scope.row.client_info" />
+      </template>
+      <template #request_method="scope">
+        <div v-if="scope.row.request_method === ''"></div>
+        <el-tag v-else-if="scope.row.request_method === 'GET'" type="success">GET</el-tag>
+        <el-tag v-else-if="scope.row.request_method === 'POST'" type="primary">POST</el-tag>
+        <el-tag v-else-if="scope.row.request_method === 'PUT'" type="warning">PUT</el-tag>
+        <el-tag v-else-if="scope.row.request_method === 'DELETE'" type="danger">DELETE</el-tag>
+        <el-tag v-else type="info">{{ scope.row.request_method }}</el-tag>
+      </template>
+    </page-content>
   </div>
 </template>
 
 <script setup lang="ts">
+import type { IOperateData } from "@/components/CURD/types";
+import usePage from "@/components/CURD/usePage";
+import contentConfig from "./config/content";
+import searchConfig from "./config/search";
 import PageSearch from "@/components/CURD/PageSearch.vue";
 import PageContent from "@/components/CURD/PageContent.vue";
-import searchConfig from "./config/search";
-import contentConfig from "./config/content";
-import usePage from "@/components/CURD/usePage";
+import UserInfo from "@/components/UserInfo/index.vue";
+import ClientInfo from "@/components/ClientInfo/index.vue";
 
-const { contentRef, handleSearchClick, handleResetClick } = usePage();
+const {
+  searchRef,
+  contentRef,
+  addModalRef,
+  editModalRef,
+  handleQueryClick,
+  handleResetClick,
+  handleAddClick,
+  handleEditClick,
+  handleSubmitClick,
+  handleExportClick,
+  handleSearchClick,
+  handleFilterChange,
+} = usePage();
+
+// 其他工具栏
+function handleToolbarClick(name: string) {
+  console.log(name);
+}
+
+// 其他操作列
+function handleOperateClick(data: IOperateData) {
+  console.log(data);
+}
 </script>
