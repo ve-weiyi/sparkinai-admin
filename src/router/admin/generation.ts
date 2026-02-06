@@ -8,7 +8,8 @@ const generationRoutes: RouteRecordRaw = {
   meta: {
     title: "内容管理",
     icon: "document",
-    rank: 7,
+    rank: 6,
+    alwaysShow: true,
   },
   children: [
     {

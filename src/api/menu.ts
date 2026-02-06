@@ -1,19 +1,19 @@
 import request from "@/utils/request";
 import type {
-  CleanMenusResp,
-  PageResp,
-  CreateMenuReq,
-  MenuVO,
+  BatchDeleteMenusReq,
   BatchDeleteMenusResp,
   CleanMenusReq,
-  SyncMenusReq,
-  SyncMenusResp,
-  GetMenuListReq,
-  BatchDeleteMenusReq,
-  GetMenuReq,
-  UpdateMenuReq,
+  CleanMenusResp,
+  CreateMenuReq,
   DeleteMenuReq,
   EmptyResp,
+  GetMenuListReq,
+  GetMenuReq,
+  MenuVO,
+  PageResp,
+  SyncMenusReq,
+  SyncMenusResp,
+  UpdateMenuReq
 } from "./types";
 
 /** 菜单管理 */
@@ -89,4 +89,5 @@ export const MenuAPI = {
       data: data,
     });
   },
+
 };

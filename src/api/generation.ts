@@ -1,15 +1,15 @@
 import request from "@/utils/request";
 import type {
-  DeleteGenerationResp,
-  RegenerateReq,
-  RegenerateResp,
   BatchDeleteGenerationsReq,
-  GetGenerationListReq,
+  BatchDeleteGenerationsResp,
+  DeleteGenerationReq,
+  DeleteGenerationResp,
   GetGenerationDetailReq,
   GetGenerationDetailResp,
-  BatchDeleteGenerationsResp,
+  GetGenerationListReq,
   GetGenerationListResp,
-  DeleteGenerationReq,
+  RegenerateReq,
+  RegenerateResp
 } from "./types";
 
 /** 生成记录管理 */
@@ -24,9 +24,7 @@ export const GenerationAPI = {
   },
 
   /** 获取生成记录详情 */
-  getGenerationDetail(
-    params?: GetGenerationDetailReq
-  ): Promise<IApiResponse<GetGenerationDetailResp>> {
+  getGenerationDetail(params?: GetGenerationDetailReq): Promise<IApiResponse<GetGenerationDetailResp>> {
     return request({
       url: `/admin-api/v1/generations/${params.id}`,
       method: "GET",
@@ -53,13 +51,12 @@ export const GenerationAPI = {
   },
 
   /** 批量删除生成记录 */
-  batchDeleteGenerations(
-    data?: BatchDeleteGenerationsReq
-  ): Promise<IApiResponse<BatchDeleteGenerationsResp>> {
+  batchDeleteGenerations(data?: BatchDeleteGenerationsReq): Promise<IApiResponse<BatchDeleteGenerationsResp>> {
     return request({
       url: `/admin-api/v1/generations/batch`,
       method: "DELETE",
       data: data,
     });
   },
+
 };

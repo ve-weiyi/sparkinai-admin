@@ -103,7 +103,8 @@ export interface CleanApisResp {
   success_count: number; // 清空成功数量
 }
 
-export interface CleanMenusReq {}
+export interface CleanMenusReq {
+}
 
 export interface CleanMenusResp {
   success_count: number; // 清空成功数量
@@ -200,6 +201,7 @@ export interface CreatePromptReq {
   sort_order?: number; // 排序顺序
   version?: number; // 版本号
   language?: string; // 语言
+  platform?: string; // 平台
 }
 
 // 创建提示词响应
@@ -342,9 +344,11 @@ export interface EmailLoginReq {
   captcha_code?: string; // 验证码
 }
 
-export interface EmptyReq {}
+export interface EmptyReq {
+}
 
-export interface EmptyResp {}
+export interface EmptyResp {
+}
 
 // 引擎配置信息项
 export interface EngineConfigItem {
@@ -409,6 +413,22 @@ export interface GenerationItem {
   updated_at: number; // 更新时间
 }
 
+// 生成日志信息项
+export interface GenerationLogItem {
+  id: number; // 日志ID
+  user_id: string; // 用户ID
+  terminal_id: string; // 设备ID
+  generation_id: string; // 生成记录ID
+  task_id: number; // 任务ID
+  task_type: string; // 任务类型
+  step: string; // 执行步骤
+  log_level: string; // 日志级别
+  message: string; // 日志消息
+  detail: string; // 详细信息
+  cost_time: number; // 耗时（毫秒）
+  created_at: number; // 创建时间
+}
+
 // 生成统计趋势数据项
 export interface GenerationTrendItem {
   date: string; // 日期
@@ -464,7 +484,8 @@ export interface GetCaptchaCodeResp {
   captcha_code: string; // 验证码
 }
 
-export interface GetClientInfoReq {}
+export interface GetClientInfoReq {
+}
 
 export interface GetClientInfoResp {
   id: number; // 访客唯一ID
@@ -476,7 +497,8 @@ export interface GetClientInfoResp {
 }
 
 // 获取仪表盘统计数据请求
-export interface GetDashboardStatsReq {}
+export interface GetDashboardStatsReq {
+}
 
 // 仪表盘统计数据响应
 export interface GetDashboardStatsResp {
@@ -514,7 +536,8 @@ export interface GetGenerationDetailReq {
 }
 
 // 生成记录详情响应
-export interface GetGenerationDetailResp extends GenerationItem {}
+export interface GetGenerationDetailResp extends GenerationItem {
+}
 
 // 生成记录列表查询请求
 export interface GetGenerationListReq extends PageQuery {
@@ -532,6 +555,25 @@ export interface GetGenerationListResp {
   page_size: number;
   total: number;
   list: GenerationItem[];
+}
+
+// 生成日志列表查询请求
+export interface GetGenerationLogListReq extends PageQuery {
+  generation_id?: string; // 生成记录ID筛选
+  task_id?: number; // 任务ID筛选
+  user_id?: string; // 用户ID筛选
+  task_type?: string; // 任务类型筛选
+  log_level?: string; // 日志级别筛选
+  start_date?: string; // 开始日期 YYYY-MM-DD
+  end_date?: string; // 结束日期 YYYY-MM-DD
+}
+
+// 生成日志列表响应
+export interface GetGenerationLogListResp {
+  page: number;
+  page_size: number;
+  total: number;
+  list: GenerationLogItem[];
 }
 
 // 获取生成统计趋势请求
@@ -591,6 +633,22 @@ export interface GetOauthAuthorizeUrlResp {
   authorize_url: string; // 授权地址
 }
 
+// 操作日志列表查询请求
+export interface GetOperationLogListReq extends PageQuery {
+  user_id?: string; // 用户ID筛选
+  module?: string; // 操作模块筛选
+  start_date?: string; // 开始日期 YYYY-MM-DD
+  end_date?: string; // 结束日期 YYYY-MM-DD
+}
+
+// 操作日志列表响应
+export interface GetOperationLogListResp {
+  page: number;
+  page_size: number;
+  total: number;
+  list: OperationLogItem[];
+}
+
 // 获取热门产品统计请求
 export interface GetPopularProductsReq {
   limit?: number; // 返回数量限制
@@ -605,6 +663,7 @@ export interface GetPopularProductsResp {
 export interface GetPromptListReq extends PageQuery {
   scene?: string; // 场景筛选
   language?: string; // 语言筛选
+  platform?: string; // 平台筛选
   status?: number; // 状态筛选
   keyword?: string; // 关键词搜索
 }
@@ -632,7 +691,8 @@ export interface GetProviderListResp {
 }
 
 // 获取公开配置请求（无需认证）
-export interface GetPublicConfigReq {}
+export interface GetPublicConfigReq {
+}
 
 // 获取公开配置响应
 export interface GetPublicConfigResp {
@@ -687,7 +747,24 @@ export interface GetSystemConfigReq {
 }
 
 // 获取系统配置响应
-export interface GetSystemConfigResp extends SystemConfigItem {}
+export interface GetSystemConfigResp extends SystemConfigItem {
+}
+
+// 文件上传日志列表查询请求
+export interface GetUploadLogListReq extends PageQuery {
+  user_id?: string; // 用户ID筛选
+  file_type?: string; // 文件类型筛选
+  start_date?: string; // 开始日期 YYYY-MM-DD
+  end_date?: string; // 结束日期 YYYY-MM-DD
+}
+
+// 文件上传日志列表响应
+export interface GetUploadLogListResp {
+  page: number;
+  page_size: number;
+  total: number;
+  list: UploadLogItem[];
+}
 
 // 获取上传凭证请求
 export interface GetUploadTokenReq {
@@ -757,11 +834,28 @@ export interface GetUserListResp {
   list: UserItem[];
 }
 
+// 登录日志列表查询请求
+export interface GetUserLoginLogListReq extends PageQuery {
+  user_id?: string; // 用户ID筛选
+  status?: number; // 登录状态筛选
+  start_date?: string; // 开始日期 YYYY-MM-DD
+  end_date?: string; // 结束日期 YYYY-MM-DD
+}
+
+// 登录日志列表响应
+export interface GetUserLoginLogListResp {
+  page: number;
+  page_size: number;
+  total: number;
+  list: UserLoginLogItem[];
+}
+
 export interface GetUserMenusResp {
   list: UserMenu[];
 }
 
-export interface GetUserProfileReq {}
+export interface GetUserProfileReq {
+}
 
 export interface GetUserRolesResp {
   list: UserRole[];
@@ -860,6 +954,22 @@ export interface OauthLoginReq {
   code?: string; // 授权码
 }
 
+// 操作日志信息项
+export interface OperationLogItem {
+  id: number; // 主键ID
+  user_id: string; // 用户ID
+  terminal_id: string; // 设备ID
+  module: string; // 操作模块
+  description: string; // 操作描述
+  request_uri: string; // 请求地址
+  request_method: string; // 请求方式
+  request_data: string; // 请求参数
+  response_data: string; // 返回数据
+  response_status: number; // 响应状态码
+  cost: string; // 耗时（ms）
+  created_at: number; // 创建时间
+}
+
 export interface PageQuery {
   page?: number; // 当前页码
   page_size?: number; // 每页数量
@@ -878,7 +988,8 @@ export interface PhoneLoginReq {
   verify_code: string; // 验证码
 }
 
-export interface PingReq {}
+export interface PingReq {
+}
 
 export interface PingResp {
   env: string;
@@ -906,6 +1017,7 @@ export interface PromptItem {
   sort_order: number; // 排序顺序
   version: number; // 版本号
   language: string; // 语言
+  platform: string; // 平台
   status: number; // 状态
   created_at: number; // 创建时间
   updated_at: number; // 更新时间
@@ -924,7 +1036,8 @@ export interface ProviderItem {
   updated_at: number; // 更新时间
 }
 
-export interface QueryUserLoginHistoryReq extends PageQuery {}
+export interface QueryUserLoginHistoryReq extends PageQuery {
+}
 
 // 用户充值请求
 export interface RechargeUserReq {
@@ -1179,6 +1292,7 @@ export interface UpdatePromptReq {
   sort_order?: number; // 排序顺序
   version?: number; // 版本号
   language?: string; // 语言
+  platform?: string; // 平台
   status?: number; // 状态
 }
 
@@ -1285,6 +1399,19 @@ export interface UploadFilesReq {
   file_path?: string; // 文件路径
 }
 
+// 文件上传日志信息项
+export interface UploadLogItem {
+  id: number; // ID
+  user_id: string; // 用户ID
+  terminal_id: string; // 设备ID
+  file_path: string; // 文件路径
+  file_name: string; // 文件名称
+  file_type: string; // 文件类型
+  file_size: number; // 文件大小
+  file_url: string; // 上传路径
+  created_at: number; // 创建时间
+}
+
 // 用户活跃度排行数据项
 export interface UserActivityRankingItem {
   user_id: string; // 用户ID
@@ -1330,6 +1457,18 @@ export interface UserItem {
   last_login_ip: string; // 最后登录IP
   created_at: number; // 创建时间（时间戳）
   roles: UserRoleLabel[];
+}
+
+// 登录日志信息项
+export interface UserLoginLogItem {
+  id: number; // 日志ID
+  user_id: string; // 用户ID
+  terminal_id: string; // 设备ID
+  login_type: string; // 登录类型
+  status: number; // 登录状态
+  fail_reason: string; // 失败原因
+  logout_at: number; // 登出时间
+  created_at: number; // 创建时间
 }
 
 export interface UserMenu {
@@ -1393,3 +1532,4 @@ export interface UserVO {
   roles: string[];
   perms: string[];
 }
+

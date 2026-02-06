@@ -10,7 +10,7 @@ export default {
   meta: {
     title: "系统配置",
     icon: "system",
-    rank: 6,
+    rank: 7,
   },
   children: [
     {

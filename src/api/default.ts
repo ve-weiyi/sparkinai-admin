@@ -1,5 +1,8 @@
 import request from "@/utils/request";
-import type { PingReq, PingResp } from "./types";
+import type {
+  PingReq,
+  PingResp
+} from "./types";
 
 export const DefaultAPI = {
   /** 健康检查 */
@@ -10,4 +13,5 @@ export const DefaultAPI = {
       params: params,
     });
   },
+
 };

@@ -50,13 +50,6 @@ const contentConfig: IContentConfig<GetAdminListReq> = {
       show: false,
     },
     {
-      label: "头像",
-      align: "center",
-      prop: "avatar",
-      width: 80,
-      templet: "image",
-    },
-    {
       label: "用户名",
       prop: "username",
       width: 160,
@@ -71,7 +64,13 @@ const contentConfig: IContentConfig<GetAdminListReq> = {
     {
       label: "登录邮箱",
       prop: "email",
-      width: 120,
+      width: 200,
+      align: "center",
+    },
+    {
+      label: "手机号",
+      prop: "phone",
+      width: 140,
       align: "center",
     },
     {
@@ -79,13 +78,6 @@ const contentConfig: IContentConfig<GetAdminListReq> = {
       prop: "roles",
       minWidth: 140,
       width: 0,
-      align: "center",
-      templet: "custom",
-    },
-    {
-      label: "注册方式",
-      prop: "register_type",
-      width: 120,
       align: "center",
       templet: "custom",
     },
@@ -101,17 +93,19 @@ const contentConfig: IContentConfig<GetAdminListReq> = {
       inactiveText: "正常",
     },
     {
-      label: "注册IP地址",
-      prop: "ip_address",
+      label: "最后登录IP",
+      prop: "last_login_ip",
       width: 140,
       align: "center",
     },
     {
-      label: "注册IP归属地",
-      prop: "ip_source",
-      width: 0,
-      minWidth: 160,
+      label: "最后登录时间",
+      prop: "last_login_at",
+      width: 170,
       align: "center",
+      sortable: true,
+      templet: "date",
+      dateFormat: "YYYY/MM/DD HH:mm:ss",
     },
     {
       label: "创建时间",
@@ -149,7 +143,7 @@ const contentConfig: IContentConfig<GetAdminListReq> = {
           },
           render(row) {
             return (
-              !row.roles.find((item) => item === "super-admin") ||
+              !row.roles?.find((item) => item === "super-admin") ||
               row.user_id == useUserStore().userInfo.user_id
             );
           },

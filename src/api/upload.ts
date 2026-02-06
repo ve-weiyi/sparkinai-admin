@@ -5,7 +5,7 @@ import type {
   GetUploadTokenResp,
   ListFilesReq,
   PageResp,
-  UploadFilesReq,
+  UploadFilesReq
 } from "./types";
 
 /** 文件上传 */
@@ -36,4 +36,5 @@ export const UploadAPI = {
       data: data,
     });
   },
+
 };

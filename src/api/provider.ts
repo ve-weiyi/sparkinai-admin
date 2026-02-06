@@ -1,13 +1,13 @@
 import request from "@/utils/request";
 import type {
+  CreateProviderReq,
+  CreateProviderResp,
   DeleteProviderReq,
   DeleteProviderResp,
   GetProviderListReq,
   GetProviderListResp,
-  CreateProviderReq,
-  CreateProviderResp,
   UpdateProviderReq,
-  UpdateProviderResp,
+  UpdateProviderResp
 } from "./types";
 
 /** AI供应商管理 */
@@ -47,4 +47,5 @@ export const ProviderAPI = {
       data: data,
     });
   },
+
 };

@@ -1,15 +1,15 @@
 import request from "@/utils/request";
 import type {
+  GetUserDetailReq,
+  GetUserDetailResp,
   GetUserListReq,
   GetUserListResp,
   RechargeUserReq,
   RechargeUserResp,
   ResetUserPasswordReq,
-  UpdateUserStatusReq,
-  UpdateUserStatusResp,
-  GetUserDetailReq,
-  GetUserDetailResp,
   ResetUserPasswordResp,
+  UpdateUserStatusReq,
+  UpdateUserStatusResp
 } from "./types";
 
 /** 用户管理 */
@@ -58,4 +58,5 @@ export const UserAPI = {
       data: data,
     });
   },
+
 };

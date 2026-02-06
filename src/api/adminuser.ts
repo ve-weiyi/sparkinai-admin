@@ -1,11 +1,11 @@
 import request from "@/utils/request";
 import type {
-  UpdateAdminPasswordReq,
   EmptyResp,
-  UpdateAdminRolesReq,
   GetAdminListReq,
   PageResp,
-  UpdateAdminStatusReq,
+  UpdateAdminPasswordReq,
+  UpdateAdminRolesReq,
+  UpdateAdminStatusReq
 } from "./types";
 
 /** 账号管理（Admin） */
@@ -45,4 +45,5 @@ export const AdminuserAPI = {
       data: data,
     });
   },
+
 };

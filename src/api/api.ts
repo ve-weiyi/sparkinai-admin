@@ -1,18 +1,18 @@
 import request from "@/utils/request";
 import type {
-  CreateApiReq,
-  BatchDeleteApisReq,
-  UpdateApiReq,
-  CleanApisResp,
-  SyncApisResp,
-  GetApiListReq,
-  PageResp,
   ApiVO,
+  BatchDeleteApisReq,
   BatchDeleteApisResp,
-  GetApiReq,
+  CleanApisResp,
+  CreateApiReq,
   DeleteApiReq,
-  EmptyResp,
   EmptyReq,
+  EmptyResp,
+  GetApiListReq,
+  GetApiReq,
+  PageResp,
+  SyncApisResp,
+  UpdateApiReq
 } from "./types";
 
 /** 接口管理 */
@@ -88,4 +88,5 @@ export const ApiAPI = {
       data: data,
     });
   },
+
 };

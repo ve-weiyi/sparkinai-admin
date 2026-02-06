@@ -1,21 +1,21 @@
 import request from "@/utils/request";
 import type {
+  ExportStatsReportReq,
+  ExportStatsReportResp,
+  GetDashboardStatsReq,
+  GetDashboardStatsResp,
+  GetGenerationTrendReq,
+  GetGenerationTrendResp,
+  GetModelUsageStatsReq,
   GetModelUsageStatsResp,
+  GetPopularProductsReq,
   GetPopularProductsResp,
   GetRevenueTrendReq,
   GetRevenueTrendResp,
   GetUserActivityRankingReq,
-  GetDashboardStatsResp,
-  GetGenerationTrendResp,
-  GetUserGrowthTrendReq,
-  GetDashboardStatsReq,
-  ExportStatsReportReq,
-  GetPopularProductsReq,
   GetUserActivityRankingResp,
-  GetUserGrowthTrendResp,
-  ExportStatsReportResp,
-  GetGenerationTrendReq,
-  GetModelUsageStatsReq,
+  GetUserGrowthTrendReq,
+  GetUserGrowthTrendResp
 } from "./types";
 
 /** 统计分析 */
@@ -39,9 +39,7 @@ export const StatsAPI = {
   },
 
   /** 获取生成统计趋势 */
-  getGenerationTrend(
-    params?: GetGenerationTrendReq
-  ): Promise<IApiResponse<GetGenerationTrendResp>> {
+  getGenerationTrend(params?: GetGenerationTrendReq): Promise<IApiResponse<GetGenerationTrendResp>> {
     return request({
       url: `/admin-api/v1/stats/generation-trend`,
       method: "GET",
@@ -50,9 +48,7 @@ export const StatsAPI = {
   },
 
   /** 获取模型使用统计 */
-  getModelUsageStats(
-    params?: GetModelUsageStatsReq
-  ): Promise<IApiResponse<GetModelUsageStatsResp>> {
+  getModelUsageStats(params?: GetModelUsageStatsReq): Promise<IApiResponse<GetModelUsageStatsResp>> {
     return request({
       url: `/admin-api/v1/stats/model-usage`,
       method: "GET",
@@ -61,9 +57,7 @@ export const StatsAPI = {
   },
 
   /** 获取热门产品统计 */
-  getPopularProducts(
-    params?: GetPopularProductsReq
-  ): Promise<IApiResponse<GetPopularProductsResp>> {
+  getPopularProducts(params?: GetPopularProductsReq): Promise<IApiResponse<GetPopularProductsResp>> {
     return request({
       url: `/admin-api/v1/stats/popular-products`,
       method: "GET",
@@ -81,9 +75,7 @@ export const StatsAPI = {
   },
 
   /** 获取用户活跃度排行 */
-  getUserActivityRanking(
-    params?: GetUserActivityRankingReq
-  ): Promise<IApiResponse<GetUserActivityRankingResp>> {
+  getUserActivityRanking(params?: GetUserActivityRankingReq): Promise<IApiResponse<GetUserActivityRankingResp>> {
     return request({
       url: `/admin-api/v1/stats/user-activity-ranking`,
       method: "GET",
@@ -92,13 +84,12 @@ export const StatsAPI = {
   },
 
   /** 获取用户增长趋势 */
-  getUserGrowthTrend(
-    params?: GetUserGrowthTrendReq
-  ): Promise<IApiResponse<GetUserGrowthTrendResp>> {
+  getUserGrowthTrend(params?: GetUserGrowthTrendReq): Promise<IApiResponse<GetUserGrowthTrendResp>> {
     return request({
       url: `/admin-api/v1/stats/user-growth-trend`,
       method: "GET",
       params: params,
     });
   },
+
 };

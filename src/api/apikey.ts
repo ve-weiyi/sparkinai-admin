@@ -1,15 +1,15 @@
 import request from "@/utils/request";
 import type {
-  GetApiKeyListReq,
   CreateApiKeyReq,
-  UpdateApiKeyResp,
+  CreateApiKeyResp,
   DeleteApiKeyReq,
   DeleteApiKeyResp,
-  TestApiKeyResp,
+  GetApiKeyListReq,
   GetApiKeyListResp,
-  CreateApiKeyResp,
-  UpdateApiKeyReq,
   TestApiKeyReq,
+  TestApiKeyResp,
+  UpdateApiKeyReq,
+  UpdateApiKeyResp
 } from "./types";
 
 /** API密钥管理 */
@@ -58,4 +58,5 @@ export const ApikeyAPI = {
       data: data,
     });
   },
+
 };

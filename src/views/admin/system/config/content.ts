@@ -4,6 +4,26 @@ import { ConfigAPI } from "@/api/config";
 const contentConfig: IContentConfig = {
   pageTitle: "系统配置管理",
   pk: "id",
+  toolbar: [
+    {
+      name: "add",
+      text: "新增",
+      perm: "add",
+      attrs: {
+        icon: "plus",
+        type: "success",
+      },
+    },
+    {
+      name: "delete",
+      text: "删除",
+      perm: "delete",
+      attrs: {
+        icon: "delete",
+        type: "danger",
+      },
+    },
+  ],
   cols: [
     { label: "ID", prop: "id", width: 80, align: "center" },
     { label: "配置键", prop: "config_key", width: 200, align: "center" },
@@ -52,8 +72,8 @@ const contentConfig: IContentConfig = {
       fixed: "right",
       templet: "tool",
       operat: [
-        { name: "edit", text: "编辑", attrs: { type: "primary" } },
-        { name: "delete", text: "删除", attrs: { type: "danger" } },
+        { name: "edit", text: "编辑", perm: "edit", attrs: { type: "primary" } },
+        { name: "delete", text: "删除", perm: "delete", attrs: { type: "danger" } },
       ],
     },
   ],

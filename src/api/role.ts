@@ -1,19 +1,19 @@
 import request from "@/utils/request";
 import type {
-  UpdateRoleReq,
-  EmptyResp,
-  GetRolePermissionsReq,
-  UpdateRoleApiPermissionsReq,
-  PageResp,
-  CreateRoleReq,
-  RoleVO,
-  BatchDeleteRolesResp,
-  GetRoleReq,
-  DeleteRoleReq,
-  RolePermissionsResp,
-  UpdateRoleMenuPermissionsReq,
-  GetRoleListReq,
   BatchDeleteRolesReq,
+  BatchDeleteRolesResp,
+  CreateRoleReq,
+  DeleteRoleReq,
+  EmptyResp,
+  GetRoleListReq,
+  GetRolePermissionsReq,
+  GetRoleReq,
+  PageResp,
+  RolePermissionsResp,
+  RoleVO,
+  UpdateRoleApiPermissionsReq,
+  UpdateRoleMenuPermissionsReq,
+  UpdateRoleReq
 } from "./types";
 
 /** 角色管理 */
@@ -98,4 +98,5 @@ export const RoleAPI = {
       data: data,
     });
   },
+
 };

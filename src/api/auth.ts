@@ -1,23 +1,23 @@
 import request from "@/utils/request";
 import type {
+  EmailLoginReq,
+  EmptyReq,
+  EmptyResp,
+  GetCaptchaCodeReq,
+  GetCaptchaCodeResp,
   GetClientInfoReq,
   GetClientInfoResp,
-  GetCaptchaCodeResp,
-  SendEmailVerifyCodeReq,
-  LoginReq,
-  EmailLoginReq,
-  LoginResp,
-  EmptyResp,
-  OauthLoginReq,
-  ResetPasswordReq,
-  RegisterReq,
-  EmptyReq,
-  GetCaptchaCodeReq,
+  GetOauthAuthorizeUrlReq,
   GetOauthAuthorizeUrlResp,
+  LoginReq,
+  LoginResp,
+  OauthLoginReq,
   PhoneLoginReq,
   RefreshTokenReq,
-  GetOauthAuthorizeUrlReq,
-  SendPhoneVerifyCodeReq,
+  RegisterReq,
+  ResetPasswordReq,
+  SendEmailVerifyCodeReq,
+  SendPhoneVerifyCodeReq
 } from "./types";
 
 /** 登录认证 */
@@ -68,9 +68,7 @@ export const AuthAPI = {
   },
 
   /** 第三方登录授权地址 */
-  getOauthAuthorizeUrl(
-    params?: GetOauthAuthorizeUrlReq
-  ): Promise<IApiResponse<GetOauthAuthorizeUrlResp>> {
+  getOauthAuthorizeUrl(params?: GetOauthAuthorizeUrlReq): Promise<IApiResponse<GetOauthAuthorizeUrlResp>> {
     return request({
       url: `/admin-api/v1/auth/oauth/authorize-url`,
       method: "GET",
@@ -140,4 +138,5 @@ export const AuthAPI = {
       data: data,
     });
   },
+
 };

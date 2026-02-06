@@ -1,21 +1,21 @@
 import request from "@/utils/request";
 import type {
-  EmptyReq,
-  GetUserRolesResp,
-  UpdateUserBindEmailReq,
-  QueryUserLoginHistoryReq,
-  PageResp,
-  GetUserProfileReq,
-  GetUserApisResp,
   DeleteUserBindThirdPartyReq,
+  EmptyReq,
+  EmptyResp,
+  GetUserApisResp,
+  GetUserMenusResp,
+  GetUserProfileReq,
+  GetUserRolesResp,
+  PageResp,
+  QueryUserLoginHistoryReq,
+  UpdateUserAvatarReq,
+  UpdateUserBindEmailReq,
+  UpdateUserBindPhoneReq,
+  UpdateUserBindThirdPartyReq,
   UpdateUserPasswordReq,
   UpdateUserProfileReq,
-  UpdateUserAvatarReq,
-  EmptyResp,
-  GetUserMenusResp,
-  UpdateUserBindThirdPartyReq,
-  UpdateUserBindPhoneReq,
-  UserVO,
+  UserVO
 } from "./types";
 
 /** 个人中心 */
@@ -127,4 +127,5 @@ export const MeAPI = {
       data: data,
     });
   },
+
 };
