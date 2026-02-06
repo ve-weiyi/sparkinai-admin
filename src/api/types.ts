@@ -36,6 +36,16 @@ export interface ApiKeyItem {
   updated_at: number; // 更新时间
 }
 
+// API密钥使用统计数据项
+export interface ApiKeyUsageStatsItem {
+  apikey_id: number; // API密钥ID
+  apikey_name: string; // API密钥名称
+  provider_name: string; // 供应商名称
+  total_calls: number; // 总调用次数
+  quota_usage_rate: number; // 配额使用率
+  last_used_at: number; // 最后使用时间
+}
+
 export interface ApiVO {
   id?: number; // 主键id
   parent_id: number; // 分组id
@@ -145,7 +155,7 @@ export interface CreateApiReq {
 }
 
 // 创建引擎配置请求
-export interface CreateEngineConfigReq {
+export interface CreateEngineReq {
   name: string; // 配置名称
   engine_type: string; // 引擎类型
   model_id: number; // 模型ID
@@ -162,7 +172,7 @@ export interface CreateEngineConfigReq {
 }
 
 // 创建引擎配置响应
-export interface CreateEngineConfigResp {
+export interface CreateEngineResp {
   id: number; // 引擎配置ID
 }
 
@@ -190,23 +200,6 @@ export interface CreateModelReq {
 // 创建模型响应
 export interface CreateModelResp {
   id: number; // 模型ID
-}
-
-// 创建提示词请求
-export interface CreatePromptReq {
-  name: string; // 名称
-  page_name: string; // 页面名称
-  scene: string; // 场景
-  content: string; // 内容
-  sort_order?: number; // 排序顺序
-  version?: number; // 版本号
-  language?: string; // 语言
-  platform?: string; // 平台
-}
-
-// 创建提示词响应
-export interface CreatePromptResp {
-  id: number; // 提示词ID
 }
 
 // 创建供应商请求
@@ -265,12 +258,12 @@ export interface DeleteApiReq {
 }
 
 // 删除引擎配置请求
-export interface DeleteEngineConfigReq {
+export interface DeleteEngineReq {
   id: number; // 引擎配置ID
 }
 
 // 删除引擎配置响应
-export interface DeleteEngineConfigResp {
+export interface DeleteEngineResp {
   success: boolean;
 }
 
@@ -295,16 +288,6 @@ export interface DeleteModelReq {
 
 // 删除模型响应
 export interface DeleteModelResp {
-  success: boolean;
-}
-
-// 删除提示词请求
-export interface DeletePromptReq {
-  id: number; // 提示词ID
-}
-
-// 删除提示词响应
-export interface DeletePromptResp {
   success: boolean;
 }
 
@@ -351,7 +334,7 @@ export interface EmptyResp {
 }
 
 // 引擎配置信息项
-export interface EngineConfigItem {
+export interface EngineItem {
   id: number; // 引擎配置ID
   name: string; // 配置名称
   engine_type: string; // 引擎类型
@@ -369,6 +352,18 @@ export interface EngineConfigItem {
   status: number; // 状态
   created_at: number; // 创建时间
   updated_at: number; // 更新时间
+}
+
+// 引擎使用统计数据项
+export interface EngineUsageStatsItem {
+  engine_id: number; // 引擎ID
+  engine_name: string; // 引擎名称
+  engine_type: string; // 引擎类型
+  total_generations: number; // 总生成次数
+  success_generations: number; // 成功生成次数
+  failed_generations: number; // 失败生成次数
+  success_rate: number; // 成功率
+  avg_generation_time: number; // 平均生成耗时（秒）
 }
 
 // 导出统计报表请求
@@ -408,12 +403,12 @@ export interface GenerationItem {
   error_message: string; // 错误信息
   cost_tokens: number; // 消耗的token数量
   generation_time: number; // 生成耗时（秒）
-  engine_config_id: number; // 使用的引擎配置ID
+  engine_id: number; // 使用的引擎配置ID
   created_at: number; // 创建时间
   updated_at: number; // 更新时间
 }
 
-// 生成日志信息项
+// 生成任务日志信息项
 export interface GenerationLogItem {
   id: number; // 日志ID
   user_id: string; // 用户ID
@@ -460,6 +455,17 @@ export interface GetApiKeyListResp {
   page_size: number;
   total: number;
   list: ApiKeyItem[];
+}
+
+// 获取API密钥使用统计请求
+export interface GetApiKeyUsageStatsReq {
+  start_date?: string; // 开始日期 YYYY-MM-DD
+  end_date?: string; // 结束日期 YYYY-MM-DD
+}
+
+// 获取API密钥使用统计响应
+export interface GetApiKeyUsageStatsResp {
+  list: ApiKeyUsageStatsItem[]; // 统计数据列表
 }
 
 export interface GetApiListReq extends PageQuery {
@@ -516,18 +522,29 @@ export interface GetDashboardStatsResp {
 }
 
 // 引擎配置列表查询请求
-export interface GetEngineConfigListReq extends PageQuery {
+export interface GetEngineListReq extends PageQuery {
   engine_type?: string; // 引擎类型筛选
   status?: number; // 状态筛选
   keyword?: string; // 关键词搜索
 }
 
 // 引擎配置列表响应
-export interface GetEngineConfigListResp {
+export interface GetEngineListResp {
   page: number;
   page_size: number;
   total: number;
-  list: EngineConfigItem[];
+  list: EngineItem[];
+}
+
+// 获取引擎使用统计请求
+export interface GetEngineUsageStatsReq {
+  start_date?: string; // 开始日期 YYYY-MM-DD
+  end_date?: string; // 结束日期 YYYY-MM-DD
+}
+
+// 获取引擎使用统计响应
+export interface GetEngineUsageStatsResp {
+  list: EngineUsageStatsItem[]; // 统计数据列表
 }
 
 // 获取生成记录详情请求
@@ -557,7 +574,7 @@ export interface GetGenerationListResp {
   list: GenerationItem[];
 }
 
-// 生成日志列表查询请求
+// 生成任务日志列表查询请求
 export interface GetGenerationLogListReq extends PageQuery {
   generation_id?: string; // 生成记录ID筛选
   task_id?: number; // 任务ID筛选
@@ -568,7 +585,7 @@ export interface GetGenerationLogListReq extends PageQuery {
   end_date?: string; // 结束日期 YYYY-MM-DD
 }
 
-// 生成日志列表响应
+// 生成任务日志列表响应
 export interface GetGenerationLogListResp {
   page: number;
   page_size: number;
@@ -595,6 +612,15 @@ export interface GetMenuListReq extends PageQuery {
 
 export interface GetMenuReq {
   id: number; // 主键
+}
+
+// 获取模型详情请求
+export interface GetModelDetailReq {
+  id: number; // 模型ID
+}
+
+// 获取模型详情响应
+export interface GetModelDetailResp extends ModelItem {
 }
 
 // 模型列表查询请求
@@ -659,23 +685,6 @@ export interface GetPopularProductsResp {
   list: PopularProductItem[]; // 热门产品列表
 }
 
-// 提示词列表查询请求
-export interface GetPromptListReq extends PageQuery {
-  scene?: string; // 场景筛选
-  language?: string; // 语言筛选
-  platform?: string; // 平台筛选
-  status?: number; // 状态筛选
-  keyword?: string; // 关键词搜索
-}
-
-// 提示词列表响应
-export interface GetPromptListResp {
-  page: number;
-  page_size: number;
-  total: number;
-  list: PromptItem[];
-}
-
 // 供应商列表查询请求
 export interface GetProviderListReq extends PageQuery {
   status?: number; // 状态筛选
@@ -688,6 +697,17 @@ export interface GetProviderListResp {
   page_size: number;
   total: number;
   list: ProviderItem[];
+}
+
+// 获取供应商使用统计请求
+export interface GetProviderUsageStatsReq {
+  start_date?: string; // 开始日期 YYYY-MM-DD
+  end_date?: string; // 结束日期 YYYY-MM-DD
+}
+
+// 获取供应商使用统计响应
+export interface GetProviderUsageStatsResp {
+  list: ProviderUsageStatsItem[]; // 统计数据列表
 }
 
 // 获取公开配置请求（无需认证）
@@ -834,7 +854,7 @@ export interface GetUserListResp {
   list: UserItem[];
 }
 
-// 登录日志列表查询请求
+// 用户登录日志列表查询请求
 export interface GetUserLoginLogListReq extends PageQuery {
   user_id?: string; // 用户ID筛选
   status?: number; // 登录状态筛选
@@ -842,7 +862,7 @@ export interface GetUserLoginLogListReq extends PageQuery {
   end_date?: string; // 结束日期 YYYY-MM-DD
 }
 
-// 登录日志列表响应
+// 用户登录日志列表响应
 export interface GetUserLoginLogListResp {
   page: number;
   page_size: number;
@@ -925,6 +945,7 @@ export interface ModelItem {
   id: number; // 模型ID
   provider_id: number; // 供应商ID
   provider_name: string; // 供应商名称
+  provider_code: string; // 供应商代码
   name: string; // 模型名称
   code: string; // 模型代码
   model_type: string; // 模型类型
@@ -947,6 +968,7 @@ export interface ModelUsageStatsItem {
   failed_count: number; // 失败次数
   success_rate: number; // 成功率
   avg_latency: number; // 平均延迟（毫秒）
+  total_tokens: number; // 总消耗token数
 }
 
 export interface OauthLoginReq {
@@ -1007,22 +1029,6 @@ export interface PopularProductItem {
   last_generated_at: number; // 最后生成时间
 }
 
-// 提示词信息项
-export interface PromptItem {
-  id: number; // 提示词ID
-  name: string; // 名称
-  page_name: string; // 页面名称
-  scene: string; // 场景
-  content: string; // 内容
-  sort_order: number; // 排序顺序
-  version: number; // 版本号
-  language: string; // 语言
-  platform: string; // 平台
-  status: number; // 状态
-  created_at: number; // 创建时间
-  updated_at: number; // 更新时间
-}
-
 // 供应商信息项
 export interface ProviderItem {
   id: number; // 供应商ID
@@ -1036,7 +1042,25 @@ export interface ProviderItem {
   updated_at: number; // 更新时间
 }
 
+// 供应商使用统计数据项
+export interface ProviderUsageStatsItem {
+  provider_id: number; // 供应商ID
+  provider_name: string; // 供应商名称
+  total_calls: number; // 总调用次数
+  success_calls: number; // 成功调用次数
+  failed_calls: number; // 失败调用次数
+  success_rate: number; // 成功率
+  total_tokens: number; // 总消耗token数
+  avg_latency: number; // 平均延迟（毫秒）
+}
+
 export interface QueryUserLoginHistoryReq extends PageQuery {
+}
+
+export interface QuotaInfo {
+  total: number;
+  used: number;
+  remaining: number;
 }
 
 // 用户充值请求
@@ -1083,6 +1107,16 @@ export interface ResetPasswordReq {
   password: string; // 新密码
   confirm_password?: string; // 确认密码
   verify_code: string; // 验证码
+}
+
+// 重置配额请求
+export interface ResetQuotaReq {
+  id: number; // API密钥ID
+}
+
+// 重置配额响应
+export interface ResetQuotaResp {
+  success: boolean;
 }
 
 // 重置用户密码请求
@@ -1133,12 +1167,13 @@ export interface SendPhoneVerifyCodeReq {
 }
 
 // 设置默认引擎配置请求
-export interface SetDefaultEngineConfigReq {
+export interface SetDefaultEngineReq {
   id: number; // 引擎配置ID
+  is_default?: number; // 是否为默认配置
 }
 
 // 设置默认引擎配置响应
-export interface SetDefaultEngineConfigResp {
+export interface SetDefaultEngineResp {
   success: boolean;
 }
 
@@ -1184,6 +1219,19 @@ export interface TestApiKeyResp {
   success: boolean; // 是否测试成功
   message: string; // 测试结果信息
   latency: number; // 响应延迟（毫秒）
+  quota_info?: QuotaInfo; // 配额信息
+}
+
+// 测试供应商连接请求
+export interface TestProviderReq {
+  id: number; // 供应商ID
+}
+
+// 测试供应商连接响应
+export interface TestProviderResp {
+  success: boolean; // 是否连接成功
+  message: string; // 提示信息
+  latency: number; // 响应延迟(ms)
 }
 
 export interface Token {
@@ -1237,7 +1285,7 @@ export interface UpdateApiReq {
 }
 
 // 更新引擎配置请求
-export interface UpdateEngineConfigReq {
+export interface UpdateEngineReq {
   id: number; // 引擎配置ID
   name?: string; // 配置名称
   system_prompt?: string; // 系统提示词
@@ -1253,7 +1301,7 @@ export interface UpdateEngineConfigReq {
 }
 
 // 更新引擎配置响应
-export interface UpdateEngineConfigResp {
+export interface UpdateEngineResp {
   success: boolean;
 }
 
@@ -1279,25 +1327,6 @@ export interface UpdateModelReq {
 
 // 更新模型响应
 export interface UpdateModelResp {
-  success: boolean;
-}
-
-// 更新提示词请求
-export interface UpdatePromptReq {
-  id: number; // 提示词ID
-  name?: string; // 名称
-  page_name?: string; // 页面名称
-  scene?: string; // 场景
-  content?: string; // 内容
-  sort_order?: number; // 排序顺序
-  version?: number; // 版本号
-  language?: string; // 语言
-  platform?: string; // 平台
-  status?: number; // 状态
-}
-
-// 更新提示词响应
-export interface UpdatePromptResp {
   success: boolean;
 }
 
@@ -1459,7 +1488,7 @@ export interface UserItem {
   roles: UserRoleLabel[];
 }
 
-// 登录日志信息项
+// 用户登录日志信息项
 export interface UserLoginLogItem {
   id: number; // 日志ID
   user_id: string; // 用户ID

@@ -6,6 +6,8 @@ import type {
   DeleteProviderResp,
   GetProviderListReq,
   GetProviderListResp,
+  TestProviderReq,
+  TestProviderResp,
   UpdateProviderReq,
   UpdateProviderResp
 } from "./types";
@@ -44,6 +46,15 @@ export const ProviderAPI = {
     return request({
       url: `/admin-api/v1/providers/${data.id}`,
       method: "DELETE",
+      data: data,
+    });
+  },
+
+  /** 测试供应商连接 */
+  testProvider(data?: TestProviderReq): Promise<IApiResponse<TestProviderResp>> {
+    return request({
+      url: `/admin-api/v1/providers/${data.id}/test`,
+      method: "POST",
       data: data,
     });
   },

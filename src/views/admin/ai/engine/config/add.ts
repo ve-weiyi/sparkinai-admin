@@ -7,7 +7,7 @@ const modalConfig: IModalConfig<any> = {
   component: "dialog",
   dialog: { title: "新增配置", width: 700, draggable: true },
   form: { labelWidth: 120 },
-  formAction: (data) => EngineAPI.createEngineConfig(data),
+  formAction: (data) => EngineAPI.createEngine(data),
   formItems: [
     {
       label: "配置名称",

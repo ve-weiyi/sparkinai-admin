@@ -12,7 +12,7 @@ import type {
 
 /** 系统日志管理 */
 export const SyslogAPI = {
-  /** 获取生成日志列表 */
+  /** 获取生成任务日志列表 */
   getGenerationLogList(params?: GetGenerationLogListReq): Promise<IApiResponse<GetGenerationLogListResp>> {
     return request({
       url: `/admin-api/v1/syslogs/generation_log`,
@@ -21,7 +21,7 @@ export const SyslogAPI = {
     });
   },
 
-  /** 获取登录日志列表 */
+  /** 获取用户登录日志列表 */
   getUserLoginLogList(params?: GetUserLoginLogListReq): Promise<IApiResponse<GetUserLoginLogListResp>> {
     return request({
       url: `/admin-api/v1/syslogs/login_log`,

@@ -1,21 +1,21 @@
 import request from "@/utils/request";
 import type {
-  CreateEngineConfigReq,
-  CreateEngineConfigResp,
-  DeleteEngineConfigReq,
-  DeleteEngineConfigResp,
-  GetEngineConfigListReq,
-  GetEngineConfigListResp,
-  SetDefaultEngineConfigReq,
-  SetDefaultEngineConfigResp,
-  UpdateEngineConfigReq,
-  UpdateEngineConfigResp
+  CreateEngineReq,
+  CreateEngineResp,
+  DeleteEngineReq,
+  DeleteEngineResp,
+  GetEngineListReq,
+  GetEngineListResp,
+  SetDefaultEngineReq,
+  SetDefaultEngineResp,
+  UpdateEngineReq,
+  UpdateEngineResp
 } from "./types";
 
 /** 引擎配置管理 */
 export const EngineAPI = {
   /** 获取引擎配置列表 */
-  getEngineConfigList(params?: GetEngineConfigListReq): Promise<IApiResponse<GetEngineConfigListResp>> {
+  getEngineList(params?: GetEngineListReq): Promise<IApiResponse<GetEngineListResp>> {
     return request({
       url: `/admin-api/v1/engines`,
       method: "GET",
@@ -24,7 +24,7 @@ export const EngineAPI = {
   },
 
   /** 创建引擎配置 */
-  createEngineConfig(data?: CreateEngineConfigReq): Promise<IApiResponse<CreateEngineConfigResp>> {
+  createEngine(data?: CreateEngineReq): Promise<IApiResponse<CreateEngineResp>> {
     return request({
       url: `/admin-api/v1/engines`,
       method: "POST",
@@ -33,7 +33,7 @@ export const EngineAPI = {
   },
 
   /** 更新引擎配置 */
-  updateEngineConfig(data?: UpdateEngineConfigReq): Promise<IApiResponse<UpdateEngineConfigResp>> {
+  updateEngine(data?: UpdateEngineReq): Promise<IApiResponse<UpdateEngineResp>> {
     return request({
       url: `/admin-api/v1/engines/${data.id}`,
       method: "PUT",
@@ -42,7 +42,7 @@ export const EngineAPI = {
   },
 
   /** 删除引擎配置 */
-  deleteEngineConfig(data?: DeleteEngineConfigReq): Promise<IApiResponse<DeleteEngineConfigResp>> {
+  deleteEngine(data?: DeleteEngineReq): Promise<IApiResponse<DeleteEngineResp>> {
     return request({
       url: `/admin-api/v1/engines/${data.id}`,
       method: "DELETE",
@@ -51,7 +51,7 @@ export const EngineAPI = {
   },
 
   /** 设置默认引擎配置 */
-  setDefaultEngineConfig(data?: SetDefaultEngineConfigReq): Promise<IApiResponse<SetDefaultEngineConfigResp>> {
+  setDefaultEngine(data?: SetDefaultEngineReq): Promise<IApiResponse<SetDefaultEngineResp>> {
     return request({
       url: `/admin-api/v1/engines/${data.id}/default`,
       method: "PUT",

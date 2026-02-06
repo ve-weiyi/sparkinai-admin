@@ -4,6 +4,8 @@ import type {
   CreateModelResp,
   DeleteModelReq,
   DeleteModelResp,
+  GetModelDetailReq,
+  GetModelDetailResp,
   GetModelListReq,
   GetModelListResp,
   UpdateModelReq,
@@ -27,6 +29,15 @@ export const ModelAPI = {
       url: `/admin-api/v1/models`,
       method: "POST",
       data: data,
+    });
+  },
+
+  /** 获取模型详情 */
+  getModelDetail(params?: GetModelDetailReq): Promise<IApiResponse<GetModelDetailResp>> {
+    return request({
+      url: `/admin-api/v1/models/${params.id}`,
+      method: "GET",
+      params: params,
     });
   },
 

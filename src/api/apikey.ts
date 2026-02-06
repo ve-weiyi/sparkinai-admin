@@ -6,6 +6,8 @@ import type {
   DeleteApiKeyResp,
   GetApiKeyListReq,
   GetApiKeyListResp,
+  ResetQuotaReq,
+  ResetQuotaResp,
   TestApiKeyReq,
   TestApiKeyResp,
   UpdateApiKeyReq,
@@ -50,10 +52,19 @@ export const ApikeyAPI = {
     });
   },
 
+  /** 重置配额 */
+  resetQuota(data?: ResetQuotaReq): Promise<IApiResponse<ResetQuotaResp>> {
+    return request({
+      url: `/admin-api/v1/apikeys/${data.id}/reset-quota`,
+      method: "POST",
+      data: data,
+    });
+  },
+
   /** 测试API密钥 */
   testApiKey(data?: TestApiKeyReq): Promise<IApiResponse<TestApiKeyResp>> {
     return request({
-      url: `/admin-api/v1/apikeys/${data.id}/testing`,
+      url: `/admin-api/v1/apikeys/${data.id}/test`,
       method: "POST",
       data: data,
     });

@@ -52,7 +52,7 @@ const handleOperateClick = async (data: IOperateData) => {
   switch (data.name) {
     case "set_default":
       try {
-        await EngineAPI.setDefaultEngineConfig({ id: data.row.id });
+        await EngineAPI.setDefaultEngine({ id: data.row.id });
         ElMessage.success("设置默认成功");
         contentRef.value?.handleRefresh();
       } catch (error) {

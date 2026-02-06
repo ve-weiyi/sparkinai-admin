@@ -2,14 +2,20 @@ import request from "@/utils/request";
 import type {
   ExportStatsReportReq,
   ExportStatsReportResp,
+  GetApiKeyUsageStatsReq,
+  GetApiKeyUsageStatsResp,
   GetDashboardStatsReq,
   GetDashboardStatsResp,
+  GetEngineUsageStatsReq,
+  GetEngineUsageStatsResp,
   GetGenerationTrendReq,
   GetGenerationTrendResp,
   GetModelUsageStatsReq,
   GetModelUsageStatsResp,
   GetPopularProductsReq,
   GetPopularProductsResp,
+  GetProviderUsageStatsReq,
+  GetProviderUsageStatsResp,
   GetRevenueTrendReq,
   GetRevenueTrendResp,
   GetUserActivityRankingReq,
@@ -20,10 +26,28 @@ import type {
 
 /** 统计分析 */
 export const StatsAPI = {
+  /** 获取API密钥使用统计 */
+  getApiKeyUsageStats(params?: GetApiKeyUsageStatsReq): Promise<IApiResponse<GetApiKeyUsageStatsResp>> {
+    return request({
+      url: `/admin-api/v1/stats/apikeys`,
+      method: "GET",
+      params: params,
+    });
+  },
+
   /** 获取仪表盘统计数据 */
   getDashboardStats(params?: GetDashboardStatsReq): Promise<IApiResponse<GetDashboardStatsResp>> {
     return request({
       url: `/admin-api/v1/stats/dashboard`,
+      method: "GET",
+      params: params,
+    });
+  },
+
+  /** 获取引擎使用统计 */
+  getEngineUsageStats(params?: GetEngineUsageStatsReq): Promise<IApiResponse<GetEngineUsageStatsResp>> {
+    return request({
+      url: `/admin-api/v1/stats/engines`,
       method: "GET",
       params: params,
     });
@@ -50,7 +74,7 @@ export const StatsAPI = {
   /** 获取模型使用统计 */
   getModelUsageStats(params?: GetModelUsageStatsReq): Promise<IApiResponse<GetModelUsageStatsResp>> {
     return request({
-      url: `/admin-api/v1/stats/model-usage`,
+      url: `/admin-api/v1/stats/models`,
       method: "GET",
       params: params,
     });
@@ -60,6 +84,15 @@ export const StatsAPI = {
   getPopularProducts(params?: GetPopularProductsReq): Promise<IApiResponse<GetPopularProductsResp>> {
     return request({
       url: `/admin-api/v1/stats/popular-products`,
+      method: "GET",
+      params: params,
+    });
+  },
+
+  /** 获取供应商使用统计 */
+  getProviderUsageStats(params?: GetProviderUsageStatsReq): Promise<IApiResponse<GetProviderUsageStatsResp>> {
+    return request({
+      url: `/admin-api/v1/stats/providers`,
       method: "GET",
       params: params,
     });
