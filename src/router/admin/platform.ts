@@ -10,7 +10,7 @@ export default {
   meta: {
     title: "平台管理",
     icon: "role",
-    rank: 1,
+    rank: 2,
     alwaysShow: true,
   },
   children: [

@@ -3,7 +3,24 @@ import { ConfigAPI } from "@/api/config";
 
 const contentConfig: IContentConfig = {
   pageTitle: "系统配置管理",
+  permPrefix: "sys:config",
   pk: "id",
+  table: {
+    border: true,
+    highlightCurrentRow: true,
+  },
+  pagination: {
+    background: true,
+    layout: "prev,pager,next,jumper,total,sizes",
+    pageSize: 10,
+    pageSizes: [10, 20, 30, 50],
+  },
+  parseData: (res) => {
+    return {
+      total: res.data.total,
+      list: res.data.list || [],
+    };
+  },
   toolbar: [
     {
       name: "add",
@@ -32,7 +49,6 @@ const contentConfig: IContentConfig = {
       prop: "config_value",
       minWidth: 200,
       align: "center",
-      showOverflowTooltip: true,
     },
     { label: "配置类型", prop: "config_type", width: 100, align: "center" },
     { label: "分类", prop: "category", width: 100, align: "center" },
@@ -41,7 +57,6 @@ const contentConfig: IContentConfig = {
       prop: "description",
       width: 200,
       align: "center",
-      showOverflowTooltip: true,
     },
     {
       label: "公开",
@@ -64,6 +79,8 @@ const contentConfig: IContentConfig = {
       prop: "created_at",
       width: 180,
       align: "center",
+      templet: "date",
+      dateFormat: "YYYY/MM/DD HH:mm:ss",
     },
     {
       label: "操作",

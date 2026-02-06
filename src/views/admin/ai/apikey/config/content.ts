@@ -41,7 +41,6 @@ const contentConfig: IContentConfig = {
       prop: "api_key",
       width: 200,
       align: "center",
-      showOverflowTooltip: true,
     },
     { label: "Profile", prop: "profile", width: 100, align: "center" },
     { label: "优先级", prop: "priority", width: 80, align: "center" },

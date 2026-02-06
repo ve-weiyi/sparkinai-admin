@@ -14,11 +14,12 @@ export function compressImage(rawFile: Blob) {
 /**
  * 使用上传凭证上传文件（前端直传）
  */
-export async function uploadFileWithToken(file: File, fileName?: string): Promise<string> {
+export async function uploadFileWithToken(file: File, fileName?: string, filePath?: string): Promise<string> {
   try {
     // 获取上传凭证
     const { data: tokenData } = await UploadAPI.getUploadToken({
       file_name: fileName || file.name,
+      file_path: filePath,
     });
 
     // 构建上传表单数据
@@ -58,8 +59,8 @@ export async function uploadFileWithToken(file: File, fileName?: string): Promis
 /**
  * 批量上传文件（使用上传凭证）
  */
-export async function multipleUploadFileWithToken(files: File[]): Promise<string[]> {
-  const uploadPromises = files.map((file) => uploadFileWithToken(file));
+export async function multipleUploadFileWithToken(files: File[], filePath?: string): Promise<string[]> {
+  const uploadPromises = files.map((file) => uploadFileWithToken(file, undefined, filePath));
   return Promise.all(uploadPromises);
 }
 

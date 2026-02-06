@@ -408,22 +408,6 @@ export interface GenerationItem {
   updated_at: number; // 更新时间
 }
 
-// 生成任务日志信息项
-export interface GenerationLogItem {
-  id: number; // 日志ID
-  user_id: string; // 用户ID
-  terminal_id: string; // 设备ID
-  generation_id: string; // 生成记录ID
-  task_id: number; // 任务ID
-  task_type: string; // 任务类型
-  step: string; // 执行步骤
-  log_level: string; // 日志级别
-  message: string; // 日志消息
-  detail: string; // 详细信息
-  cost_time: number; // 耗时（毫秒）
-  created_at: number; // 创建时间
-}
-
 // 生成统计趋势数据项
 export interface GenerationTrendItem {
   date: string; // 日期
@@ -572,25 +556,6 @@ export interface GetGenerationListResp {
   page_size: number;
   total: number;
   list: GenerationItem[];
-}
-
-// 生成任务日志列表查询请求
-export interface GetGenerationLogListReq extends PageQuery {
-  generation_id?: string; // 生成记录ID筛选
-  task_id?: number; // 任务ID筛选
-  user_id?: string; // 用户ID筛选
-  task_type?: string; // 任务类型筛选
-  log_level?: string; // 日志级别筛选
-  start_date?: string; // 开始日期 YYYY-MM-DD
-  end_date?: string; // 结束日期 YYYY-MM-DD
-}
-
-// 生成任务日志列表响应
-export interface GetGenerationLogListResp {
-  page: number;
-  page_size: number;
-  total: number;
-  list: GenerationLogItem[];
 }
 
 // 获取生成统计趋势请求
@@ -789,6 +754,7 @@ export interface GetUploadLogListResp {
 // 获取上传凭证请求
 export interface GetUploadTokenReq {
   file_name: string; // 文件名称
+  file_path?: string; // 文件路径
   expire_seconds?: number; // 凭证有效期（秒），默认1小时
 }
 
@@ -1288,6 +1254,8 @@ export interface UpdateApiReq {
 export interface UpdateEngineReq {
   id: number; // 引擎配置ID
   name?: string; // 配置名称
+  engine_type: string; // 引擎类型
+  model_id: number; // 模型ID
   system_prompt?: string; // 系统提示词
   user_prompt_template?: string; // 用户提示词模板
   temperature?: number; // 温度参数

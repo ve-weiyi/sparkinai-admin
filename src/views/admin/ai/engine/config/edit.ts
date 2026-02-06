@@ -19,9 +19,10 @@ const modalConfig: IModalConfig<any> = {
       label: "引擎类型",
       prop: "engine_type",
       type: "select",
-      attrs: { disabled: true },
       options: [
+        { label: "产品分析 (Analysis)", value: "analysis" },
         { label: "文案生成 (Copy)", value: "copy" },
+        { label: "套图生成 (Image-Set)", value: "image_set" },
         { label: "图片生成 (Image)", value: "image" },
       ],
     },

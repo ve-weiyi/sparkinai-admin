@@ -10,16 +10,10 @@ export default {
   meta: {
     title: "系统日志",
     icon: "document",
-    rank: 5,
+    rank: 6,
     alwaysShow: true,
   },
   children: [
-    {
-      path: "generation",
-      component: () => import("@/views/admin/syslog/generation/index.vue"),
-      name: "GenerationLog",
-      meta: { title: "生成日志", keepAlive: true },
-    },
     {
       path: "login",
       component: () => import("@/views/admin/syslog/login/index.vue"),

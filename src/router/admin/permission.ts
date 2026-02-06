@@ -10,7 +10,7 @@ export default {
   meta: {
     title: "权限管理",
     icon: "monitor",
-    rank: 2,
+    rank: 1,
   },
   children: [
     {

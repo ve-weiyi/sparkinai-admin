@@ -3,16 +3,32 @@ import { GenerationAPI } from "@/api/generation.ts";
 
 const contentConfig: IContentConfig = {
   pageTitle: "生成记录管理",
+  permPrefix: "admin:generation",
   pk: "id",
+  table: {
+    border: true,
+    highlightCurrentRow: true,
+  },
+  pagination: {
+    background: true,
+    layout: "prev,pager,next,jumper,total,sizes",
+    pageSize: 10,
+    pageSizes: [10, 20, 30, 50],
+  },
+  parseData: (res) => {
+    return {
+      total: res.data.total,
+      list: res.data.list || [],
+    };
+  },
   cols: [
-    { label: "ID", prop: "id", width: 150, align: "center", showOverflowTooltip: true },
+    { label: "ID", prop: "id", width: 150, align: "center",  },
     { label: "用户手机", prop: "user_phone", width: 120, align: "center" },
     {
       label: "产品名称",
       prop: "product_name",
       width: 150,
       align: "center",
-      showOverflowTooltip: true,
     },
     { label: "生成类型", prop: "generation_type", width: 100, align: "center" },
     {
@@ -30,6 +46,8 @@ const contentConfig: IContentConfig = {
       prop: "created_at",
       width: 180,
       align: "center",
+      templet: "date",
+      dateFormat: "YYYY/MM/DD HH:mm:ss",
     },
     {
       label: "操作",
