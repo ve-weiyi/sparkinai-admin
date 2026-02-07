@@ -5,7 +5,7 @@ import type {
   PageResp,
   UpdateAdminPasswordReq,
   UpdateAdminRolesReq,
-  UpdateAdminStatusReq
+  UpdateAdminStatusReq,
 } from "./types";
 
 /** 账号管理（Admin） */
@@ -45,5 +45,4 @@ export const AdminuserAPI = {
       data: data,
     });
   },
-
 };

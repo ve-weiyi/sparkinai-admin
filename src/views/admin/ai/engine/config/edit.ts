@@ -1,6 +1,8 @@
 import type { IModalConfig } from "@/components/CURD/types";
 import { EngineAPI } from "@/api/engine";
 import { ModelAPI } from "@/api/model";
+import { EnableStatusEnum, YesNoEnum } from "@/enums/common";
+import { AI_ENGINE_TYPE_OPTIONS } from "@/utils/option";
 
 const modalConfig: IModalConfig<any> = {
   permPrefix: "admin:engine",
@@ -19,12 +21,7 @@ const modalConfig: IModalConfig<any> = {
       label: "引擎类型",
       prop: "engine_type",
       type: "select",
-      options: [
-        { label: "产品分析 (Analysis)", value: "analysis" },
-        { label: "文案生成 (Copy)", value: "copy" },
-        { label: "套图生成 (Image-Set)", value: "image_set" },
-        { label: "图片生成 (Image)", value: "image" },
-      ],
+      options: AI_ENGINE_TYPE_OPTIONS,
     },
     {
       label: "模型",
@@ -92,15 +89,15 @@ const modalConfig: IModalConfig<any> = {
       label: "设为默认",
       prop: "is_default",
       type: "switch",
-      attrs: { activeValue: 1, inactiveValue: 0 },
+      attrs: { activeValue: YesNoEnum.YES, inactiveValue: YesNoEnum.NO },
     },
     {
       label: "状态",
       prop: "status",
       type: "switch",
       attrs: {
-        activeValue: 1,
-        inactiveValue: 2,
+        activeValue: EnableStatusEnum.ENABLED,
+        inactiveValue: EnableStatusEnum.DISABLED,
         activeText: "启用",
         inactiveText: "禁用",
       },

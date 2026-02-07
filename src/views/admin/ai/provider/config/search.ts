@@ -1,4 +1,5 @@
 import type { ISearchConfig } from "@/components/CURD/types";
+import { ENABLE_STATUS_OPTIONS } from "@/utils/option";
 
 const searchConfig: ISearchConfig = {
   permPrefix: "admin:provider",
@@ -17,10 +18,7 @@ const searchConfig: ISearchConfig = {
       type: "select",
       label: "状态",
       prop: "status",
-      options: [
-        { label: "启用", value: 1 },
-        { label: "禁用", value: 2 },
-      ],
+      options: ENABLE_STATUS_OPTIONS,
       attrs: { placeholder: "全部", clearable: true, style: { width: "100px" } },
     },
   ],

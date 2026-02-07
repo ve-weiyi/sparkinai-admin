@@ -134,12 +134,8 @@ function handleBeforeUpload(file: UploadRawFile) {
  */
 async function handleHttpRequest(options: UploadRequestOptions) {
   console.log("handleHttpRequest", options.filename);
-  try {
-    const url = await uploadFileWithToken(options.file as File, undefined, props.uploadPath);
-    return { data: { file_url: url } };
-  } catch (error) {
-    throw error;
-  }
+  const url = await uploadFileWithToken(options.file as File, undefined, props.uploadPath);
+  return { data: { file_url: url } };
 }
 
 /**

@@ -1,4 +1,5 @@
 import type { ISearchConfig } from "@/components/CURD/types.ts";
+import { GENERATION_STATUS_OPTIONS, GENERATION_TYPE_OPTIONS } from "@/utils/option";
 
 const searchConfig: ISearchConfig = {
   formItems: [
@@ -18,21 +19,13 @@ const searchConfig: ISearchConfig = {
       type: "select",
       label: "状态",
       prop: "status",
-      options: [
-        { label: "成功", value: 1 },
-        { label: "失败", value: 2 },
-        { label: "进行中", value: 0 },
-      ],
+      options: GENERATION_STATUS_OPTIONS,
     },
     {
       type: "select",
       label: "类型",
       prop: "generation_type",
-      options: [
-        { label: "文案", value: "copy" },
-        { label: "图片", value: "image" },
-        { label: "混合", value: "mixed" },
-      ],
+      options: GENERATION_TYPE_OPTIONS,
     },
     {
       type: "date-picker",

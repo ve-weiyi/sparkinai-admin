@@ -15,8 +15,8 @@
         <UserInfo :user="scope.row.user_info" />
       </template>
       <template #status="{ row }">
-        <el-tag v-if="row.status === 1" type="success">成功</el-tag>
-        <el-tag v-else-if="row.status === 2" type="danger">失败</el-tag>
+        <el-tag v-if="row.status === GenerationStatusEnum.SUCCESS" type="success">成功</el-tag>
+        <el-tag v-else-if="row.status === GenerationStatusEnum.FAILED" type="danger">失败</el-tag>
         <el-tag v-else type="warning">进行中</el-tag>
       </template>
     </PageContent>
@@ -55,6 +55,7 @@ import { GenerationAPI } from "@/api/generation.ts";
 import { ElMessage, ElMessageBox } from "element-plus";
 import type { IOperateData } from "@/components/CURD/types.ts";
 import UserInfo from "@/components/UserInfo/index.vue";
+import { GenerationStatusEnum } from "@/enums/ai";
 
 const { contentRef, handleSearchClick, handleResetClick } = usePage();
 

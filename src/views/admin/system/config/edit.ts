@@ -1,5 +1,6 @@
 import type { IModalConfig } from "@/components/CURD/types";
 import { ConfigAPI } from "@/api/config";
+import { YesNoEnum } from "@/enums/common";
 
 const modalConfig: IModalConfig<any> = {
   permPrefix: "admin:system",
@@ -23,7 +24,12 @@ const modalConfig: IModalConfig<any> = {
       label: "公开",
       prop: "is_public",
       type: "switch",
-      attrs: { activeValue: 1, inactiveValue: 0, activeText: "是", inactiveText: "否" },
+      attrs: {
+        activeValue: YesNoEnum.YES,
+        inactiveValue: YesNoEnum.NO,
+        activeText: "是",
+        inactiveText: "否",
+      },
     },
   ],
 };

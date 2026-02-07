@@ -13,7 +13,7 @@ import type {
   PageResp,
   SyncMenusReq,
   SyncMenusResp,
-  UpdateMenuReq
+  UpdateMenuReq,
 } from "./types";
 
 /** 菜单管理 */
@@ -89,5 +89,4 @@ export const MenuAPI = {
       data: data,
     });
   },
-
 };

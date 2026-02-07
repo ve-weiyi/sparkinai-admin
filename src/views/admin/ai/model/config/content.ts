@@ -1,5 +1,7 @@
 import type { IContentConfig } from "@/components/CURD/types";
 import { ModelAPI } from "@/api/model";
+import { EnableStatusEnum, YesNoEnum } from "@/enums/common";
+import { AI_MODEL_TYPE_SELECT_LIST } from "@/utils/option";
 
 const contentConfig: IContentConfig = {
   pageTitle: "AI模型管理",
@@ -35,7 +37,14 @@ const contentConfig: IContentConfig = {
     { label: "服务商", prop: "provider_name", width: 120, align: "center" },
     { label: "模型名称", prop: "name", width: 150, align: "center" },
     { label: "模型代码", prop: "code", width: 150, align: "center" },
-    { label: "类型", prop: "model_type", width: 100, align: "center" },
+    {
+      label: "类型",
+      prop: "model_type",
+      width: 100,
+      align: "center",
+      templet: "list",
+      selectList: AI_MODEL_TYPE_SELECT_LIST,
+    },
     { label: "最大Token", prop: "max_tokens", width: 100, align: "center" },
     {
       label: "视觉支持",
@@ -43,8 +52,8 @@ const contentConfig: IContentConfig = {
       width: 100,
       align: "center",
       templet: "switch",
-      activeValue: 1,
-      inactiveValue: 0,
+      activeValue: YesNoEnum.YES,
+      inactiveValue: YesNoEnum.NO,
       activeText: "是",
       inactiveText: "否",
     },
@@ -55,8 +64,8 @@ const contentConfig: IContentConfig = {
       width: 80,
       align: "center",
       templet: "switch",
-      activeValue: 1,
-      inactiveValue: 2,
+      activeValue: EnableStatusEnum.ENABLED,
+      inactiveValue: EnableStatusEnum.DISABLED,
       activeText: "启用",
       inactiveText: "禁用",
     },

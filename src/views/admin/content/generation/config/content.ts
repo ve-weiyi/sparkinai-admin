@@ -1,5 +1,6 @@
 import type { IContentConfig } from "@/components/CURD/types.ts";
 import { GenerationAPI } from "@/api/generation.ts";
+import { GENERATION_TYPE_SELECT_LIST } from "@/utils/option";
 
 const contentConfig: IContentConfig = {
   pageTitle: "生成记录管理",
@@ -34,8 +35,9 @@ const contentConfig: IContentConfig = {
     }));
   },
   pk: "id",
+  defaultToolbar: ["refresh", "filter", "imports", "exports", "search"],
   cols: [
-    { label: "ID", prop: "id", width: 150, align: "center",  },
+    { label: "ID", prop: "id", width: 150, align: "center" },
     {
       label: "用户",
       prop: "user_info",
@@ -49,7 +51,14 @@ const contentConfig: IContentConfig = {
       width: 150,
       align: "center",
     },
-    { label: "生成类型", prop: "generation_type", width: 100, align: "center" },
+    {
+      label: "生成类型",
+      prop: "generation_type",
+      width: 100,
+      align: "center",
+      templet: "list",
+      selectList: GENERATION_TYPE_SELECT_LIST,
+    },
     {
       label: "状态",
       prop: "status",
@@ -70,7 +79,7 @@ const contentConfig: IContentConfig = {
     },
     {
       label: "操作",
-      width: 250,
+      width: 220,
       align: "center",
       fixed: "right",
       templet: "tool",

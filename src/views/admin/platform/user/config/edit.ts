@@ -1,5 +1,6 @@
 import type { IModalConfig } from "@/components/CURD/types.ts";
 import { UserAPI } from "@/api/user.ts";
+import { USER_STATUS_OPTIONS } from "@/utils/option";
 
 const modalConfig: IModalConfig = {
   permPrefix: "admin:user",
@@ -51,10 +52,7 @@ const modalConfig: IModalConfig = {
       label: "状态",
       prop: "status",
       type: "select",
-      options: [
-        { label: "正常", value: 1 },
-        { label: "禁用", value: 2 },
-      ],
+      options: USER_STATUS_OPTIONS,
     },
   ],
 };

@@ -1,5 +1,6 @@
 import type { IContentConfig } from "@/components/CURD/types";
 import { ApikeyAPI } from "@/api/apikey";
+import { EnableStatusEnum } from "@/enums/common";
 
 const contentConfig: IContentConfig = {
   pageTitle: "API密钥管理",
@@ -52,8 +53,8 @@ const contentConfig: IContentConfig = {
       width: 80,
       align: "center",
       templet: "switch",
-      activeValue: 1,
-      inactiveValue: 2,
+      activeValue: EnableStatusEnum.ENABLED,
+      inactiveValue: EnableStatusEnum.DISABLED,
       activeText: "启用",
       inactiveText: "禁用",
     },

@@ -36,16 +36,6 @@ export interface ApiKeyItem {
   updated_at: number; // 更新时间
 }
 
-// API密钥使用统计数据项
-export interface ApiKeyUsageStatsItem {
-  apikey_id: number; // API密钥ID
-  apikey_name: string; // API密钥名称
-  provider_name: string; // 供应商名称
-  total_calls: number; // 总调用次数
-  quota_usage_rate: number; // 配额使用率
-  last_used_at: number; // 最后使用时间
-}
-
 export interface ApiVO {
   id?: number; // 主键id
   parent_id: number; // 分组id
@@ -123,8 +113,7 @@ export interface CleanApisResp {
   success_count: number; // 清空成功数量
 }
 
-export interface CleanMenusReq {
-}
+export interface CleanMenusReq {}
 
 export interface CleanMenusResp {
   success_count: number; // 清空成功数量
@@ -337,11 +326,9 @@ export interface EmailLoginReq {
   captcha_code?: string; // 验证码
 }
 
-export interface EmptyReq {
-}
+export interface EmptyReq {}
 
-export interface EmptyResp {
-}
+export interface EmptyResp {}
 
 // 引擎配置信息项
 export interface EngineItem {
@@ -362,31 +349,6 @@ export interface EngineItem {
   status: number; // 状态
   created_at: number; // 创建时间
   updated_at: number; // 更新时间
-}
-
-// 引擎使用统计数据项
-export interface EngineUsageStatsItem {
-  engine_id: number; // 引擎ID
-  engine_name: string; // 引擎名称
-  engine_type: string; // 引擎类型
-  total_generations: number; // 总生成次数
-  success_generations: number; // 成功生成次数
-  failed_generations: number; // 失败生成次数
-  success_rate: number; // 成功率
-  avg_generation_time: number; // 平均生成耗时（秒）
-}
-
-// 导出统计报表请求
-export interface ExportStatsReportReq {
-  report_type: string; // 报表类型
-  start_date: string; // 开始日期 YYYY-MM-DD
-  end_date: string; // 结束日期 YYYY-MM-DD
-  format?: string; // 导出格式
-}
-
-// 导出统计报表响应
-export interface ExportStatsReportResp {
-  file_url: string; // 文件下载URL
 }
 
 export interface FileInfoVO {
@@ -418,16 +380,6 @@ export interface GenerationItem {
   user_info: UserInfoVO; // 用户信息
 }
 
-// 生成统计趋势数据项
-export interface GenerationTrendItem {
-  date: string; // 日期
-  total_generations: number; // 总生成次数
-  copy_generations: number; // 文案生成次数
-  image_generations: number; // 图片生成次数
-  success_generations: number; // 成功生成次数
-  failed_generations: number; // 失败生成次数
-}
-
 export interface GetAdminListReq extends PageQuery {
   username?: string;
   email?: string;
@@ -449,17 +401,6 @@ export interface GetApiKeyListResp {
   page_size: number;
   total: number;
   list: ApiKeyItem[];
-}
-
-// 获取API密钥使用统计请求
-export interface GetApiKeyUsageStatsReq {
-  start_date?: string; // 开始日期 YYYY-MM-DD
-  end_date?: string; // 结束日期 YYYY-MM-DD
-}
-
-// 获取API密钥使用统计响应
-export interface GetApiKeyUsageStatsResp {
-  list: ApiKeyUsageStatsItem[]; // 统计数据列表
 }
 
 export interface GetApiListReq extends PageQuery {
@@ -484,8 +425,7 @@ export interface GetCaptchaCodeResp {
   captcha_code: string; // 验证码
 }
 
-export interface GetClientInfoReq {
-}
+export interface GetClientInfoReq {}
 
 export interface GetClientInfoResp {
   id: number; // 访客唯一ID
@@ -498,21 +438,18 @@ export interface GetClientInfoResp {
 
 // 获取仪表盘统计数据请求
 export interface GetDashboardStatsReq {
+  start_date?: string; // 开始日期 YYYY-MM-DD
+  end_date?: string; // 结束日期 YYYY-MM-DD
 }
 
 // 仪表盘统计数据响应
 export interface GetDashboardStatsResp {
   total_users: number; // 总用户数
-  new_users_today: number; // 今日新增用户
-  active_users_today: number; // 今日活跃用户
+  new_users: number; // 区间新增用户数
   total_generations: number; // 总生成次数
-  generations_today: number; // 今日生成次数
-  success_rate: number; // 成功率
-  total_revenue: number; // 总收入
-  revenue_today: number; // 今日收入
-  total_tokens_consumed: number; // 总消耗token数
-  tokens_consumed_today: number; // 今日消耗token数
-  avg_generation_time: number; // 平均生成耗时（秒）
+  new_generations: number; // 区间新增内容数
+  revenue: number; // 区间收入
+  api_cost: number; // 区间API消耗成本
 }
 
 // 引擎配置列表查询请求
@@ -530,25 +467,13 @@ export interface GetEngineListResp {
   list: EngineItem[];
 }
 
-// 获取引擎使用统计请求
-export interface GetEngineUsageStatsReq {
-  start_date?: string; // 开始日期 YYYY-MM-DD
-  end_date?: string; // 结束日期 YYYY-MM-DD
-}
-
-// 获取引擎使用统计响应
-export interface GetEngineUsageStatsResp {
-  list: EngineUsageStatsItem[]; // 统计数据列表
-}
-
 // 获取生成记录详情请求
 export interface GetGenerationDetailReq {
   id: string; // 生成记录ID
 }
 
 // 生成记录详情响应
-export interface GetGenerationDetailResp extends GenerationItem {
-}
+export interface GetGenerationDetailResp extends GenerationItem {}
 
 // 生成记录列表查询请求
 export interface GetGenerationListReq extends PageQuery {
@@ -568,17 +493,6 @@ export interface GetGenerationListResp {
   list: GenerationItem[];
 }
 
-// 获取生成统计趋势请求
-export interface GetGenerationTrendReq {
-  start_date: string; // 开始日期 YYYY-MM-DD
-  end_date: string; // 结束日期 YYYY-MM-DD
-}
-
-// 获取生成统计趋势响应
-export interface GetGenerationTrendResp {
-  list: GenerationTrendItem[]; // 趋势数据列表
-}
-
 export interface GetMenuListReq extends PageQuery {
   name?: string; // 路由名字
   title?: string; // 菜单标题
@@ -595,8 +509,7 @@ export interface GetModelDetailReq {
 }
 
 // 获取模型详情响应
-export interface GetModelDetailResp extends ModelItem {
-}
+export interface GetModelDetailResp extends ModelItem {}
 
 // 模型列表查询请求
 export interface GetModelListReq extends PageQuery {
@@ -612,17 +525,6 @@ export interface GetModelListResp {
   page_size: number;
   total: number;
   list: ModelItem[];
-}
-
-// 获取模型使用统计请求
-export interface GetModelUsageStatsReq {
-  start_date?: string; // 开始日期 YYYY-MM-DD
-  end_date?: string; // 结束日期 YYYY-MM-DD
-}
-
-// 获取模型使用统计响应
-export interface GetModelUsageStatsResp {
-  list: ModelUsageStatsItem[]; // 统计数据列表
 }
 
 export interface GetOauthAuthorizeUrlReq {
@@ -650,16 +552,6 @@ export interface GetOperationLogListResp {
   list: OperationLogItem[];
 }
 
-// 获取热门产品统计请求
-export interface GetPopularProductsReq {
-  limit?: number; // 返回数量限制
-}
-
-// 获取热门产品统计响应
-export interface GetPopularProductsResp {
-  list: PopularProductItem[]; // 热门产品列表
-}
-
 // 供应商列表查询请求
 export interface GetProviderListReq extends PageQuery {
   status?: number; // 状态筛选
@@ -674,35 +566,12 @@ export interface GetProviderListResp {
   list: ProviderItem[];
 }
 
-// 获取供应商使用统计请求
-export interface GetProviderUsageStatsReq {
-  start_date?: string; // 开始日期 YYYY-MM-DD
-  end_date?: string; // 结束日期 YYYY-MM-DD
-}
-
-// 获取供应商使用统计响应
-export interface GetProviderUsageStatsResp {
-  list: ProviderUsageStatsItem[]; // 统计数据列表
-}
-
 // 获取公开配置请求（无需认证）
-export interface GetPublicConfigReq {
-}
+export interface GetPublicConfigReq {}
 
 // 获取公开配置响应
 export interface GetPublicConfigResp {
   configs: Record<string, any>; // 公开配置键值对
-}
-
-// 获取收入统计趋势请求
-export interface GetRevenueTrendReq {
-  start_date: string; // 开始日期 YYYY-MM-DD
-  end_date: string; // 结束日期 YYYY-MM-DD
-}
-
-// 获取收入统计趋势响应
-export interface GetRevenueTrendResp {
-  list: RevenueTrendItem[]; // 趋势数据列表
 }
 
 // 角色列表查询请求
@@ -742,8 +611,7 @@ export interface GetSystemConfigReq {
 }
 
 // 获取系统配置响应
-export interface GetSystemConfigResp extends SystemConfigItem {
-}
+export interface GetSystemConfigResp extends SystemConfigItem {}
 
 // 文件上传日志列表查询请求
 export interface GetUploadLogListReq extends PageQuery {
@@ -780,16 +648,6 @@ export interface GetUploadTokenResp {
   extra_data: Record<string, any>; // 额外数据
 }
 
-// 获取用户活跃度排行请求
-export interface GetUserActivityRankingReq {
-  limit?: number; // 返回数量限制
-}
-
-// 获取用户活跃度排行响应
-export interface GetUserActivityRankingResp {
-  list: UserActivityRankingItem[]; // 用户活跃度排行列表
-}
-
 export interface GetUserApisResp {
   list: UserApi[];
 }
@@ -802,17 +660,6 @@ export interface GetUserDetailReq {
 // 用户详情响应
 export interface GetUserDetailResp extends UserItem {
   updated_at: number; // 更新时间
-}
-
-// 获取用户增长趋势请求
-export interface GetUserGrowthTrendReq {
-  start_date: string; // 开始日期 YYYY-MM-DD
-  end_date: string; // 结束日期 YYYY-MM-DD
-}
-
-// 获取用户增长趋势响应
-export interface GetUserGrowthTrendResp {
-  list: UserGrowthTrendItem[]; // 趋势数据列表
 }
 
 // 用户列表查询请求
@@ -850,8 +697,7 @@ export interface GetUserMenusResp {
   list: UserMenu[];
 }
 
-export interface GetUserProfileReq {
-}
+export interface GetUserProfileReq {}
 
 export interface GetUserRolesResp {
   list: UserRole[];
@@ -934,19 +780,6 @@ export interface ModelItem {
   updated_at: number; // 更新时间
 }
 
-// 模型使用统计数据项
-export interface ModelUsageStatsItem {
-  model_id: number; // 模型ID
-  model_name: string; // 模型名称
-  provider_name: string; // 供应商名称
-  usage_count: number; // 使用次数
-  success_count: number; // 成功次数
-  failed_count: number; // 失败次数
-  success_rate: number; // 成功率
-  avg_latency: number; // 平均延迟（毫秒）
-  total_tokens: number; // 总消耗token数
-}
-
 export interface OauthLoginReq {
   platform: string; // 平台
   code?: string; // 授权码
@@ -988,8 +821,7 @@ export interface PhoneLoginReq {
   verify_code: string; // 验证码
 }
 
-export interface PingReq {
-}
+export interface PingReq {}
 
 export interface PingResp {
   env: string;
@@ -997,14 +829,6 @@ export interface PingResp {
   version: string;
   runtime: string;
   description: string;
-}
-
-// 热门产品统计数据项
-export interface PopularProductItem {
-  product_name: string; // 产品名称
-  generation_count: number; // 生成次数
-  success_count: number; // 成功次数
-  last_generated_at: number; // 最后生成时间
 }
 
 // 供应商信息项
@@ -1020,20 +844,7 @@ export interface ProviderItem {
   updated_at: number; // 更新时间
 }
 
-// 供应商使用统计数据项
-export interface ProviderUsageStatsItem {
-  provider_id: number; // 供应商ID
-  provider_name: string; // 供应商名称
-  total_calls: number; // 总调用次数
-  success_calls: number; // 成功调用次数
-  failed_calls: number; // 失败调用次数
-  success_rate: number; // 成功率
-  total_tokens: number; // 总消耗token数
-  avg_latency: number; // 平均延迟（毫秒）
-}
-
-export interface QueryUserLoginHistoryReq extends PageQuery {
-}
+export interface QueryUserLoginHistoryReq extends PageQuery {}
 
 export interface QuotaInfo {
   total: number;
@@ -1106,12 +917,6 @@ export interface ResetUserPasswordReq {
 // 重置用户密码响应
 export interface ResetUserPasswordResp {
   success: boolean;
-}
-
-// 收入统计趋势数据项
-export interface RevenueTrendItem {
-  date: string; // 日期
-  revenue: number; // 收入金额
 }
 
 // 角色资源权限响应
@@ -1423,16 +1228,6 @@ export interface UploadLogItem {
   client_info: ClientInfoVO; // 客户端信息
 }
 
-// 用户活跃度排行数据项
-export interface UserActivityRankingItem {
-  user_id: string; // 用户ID
-  phone: string; // 手机号
-  nickname: string; // 昵称
-  generation_count: number; // 生成次数
-  tokens_consumed: number; // 消耗token数
-  last_generated_at: number; // 最后生成时间
-}
-
 export interface UserApi {
   id?: number; // 主键id
   parent_id: number; // 父id
@@ -1442,13 +1237,6 @@ export interface UserApi {
   created_at: number; // 创建时间
   updated_at: number; // 更新时间
   children: UserApi[];
-}
-
-// 用户增长趋势数据项
-export interface UserGrowthTrendItem {
-  date: string; // 日期
-  new_users: number; // 新增用户数
-  active_users: number; // 活跃用户数
 }
 
 export interface UserInfoVO {
@@ -1553,4 +1341,3 @@ export interface UserVO {
   roles: string[];
   perms: string[];
 }
-

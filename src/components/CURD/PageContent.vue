@@ -56,7 +56,7 @@
     >
       <template v-for="col in cols" :key="col.prop">
         <el-table-column v-if="col.show" v-bind="col">
-          <template #default="scope">
+          <template v-if="col.templet" #default="scope">
             <!-- 显示图片 -->
             <template v-if="col.templet === 'image'">
               <template v-if="col.prop">
@@ -181,6 +181,10 @@
             <!-- 自定义 -->
             <template v-else-if="col.templet === 'custom'">
               <slot :name="col.slotName ?? col.prop" :prop="col.prop" v-bind="scope" />
+            </template>
+            <!-- 默认文本 -->
+            <template v-else>
+              <template v-if="col.prop">{{ scope.row[col.prop] }}</template>
             </template>
           </template>
         </el-table-column>

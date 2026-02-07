@@ -11,7 +11,7 @@ import type {
   TestApiKeyReq,
   TestApiKeyResp,
   UpdateApiKeyReq,
-  UpdateApiKeyResp
+  UpdateApiKeyResp,
 } from "./types";
 
 /** API密钥管理 */
@@ -69,5 +69,4 @@ export const ApikeyAPI = {
       data: data,
     });
   },
-
 };

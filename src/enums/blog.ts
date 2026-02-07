@@ -1,10 +1,38 @@
+
 /**
- * 通知发布状态枚举
+ * 是否枚举
+ *
+ * @description
+ * 适用于通用的 Yes/No 或开关型字段
  */
-export enum NoticePublishStatusEnum {
-  DRAFT = 1, // 草稿
-  PUBLISHED = 2, // 已发布
-  REVOKED = 3, // 已撤回
+export enum YesNoEnum {
+  /** 否 */
+  NO = 0,
+  /** 是 */
+  YES = 1,
+}
+
+/**
+ * 启用状态枚举
+ *
+ * @description
+ * 适用于启用/禁用为 1/2 的业务状态
+ */
+export enum EnableStatusEnum {
+  /** 禁用 */
+  DISABLED = 0,
+  /** 启用 */
+  ENABLED = 1,
+}
+
+/**
+ * 登录状态枚举
+ */
+export enum LoginStatusEnum {
+  /** 失败 */
+  FAILED = 0,
+  /** 成功 */
+  SUCCESS = 1,
 }
 
 /**
@@ -80,6 +108,16 @@ export enum ApiStatusEnum {
 export enum ApiTraceableEnum {
   NO = 0, // 不记录
   YES = 1, // 记录
+}
+
+
+/**
+ * 通知发布状态枚举
+ */
+export enum NoticePublishStatusEnum {
+  DRAFT = 1, // 草稿
+  PUBLISHED = 2, // 已发布
+  REVOKED = 3, // 已撤回
 }
 
 /**

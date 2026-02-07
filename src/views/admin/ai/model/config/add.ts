@@ -1,6 +1,8 @@
 import type { IModalConfig } from "@/components/CURD/types";
 import { ModelAPI } from "@/api/model";
 import { ProviderAPI } from "@/api/provider";
+import { EnableStatusEnum, YesNoEnum } from "@/enums/common";
+import { AI_MODEL_TYPE_OPTIONS } from "@/utils/option";
 
 const modalConfig: IModalConfig<any> = {
   permPrefix: "admin:model",
@@ -41,11 +43,7 @@ const modalConfig: IModalConfig<any> = {
       prop: "model_type",
       type: "select",
       rules: [{ required: true, message: "请选择模型类型" }],
-      options: [
-        { label: "文本", value: "text" },
-        { label: "图片", value: "image" },
-        { label: "嵌入", value: "embedding" },
-      ],
+      options: AI_MODEL_TYPE_OPTIONS,
     },
     { label: "最大Token", prop: "max_tokens", type: "input-number", attrs: { min: 0 } },
     {
@@ -53,8 +51,8 @@ const modalConfig: IModalConfig<any> = {
       prop: "support_vision",
       type: "switch",
       attrs: {
-        activeValue: 1,
-        inactiveValue: 0,
+        activeValue: YesNoEnum.YES,
+        inactiveValue: YesNoEnum.NO,
         activeText: "支持",
         inactiveText: "不支持",
       },
@@ -76,8 +74,8 @@ const modalConfig: IModalConfig<any> = {
       prop: "status",
       type: "switch",
       attrs: {
-        activeValue: 1,
-        inactiveValue: 2,
+        activeValue: EnableStatusEnum.ENABLED,
+        inactiveValue: EnableStatusEnum.DISABLED,
         activeText: "启用",
         inactiveText: "禁用",
       },
