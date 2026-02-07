@@ -1,4 +1,5 @@
 import type { ISearchConfig } from "@/components/CURD/types.ts";
+import { USER_STATUS_OPTIONS } from "@/utils/option";
 
 const searchConfig: ISearchConfig = {
   permPrefix: "admin:user",
@@ -18,10 +19,7 @@ const searchConfig: ISearchConfig = {
       label: "状态",
       prop: "status",
       attrs: { placeholder: "请选择", clearable: true, style: { width: "120px" } },
-      options: [
-        { label: "正常", value: 1 },
-        { label: "禁用", value: 2 },
-      ],
+      options: USER_STATUS_OPTIONS,
     },
   ],
 };

@@ -2,17 +2,17 @@ import { defineMock } from "./base";
 
 export default defineMock([
   {
-    url: "/admin-api/v1/dashboard/stats",
+    url: "/admin-api/v1/stats/dashboard",
     method: ["GET"],
     body: {
       code: 200,
       data: {
-        user_count: 1250,
-        provider_count: 8,
-        model_count: 32,
-        apikey_count: 15,
-        total_requests: 45680,
-        total_tokens: 12500000,
+        total_users: 1250,
+        new_users: 48,
+        total_generations: 45680,
+        new_generations: 920,
+        revenue: 1532.6,
+        api_cost: 892.4,
       },
       msg: "success",
     },

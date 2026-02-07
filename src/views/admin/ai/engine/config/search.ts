@@ -1,4 +1,5 @@
 import type { ISearchConfig } from "@/components/CURD/types";
+import { ENGINE_CONFIG_TYPE_OPTIONS } from "@/utils/option";
 
 const searchConfig: ISearchConfig = {
   permPrefix: "admin:engine",
@@ -8,10 +9,7 @@ const searchConfig: ISearchConfig = {
       label: "配置类型",
       prop: "type",
       attrs: { placeholder: "请选择", clearable: true, style: { width: "150px" } },
-      options: [
-        { label: "文案生成", value: "text" },
-        { label: "图片生成", value: "image" },
-      ],
+      options: ENGINE_CONFIG_TYPE_OPTIONS,
     },
   ],
 };

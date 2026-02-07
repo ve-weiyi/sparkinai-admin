@@ -9,7 +9,7 @@ import type {
   ResetUserPasswordReq,
   ResetUserPasswordResp,
   UpdateUserStatusReq,
-  UpdateUserStatusResp
+  UpdateUserStatusResp,
 } from "./types";
 
 /** 用户管理 */
@@ -58,5 +58,4 @@ export const UserAPI = {
       data: data,
     });
   },
-
 };

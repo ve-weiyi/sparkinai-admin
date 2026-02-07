@@ -27,12 +27,19 @@
     <div class="navbar-actions__item">
       <el-dropdown trigger="click">
         <div class="user-profile">
-          <div style="width: 28px; height: 28px; overflow: hidden; border-radius: 50%">
+          <div class="user-profile__avatar-wrapper">
             <img
+              v-if="userStore.userInfo.avatar"
               :src="userStore.userInfo.avatar"
               class="user-profile__avatar"
-              style="width: 100%; height: 100%; object-fit: cover; object-position: center"
             />
+            <div
+              v-else
+              class="user-profile__avatar-fallback"
+              :style="{ backgroundColor: avatarBgColor }"
+            >
+              {{ avatarText }}
+            </div>
           </div>
           <span class="user-profile__name">{{ userStore.userInfo.username }}</span>
         </div>
@@ -104,6 +111,33 @@ const navbarActionsClass = computed(() => {
   }
 
   return "navbar-actions--dark-text";
+});
+
+const avatarText = computed(() => {
+  const nickname = userStore.userInfo.nickname || userStore.userInfo.username || "";
+  const trimmed = nickname.trim();
+  return trimmed ? trimmed.charAt(0).toUpperCase() : "?";
+});
+
+const avatarBgColor = computed(() => {
+  const palette = [
+    "#2563eb",
+    "#7c3aed",
+    "#db2777",
+    "#f97316",
+    "#f59e0b",
+    "#10b981",
+    "#0ea5e9",
+    "#6b7280",
+    "#16a34a",
+    "#dc2626",
+  ];
+  const text = avatarText.value;
+  if (!text || text === "?") {
+    return "#9ca3af";
+  }
+  const code = text.codePointAt(0) ?? 0;
+  return palette[code % palette.length];
 });
 
 /**
@@ -194,6 +228,8 @@ function handleSettingsClick() {
       width: 28px;
       height: 28px;
       border-radius: 50%;
+      object-fit: cover;
+      object-position: center;
     }
 
     &__name {
@@ -201,6 +237,27 @@ function handleSettingsClick() {
       color: var(--el-text-color-regular);
       white-space: nowrap;
       transition: color 0.3s;
+    }
+
+    &__avatar-wrapper {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      width: 28px;
+      height: 28px;
+      overflow: hidden;
+      border-radius: 50%;
+    }
+
+    &__avatar-fallback {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      width: 100%;
+      height: 100%;
+      font-size: 16px;
+      font-weight: 600;
+      color: #fff;
     }
   }
 }

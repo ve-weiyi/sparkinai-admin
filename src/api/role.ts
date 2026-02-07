@@ -13,7 +13,7 @@ import type {
   RoleVO,
   UpdateRoleApiPermissionsReq,
   UpdateRoleMenuPermissionsReq,
-  UpdateRoleReq
+  UpdateRoleReq,
 } from "./types";
 
 /** 角色管理 */
@@ -98,5 +98,4 @@ export const RoleAPI = {
       data: data,
     });
   },
-
 };

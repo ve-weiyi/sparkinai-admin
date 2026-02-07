@@ -1,5 +1,6 @@
 import type { ISearchConfig } from "@/components/CURD/types";
 import { ProviderAPI } from "@/api/provider";
+import { AI_MODEL_TYPE_OPTIONS, ENABLE_STATUS_OPTIONS } from "@/utils/option";
 
 const searchConfig: ISearchConfig = {
   permPrefix: "admin:model",
@@ -25,21 +26,14 @@ const searchConfig: ISearchConfig = {
       type: "select",
       label: "类型",
       prop: "model_type",
-      options: [
-        { label: "文本", value: "text" },
-        { label: "图片", value: "image" },
-        { label: "嵌入", value: "embedding" },
-      ],
+      options: AI_MODEL_TYPE_OPTIONS,
       attrs: { placeholder: "全部", clearable: true, style: { width: "100px" } },
     },
     {
       type: "select",
       label: "状态",
       prop: "status",
-      options: [
-        { label: "启用", value: 1 },
-        { label: "禁用", value: 2 },
-      ],
+      options: ENABLE_STATUS_OPTIONS,
       attrs: { placeholder: "全部", clearable: true, style: { width: "100px" } },
     },
   ],

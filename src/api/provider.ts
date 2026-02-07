@@ -9,7 +9,7 @@ import type {
   TestProviderReq,
   TestProviderResp,
   UpdateProviderReq,
-  UpdateProviderResp
+  UpdateProviderResp,
 } from "./types";
 
 /** AI供应商管理 */
@@ -58,5 +58,4 @@ export const ProviderAPI = {
       data: data,
     });
   },
-
 };

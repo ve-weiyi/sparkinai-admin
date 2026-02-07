@@ -13,13 +13,15 @@ import type {
   GetSystemConfigReq,
   GetSystemConfigResp,
   UpdateSystemConfigReq,
-  UpdateSystemConfigResp
+  UpdateSystemConfigResp,
 } from "./types";
 
 /** 系统配置管理 */
 export const ConfigAPI = {
   /** 获取系统配置列表 */
-  getSystemConfigList(params?: GetSystemConfigListReq): Promise<IApiResponse<GetSystemConfigListResp>> {
+  getSystemConfigList(
+    params?: GetSystemConfigListReq
+  ): Promise<IApiResponse<GetSystemConfigListResp>> {
     return request({
       url: `/admin-api/v1/configs`,
       method: "GET",
@@ -64,7 +66,9 @@ export const ConfigAPI = {
   },
 
   /** 批量更新系统配置 */
-  batchUpdateSystemConfig(data?: BatchUpdateSystemConfigReq): Promise<IApiResponse<BatchUpdateSystemConfigResp>> {
+  batchUpdateSystemConfig(
+    data?: BatchUpdateSystemConfigReq
+  ): Promise<IApiResponse<BatchUpdateSystemConfigResp>> {
     return request({
       url: `/admin-api/v1/configs/batch`,
       method: "PUT",
@@ -80,5 +84,4 @@ export const ConfigAPI = {
       params: params,
     });
   },
-
 };

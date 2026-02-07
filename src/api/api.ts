@@ -12,7 +12,7 @@ import type {
   GetApiReq,
   PageResp,
   SyncApisResp,
-  UpdateApiReq
+  UpdateApiReq,
 } from "./types";
 
 /** 接口管理 */
@@ -88,5 +88,4 @@ export const ApiAPI = {
       data: data,
     });
   },
-
 };

@@ -1,5 +1,7 @@
 import type { IModalConfig } from "@/components/CURD/types";
 import { ConfigAPI } from "@/api/config";
+import { YesNoEnum } from "@/enums/common";
+import { CONFIG_TYPE_OPTIONS } from "@/utils/option";
 
 const modalConfig: IModalConfig<any> = {
   permPrefix: "admin:system",
@@ -27,12 +29,7 @@ const modalConfig: IModalConfig<any> = {
       label: "配置类型",
       prop: "config_type",
       type: "select",
-      options: [
-        { label: "字符串", value: "string" },
-        { label: "JSON", value: "json" },
-        { label: "数字", value: "number" },
-        { label: "布尔值", value: "boolean" },
-      ],
+      options: CONFIG_TYPE_OPTIONS,
       initialValue: "string",
     },
     {
@@ -46,13 +43,23 @@ const modalConfig: IModalConfig<any> = {
       label: "公开",
       prop: "is_public",
       type: "switch",
-      attrs: { activeValue: 1, inactiveValue: 0, activeText: "是", inactiveText: "否" },
+      attrs: {
+        activeValue: YesNoEnum.YES,
+        inactiveValue: YesNoEnum.NO,
+        activeText: "是",
+        inactiveText: "否",
+      },
     },
     {
       label: "加密存储",
       prop: "is_encrypted",
       type: "switch",
-      attrs: { activeValue: 1, inactiveValue: 0, activeText: "是", inactiveText: "否" },
+      attrs: {
+        activeValue: YesNoEnum.YES,
+        inactiveValue: YesNoEnum.NO,
+        activeText: "是",
+        inactiveText: "否",
+      },
     },
   ],
 };

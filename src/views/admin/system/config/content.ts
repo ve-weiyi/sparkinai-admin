@@ -1,5 +1,7 @@
 import type { IContentConfig } from "@/components/CURD/types";
 import { ConfigAPI } from "@/api/config";
+import { YesNoEnum } from "@/enums/common";
+import { CONFIG_TYPE_SELECT_LIST } from "@/utils/option";
 
 const contentConfig: IContentConfig = {
   pageTitle: "系统配置管理",
@@ -39,6 +41,7 @@ const contentConfig: IContentConfig = {
     );
   },
   pk: "id",
+  defaultToolbar: ["refresh", "filter", "imports", "exports", "search"],
   toolbar: [
     {
       name: "add",
@@ -68,7 +71,14 @@ const contentConfig: IContentConfig = {
       minWidth: 200,
       align: "center",
     },
-    { label: "配置类型", prop: "config_type", width: 100, align: "center" },
+    {
+      label: "配置类型",
+      prop: "config_type",
+      width: 100,
+      align: "center",
+      templet: "list",
+      selectList: CONFIG_TYPE_SELECT_LIST,
+    },
     { label: "分类", prop: "category", width: 100, align: "center" },
     {
       label: "描述",
@@ -81,8 +91,11 @@ const contentConfig: IContentConfig = {
       prop: "is_public",
       width: 80,
       align: "center",
-      component: "switch",
-      attrs: { activeValue: 1, inactiveValue: 0 },
+      templet: "switch",
+      activeValue: YesNoEnum.YES,
+      inactiveValue: YesNoEnum.NO,
+      activeText: "是",
+      inactiveText: "否",
     },
     {
       label: "加密",

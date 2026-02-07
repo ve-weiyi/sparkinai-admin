@@ -1,5 +1,6 @@
 import type { IContentConfig } from "@/components/CURD/types";
 import { ProviderAPI } from "@/api/provider";
+import { EnableStatusEnum } from "@/enums/common";
 
 const contentConfig: IContentConfig = {
   pageTitle: "AI服务商管理",
@@ -48,8 +49,8 @@ const contentConfig: IContentConfig = {
       width: 80,
       align: "center",
       templet: "switch",
-      activeValue: 1,
-      inactiveValue: 2,
+      activeValue: EnableStatusEnum.ENABLED,
+      inactiveValue: EnableStatusEnum.DISABLED,
       activeText: "启用",
       inactiveText: "禁用",
     },

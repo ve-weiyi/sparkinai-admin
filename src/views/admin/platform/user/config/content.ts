@@ -1,5 +1,6 @@
 import type { IContentConfig } from "@/components/CURD/types.ts";
 import { UserAPI } from "@/api/user.ts";
+import { EnableStatusEnum } from "@/enums/common";
 
 const contentConfig: IContentConfig = {
   pageTitle: "用户管理",
@@ -41,10 +42,10 @@ const contentConfig: IContentConfig = {
       width: 80,
       align: "center",
       templet: "switch",
-      activeValue: 1,
-      inactiveValue: 0,
-      activeText: "禁用",
-      inactiveText: "正常",
+      activeValue: EnableStatusEnum.ENABLED,
+      inactiveValue: EnableStatusEnum.DISABLED,
+      activeText: "正常",
+      inactiveText: "禁用",
     },
     {
       label: "注册时间",

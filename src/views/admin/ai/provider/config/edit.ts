@@ -1,5 +1,6 @@
 import type { IModalConfig } from "@/components/CURD/types";
 import { ProviderAPI } from "@/api/provider";
+import { EnableStatusEnum } from "@/enums/common";
 
 const modalConfig: IModalConfig<any> = {
   permPrefix: "admin:provider",
@@ -38,8 +39,8 @@ const modalConfig: IModalConfig<any> = {
       prop: "status",
       type: "switch",
       attrs: {
-        activeValue: 1,
-        inactiveValue: 2,
+        activeValue: EnableStatusEnum.ENABLED,
+        inactiveValue: EnableStatusEnum.DISABLED,
         activeText: "启用",
         inactiveText: "禁用",
       },

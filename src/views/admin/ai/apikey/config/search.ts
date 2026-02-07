@@ -1,5 +1,6 @@
 import type { ISearchConfig } from "@/components/CURD/types";
 import { ProviderAPI } from "@/api/provider";
+import { ENABLE_STATUS_OPTIONS } from "@/utils/option";
 
 const searchConfig: ISearchConfig = {
   formItems: [
@@ -29,10 +30,7 @@ const searchConfig: ISearchConfig = {
       label: "状态",
       prop: "status",
       attrs: { placeholder: "全部", clearable: true, style: { width: "100px" } },
-      options: [
-        { label: "启用", value: 1 },
-        { label: "禁用", value: 2 },
-      ],
+      options: ENABLE_STATUS_OPTIONS,
     },
   ],
 };
