@@ -1,6 +1,6 @@
-import type { IContentConfig } from "@/components/CURD/types.ts";
-import { GenerationAPI } from "@/api/generation.ts";
-import { GENERATION_TYPE_SELECT_LIST } from "@/utils/option";
+import type { IContentConfig } from "@/components/CURD/types";
+import { GenerationAPI } from "@/api/generation";
+import { GENERATION_TYPE_SELECT_LIST } from "@/constants/options";
 
 const contentConfig: IContentConfig = {
   pageTitle: "生成记录管理",
@@ -79,14 +79,13 @@ const contentConfig: IContentConfig = {
     },
     {
       label: "操作",
-      width: 220,
+      width: 180,
       align: "center",
       fixed: "right",
       templet: "tool",
       operat: [
         { name: "view_copy", text: "文案", attrs: { type: "primary", plain: true } },
         { name: "view_images", text: "图片", attrs: { type: "success", plain: true } },
-        { name: "regenerate", text: "重试", attrs: { type: "warning", plain: true } },
         { name: "delete", text: "删除", attrs: { type: "danger", plain: true } },
       ],
     },

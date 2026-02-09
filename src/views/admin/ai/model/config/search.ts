@@ -1,6 +1,6 @@
 import type { ISearchConfig } from "@/components/CURD/types";
-import { ProviderAPI } from "@/api/provider";
-import { AI_MODEL_TYPE_OPTIONS, ENABLE_STATUS_OPTIONS } from "@/utils/option";
+import { AI_MODEL_TYPE_OPTIONS, ENABLE_STATUS_OPTIONS } from "@/constants/options";
+import { useProvider } from "@/composables/useProvider";
 
 const searchConfig: ISearchConfig = {
   permPrefix: "admin:model",
@@ -18,8 +18,8 @@ const searchConfig: ISearchConfig = {
       attrs: { placeholder: "全部", clearable: true, style: { width: "150px" } },
       options: [],
       initFn: async (item) => {
-        const res = await ProviderAPI.getProviderList({ page: 1, page_size: 100 });
-        item.options = res.data.list.map((p) => ({ label: p.name, value: p.id }));
+        const { loadProviderOptions } = useProvider();
+        item.options = await loadProviderOptions();
       },
     },
     {

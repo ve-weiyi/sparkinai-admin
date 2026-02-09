@@ -1,5 +1,5 @@
 import type { ISearchConfig } from "@/components/CURD/types";
-import { HTTP_METHODS_WITH_EMPTY } from "@/utils/option";
+import { HTTP_METHODS_WITH_EMPTY } from "@/constants/options";
 
 const searchConfig: ISearchConfig = {
   permPrefix: "sys:api",

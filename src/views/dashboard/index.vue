@@ -25,129 +25,179 @@
       </el-row>
     </el-card>
 
+    <!-- 数据统计 -->
     <el-row :gutter="10" class="mt-5">
-      <el-col :xs="12" :sm="12" :md="8" :lg="6">
-        <el-card shadow="never" class="h-full">
+      <!-- 新增用户 -->
+      <el-col :xs="12" :sm="12" :md="6">
+        <el-card shadow="never" :loading="statsLoading" class="h-full">
           <template #header>
-            <div class="flex justify-between items-center">
-              <span class="text-gray-500">总用户数</span>
-              <el-tag type="danger" size="small">累计</el-tag>
+            <div class="flex-x-between">
+              <span class="text-gray">新增用户</span>
+              <el-tag type="success" size="small">日</el-tag>
             </div>
           </template>
-          <div class="flex justify-between items-center mt-2">
-            <div>
-              <span class="text-2xl font-bold">{{ totals.totalUsers }}</span>
+
+          <div class="flex-x-between mt-2">
+            <div class="flex-y-center">
+              <span class="text-lg">{{ statsData.today_new_users }}</span>
             </div>
-            <el-icon class="text-3xl text-blue-500"><User /></el-icon>
+            <div class="i-svg:user w-8 h-8" />
+          </div>
+
+          <div class="flex-x-between mt-2 text-sm text-gray">
+            <span>总用户数</span>
+            <span>{{ statsData.total_users }}</span>
           </div>
         </el-card>
       </el-col>
 
-      <el-col :xs="12" :sm="12" :md="8" :lg="6">
-        <el-card shadow="never" class="h-full">
+      <!-- 生成次数 -->
+      <el-col :xs="12" :sm="12" :md="6">
+        <el-card shadow="never" :loading="statsLoading" class="h-full">
           <template #header>
-            <div class="flex justify-between items-center">
-              <span class="text-gray-500">新增用户数</span>
-              <el-select v-model="newUsersRange" size="small" class="range-select">
-                <el-option
-                  v-for="option in rangeOptions"
-                  :key="option.value"
-                  :label="option.label"
-                  :value="option.value"
-                />
-              </el-select>
+            <div class="flex-x-between">
+              <span class="text-gray">生成次数</span>
+              <el-tag type="primary" size="small">日</el-tag>
             </div>
           </template>
-          <div class="flex justify-between items-center mt-2">
-            <div>
-              <span class="text-2xl font-bold">{{ newUsers }}</span>
+
+          <div class="flex-x-between mt-2">
+            <div class="flex-y-center">
+              <span class="text-lg">{{ statsData.today_generations }}</span>
             </div>
-            <el-icon class="text-3xl text-green-500"><UserFilled /></el-icon>
+            <div class="i-svg:article w-8 h-8" />
+          </div>
+
+          <div class="flex-x-between mt-2 text-sm text-gray">
+            <span>总生成次数</span>
+            <span>{{ statsData.total_generations }}</span>
           </div>
         </el-card>
       </el-col>
 
-      <el-col :xs="12" :sm="12" :md="8" :lg="6">
-        <el-card shadow="never" class="h-full">
+      <!-- Token消耗 -->
+      <el-col :xs="12" :sm="12" :md="6">
+        <el-card shadow="never" :loading="statsLoading" class="h-full">
           <template #header>
-            <div class="flex justify-between items-center">
-              <span class="text-gray-500">总内容生成数</span>
-              <el-tag type="success" size="small">累计</el-tag>
+            <div class="flex-x-between">
+              <span class="text-gray">Token消耗</span>
+              <el-tag type="warning" size="small">日</el-tag>
             </div>
           </template>
-          <div class="flex justify-between items-center mt-2">
-            <div>
-              <span class="text-2xl font-bold">{{ totals.totalGenerations }}</span>
+
+          <div class="flex-x-between mt-2">
+            <div class="flex-y-center">
+              <span class="text-lg">{{ formatNumber(statsData.today_tokens) }}</span>
             </div>
-            <el-icon class="text-3xl text-teal-500"><DocumentCopy /></el-icon>
+            <div class="i-svg:browser w-8 h-8" />
+          </div>
+
+          <div class="flex-x-between mt-2 text-sm text-gray">
+            <span>总Token消耗</span>
+            <span>{{ formatNumber(statsData.total_tokens) }}</span>
           </div>
         </el-card>
       </el-col>
 
-      <el-col :xs="12" :sm="12" :md="8" :lg="6">
-        <el-card shadow="never" class="h-full">
+      <!-- 今日收入 -->
+      <el-col :xs="12" :sm="12" :md="6">
+        <el-card shadow="never" :loading="statsLoading" class="h-full">
           <template #header>
-            <div class="flex justify-between items-center">
-              <span class="text-gray-500">新增内容数</span>
-              <el-select v-model="newGenerationsRange" size="small" class="range-select">
-                <el-option
-                  v-for="option in rangeOptions"
-                  :key="option.value"
-                  :label="option.label"
-                  :value="option.value"
-                />
-              </el-select>
+            <div class="flex-x-between">
+              <span class="text-gray">今日收入</span>
+              <el-tag type="danger" size="small">日</el-tag>
             </div>
           </template>
-          <div class="flex justify-between items-center mt-2">
-            <div>
-              <span class="text-2xl font-bold">{{ newGenerations }}</span>
+
+          <div class="flex-x-between mt-2">
+            <div class="flex-y-center">
+              <span class="text-lg">¥{{ formatAmount(statsData.today_revenue) }}</span>
             </div>
-            <el-icon class="text-3xl text-orange-500"><DocumentAdd /></el-icon>
+            <div class="i-svg:message w-8 h-8" />
+          </div>
+
+          <div class="flex-x-between mt-2 text-sm text-gray">
+            <span>总收入</span>
+            <span>¥{{ formatAmount(statsData.total_revenue) }}</span>
           </div>
         </el-card>
       </el-col>
+    </el-row>
 
-      <el-col :xs="12" :sm="12" :md="8" :lg="6" class="mt-4">
-        <el-card shadow="never" class="h-full">
+
+    <!-- 趋势图 -->
+    <el-row :gutter="10" class="mt-5">
+      <el-col :xs="24">
+        <el-card>
           <template #header>
-            <div class="flex justify-between items-center">
-              <span class="text-gray-500">收入</span>
-              <el-select v-model="revenueRange" size="small" class="range-select">
-                <el-option
-                  v-for="option in rangeOptions"
-                  :key="option.value"
-                  :label="option.label"
-                  :value="option.value"
-                />
-              </el-select>
+            <div class="flex-x-between">
+              <div class="title">数据趋势✨</div>
+              <el-radio-group v-model="trendDateRange" size="small">
+                <el-radio-button :value="7">近7天</el-radio-button>
+                <el-radio-button :value="30">近30天</el-radio-button>
+              </el-radio-group>
             </div>
           </template>
-          <div class="flex justify-between items-center mt-2">
-            <div>
-              <span class="text-2xl font-bold">{{ formatAmount(revenue) }}</span>
-              <span class="text-xs text-gray-500 ml-1">元</span>
-            </div>
-            <el-icon class="text-3xl text-red-500"><Money /></el-icon>
-          </div>
+          <el-row :gutter="10">
+            <el-col :xs="24" :sm="12">
+              <el-card shadow="never">
+                <template #header>
+                  <div class="chart-title">新增用户趋势</div>
+                </template>
+                <ECharts :options="newUsersChartOptions" height="200px" />
+              </el-card>
+            </el-col>
+            <el-col :xs="24" :sm="12">
+              <el-card shadow="never">
+                <template #header>
+                  <div class="chart-title">活跃用户趋势</div>
+                </template>
+                <ECharts :options="activeUsersChartOptions" height="200px" />
+              </el-card>
+            </el-col>
+            <el-col :xs="24" :sm="12">
+              <el-card shadow="never">
+                <template #header>
+                  <div class="chart-title">生成次数趋势</div>
+                </template>
+                <ECharts :options="generationsChartOptions" height="200px" />
+              </el-card>
+            </el-col>
+            <el-col :xs="24" :sm="12">
+              <el-card shadow="never">
+                <template #header>
+                  <div class="chart-title">收入趋势</div>
+                </template>
+                <ECharts :options="revenueChartOptions" height="200px" />
+              </el-card>
+            </el-col>
+          </el-row>
         </el-card>
       </el-col>
+    </el-row>
 
-      <el-col :xs="12" :sm="12" :md="8" :lg="6" class="mt-4">
-        <el-card shadow="never" class="h-full">
+    <!-- 统计图表 -->
+    <el-row :gutter="10" class="mt-5">
+      <el-col :xs="24" :sm="24" :lg="12">
+        <el-card shadow="never">
+          <div class="title">用户活跃度排行🚀</div>
+          <ECharts :options="userRankingOptions" height="350px" />
+        </el-card>
+      </el-col>
+      <el-col :xs="24" :sm="24" :lg="12">
+        <el-card shadow="never">
           <template #header>
-            <div class="flex justify-between items-center">
-              <span class="text-gray-500">API消耗成本</span>
-              <el-tag type="info" size="small">{{ rangeLabel(revenueRange) }}</el-tag>
+            <div class="flex-x-between">
+              <div class="title">AI使用统计🍉</div>
+              <el-radio-group v-model="aiStatsType" size="small">
+                <el-radio-button value="models">模型</el-radio-button>
+                <el-radio-button value="providers">供应商</el-radio-button>
+                <el-radio-button value="engines">引擎</el-radio-button>
+                <el-radio-button value="apikeys">API密钥</el-radio-button>
+              </el-radio-group>
             </div>
           </template>
-          <div class="flex justify-between items-center mt-2">
-            <div>
-              <span class="text-2xl font-bold">{{ formatAmount(apiCost) }}</span>
-              <span class="text-xs text-gray-500 ml-1">元</span>
-            </div>
-            <el-icon class="text-3xl text-yellow-500"><Coin /></el-icon>
-          </div>
+          <ECharts :options="aiUsageOptions" height="350px" />
         </el-card>
       </el-col>
     </el-row>
@@ -155,34 +205,46 @@
 </template>
 
 <script setup lang="ts">
-import { ref, computed, reactive, watch } from "vue";
+import { ref, computed, onMounted, watch } from "vue";
 import { useUserStore } from "@/store/modules/user";
 import { StatsAPI } from "@/api/stats";
-import type { GetDashboardStatsResp } from "@/api/types";
-
-type RangeKey = "today" | "last_7d" | "last_30d";
-
-const rangeOptions = [
-  { label: "今日", value: "today", offset: 0 },
-  { label: "近7天", value: "last_7d", offset: 6 },
-  { label: "近30天", value: "last_30d", offset: 29 },
-] as const;
+import type {
+  GetDashboardStatsResp,
+  StatsTrendItem,
+  UserActivityRankingItem,
+  ModelUsageStatsItem,
+  ProviderUsageStatsItem,
+  EngineUsageStatsItem,
+  ApiKeyUsageStatsItem,
+  GetAiUsageStatsResp,
+} from "@/api/types";
+import ECharts from "@/components/ECharts/index.vue";
+import type { EChartsOption } from "echarts";
 
 const userStore = useUserStore();
 
-const newUsersRange = ref<RangeKey>("today");
-const newGenerationsRange = ref<RangeKey>("today");
-const revenueRange = ref<RangeKey>("today");
-
-const totals = reactive({
-  totalUsers: 0,
-  totalGenerations: 0,
+const statsLoading = ref(false);
+const statsData = ref<GetDashboardStatsResp>({
+  total_users: 0,
+  today_new_users: 0,
+  total_generations: 0,
+  today_generations: 0,
+  total_tokens: 0,
+  today_tokens: 0,
+  total_revenue: 0,
+  today_revenue: 0,
 });
 
-const newUsers = ref(0);
-const newGenerations = ref(0);
-const revenue = ref(0);
-const apiCost = ref(0);
+const trendData = ref<StatsTrendItem[]>([]);
+const trendDateRange = ref(7);
+const userRankingData = ref<UserActivityRankingItem[]>([]);
+const aiStatsType = ref<"models" | "providers" | "engines" | "apikeys">("models");
+const aiStatsData = ref<GetAiUsageStatsResp>({
+  models: [],
+  providers: [],
+  engines: [],
+  apikeys: [],
+});
 
 const greetings = computed(() => {
   const hour = new Date().getHours();
@@ -222,102 +284,315 @@ const avatarBgColor = computed(() => {
   return palette[code % palette.length];
 });
 
-const formatDate = (date: Date) => {
-  const year = date.getFullYear();
-  const month = String(date.getMonth() + 1).padStart(2, "0");
-  const day = String(date.getDate()).padStart(2, "0");
-  return `${year}-${month}-${day}`;
-};
-
-const buildDateRange = (rangeKey: RangeKey) => {
-  const today = new Date();
-  const match = rangeOptions.find((option) => option.value === rangeKey);
-  const offset = match ? match.offset : 0;
-  const start = new Date(today);
-  start.setDate(today.getDate() - offset);
-  return {
-    start_date: formatDate(start),
-    end_date: formatDate(today),
-  };
-};
-
-const rangeLabel = (rangeKey: RangeKey) => {
-  const match = rangeOptions.find((option) => option.value === rangeKey);
-  return match ? match.label : "今日";
-};
-
 const formatAmount = (value: number) => {
   if (Number.isNaN(value)) return "0.00";
   return value.toFixed(2);
 };
 
-const applyTotals = (data: GetDashboardStatsResp) => {
-  totals.totalUsers = data.total_users;
-  totals.totalGenerations = data.total_generations;
+const formatNumber = (value: number) => {
+  if (Number.isNaN(value)) return "0";
+  return value.toLocaleString();
 };
 
-const fetchNewUsers = async () => {
+const createChartOptions = (
+  name: string,
+  data: number[],
+  color: string,
+  unit: string = ""
+): EChartsOption => {
+  const dates = trendData.value.map((item) => item.date);
+  return {
+    tooltip: {
+      trigger: "axis",
+    },
+    grid: {
+      left: "1%",
+      right: "5%",
+      top: "5%",
+      bottom: "5%",
+      containLabel: true,
+    },
+    xAxis: {
+      type: "category",
+      data: dates,
+    },
+    yAxis: {
+      type: "value",
+      splitLine: {
+        show: true,
+        lineStyle: {
+          type: "dashed",
+        },
+      },
+    },
+    series: [
+      {
+        name,
+        type: "line",
+        data,
+        areaStyle: {
+          color: color + "1A",
+        },
+        smooth: true,
+        itemStyle: {
+          color,
+        },
+        lineStyle: {
+          color,
+        },
+      },
+    ],
+  };
+};
+
+const newUsersChartOptions = computed(() =>
+  createChartOptions(
+    "新增用户",
+    trendData.value.map((item) => item.new_users),
+    "#67C23A",
+    "人"
+  )
+);
+
+const activeUsersChartOptions = computed(() =>
+  createChartOptions(
+    "活跃用户",
+    trendData.value.map((item) => item.active_users),
+    "#409EFF",
+    "人"
+  )
+);
+
+const generationsChartOptions = computed(() =>
+  createChartOptions(
+    "生成次数",
+    trendData.value.map((item) => item.daily_generations),
+    "#E6A23C",
+    "次"
+  )
+);
+
+const revenueChartOptions = computed(() =>
+  createChartOptions(
+    "收入",
+    trendData.value.map((item) => item.daily_revenue),
+    "#F56C6C",
+    "¥"
+  )
+);
+
+const userRankingOptions = computed<EChartsOption>(() => ({
+  tooltip: {
+    trigger: "axis",
+    axisPointer: {
+      type: "shadow",
+    },
+  },
+  color: ["#58AFFF"],
+  grid: {
+    left: "0%",
+    right: "0%",
+    bottom: "0%",
+    top: "10%",
+    containLabel: true,
+  },
+  xAxis: {
+    data: userRankingData.value.map((item) => item.nickname),
+    axisTick: {
+      alignWithLabel: true,
+    },
+  },
+  yAxis: {
+    type: "value",
+    axisTick: {
+      show: false,
+    },
+  },
+  series: [
+    {
+      name: "生成次数",
+      type: "bar",
+      data: userRankingData.value.map((item) => item.generation_count),
+    },
+  ],
+}));
+
+const aiUsageOptions = computed<EChartsOption>(() => {
+  let data: { name: string; value: number }[] = [];
+  let seriesName = "";
+
+  switch (aiStatsType.value) {
+    case "models":
+      data = (aiStatsData.value.models || []).map((item) => ({
+        name: item.model_name,
+        value: item.usage_count,
+      }));
+      seriesName = "模型使用统计";
+      break;
+    case "providers":
+      data = (aiStatsData.value.providers || []).map((item) => ({
+        name: item.provider_name,
+        value: item.total_calls,
+      }));
+      seriesName = "供应商调用统计";
+      break;
+    case "engines":
+      data = (aiStatsData.value.engines || []).map((item) => ({
+        name: item.engine_name,
+        value: item.total_generations,
+      }));
+      seriesName = "引擎生成统计";
+      break;
+    case "apikeys":
+      data = (aiStatsData.value.apikeys || []).map((item) => ({
+        name: item.apikey_name,
+        value: item.total_calls,
+      }));
+      seriesName = "API密钥调用统计";
+      break;
+  }
+
+  return {
+    tooltip: {
+      trigger: "item",
+      formatter: "{a} <br/>{b} : {c} ({d}%)",
+    },
+    legend: {
+      top: "bottom",
+      data: data.map((item) => item.name),
+    },
+    series: [
+      {
+        name: seriesName,
+        type: "pie",
+        radius: [15, 95],
+        center: ["50%", "38%"],
+        roseType: "area",
+        itemStyle: {
+          borderRadius: 6,
+        },
+        label: {
+          show: true,
+        },
+        data,
+      },
+    ],
+  };
+});
+
+const fetchDashboardStats = async () => {
+  statsLoading.value = true;
   try {
-    const res = await StatsAPI.getDashboardStats(buildDateRange(newUsersRange.value));
-    applyTotals(res.data);
-    newUsers.value = res.data.new_users;
+    const res = await StatsAPI.getDashboardStats();
+    if (res.data) {
+      statsData.value = res.data;
+    }
   } catch (error) {
-    console.error(error);
+    console.error("获取仪表盘统计数据失败:", error);
+  } finally {
+    statsLoading.value = false;
   }
 };
 
-const fetchNewGenerations = async () => {
+const fetchDashboardTrend = async () => {
   try {
-    const res = await StatsAPI.getDashboardStats(buildDateRange(newGenerationsRange.value));
-    applyTotals(res.data);
-    newGenerations.value = res.data.new_generations;
+    const today = new Date();
+    const startDate = new Date(today);
+    startDate.setDate(today.getDate() - trendDateRange.value);
+
+    const res = await StatsAPI.getDashboardTrend({
+      start_date: startDate.toISOString().split("T")[0],
+      end_date: today.toISOString().split("T")[0],
+    });
+    if (res.data?.list) {
+      trendData.value = res.data.list;
+    }
   } catch (error) {
-    console.error(error);
+    console.error("获取趋势数据失败:", error);
   }
 };
 
-const fetchRevenue = async () => {
+const fetchUserRanking = async () => {
   try {
-    const res = await StatsAPI.getDashboardStats(buildDateRange(revenueRange.value));
-    applyTotals(res.data);
-    revenue.value = res.data.revenue;
-    apiCost.value = res.data.api_cost;
+    const res = await StatsAPI.getUserActivityRanking({ limit: 10 });
+    if (res.data?.list) {
+      userRankingData.value = res.data.list;
+    }
   } catch (error) {
-    console.error(error);
+    console.error("获取用户排行失败:", error);
   }
 };
 
-watch(
-  newUsersRange,
-  () => {
-    fetchNewUsers();
-  },
-  { immediate: true }
-);
+const fetchAiUsage = async () => {
+  try {
+    const res = await StatsAPI.getAiUsageStats();
+    if (res.data) {
+      aiStatsData.value = res.data;
+    }
+  } catch (error) {
+    console.error("获取AI使用统计失败:", error);
+  }
+};
 
-watch(
-  newGenerationsRange,
-  () => {
-    fetchNewGenerations();
-  },
-  { immediate: true }
-);
+watch(trendDateRange, () => {
+  fetchDashboardTrend();
+});
 
-watch(
-  revenueRange,
-  () => {
-    fetchRevenue();
-  },
-  { immediate: true }
-);
+onMounted(() => {
+  fetchDashboardStats();
+  fetchDashboardTrend();
+  fetchUserRanking();
+  fetchAiUsage();
+});
 </script>
 
-<style scoped>
+<style lang="scss" scoped>
 .dashboard-container {
-  padding: 20px;
+  position: relative;
+  padding: 24px;
+
+  .github-corner {
+    position: absolute;
+    top: 0;
+    right: 0;
+    z-index: 1;
+    border: 0;
+  }
+
+  .version-item {
+    padding: 16px;
+    margin-bottom: 12px;
+    background: var(--el-fill-color-lighter);
+    border-radius: 8px;
+    transition: all 0.2s;
+
+    &.latest-item {
+      background: var(--el-color-primary-light-9);
+      border: 1px solid var(--el-color-primary-light-5);
+    }
+
+    &:hover {
+      transform: translateX(5px);
+    }
+
+    .version-content {
+      margin-bottom: 12px;
+      font-size: 13px;
+      line-height: 1.5;
+      color: var(--el-text-color-secondary);
+    }
+  }
 }
 
-.range-select {
-  width: 110px;
+.title {
+  font-size: 14px;
+  font-weight: 700;
+  color: var(--el-text-color-secondary);
+}
+
+.chart-title {
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--el-text-color-regular);
 }
 </style>

@@ -52,7 +52,7 @@
 
 <script setup lang="ts">
 import type { IOperateData } from "@/components/CURD/types";
-import usePage from "@/components/CURD/usePage.ts";
+import usePage from "@/components/CURD/usePage";
 import addModalConfig from "./config/add";
 import contentConfig from "./config/content";
 import editModalConfig from "./config/edit";
@@ -61,7 +61,7 @@ import PageSearch from "@/components/CURD/PageSearch.vue";
 import PageModal from "@/components/CURD/PageModal.vue";
 import PageContent from "@/components/CURD/PageContent.vue";
 import { ApiAPI } from "@/api/api";
-import { ApiStatusEnum } from "@/enums/blog";
+import { ApiStatusEnum } from "@/enums";
 
 const {
   searchRef,

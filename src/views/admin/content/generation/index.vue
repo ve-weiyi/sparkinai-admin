@@ -46,16 +46,16 @@
 import { ref } from "vue";
 import PageSearch from "@/components/CURD/PageSearch.vue";
 import PageContent from "@/components/CURD/PageContent.vue";
-import searchConfig from "./config/search.ts";
-import contentConfig from "./config/content.ts";
-import addConfig from "./config/add.ts";
-import editConfig from "./config/edit.ts";
-import usePage from "@/components/CURD/usePage.ts";
-import { GenerationAPI } from "@/api/generation.ts";
+import searchConfig from "./config/search";
+import contentConfig from "./config/content";
+import addConfig from "./config/add";
+import editConfig from "./config/edit";
+import usePage from "@/components/CURD/usePage";
+import { GenerationAPI } from "@/api/generation";
 import { ElMessage, ElMessageBox } from "element-plus";
-import type { IOperateData } from "@/components/CURD/types.ts";
+import type { IOperateData } from "@/components/CURD/types";
 import UserInfo from "@/components/UserInfo/index.vue";
-import { GenerationStatusEnum } from "@/enums/ai";
+import { GenerationStatusEnum } from "@/enums";
 
 const { contentRef, handleSearchClick, handleResetClick } = usePage();
 
@@ -77,22 +77,6 @@ const handleOperateClick = async (data: IOperateData) => {
     case "view_images":
       currentImages.value = data.row.image_urls || [];
       imageDialogVisible.value = true;
-      break;
-    case "regenerate":
-      try {
-        await ElMessageBox.confirm("确定要重新生成吗？这将会消耗新的Token。", "提示", {
-          type: "warning",
-        });
-        const res = await GenerationAPI.regenerate({ id: data.row.id });
-        if (res.data.success) {
-          ElMessage.success("已提交重试请求");
-          contentRef.value?.handleRefresh();
-        } else {
-          ElMessage.error("重试请求失败");
-        }
-      } catch (error) {
-        console.error(error);
-      }
       break;
   }
 };

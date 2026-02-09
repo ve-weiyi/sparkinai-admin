@@ -1,6 +1,6 @@
-import type { IContentConfig } from "@/components/CURD/types.ts";
-import { UserAPI } from "@/api/user.ts";
-import { EnableStatusEnum } from "@/enums/common";
+import type { IContentConfig } from "@/components/CURD/types";
+import { UserAPI } from "@/api/user";
+import { EnableStatusEnum } from "@/enums";
 
 const contentConfig: IContentConfig = {
   pageTitle: "用户管理",

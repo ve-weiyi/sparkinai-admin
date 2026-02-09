@@ -22,14 +22,14 @@
 import PageSearch from "@/components/CURD/PageSearch.vue";
 import PageContent from "@/components/CURD/PageContent.vue";
 import PageModal from "@/components/CURD/PageModal.vue";
-import searchConfig from "./config/search.ts";
-import contentConfig from "./config/content.ts";
-import addConfig from "./config/add.ts";
-import editConfig from "./config/edit.ts";
-import usePage from "@/components/CURD/usePage.ts";
-import { UserAPI } from "@/api/user.ts";
+import searchConfig from "./config/search";
+import contentConfig from "./config/content";
+import addConfig from "./config/add";
+import editConfig from "./config/edit";
+import usePage from "@/components/CURD/usePage";
+import { UserAPI } from "@/api/user";
 import { ElMessage, ElMessageBox } from "element-plus";
-import type { IOperateData } from "@/components/CURD/types.ts";
+import type { IOperateData } from "@/components/CURD/types";
 
 const {
   contentRef,

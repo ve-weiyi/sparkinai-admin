@@ -95,7 +95,7 @@
 
 <script setup lang="ts">
 import type { IOperateData } from "@/components/CURD/types";
-import usePage from "@/components/CURD/usePage.ts";
+import usePage from "@/components/CURD/usePage";
 import addModalConfig from "./config/add";
 import contentConfig from "./config/content";
 import editModalConfig from "./config/edit";
@@ -108,7 +108,7 @@ import { RoleAPI } from "@/api/role";
 import { ApiAPI } from "@/api/api";
 import { MenuAPI } from "@/api/menu";
 import type { ApiVO, MenuVO, RoleVO, RolePermissionsResp } from "@/api/types";
-import { RoleStatusEnum } from "@/enums/blog";
+import { RoleStatusEnum } from "@/enums";
 
 const {
   searchRef,

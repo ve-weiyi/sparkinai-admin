@@ -50,7 +50,7 @@ import PageSearch from "@/components/CURD/PageSearch.vue";
 import PageContent from "@/components/CURD/PageContent.vue";
 import UserInfo from "@/components/UserInfo/index.vue";
 import ClientInfo from "@/components/ClientInfo/index.vue";
-import { LoginTypeEnum, NoticeAppEnum } from "@/enums/blog";
+import { LoginTypeEnum, NoticeAppEnum } from "@/enums";
 
 const {
   searchRef,

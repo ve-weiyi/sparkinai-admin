@@ -10,7 +10,7 @@ import type {
   EmptyResp,
   GetApiListReq,
   GetApiReq,
-  PageResp,
+  PageResult,
   SyncApisResp,
   UpdateApiReq,
 } from "./types";
@@ -18,7 +18,7 @@ import type {
 /** 接口管理 */
 export const ApiAPI = {
   /** 获取接口列表 */
-  getApiList(params?: GetApiListReq): Promise<IApiResponse<PageResp>> {
+  getApiList(params?: GetApiListReq): Promise<IApiResponse<PageResult>> {
     return request({
       url: `/admin-api/v1/apis`,
       method: "GET",

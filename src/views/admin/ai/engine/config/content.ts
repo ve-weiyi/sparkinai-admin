@@ -1,8 +1,8 @@
 import type { IContentConfig } from "@/components/CURD/types";
 import { EngineAPI } from "@/api/engine";
-import { UpdateEngineReq } from "@/api/types.ts";
-import { EnableStatusEnum, YesNoEnum } from "@/enums/common";
-import { AI_ENGINE_TYPE_SELECT_LIST } from "@/utils/option";
+import { UpdateEngineReq } from "@/api/types";
+import { EnableStatusEnum, YesNoEnum } from "@/enums";
+import { AI_ENGINE_TYPE_SELECT_LIST } from "@/constants/options";
 
 const contentConfig: IContentConfig = {
   pageTitle: "引擎配置",

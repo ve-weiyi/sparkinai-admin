@@ -8,7 +8,7 @@ import type {
   GetRoleListReq,
   GetRolePermissionsReq,
   GetRoleReq,
-  PageResp,
+  PageResult,
   RolePermissionsResp,
   RoleVO,
   UpdateRoleApiPermissionsReq,
@@ -19,7 +19,7 @@ import type {
 /** 角色管理 */
 export const RoleAPI = {
   /** 获取角色列表 */
-  getRoleList(params?: GetRoleListReq): Promise<IApiResponse<PageResp>> {
+  getRoleList(params?: GetRoleListReq): Promise<IApiResponse<PageResult>> {
     return request({
       url: `/admin-api/v1/roles`,
       method: "GET",

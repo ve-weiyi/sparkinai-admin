@@ -2,7 +2,7 @@ import type { IContentConfig } from "@/components/CURD/types";
 import type { GetAdminListReq } from "@/api/types";
 import { AdminuserAPI } from "@/api/adminuser";
 import { useUserStore } from "@/store";
-import { UserStatusEnum } from "@/enums/blog";
+import { UserStatusEnum } from "@/enums";
 
 const contentConfig: IContentConfig<GetAdminListReq> = {
   pageTitle: "用户管理",

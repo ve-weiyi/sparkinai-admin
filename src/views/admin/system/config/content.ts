@@ -1,7 +1,7 @@
 import type { IContentConfig } from "@/components/CURD/types";
 import { ConfigAPI } from "@/api/config";
-import { YesNoEnum } from "@/enums/common";
-import { CONFIG_TYPE_SELECT_LIST } from "@/utils/option";
+import { YesNoEnum } from "@/enums";
+import { CONFIG_TYPE_SELECT_LIST } from "@/constants/options";
 
 const contentConfig: IContentConfig = {
   pageTitle: "系统配置管理",

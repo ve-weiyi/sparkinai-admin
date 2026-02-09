@@ -7,7 +7,7 @@ import type {
   GetUserMenusResp,
   GetUserProfileReq,
   GetUserRolesResp,
-  PageResp,
+  PageResult,
   QueryUserLoginHistoryReq,
   UpdateUserAvatarReq,
   UpdateUserBindEmailReq,
@@ -93,7 +93,7 @@ export const MeAPI = {
   },
 
   /** 查询用户登录历史 */
-  getUserLoginHistory(params?: QueryUserLoginHistoryReq): Promise<IApiResponse<PageResp>> {
+  getUserLoginHistory(params?: QueryUserLoginHistoryReq): Promise<IApiResponse<PageResult>> {
     return request({
       url: `/admin-api/v1/users/me/login-history`,
       method: "GET",

@@ -1,6 +1,6 @@
 import type { IContentConfig } from "@/components/CURD/types";
 import { ApikeyAPI } from "@/api/apikey";
-import { EnableStatusEnum } from "@/enums/common";
+import { EnableStatusEnum } from "@/enums";
 
 const contentConfig: IContentConfig = {
   pageTitle: "API密钥管理",

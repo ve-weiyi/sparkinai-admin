@@ -8,8 +8,6 @@ import type {
   GetGenerationDetailResp,
   GetGenerationListReq,
   GetGenerationListResp,
-  RegenerateReq,
-  RegenerateResp,
 } from "./types";
 
 /** 生成记录管理 */
@@ -39,15 +37,6 @@ export const GenerationAPI = {
     return request({
       url: `/admin-api/v1/generations/${data.id}`,
       method: "DELETE",
-      data: data,
-    });
-  },
-
-  /** 重新生成 */
-  regenerate(data?: RegenerateReq): Promise<IApiResponse<RegenerateResp>> {
-    return request({
-      url: `/admin-api/v1/generations/${data.id}/regenerate`,
-      method: "POST",
       data: data,
     });
   },

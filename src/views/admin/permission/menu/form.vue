@@ -4,7 +4,7 @@ import type { FormInstance, FormRules } from "element-plus";
 import IconSelect from "@/components/IconSelect/index.vue";
 import type { MenuVO, CreateMenuReq } from "@/api/types";
 import { MenuAPI } from "@/api/menu";
-import { MenuTypeEnum } from "@/enums/blog";
+import { MenuTypeEnum } from "@/enums";
 import { CirclePlusFilled, DeleteFilled, QuestionFilled } from "@element-plus/icons-vue";
 
 interface OptionType {

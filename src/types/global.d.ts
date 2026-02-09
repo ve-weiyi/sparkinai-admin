@@ -13,7 +13,7 @@ declare global {
     sorts?: string[];
   }
 
-  interface PageResp<T> {
+  interface PageResult<T> {
     list: T;
     page: number;
     page_size: number;

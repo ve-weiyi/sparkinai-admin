@@ -1,7 +1,7 @@
 import type { IContentConfig } from "@/components/CURD/types";
 import { ModelAPI } from "@/api/model";
-import { EnableStatusEnum, YesNoEnum } from "@/enums/common";
-import { AI_MODEL_TYPE_SELECT_LIST } from "@/utils/option";
+import { EnableStatusEnum, YesNoEnum } from "@/enums";
+import { AI_MODEL_TYPE_SELECT_LIST } from "@/constants/options";
 
 const contentConfig: IContentConfig = {
   pageTitle: "AI模型管理",

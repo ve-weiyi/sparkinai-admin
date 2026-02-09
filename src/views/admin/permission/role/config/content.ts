@@ -1,7 +1,7 @@
 import type { IContentConfig } from "@/components/CURD/types";
 import type { GetRoleListReq } from "@/api/types";
 import { RoleAPI } from "@/api/role";
-import { RoleDefaultEnum } from "@/enums/blog";
+import { RoleDefaultEnum } from "@/enums";
 
 const contentConfig: IContentConfig<GetRoleListReq> = {
   pageTitle: "角色管理",

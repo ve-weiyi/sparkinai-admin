@@ -1,6 +1,6 @@
-import type { IModalConfig } from "@/components/CURD/types.ts";
-import { UserAPI } from "@/api/user.ts";
-import { USER_STATUS_OPTIONS } from "@/utils/option";
+import type { IModalConfig } from "@/components/CURD/types";
+import { UserAPI } from "@/api/user";
+import { USER_STATUS_OPTIONS } from "@/constants/options";
 
 const modalConfig: IModalConfig = {
   permPrefix: "admin:user",

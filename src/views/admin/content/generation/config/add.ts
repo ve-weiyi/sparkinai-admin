@@ -1,4 +1,4 @@
-import type { IModalConfig } from "@/components/CURD/types.ts";
+import type { IModalConfig } from "@/components/CURD/types";
 
 const modalConfig: IModalConfig<any> = {
   permPrefix: "admin:generation",

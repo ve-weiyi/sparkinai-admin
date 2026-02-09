@@ -1,5 +1,5 @@
 import type { ISearchConfig } from "@/components/CURD/types";
-import { LOGIN_STATUS_OPTIONS } from "@/utils/option";
+import { LOGIN_STATUS_OPTIONS } from "@/constants/options";
 
 const searchConfig: ISearchConfig = {
   formItems: [

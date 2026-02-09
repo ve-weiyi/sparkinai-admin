@@ -32,7 +32,7 @@ import searchConfig from "./config/search";
 import contentConfig from "./config/content";
 import addConfig from "./config/add";
 import editConfig from "./config/edit";
-import usePage from "@/components/CURD/usePage.ts";
+import usePage from "@/components/CURD/usePage";
 import type { IOperateData } from "@/components/CURD/types";
 
 const {

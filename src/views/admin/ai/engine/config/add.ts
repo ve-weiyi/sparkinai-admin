@@ -1,8 +1,8 @@
 import type { IModalConfig } from "@/components/CURD/types";
 import { EngineAPI } from "@/api/engine";
-import { ModelAPI } from "@/api/model";
-import { EnableStatusEnum, YesNoEnum } from "@/enums/common";
-import { AI_ENGINE_TYPE_OPTIONS } from "@/utils/option";
+import { EnableStatusEnum, YesNoEnum } from "@/enums";
+import { AI_ENGINE_TYPE_OPTIONS } from "@/constants/options";
+import { useModel } from "@/composables/useModel";
 
 const modalConfig: IModalConfig<any> = {
   permPrefix: "admin:engine",
@@ -31,11 +31,8 @@ const modalConfig: IModalConfig<any> = {
       rules: [{ required: true, message: "请选择模型" }],
       options: [],
       initFn: async (item) => {
-        const res = await ModelAPI.getModelList({ page: 1, page_size: 100, status: 1 });
-        item.options = res.data.list.map((m) => ({
-          label: `${m.provider_name} - ${m.name}`,
-          value: m.id,
-        }));
+        const { loadModelOptions } = useModel();
+        item.options = await loadModelOptions();
       },
     },
     {

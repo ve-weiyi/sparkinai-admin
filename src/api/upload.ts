@@ -4,14 +4,14 @@ import type {
   GetUploadTokenReq,
   GetUploadTokenResp,
   ListFilesReq,
-  PageResp,
+  PageResult,
   UploadFilesReq,
 } from "./types";
 
 /** 文件上传 */
 export const UploadAPI = {
   /** 获取文件列表 */
-  listFiles(params?: ListFilesReq): Promise<IApiResponse<PageResp>> {
+  listFiles(params?: ListFilesReq): Promise<IApiResponse<PageResult>> {
     return request({
       url: `/admin-api/v1/upload/files`,
       method: "GET",

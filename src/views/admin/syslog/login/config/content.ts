@@ -1,5 +1,5 @@
-import type { IContentConfig } from "@/components/CURD/types.ts";
-import { SyslogAPI } from "@/api/syslog.ts";
+import type { IContentConfig } from "@/components/CURD/types";
+import { SyslogAPI } from "@/api/syslog";
 
 const contentConfig: IContentConfig = {
   pageTitle: "登录日志",

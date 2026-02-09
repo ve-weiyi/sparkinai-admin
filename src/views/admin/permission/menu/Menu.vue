@@ -62,7 +62,7 @@
 <script setup lang="ts">
 import type { IOperateData } from "@/components/CURD/types";
 import type { RouteRecordRaw } from "vue-router";
-import usePage from "@/components/CURD/usePage.ts";
+import usePage from "@/components/CURD/usePage";
 import contentConfig from "./config/content";
 import searchConfig from "./config/search";
 import PageSearch from "@/components/CURD/PageSearch.vue";
@@ -70,9 +70,9 @@ import PageContent from "@/components/CURD/PageContent.vue";
 import MenuForm from "./form.vue";
 import type { CreateMenuReq, UpdateMenuReq } from "@/api/types";
 import { MenuAPI } from "@/api/menu";
-import { ApiStatusEnum, MenuStatusEnum, MenuTypeEnum, MenuVisibleEnum } from "@/enums/blog";
+import { ApiStatusEnum, MenuStatusEnum, MenuTypeEnum, MenuVisibleEnum } from "@/enums";
 import { usePermissionStore } from "@/store";
-import { collectButtonsFromConfigs } from "@/utils/collect-buttons.ts";
+import { collectButtonsFromConfigs } from "@/utils/collect-buttons";
 
 const {
   searchRef,

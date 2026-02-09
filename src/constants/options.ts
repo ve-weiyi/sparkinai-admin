@@ -4,8 +4,8 @@ import {
   EngineConfigTypeEnum,
   GenerationStatusEnum,
   GenerationTypeEnum,
-} from "@/enums/ai";
-import { EnableStatusEnum, LoginStatusEnum } from "@/enums/common";
+} from "@/enums";
+import { EnableStatusEnum, LoginStatusEnum } from "@/enums";
 
 export const HTTP_METHODS = [
   { label: "GET", value: "GET" },

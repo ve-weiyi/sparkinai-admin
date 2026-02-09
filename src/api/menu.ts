@@ -10,7 +10,7 @@ import type {
   GetMenuListReq,
   GetMenuReq,
   MenuVO,
-  PageResp,
+  PageResult,
   SyncMenusReq,
   SyncMenusResp,
   UpdateMenuReq,
@@ -19,7 +19,7 @@ import type {
 /** 菜单管理 */
 export const MenuAPI = {
   /** 获取菜单列表 */
-  getMenuList(params?: GetMenuListReq): Promise<IApiResponse<PageResp>> {
+  getMenuList(params?: GetMenuListReq): Promise<IApiResponse<PageResult>> {
     return request({
       url: `/admin-api/v1/menus`,
       method: "GET",

@@ -1,5 +1,5 @@
 import type { ISearchConfig } from "@/components/CURD/types";
-import { ENABLE_STATUS_OPTIONS } from "@/utils/option";
+import { ENABLE_STATUS_OPTIONS } from "@/constants/options";
 
 const searchConfig: ISearchConfig = {
   permPrefix: "admin:provider",

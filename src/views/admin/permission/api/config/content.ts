@@ -1,7 +1,7 @@
 import type { IContentConfig } from "@/components/CURD/types";
 import type { GetApiListReq } from "@/api/types";
 import { ApiAPI } from "@/api/api";
-import { ApiTraceableEnum } from "@/enums/blog";
+import { ApiTraceableEnum } from "@/enums";
 
 const contentConfig: IContentConfig<GetApiListReq> = {
   pageTitle: "接口管理",

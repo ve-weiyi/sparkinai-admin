@@ -1,7 +1,7 @@
 import type { IModalConfig } from "@/components/CURD/types";
 import { ApikeyAPI } from "@/api/apikey";
-import { ProviderAPI } from "@/api/provider";
-import { EnableStatusEnum } from "@/enums/common";
+import { EnableStatusEnum } from "@/enums";
+import { useProvider } from "@/composables/useProvider";
 
 const modalConfig: IModalConfig<any> = {
   permPrefix: "admin:apikey",
@@ -22,8 +22,8 @@ const modalConfig: IModalConfig<any> = {
       attrs: { disabled: true },
       options: [],
       initFn: async (item) => {
-        const res = await ProviderAPI.getProviderList({ page: 1, page_size: 100 });
-        item.options = res.data.list.map((p) => ({ label: p.name, value: p.id }));
+        const { loadProviderOptions } = useProvider();
+        item.options = await loadProviderOptions();
       },
     },
     {

@@ -1,5 +1,5 @@
-import type { ISearchConfig } from "@/components/CURD/types.ts";
-import { GENERATION_STATUS_OPTIONS, GENERATION_TYPE_OPTIONS } from "@/utils/option";
+import type { ISearchConfig } from "@/components/CURD/types";
+import { GENERATION_STATUS_OPTIONS, GENERATION_TYPE_OPTIONS } from "@/constants/options";
 
 const searchConfig: ISearchConfig = {
   formItems: [

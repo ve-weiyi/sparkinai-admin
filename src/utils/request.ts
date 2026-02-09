@@ -61,6 +61,7 @@ axiosInstance.interceptors.response.use(
 
     const { code, data, msg } = response.data;
 
+    console.log("response", response.data);
     // 接口响应成功，判断业务错误码
     switch (code) {
       case 200:
@@ -72,7 +73,9 @@ axiosInstance.interceptors.response.use(
       case 402:
         return retryWithRefresh(response.config);
       case 403:
-        return Promise.reject(new Error(msg || "无权限访问"));
+        console.log("code", code);
+        ElMessage.error(`权限不足 ${msg}`);
+        return Promise.reject(new Error(msg || "权限不足"));
       default:
         return Promise.reject(new Error(msg || "系统错误"));
     }

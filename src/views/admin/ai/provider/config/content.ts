@@ -1,6 +1,6 @@
 import type { IContentConfig } from "@/components/CURD/types";
 import { ProviderAPI } from "@/api/provider";
-import { EnableStatusEnum } from "@/enums/common";
+import { EnableStatusEnum } from "@/enums";
 
 const contentConfig: IContentConfig = {
   pageTitle: "AI服务商管理",

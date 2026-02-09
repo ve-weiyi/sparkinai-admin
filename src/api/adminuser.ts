@@ -2,7 +2,7 @@ import request from "@/utils/request";
 import type {
   EmptyResp,
   GetAdminListReq,
-  PageResp,
+  PageResult,
   UpdateAdminPasswordReq,
   UpdateAdminRolesReq,
   UpdateAdminStatusReq,
@@ -29,7 +29,7 @@ export const AdminuserAPI = {
   },
 
   /** 查询管理员列表 */
-  getAdminList(data?: GetAdminListReq): Promise<IApiResponse<PageResp>> {
+  getAdminList(data?: GetAdminListReq): Promise<IApiResponse<PageResult>> {
     return request({
       url: `/admin-api/v1/adminusers`,
       method: "POST",

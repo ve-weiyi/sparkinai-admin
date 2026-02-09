@@ -1,5 +1,5 @@
 import type { ISearchConfig } from "@/components/CURD/types";
-import { ENGINE_CONFIG_TYPE_OPTIONS } from "@/utils/option";
+import { ENGINE_CONFIG_TYPE_OPTIONS } from "@/constants/options";
 
 const searchConfig: ISearchConfig = {
   permPrefix: "admin:engine",

@@ -1,6 +1,6 @@
 import type { IModalConfig } from "@/components/CURD/types";
 import { ProviderAPI } from "@/api/provider";
-import { EnableStatusEnum } from "@/enums/common";
+import { EnableStatusEnum } from "@/enums";
 
 const modalConfig: IModalConfig<any> = {
   permPrefix: "admin:provider",

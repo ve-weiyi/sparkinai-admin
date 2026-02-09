@@ -1,5 +1,5 @@
-import type { ISearchConfig } from "@/components/CURD/types.ts";
-import { USER_STATUS_OPTIONS } from "@/utils/option";
+import type { ISearchConfig } from "@/components/CURD/types";
+import { USER_STATUS_OPTIONS } from "@/constants/options";
 
 const searchConfig: ISearchConfig = {
   permPrefix: "admin:user",

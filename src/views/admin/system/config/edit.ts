@@ -1,6 +1,6 @@
 import type { IModalConfig } from "@/components/CURD/types";
 import { ConfigAPI } from "@/api/config";
-import { YesNoEnum } from "@/enums/common";
+import { YesNoEnum } from "@/enums";
 
 const modalConfig: IModalConfig<any> = {
   permPrefix: "admin:system",

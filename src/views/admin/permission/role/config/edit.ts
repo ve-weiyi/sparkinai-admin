@@ -1,7 +1,7 @@
 import type { IModalConfig } from "@/components/CURD/types";
 import type { UpdateRoleReq } from "@/api/types";
 import { RoleAPI } from "@/api/role";
-import { RoleDefaultEnum, RoleStatusEnum } from "@/enums/blog";
+import { RoleDefaultEnum, RoleStatusEnum } from "@/enums";
 
 const modalConfig: IModalConfig<UpdateRoleReq> = {
   permPrefix: "sys:role",
