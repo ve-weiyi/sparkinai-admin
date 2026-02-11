@@ -21,10 +21,10 @@
       @filter-change="handleFilterChange"
     >
       <template #user_info="scope">
-        <UserInfo :user="scope.row.user_info" />
+        <UserInfo :user="scope.row.user_info"/>
       </template>
       <template #client_info="scope">
-        <ClientInfo :client="scope.row.client_info" />
+        <ClientInfo :client="scope.row.client_info"/>
       </template>
       <template #login_type="scope">
         <el-tag v-if="scope.row.login_type === LoginTypeEnum.USERNAME" type="success">
@@ -37,12 +37,16 @@
         </el-tag>
         <el-tag v-else type="primary">{{ scope.row.login_type }}</el-tag>
       </template>
+      <template #status="scope">
+        <el-tag v-if="scope.row.status === 0" type="success">成功</el-tag>
+        <el-tag v-else-if="scope.row.status === 1" type="danger">失败</el-tag>
+      </template>
     </page-content>
   </div>
 </template>
 
 <script setup lang="ts">
-import type { IOperateData } from "@/components/CURD/types";
+import type {IOperateData} from "@/components/CURD/types";
 import usePage from "@/components/CURD/usePage";
 import contentConfig from "./config/content";
 import searchConfig from "./config/search";
@@ -50,7 +54,7 @@ import PageSearch from "@/components/CURD/PageSearch.vue";
 import PageContent from "@/components/CURD/PageContent.vue";
 import UserInfo from "@/components/UserInfo/index.vue";
 import ClientInfo from "@/components/ClientInfo/index.vue";
-import { LoginTypeEnum, NoticeAppEnum } from "@/enums";
+import {LoginTypeEnum, NoticeAppEnum} from "@/enums";
 
 const {
   searchRef,

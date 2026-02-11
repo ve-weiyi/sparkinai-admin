@@ -36,7 +36,7 @@ const contentConfig: IContentConfig = {
     { label: "ID", prop: "id", width: 80, align: "center" },
     { label: "服务商", prop: "provider_name", width: 120, align: "center" },
     { label: "模型名称", prop: "name", width: 150, align: "center" },
-    { label: "模型代码", prop: "code", width: 150, align: "center" },
+    { label: "模型代码", prop: "code", minWidth: 150, align: "center" },
     {
       label: "类型",
       prop: "model_type",
@@ -81,7 +81,7 @@ const contentConfig: IContentConfig = {
       label: "操作",
       align: "center",
       fixed: "right",
-      width: 120,
+      width: 180,
       templet: "tool",
       operat: [
         {

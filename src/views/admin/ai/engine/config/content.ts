@@ -42,11 +42,11 @@ const contentConfig: IContentConfig = {
   cols: [
     { type: "selection", label: "批量操作", width: 50, align: "center" },
     { label: "ID", prop: "id", width: 80, align: "center" },
-    { label: "配置名称", prop: "name", width: 150, align: "center" },
+    { label: "配置名称", prop: "name", minWidth: 150, align: "center" },
     {
       label: "类型",
       prop: "engine_type",
-      width: 120,
+      minWidth: 120,
       align: "center",
       templet: "list",
       selectList: AI_ENGINE_TYPE_SELECT_LIST,
@@ -55,7 +55,7 @@ const contentConfig: IContentConfig = {
     {
       label: "默认",
       prop: "is_default",
-      width: 80,
+      width: 100,
       align: "center",
       templet: "switch",
       activeValue: YesNoEnum.YES,
@@ -67,7 +67,7 @@ const contentConfig: IContentConfig = {
     {
       label: "状态",
       prop: "status",
-      width: 80,
+      width: 100,
       align: "center",
       templet: "switch",
       activeValue: EnableStatusEnum.ENABLED,
@@ -87,7 +87,7 @@ const contentConfig: IContentConfig = {
       label: "操作",
       align: "center",
       fixed: "right",
-      width: 150,
+      width: 180,
       templet: "tool",
       operat: [
         {

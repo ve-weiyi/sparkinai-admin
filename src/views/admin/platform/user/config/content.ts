@@ -28,12 +28,12 @@ const contentConfig: IContentConfig = {
   defaultToolbar: ["refresh", "filter", "search"],
   cols: [
     { type: "selection", label: "批量操作", width: 50, align: "center" },
-    { label: "ID", prop: "id", width: 180, align: "center" },
+    { label: "ID", prop: "id", width: 70, align: "center" },
+    { label: "用户名", prop: "username", width: 100, align: "center" },
     { label: "昵称", prop: "nickname", width: 120, align: "center" },
     { label: "头像", prop: "avatar", width: 80, align: "center", templet: "image" },
-    { label: "邮箱", prop: "email", width: 130, align: "center" },
-    { label: "手机号", prop: "phone", width: 130, align: "center" },
-    { label: "Token余额", prop: "token_balance", width: 100, align: "center" },
+    { label: "邮箱", prop: "email", minWidth: 150, align: "center" },
+    { label: "手机号", prop: "phone", minWidth: 150, align: "center" },
     { label: "免费次数", prop: "free_usage", width: 100, align: "center" },
     { label: "累计生成", prop: "total_generations", width: 100, align: "center" },
     {

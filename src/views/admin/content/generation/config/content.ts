@@ -48,8 +48,15 @@ const contentConfig: IContentConfig = {
     {
       label: "产品名称",
       prop: "product_name",
-      width: 150,
+      minWidth: 150,
       align: "center",
+    },
+    {
+      label: "产品描述",
+      prop: "description",
+      width: 200,
+      align: "center",
+      show: false,
     },
     {
       label: "生成类型",
@@ -58,6 +65,12 @@ const contentConfig: IContentConfig = {
       align: "center",
       templet: "list",
       selectList: GENERATION_TYPE_SELECT_LIST,
+    },
+    {
+      label: "引擎ID",
+      prop: "engine_id",
+      width: 100,
+      align: "center",
     },
     {
       label: "状态",
@@ -69,6 +82,13 @@ const contentConfig: IContentConfig = {
     },
     { label: "Token消耗", prop: "cost_tokens", width: 100, align: "center" },
     { label: "耗时(s)", prop: "generation_time", width: 100, align: "center" },
+    {
+      label: "错误信息",
+      prop: "error_message",
+      width: 200,
+      align: "center",
+      show: false,
+    },
     {
       label: "创建时间",
       prop: "created_at",

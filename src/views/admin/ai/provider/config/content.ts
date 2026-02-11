@@ -40,13 +40,13 @@ const contentConfig: IContentConfig = {
     { label: "ID", prop: "id", width: 80, align: "center" },
     { label: "服务商名称", prop: "name", width: 150, align: "center" },
     { label: "代码", prop: "code", width: 120, align: "center" },
-    { label: "Base URL", prop: "base_url", width: 200, align: "center" },
+    { label: "Base URL", prop: "base_url", minWidth: 200, align: "center" },
     { label: "描述", prop: "description", width: 200, align: "center" },
     { label: "排序", prop: "sort_order", width: 80, align: "center" },
     {
       label: "状态",
       prop: "status",
-      width: 80,
+      width: 100,
       align: "center",
       templet: "switch",
       activeValue: EnableStatusEnum.ENABLED,
@@ -66,7 +66,7 @@ const contentConfig: IContentConfig = {
       label: "操作",
       align: "center",
       fixed: "right",
-      width: 120,
+      width: 180,
       templet: "tool",
       operat: [
         {
