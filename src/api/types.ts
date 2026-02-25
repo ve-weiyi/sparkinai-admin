@@ -9,13 +9,7 @@ export interface AdminInfoDetail {
   last_login_ip: string; // 最后登录IP
   created_at: number; // 创建时间（毫秒时间戳）
   updated_at: number; // 更新时间（毫秒时间戳）
-  roles: AdminRoleLabel[];
-}
-
-export interface AdminRoleLabel {
-  role_id: number;
-  role_key: string;
-  role_label: string;
+  roles: string[];
 }
 
 // API密钥信息项
@@ -714,6 +708,8 @@ export interface GetUserDetailReq {
 
 // 用户详情响应
 export interface GetUserDetailResp extends UserItem {
+  account: UserAccount;
+  last_login: UserLastLogin;
   updated_at: number; // 更新时间
 }
 
@@ -942,7 +938,7 @@ export interface RechargeUserReq {
 // 用户充值响应
 export interface RechargeUserResp {
   success: boolean;
-  token_balance: number; // 充值后余额
+  balance: number; // 充值后余额
 }
 
 export interface RefreshTokenReq {
@@ -1293,6 +1289,15 @@ export interface UploadLogItem {
   client_info: ClientInfoVO; // 客户端信息
 }
 
+export interface UserAccount {
+  balance: string; // 账户余额（元，字符串格式，如"0.00"）
+  credit_limit: string; // 信用额度（元，字符串格式）
+  total_recharge: string; // 累计充值金额（元，字符串格式）
+  total_consume: string; // 累计消费金额（元，字符串格式）
+  coin: number; // 积分
+  status: number; // 账户状态
+}
+
 // 用户活跃度排行数据项
 export interface UserActivityRankingItem {
   user_id: string; // 用户ID
@@ -1331,13 +1336,18 @@ export interface UserItem {
   phone?: string; // 用户手机号
   email?: string; // 用户邮箱
   status: number; // 状态：0-禁用 1-正常 2-冻结
-  free_usage: number; // 免费使用次数
-  token_balance: number; // Token余额
-  total_generations: number; // 累计生成次数
-  last_login_at: number; // 最后登录时间（时间戳）
-  last_login_ip: string; // 最后登录IP
-  created_at: number; // 创建时间（时间戳）
+  register_type: string; // 注册方式
+  ip_address: string; // IP地址
+  ip_source: string; // IP归属地
+  created_at: number;
+  updated_at: number;
   roles: UserRoleLabel[];
+}
+
+export interface UserLastLogin {
+  login_at: number; // 最后登录时间（毫秒时间戳）
+  login_ip_address: string; // 最后登录IP地址
+  login_ip_source: string; // 最后登录IP归属地
 }
 
 // 用户登录日志信息项
@@ -1407,8 +1417,6 @@ export interface UserVO {
   email: string; // 邮箱
   phone: string; // 手机号
   status: number; // 状态：0-正常 1-禁用
-  last_login_at: number; // 最后登录时间（毫秒时间戳）
-  last_login_ip: string; // 最后登录IP
   created_at: number; // 创建时间（毫秒时间戳）
   updated_at: number; // 更新时间（毫秒时间戳）
   third_party: UserThirdPartyInfo[]; // 第三方绑定

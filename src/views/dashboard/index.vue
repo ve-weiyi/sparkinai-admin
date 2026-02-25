@@ -124,7 +124,6 @@
       </el-col>
     </el-row>
 
-
     <!-- 趋势图 -->
     <el-row :gutter="10" class="mt-5">
       <el-col :xs="24">

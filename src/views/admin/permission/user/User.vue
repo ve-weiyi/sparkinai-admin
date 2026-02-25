@@ -22,7 +22,7 @@
     >
       <template #roles="scope">
         <el-tag v-for="(item, index) in scope.row.roles">
-          {{ item.role_key }}
+          {{ item }}
         </el-tag>
       </template>
       <template #register_type="scope">
