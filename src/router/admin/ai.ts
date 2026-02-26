@@ -8,7 +8,8 @@ export default {
   component: Layout,
   redirect: "/ai/provider",
   meta: {
-    title: "AI管理",
+    title: "AI 管理",
+    icon: "menu",
     rank: 3,
   },
   children: [

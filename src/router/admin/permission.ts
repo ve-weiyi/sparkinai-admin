@@ -9,7 +9,7 @@ export default {
   redirect: "/permission/user",
   meta: {
     title: "权限管理",
-    icon: "monitor",
+    icon: "menu",
     rank: 1,
   },
   children: [
@@ -17,7 +17,7 @@ export default {
       path: "user",
       component: () => import("@/views/admin/permission/user/User.vue"),
       name: "PermissionUser",
-      meta: { title: "账号管理", keepAlive: true },
+      meta: { title: "用户管理", keepAlive: true },
     },
     {
       path: "role",

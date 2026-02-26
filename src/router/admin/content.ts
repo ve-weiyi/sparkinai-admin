@@ -7,7 +7,7 @@ const generationRoutes: RouteRecordRaw = {
   name: "Content",
   meta: {
     title: "内容管理",
-    icon: "document",
+    icon: "menu",
     rank: 5,
     alwaysShow: true,
   },

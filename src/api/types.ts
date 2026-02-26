@@ -205,6 +205,19 @@ export interface CreateModelResp {
   id: number; // 模型ID
 }
 
+export interface CreateNotifyTemplateReq {
+  code: string;
+  channel: string;
+  scene: string;
+  title: string;
+  content: string;
+  enabled?: number;
+}
+
+export interface CreateNotifyTemplateResp {
+  id: number;
+}
+
 // 创建供应商请求
 export interface CreateProviderReq {
   name: string; // 供应商名称
@@ -294,6 +307,14 @@ export interface DeleteModelResp {
   success: boolean;
 }
 
+export interface DeleteNotifyTemplateReq {
+  id: number;
+}
+
+export interface DeleteNotifyTemplateResp {
+  success: boolean;
+}
+
 // 删除供应商请求
 export interface DeleteProviderReq {
   id: number; // 供应商ID
@@ -328,6 +349,20 @@ export interface EmailLoginReq {
   password: string; // 密码
   captcha_key?: string; // 验证码key
   captcha_code?: string; // 验证码
+}
+
+export interface EmailMessageItem {
+  id: number;
+  email: string;
+  template_code: string;
+  title: string;
+  content: string;
+  scene: string;
+  status: string;
+  biz_id: string;
+  error_msg: string;
+  created_at: number;
+  updated_at: number;
 }
 
 export interface EmptyReq {}
@@ -491,6 +526,19 @@ export interface GetDashboardTrendResp {
   list: StatsTrendItem[];
 }
 
+export interface GetEmailMessageListReq extends PageQuery {
+  email?: string;
+  scene?: string;
+  status?: string;
+}
+
+export interface GetEmailMessageListResp {
+  page: number;
+  page_size: number;
+  total: number;
+  list: EmailMessageItem[];
+}
+
 // 引擎配置列表查询请求
 export interface GetEngineListReq extends PageQuery {
   engine_type?: string; // 引擎类型筛选
@@ -532,6 +580,18 @@ export interface GetGenerationListResp {
   list: GenerationItem[];
 }
 
+export interface GetInboxMessageListReq extends PageQuery {
+  user_id?: string;
+  only_unread?: number;
+}
+
+export interface GetInboxMessageListResp {
+  page: number;
+  page_size: number;
+  total: number;
+  list: InboxMessageItem[];
+}
+
 export interface GetMenuListReq extends PageQuery {
   name?: string; // 路由名字
   title?: string; // 菜单标题
@@ -564,6 +624,17 @@ export interface GetModelListResp {
   page_size: number;
   total: number;
   list: ModelItem[];
+}
+
+export interface GetNotifyTemplateListReq extends PageQuery {
+  channel?: string;
+}
+
+export interface GetNotifyTemplateListResp {
+  page: number;
+  page_size: number;
+  total: number;
+  list: NotifyTemplateItem[];
 }
 
 export interface GetOauthAuthorizeUrlReq {
@@ -628,6 +699,19 @@ export interface GetRolePermissionsReq {
 // 获取角色详情请求
 export interface GetRoleReq {
   id: number; // 主键ID
+}
+
+export interface GetSmsMessageListReq extends PageQuery {
+  phone?: string;
+  scene?: string;
+  status?: string;
+}
+
+export interface GetSmsMessageListResp {
+  page: number;
+  page_size: number;
+  total: number;
+  list: SmsMessageItem[];
 }
 
 // 系统配置列表查询请求
@@ -762,6 +846,19 @@ export interface IdsReq {
   ids: number[];
 }
 
+export interface InboxMessageItem {
+  id: number;
+  user_id: string;
+  title: string;
+  content: string;
+  type: string;
+  extra: string;
+  is_read: number;
+  read_at: number;
+  created_at: number;
+  updated_at: number;
+}
+
 export interface ListFilesReq {
   file_path?: string; // 文件路径
   limit?: number; // 限制
@@ -842,6 +939,18 @@ export interface ModelUsageStatsItem {
   success_rate: number; // 成功率
   avg_latency: number; // 平均延迟（毫秒）
   total_tokens: number; // 总消耗token数
+}
+
+export interface NotifyTemplateItem {
+  id: number;
+  code: string;
+  channel: string;
+  scene: string;
+  title: string;
+  content: string;
+  enabled: number;
+  created_at: number;
+  updated_at: number;
 }
 
 export interface OauthLoginReq {
@@ -1025,6 +1134,20 @@ export interface SetDefaultEngineResp {
   success: boolean;
 }
 
+export interface SmsMessageItem {
+  id: number;
+  phone: string;
+  template_code: string;
+  title: string;
+  content: string;
+  scene: string;
+  status: string;
+  biz_id: string;
+  error_msg: string;
+  created_at: number;
+  updated_at: number;
+}
+
 export interface StatsTrendItem {
   date: string; // 日期
   new_users: number; // 新增用户数
@@ -1173,6 +1296,20 @@ export interface UpdateModelReq {
 
 // 更新模型响应
 export interface UpdateModelResp {
+  success: boolean;
+}
+
+export interface UpdateNotifyTemplateReq {
+  id: number;
+  code: string;
+  channel: string;
+  scene: string;
+  title: string;
+  content: string;
+  enabled: number;
+}
+
+export interface UpdateNotifyTemplateResp {
   success: boolean;
 }
 
