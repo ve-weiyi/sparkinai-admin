@@ -344,11 +344,10 @@ export interface DeleteUserBindThirdPartyReq {
   platform: string; // 平台
 }
 
-export interface EmailLoginReq {
+// 邮箱验证码登录（仅登录，未注册报错）
+export interface EmailCodeLoginReq {
   email: string; // 邮箱
-  password: string; // 密码
-  captcha_key?: string; // 验证码key
-  captcha_code?: string; // 验证码
+  verify_code: string; // 验证码
 }
 
 export interface EmailMessageItem {
@@ -637,6 +636,7 @@ export interface GetNotifyTemplateListResp {
   list: NotifyTemplateItem[];
 }
 
+// 第三方登录授权URL
 export interface GetOauthAuthorizeUrlReq {
   platform: string; // 平台
   state?: string; // 状态
@@ -864,15 +864,7 @@ export interface ListFilesReq {
   limit?: number; // 限制
 }
 
-// 用户登录请求（账号-密码/验证码登录）
-export interface LoginReq {
-  username: string;
-  password: string;
-  captcha_key?: string; // 验证码key
-  captcha_code?: string; // 验证码
-}
-
-// 用户登录响应
+// 登录响应
 export interface LoginResp {
   user_id: string; // 用户id
   user_type: string; // 用户类型：user-普通用户 admin-管理员
@@ -953,9 +945,11 @@ export interface NotifyTemplateItem {
   updated_at: number;
 }
 
+// 第三方登录（前端携带code）
 export interface OauthLoginReq {
   platform: string; // 平台
-  code?: string; // 授权码
+  code: string; // 授权码
+  state?: string; // 状态
 }
 
 // 操作日志信息项
@@ -989,7 +983,16 @@ export interface PageResult {
   list: any;
 }
 
-export interface PhoneLoginReq {
+// 密码登录（账号/手机号/邮箱 + 密码）
+export interface PasswordLoginReq {
+  account: string; // 账号/手机号/邮箱
+  password: string; // 密码
+  captcha_key?: string; // 图形验证码key
+  captcha_code?: string; // 图形验证码
+}
+
+// 手机验证码登录（自动注册）
+export interface PhoneCodeLoginReq {
   phone: string; // 手机号
   verify_code: string; // 验证码
 }
@@ -1056,12 +1059,14 @@ export interface RefreshTokenReq {
   refresh_token: string; // 刷新令牌
 }
 
-// 用户注册请求
+// 邮箱注册（必须设密码）
 export interface RegisterReq {
   email: string; // 邮箱
   password: string; // 密码
   confirm_password?: string; // 确认密码
   verify_code: string; // 验证码
+  username?: string; // 用户名
+  nickname?: string; // 昵称
 }
 
 // 重置密码请求（免登录，通过验证码）
@@ -1113,14 +1118,16 @@ export interface RoleVO {
   updated_at: number; // 更新时间（时间戳）
 }
 
-export interface SendEmailVerifyCodeReq {
+// 发送邮箱验证码
+export interface SendEmailCodeReq {
   email: string; // 邮箱
-  type: string; // 类型 register,reset_password,bind_email,bind_phone
+  type: string; // login / register / reset_password / bind_email
 }
 
-export interface SendPhoneVerifyCodeReq {
+// 发送手机验证码
+export interface SendPhoneCodeReq {
   phone: string; // 手机号
-  type: string; // 类型 register,reset_password,bind_email,bind_phone
+  type: string; // login / reset_password / bind_phone
 }
 
 // 设置默认引擎配置请求

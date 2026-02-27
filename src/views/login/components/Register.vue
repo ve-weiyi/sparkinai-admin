@@ -179,7 +179,7 @@ function startCountdown() {
 }
 
 function sendCaptchaCode() {
-  AuthAPI.sendEmailVerifyCode({
+  AuthAPI.sendEmailCode({
     email: model.value.email,
     type: "register",
   })

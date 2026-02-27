@@ -403,7 +403,7 @@ function handleSendMobileCode() {
     return;
   }
   // 发送短信验证码
-  AuthAPI.sendPhoneVerifyCode({
+  AuthAPI.sendPhoneCode({
     phone: mobileUpdateForm.phone,
     type: "bind_phone",
   }).then(() => {
@@ -437,7 +437,7 @@ function handleSendEmailCode() {
   }
 
   // 发送邮箱验证码
-  AuthAPI.sendEmailVerifyCode({
+  AuthAPI.sendEmailCode({
     email: emailUpdateForm.email,
     type: "bind_email",
   }).then(() => {

@@ -46,7 +46,7 @@ import { LocationQuery, RouteLocationRaw, useRoute } from "vue-router";
 import router from "@/router";
 import { useUserStore } from "@/store";
 import { AuthAPI } from "@/api/auth";
-import { PhoneLoginReq } from "@/api/types";
+import { PhoneCodeLoginReq } from "@/api/types";
 import { Iphone } from "@element-plus/icons-vue";
 
 const userStore = useUserStore();
@@ -55,7 +55,7 @@ const route = useRoute();
 const loginFormRef = ref<FormInstance>();
 const loading = ref(false); // 按钮 loading 状态
 
-const loginFormData = ref<PhoneLoginReq>(<PhoneLoginReq>{});
+const loginFormData = ref<PhoneCodeLoginReq>(<PhoneCodeLoginReq>{});
 
 const loginRules = computed(() => {
   return {
@@ -91,7 +91,7 @@ async function handleLoginSubmit() {
     loading.value = true;
 
     // 2. 执行登录
-    await userStore.phoneLogin(loginFormData.value);
+    await userStore.phoneCodeLogin(loginFormData.value);
 
     // 3. 获取用户信息
     await userStore.getUserInfo();
@@ -159,7 +159,7 @@ function startCountdown() {
 }
 
 function sendCaptchaCode() {
-  AuthAPI.sendPhoneVerifyCode({
+  AuthAPI.sendPhoneCode({
     phone: loginFormData.value.phone,
     type: "login",
   })

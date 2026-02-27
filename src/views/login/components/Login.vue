@@ -8,9 +8,9 @@
       size="large"
       :validate-on-rule-change="false"
     >
-      <!-- 邮箱 -->
-      <el-form-item prop="email">
-        <el-input v-model.trim="loginFormData.email" placeholder="邮箱">
+      <!-- 账号 -->
+      <el-form-item prop="account">
+        <el-input v-model.trim="loginFormData.account" placeholder="用户名/手机号/邮箱">
           <template #prefix>
             <el-dropdown>
               <div>
@@ -23,9 +23,9 @@
                   <el-dropdown-item
                     v-for="(item, index) in loginCredentials"
                     :key="index"
-                    @click="setLoginCredentials(item.email, item.password)"
+                    @click="setLoginCredentials(item.account, item.password)"
                   >
-                    {{ item.nickname }}: {{ item.email }}/{{ item.password }}
+                    {{ item.nickname }}: {{ item.account }}/{{ item.password }}
                   </el-dropdown-item>
                 </el-dropdown-menu>
               </template>
@@ -144,7 +144,7 @@ import type { FormInstance, FormRules } from "element-plus";
 import router from "@/router";
 import { useUserStore } from "@/store";
 import { AuthStorage } from "@/utils/auth";
-import { EmailLoginReq } from "@/api/types";
+import { PasswordLoginReq } from "@/api/types";
 import { AuthAPI } from "@/api/auth";
 import { Message } from "@element-plus/icons-vue";
 
@@ -164,8 +164,8 @@ watch(rememberMe, (val) => {
   AuthStorage.setRememberMe(val);
 });
 
-const loginFormData = ref<EmailLoginReq>({
-  email: "root@qq.com",
+const loginFormData = ref<PasswordLoginReq>({
+  account: "root@qq.com",
   password: "123456",
   captcha_key: "",
   captcha_code: "",
@@ -175,16 +175,16 @@ onMounted(() => getCaptcha());
 
 const loginRules = computed<FormRules>(() => {
   return {
-    email: [
+    account: [
       {
         required: true,
         trigger: "blur",
-        message: "请输入邮箱",
+        message: "请输入用户名/手机号/邮箱",
       },
       {
-        type: "email",
+        min: 6,
         trigger: "blur",
-        message: "请输入正确的邮箱格式",
+        message: "请输入正确的用户名/手机号/邮箱格式",
       },
     ],
     password: [
@@ -244,7 +244,7 @@ async function handleLoginSubmit() {
 
     // 2. 执行登录
     try {
-      await userStore.emailLogin(loginFormData.value);
+      await userStore.passwordLogin(loginFormData.value);
       // 登录成功，跳转到目标页面
       const redirectPath = (route.query.redirect as string) || "/";
       await router.push(decodeURIComponent(redirectPath));
@@ -282,25 +282,25 @@ const operates = [
 
 const loginCredentials = [
   {
-    email: "root@qq.com",
+    account: "root@qq.com",
     password: "123456",
     nickname: "超级管理员",
   },
   {
-    email: "admin@qq.com",
+    account: "admin@qq.com",
     password: "123456",
     nickname: "系统管理员",
   },
   {
-    email: "test@qq.com",
+    account: "test@qq.com",
     password: "123456",
     nickname: "测试小游客",
   },
 ];
 
 // 设置登录凭证
-const setLoginCredentials = (email: string, password: string) => {
-  loginFormData.value.email = email;
+const setLoginCredentials = (account: string, password: string) => {
+  loginFormData.value.account = account;
   loginFormData.value.password = password;
 };
 
