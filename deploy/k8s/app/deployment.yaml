@@ -1,0 +1,54 @@
+# ============================================================
+# GitHub Container Registry Secret
+# ============================================================
+apiVersion: v1
+kind: Secret
+metadata:
+  name: ghcr-secret
+type: kubernetes.io/dockerconfigjson
+data:
+  .dockerconfigjson: eyJhdXRocyI6eyJnaGNyLmlvIjp7InVzZXJuYW1lIjoidmUtd2VpeWkiLCJwYXNzd29yZCI6ImdocF9ZbWI5Z0dnQTNUUDlHenVXRUhsOGhjbkJRMWgwNloxS1kzUlgiLCJlbWFpbCI6InZlLXdlaXlpQGV4YW1wbGUuY29tIiwiYXV0aCI6ImRtVXRkMlZwZVdrNloyaHdYMWx0WWpsblIyZEJNMVJRT1VkNmRWZEZTR3c0YUdOdVFsRXhhREEyV2pGTFdUTlNXQT09In19fQ==
+---
+# ============================================================
+# sparkinai-admin
+# ============================================================
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: sparkinai-admin
+spec:
+  replicas: 1
+  strategy:
+    type: Recreate
+  selector:
+    matchLabels:
+      app: sparkinai-admin
+  template:
+    metadata:
+      labels:
+        app: sparkinai-admin
+    spec:
+      imagePullSecrets:
+        - name: ghcr-secret
+      containers:
+        - name: sparkinai-admin
+          image: ghcr.io/ve-weiyi/sparkinai-admin:latest
+          ports:
+            - containerPort: 80
+              hostPort: 19521
+          env:
+            - name: TZ
+              value: Asia/Shanghai
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: sparkinai-admin
+spec:
+  selector:
+    app: sparkinai-admin
+  ports:
+    - port: 80
+      targetPort: 80
+      nodePort: 30521
+  type: NodePort

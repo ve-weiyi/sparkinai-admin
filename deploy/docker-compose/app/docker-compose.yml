@@ -1,0 +1,14 @@
+version: "3.8"
+
+services:
+  sparkinai-admin:
+    build:
+      context: ../../..
+      dockerfile: deploy/docker/Dockerfile
+    image: sparkinai-admin:latest
+    container_name: sparkinai-admin
+    restart: unless-stopped
+    ports:
+      - "19521:80"
+    environment:
+      - TZ=Asia/Shanghai
