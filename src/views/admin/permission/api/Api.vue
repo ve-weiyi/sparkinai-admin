@@ -60,7 +60,7 @@ import searchConfig from "./config/search";
 import PageSearch from "@/components/CURD/PageSearch.vue";
 import PageModal from "@/components/CURD/PageModal.vue";
 import PageContent from "@/components/CURD/PageContent.vue";
-import { ApiAPI } from "@/api/api";
+import { PermissionApiAPI } from "@/api";
 import { ApiStatusEnum } from "@/enums";
 
 const {
@@ -87,7 +87,7 @@ function handleSync() {
     draggable: true,
   })
     .then((result: any) => {
-      ApiAPI.syncApis().then((res) => {
+      PermissionApiAPI.syncApis().then((res) => {
         ElMessage.success("同步成功,请稍后刷新列表");
       });
     })
@@ -104,7 +104,7 @@ function handleToolbarClick(name: string) {
       handleSync();
       break;
     case "clear":
-      ApiAPI.cleanApis().then((res) => {
+      PermissionApiAPI.cleanApis().then((res) => {
         ElMessage.success("清空成功");
         //根据检索条件刷新列表数据
         const queryParams = searchRef.value?.getQueryParams();

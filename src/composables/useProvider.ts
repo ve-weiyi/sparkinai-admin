@@ -1,5 +1,5 @@
 import { ref } from "vue";
-import { ProviderAPI } from "@/api/provider";
+import { AgentProviderAPI } from "@/api";
 
 const providerOptions = ref<Array<{ label: string; value: number }>>([]);
 let loading = false;
@@ -17,7 +17,7 @@ export function useProvider() {
     }
 
     loading = true;
-    loadPromise = ProviderAPI.getProviderList({
+    loadPromise = AgentProviderAPI.getProviderList({
       page: 1,
       page_size: 100,
       status: 1,

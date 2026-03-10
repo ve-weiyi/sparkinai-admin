@@ -1,6 +1,6 @@
 import type { IModalConfig } from "@/components/CURD/types";
 import type { CreateRoleReq } from "@/api/types";
-import { RoleAPI } from "@/api/role";
+import { PermissionRoleAPI } from "@/api";
 import { RoleDefaultEnum, RoleStatusEnum } from "@/enums";
 
 const modalConfig: IModalConfig<CreateRoleReq> = {
@@ -15,7 +15,7 @@ const modalConfig: IModalConfig<CreateRoleReq> = {
     labelWidth: 100,
   },
   formAction: function (data) {
-    return RoleAPI.createRole(data);
+    return PermissionRoleAPI.createRole(data);
   },
   beforeSubmit(data) {
     console.log("提交之前处理", data);

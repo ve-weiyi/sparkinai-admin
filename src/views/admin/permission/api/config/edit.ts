@@ -1,6 +1,6 @@
 import type { IModalConfig } from "@/components/CURD/types";
 import type { UpdateApiReq } from "@/api/types";
-import { ApiAPI } from "@/api/api";
+import { PermissionApiAPI } from "@/api";
 import { HTTP_METHODS_WITH_EMPTY } from "@/constants/options";
 import { ApiStatusEnum, ApiTraceableEnum } from "@/enums";
 
@@ -14,7 +14,7 @@ const modalConfig: IModalConfig<UpdateApiReq> = {
   },
   pk: "id",
   formAction: function (data) {
-    return ApiAPI.updateApi(data);
+    return PermissionApiAPI.updateApi(data);
   },
   beforeSubmit(data) {
     console.log("提交之前处理", data);

@@ -1,6 +1,6 @@
 import type { IModalConfig } from "@/components/CURD/types";
 import type { UpdateAdminRolesReq } from "@/api/types";
-import { RoleAPI } from "@/api/role";
+import { PermissionRoleAPI } from "@/api";
 import { AdminuserAPI } from "@/api/adminuser";
 
 const modalConfig: IModalConfig<UpdateAdminRolesReq> = {
@@ -78,7 +78,7 @@ const modalConfig: IModalConfig<UpdateAdminRolesReq> = {
       },
       options: [],
       async initFn(item) {
-        const res = await RoleAPI.getRoleList();
+        const res = await PermissionRoleAPI.getRoleList();
         item.options = res.data.list.map((role) => ({
           label: role.role_label,
           value: role.id,

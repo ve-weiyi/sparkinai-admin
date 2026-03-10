@@ -40,7 +40,7 @@ export const AuthAPI = {
     });
   },
 
-  /** 邮箱验证码登录（仅登录，未注册报错） */
+  /** 邮箱验证码登录（仅登录） */
   emailCodeLogin(data?: EmailCodeLoginReq): Promise<IApiResponse<LoginResp>> {
     return request({
       url: `/admin-api/v1/auth/email/login/code`,

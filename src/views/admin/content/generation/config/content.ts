@@ -16,6 +16,9 @@ const contentConfig: IContentConfig = {
     pageSizes: [10, 20, 30, 50],
   },
   indexAction: function (params) {
+    if (!params.sorts || params.sorts.length == 0) {
+      params.sorts = "created_at desc";
+    }
     return GenerationAPI.getGenerationList(params);
   },
   parseData: (res) => {

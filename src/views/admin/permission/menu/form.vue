@@ -3,7 +3,7 @@ import { nextTick, onMounted, reactive, ref } from "vue";
 import type { FormInstance, FormRules } from "element-plus";
 import IconSelect from "@/components/IconSelect/index.vue";
 import type { MenuVO, CreateMenuReq } from "@/api/types";
-import { MenuAPI } from "@/api/menu";
+import { PermissionMenuAPI } from "@/api";
 import { MenuTypeEnum } from "@/enums";
 import { CirclePlusFilled, DeleteFilled, QuestionFilled } from "@element-plus/icons-vue";
 
@@ -84,7 +84,7 @@ function pushMenuOptions(list: MenuVO[]): OptionType[] {
 }
 
 const getMenuOptions = () => {
-  MenuAPI.getMenuList().then((res) => {
+  PermissionMenuAPI.getMenuList().then((res) => {
     menuOptions.value = pushMenuOptions(res.data.list);
   });
 };

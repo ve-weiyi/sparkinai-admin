@@ -69,7 +69,7 @@ import PageSearch from "@/components/CURD/PageSearch.vue";
 import PageContent from "@/components/CURD/PageContent.vue";
 import MenuForm from "./form.vue";
 import type { CreateMenuReq, UpdateMenuReq } from "@/api/types";
-import { MenuAPI } from "@/api/menu";
+import { PermissionMenuAPI } from "@/api";
 import { ApiStatusEnum, MenuStatusEnum, MenuTypeEnum, MenuVisibleEnum } from "@/enums";
 import { usePermissionStore } from "@/store";
 import { collectButtonsFromConfigs } from "@/utils/collect-buttons";
@@ -93,13 +93,13 @@ const {
 async function handleSubmitClick() {
   if (menuFormData.value?.id) {
     //编辑
-    await MenuAPI.updateMenu(menuFormData.value as UpdateMenuReq);
+    await PermissionMenuAPI.updateMenu(menuFormData.value as UpdateMenuReq);
 
     ElMessage.success("编辑成功");
     addOrUpdate.value = false;
   } else {
     //新增
-    await MenuAPI.createMenu(menuFormData.value);
+    await PermissionMenuAPI.createMenu(menuFormData.value);
 
     ElMessage.success("新增成功");
     addOrUpdate.value = false;
@@ -131,7 +131,7 @@ function handleSync() {
         const menus = convertMenu(constantRoutes as RouteRecordRaw[], buttonsCache);
 
         console.log(menus);
-        await MenuAPI.syncMenus({ menus });
+        await PermissionMenuAPI.syncMenus({ menus });
         ElMessage.success("同步成功");
 
         // 自动刷新列表
@@ -259,7 +259,7 @@ function handleToolbarClick(name: string) {
       })
         .then(async () => {
           try {
-            await MenuAPI.cleanMenus();
+            await PermissionMenuAPI.cleanMenus();
             ElMessage.success("清空成功");
             refreshList();
           } catch (error) {

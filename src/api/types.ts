@@ -1,3 +1,29 @@
+// 调整用户余额请求
+export interface AdjustUserBalanceReq {
+  user_id: string; // 用户ID
+  amount: number; // 调整金额（正数=增加，负数=减少）
+  description: string; // 调整说明
+  remark?: string; // 备注
+}
+
+// 调整用户余额响应
+export interface AdjustUserBalanceResp {
+  success: boolean;
+  balance_after: number; // 调整后余额
+}
+
+// 更新用户信用额度请求
+export interface AdjustUserCreditLimitReq {
+  user_id: string; // 用户ID
+  credit_limit: number; // 信用额度（元）
+}
+
+// 更新用户信用额度响应
+export interface AdjustUserCreditLimitResp {
+  success: boolean;
+  credit_limit: number; // 更新后的信用额度
+}
+
 export interface AdminInfoDetail {
   user_id: string; // 管理员ID（UUID）
   username: string; // 管理员名
@@ -233,6 +259,24 @@ export interface CreateProviderResp {
   id: number; // 供应商ID
 }
 
+// 创建充值套餐请求
+export interface CreateRechargePackageReq {
+  package_name: string;
+  credits: number;
+  amount: number;
+  original_amount: number;
+  description: string;
+  features: string[];
+  is_hot: boolean;
+  status: number;
+  sort_order: number;
+}
+
+// 创建充值套餐响应
+export interface CreateRechargePackageResp {
+  id: number;
+}
+
 // 角色创建请求
 export interface CreateRoleReq {
   parent_id?: number; // 父角色ID（可选，默认顶级角色）
@@ -322,6 +366,16 @@ export interface DeleteProviderReq {
 
 // 删除供应商响应
 export interface DeleteProviderResp {
+  success: boolean;
+}
+
+// 删除充值套餐请求
+export interface DeleteRechargePackageReq {
+  id: number;
+}
+
+// 删除充值套餐响应
+export interface DeleteRechargePackageResp {
   success: boolean;
 }
 
@@ -662,6 +716,32 @@ export interface GetOperationLogListResp {
   list: OperationLogItem[];
 }
 
+// 获取支付订单详情请求
+export interface GetPaymentOrderDetailReq {
+  id: number; // 订单ID
+}
+
+// 获取支付订单详情响应
+export interface GetPaymentOrderDetailResp extends PaymentOrderDetail {}
+
+// ========== 支付订单管理 ==========
+export interface GetPaymentOrderListReq extends PageQuery {
+  order_no?: string; // 订单号筛选
+  user_id?: string; // 用户ID筛选
+  channel_code?: string; // 渠道代码筛选
+  status?: number; // 状态筛选
+  start_time?: number; // 开始时间
+  end_time?: number; // 结束时间
+}
+
+// 获取支付订单列表响应
+export interface GetPaymentOrderListResp {
+  page: number;
+  page_size: number;
+  total: number;
+  list: PaymentOrderItem[];
+}
+
 // 供应商列表查询请求
 export interface GetProviderListReq extends PageQuery {
   status?: number; // 状态筛选
@@ -682,6 +762,19 @@ export interface GetPublicConfigReq {}
 // 获取公开配置响应
 export interface GetPublicConfigResp {
   configs: Record<string, any>; // 公开配置键值对
+}
+
+// ========== 充值套餐管理 ==========
+export interface GetRechargePackageListReq extends PageQuery {
+  status?: number; // 状态筛选
+}
+
+// 获取充值套餐列表响应
+export interface GetRechargePackageListResp {
+  page: number;
+  page_size: number;
+  total: number;
+  list: RechargePackageItem[];
 }
 
 // 角色列表查询请求
@@ -771,6 +864,21 @@ export interface GetUploadTokenResp {
   extra_data: Record<string, any>; // 额外数据
 }
 
+// ========== 用户账户管理 ==========
+export interface GetUserAccountListReq extends PageQuery {
+  user_id?: string; // 用户ID筛选
+  status?: number; // 状态筛选
+  keyword?: string; // 关键词搜索
+}
+
+// 获取用户账户列表响应
+export interface GetUserAccountListResp {
+  page: number;
+  page_size: number;
+  total: number;
+  list: UserAccountItem[];
+}
+
 // 获取用户活跃度排行请求
 export interface GetUserActivityRankingReq {
   limit?: number; // 返回数量限制
@@ -786,12 +894,12 @@ export interface GetUserApisResp {
 }
 
 // 获取用户详情请求
-export interface GetUserDetailReq {
+export interface GetUserProfileReq {
   user_id: string; // 用户ID (UUID)
 }
 
 // 用户详情响应
-export interface GetUserDetailResp extends UserItem {
+export interface GetUserProfileResp extends UserItem {
   account: UserAccount;
   last_login: UserLastLogin;
   updated_at: number; // 更新时间
@@ -991,6 +1099,47 @@ export interface PasswordLoginReq {
   captcha_code?: string; // 图形验证码
 }
 
+// 支付订单详情
+export interface PaymentOrderDetail extends PaymentOrderItem {
+  client_ip: string;
+  expire_time: number;
+  updated_at: number;
+}
+
+// 支付订单项
+export interface PaymentOrderItem {
+  id: number;
+  order_no: string;
+  user_id: string;
+  user_nickname: string;
+  package_id: number;
+  package_name: string;
+  package_credits: number;
+  channel_code: string;
+  pay_amount: number; // 支付金额（分）
+  status: number;
+  channel_order_no: string;
+  pay_success_time: number;
+  created_at: number;
+  features: string[];
+}
+
+// 支付订单状态枚举
+export enum PaymentOrderStatus {
+  PENDING = 1,    // 待支付
+  PAID = 2,       // 已支付
+  CANCELLED = 3,  // 已取消
+  REFUNDED = 4    // 已退款
+}
+
+// 支付订单状态文本映射
+export const PaymentOrderStatusText: Record<PaymentOrderStatus, string> = {
+  [PaymentOrderStatus.PENDING]: '待支付',
+  [PaymentOrderStatus.PAID]: '已支付',
+  [PaymentOrderStatus.CANCELLED]: '已取消',
+  [PaymentOrderStatus.REFUNDED]: '已退款'
+};
+
 // 手机验证码登录（自动注册）
 export interface PhoneCodeLoginReq {
   phone: string; // 手机号
@@ -1040,6 +1189,33 @@ export interface QuotaInfo {
   remaining: number;
 }
 
+// 充值套餐项
+export interface RechargePackageItem {
+  id: number;
+  package_name: string;
+  credits: number;
+  amount: number;
+  original_amount: number;
+  description: string;
+  features: string[];
+  is_hot: boolean;
+  status: number;
+  sort_order: number;
+  created_at: number;
+}
+
+// 充值套餐状态枚举
+export enum RechargePackageStatus {
+  OFFLINE = 0,  // 下架
+  ONLINE = 1    // 上架
+}
+
+// 充值套餐状态文本映射
+export const RechargePackageStatusText: Record<RechargePackageStatus, string> = {
+  [RechargePackageStatus.OFFLINE]: '下架',
+  [RechargePackageStatus.ONLINE]: '上架'
+};
+
 // 用户充值请求
 export interface RechargeUserReq {
   user_id: string; // 用户ID (UUID)
@@ -1075,16 +1251,6 @@ export interface ResetPasswordReq {
   password: string; // 新密码
   confirm_password?: string; // 确认密码
   verify_code: string; // 验证码
-}
-
-// 重置配额请求
-export interface ResetQuotaReq {
-  id: number; // API密钥ID
-}
-
-// 重置配额响应
-export interface ResetQuotaResp {
-  success: boolean;
 }
 
 // 重置用户密码请求
@@ -1198,6 +1364,7 @@ export interface SystemConfigUpdateItem {
 // 测试API密钥请求
 export interface TestApiKeyReq {
   id: number; // API密钥ID
+  prompt: string; // 提示词
 }
 
 // 测试API密钥响应
@@ -1335,6 +1502,25 @@ export interface UpdateProviderResp {
   success: boolean;
 }
 
+// 更新充值套餐请求
+export interface UpdateRechargePackageReq {
+  id: number;
+  package_name?: string;
+  credits?: number;
+  amount?: number;
+  original_amount?: number;
+  description?: string;
+  features?: string[];
+  is_hot?: boolean;
+  status?: number;
+  sort_order?: number;
+}
+
+// 更新充值套餐响应
+export interface UpdateRechargePackageResp {
+  success: boolean;
+}
+
 // 更新角色接口权限请求
 export interface UpdateRoleApiPermissionsReq {
   role_id: number; // 角色ID（必填）
@@ -1440,6 +1626,20 @@ export interface UserAccount {
   total_consume: string; // 累计消费金额（元，字符串格式）
   coin: number; // 积分
   status: number; // 账户状态
+}
+
+// 用户账户项
+export interface UserAccountItem {
+  id: number;
+  user_id: string;
+  user_nickname: string;
+  balance: number;
+  credit_limit: number;
+  total_recharge: number;
+  total_consume: number;
+  status: number;
+  status_text: string;
+  created_at: number;
 }
 
 // 用户活跃度排行数据项

@@ -1,6 +1,6 @@
 import type { IModalConfig } from "@/components/CURD/types";
 import type { UpdateRoleReq } from "@/api/types";
-import { RoleAPI } from "@/api/role";
+import { PermissionRoleAPI } from "@/api";
 import { RoleDefaultEnum, RoleStatusEnum } from "@/enums";
 
 const modalConfig: IModalConfig<UpdateRoleReq> = {
@@ -13,7 +13,7 @@ const modalConfig: IModalConfig<UpdateRoleReq> = {
   },
   pk: "id",
   formAction: function (data) {
-    return RoleAPI.updateRole(data);
+    return PermissionRoleAPI.updateRole(data);
   },
   beforeSubmit(data) {
     console.log("提交之前处理", data);

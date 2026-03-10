@@ -12,6 +12,17 @@ data:
 # ============================================================
 # sparkinai-admin-web Deployment
 # ============================================================
+apiVersion: v1
+kind: Service
+metadata:
+  name: sparkinai-admin-web
+spec:
+  clusterIP: None
+  selector:
+    app: sparkinai-admin-web
+  ports:
+    - port: 80
+---
 apiVersion: apps/v1
 kind: Deployment
 metadata:
@@ -39,16 +50,3 @@ spec:
           env:
             - name: TZ
               value: Asia/Shanghai
----
-apiVersion: v1
-kind: Service
-metadata:
-  name: sparkinai-admin-web
-spec:
-  selector:
-    app: sparkinai-admin-web
-  ports:
-    - port: 80
-      targetPort: 80
-      nodePort: 30521
-  type: NodePort

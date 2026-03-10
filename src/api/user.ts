@@ -1,7 +1,7 @@
 import request from "@/utils/request";
 import type {
-  GetUserDetailReq,
-  GetUserDetailResp,
+  GetUserProfileReq,
+  GetUserProfileResp,
   GetUserListReq,
   GetUserListResp,
   RechargeUserReq,
@@ -24,7 +24,7 @@ export const UserAPI = {
   },
 
   /** 获取用户详情 */
-  getUserDetail(params?: GetUserDetailReq): Promise<IApiResponse<GetUserDetailResp>> {
+  getUserProfile(params?: GetUserProfileReq): Promise<IApiResponse<GetUserProfileResp>> {
     return request({
       url: `/admin-api/v1/users/${params.user_id}`,
       method: "GET",

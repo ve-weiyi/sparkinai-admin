@@ -1,6 +1,6 @@
 import type { IContentConfig } from "@/components/CURD/types";
 import type { GetRoleListReq } from "@/api/types";
-import { RoleAPI } from "@/api/role";
+import { PermissionRoleAPI } from "@/api";
 import { RoleDefaultEnum } from "@/enums";
 
 const contentConfig: IContentConfig<GetRoleListReq> = {
@@ -17,7 +17,7 @@ const contentConfig: IContentConfig<GetRoleListReq> = {
     pageSizes: [10, 20, 30, 50],
   },
   indexAction: function (params: GetRoleListReq) {
-    return RoleAPI.getRoleList(params);
+    return PermissionRoleAPI.getRoleList(params);
   },
   parseData: (res) => {
     return {
@@ -27,10 +27,10 @@ const contentConfig: IContentConfig<GetRoleListReq> = {
   },
   modifyAction(row, field, value) {
     const data = Object.assign(row);
-    return RoleAPI.updateRole(data);
+    return PermissionRoleAPI.updateRole(data);
   },
   deleteAction: function (ids: string) {
-    return RoleAPI.batchDeleteRoles({
+    return PermissionRoleAPI.batchDeleteRoles({
       ids: ids.split(",").map((id) => parseInt(id)),
     });
   },

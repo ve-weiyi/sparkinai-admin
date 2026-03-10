@@ -1,5 +1,5 @@
 import { ref } from "vue";
-import { ModelAPI } from "@/api/model";
+import { AgentModelAPI } from "@/api";
 
 const modelOptions = ref<Array<{ label: string; value: number }>>([]);
 let loading = false;
@@ -17,7 +17,7 @@ export function useModel() {
     }
 
     loading = true;
-    loadPromise = ModelAPI.getModelList({ page: 1, page_size: 100, status: 1 })
+    loadPromise = AgentModelAPI.getModelList({ page: 1, page_size: 100, status: 1 })
       .then((res) => {
         modelOptions.value = res.data.list.map((m) => ({
           label: `${m.provider_name} - ${m.name}`,

@@ -1,6 +1,6 @@
 import type { IContentConfig } from "@/components/CURD/types";
 import type { GetMenuListReq } from "@/api/types";
-import { MenuAPI } from "@/api/menu";
+import { PermissionMenuAPI } from "@/api";
 
 const contentConfig: IContentConfig<GetMenuListReq> = {
   pageTitle: "菜单管理",
@@ -24,7 +24,7 @@ const contentConfig: IContentConfig<GetMenuListReq> = {
       params.sorts = [`id desc`];
     }
 
-    return MenuAPI.getMenuList(params);
+    return PermissionMenuAPI.getMenuList(params);
   },
   parseData: (res) => {
     return {
@@ -33,7 +33,7 @@ const contentConfig: IContentConfig<GetMenuListReq> = {
     };
   },
   deleteAction: function (ids: string) {
-    return MenuAPI.batchDeleteMenus({
+    return PermissionMenuAPI.batchDeleteMenus({
       ids: ids.split(",").map((id) => parseInt(id)),
     });
   },

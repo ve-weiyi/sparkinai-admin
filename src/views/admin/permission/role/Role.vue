@@ -104,9 +104,9 @@ import PageSearch from "@/components/CURD/PageSearch.vue";
 import PageModal from "@/components/CURD/PageModal.vue";
 import PageContent from "@/components/CURD/PageContent.vue";
 import Tree from "./components/tree.vue";
-import { RoleAPI } from "@/api/role";
-import { ApiAPI } from "@/api/api";
-import { MenuAPI } from "@/api/menu";
+import { PermissionRoleAPI } from "@/api";
+import { PermissionApiAPI } from "@/api";
+import { PermissionMenuAPI } from "@/api";
 import type { ApiVO, MenuVO, RoleVO, RolePermissionsResp } from "@/api/types";
 import { RoleStatusEnum } from "@/enums";
 
@@ -163,17 +163,17 @@ const onApiChange = (value: any) => {
 
 const openDrawer = (v: any) => {
   if (!apiList.value) {
-    ApiAPI.getApiList({}).then((res) => {
+    PermissionApiAPI.getApiList({}).then((res) => {
       apiList.value = res.data.list;
     });
 
-    MenuAPI.getMenuList({}).then((res) => {
+    PermissionMenuAPI.getMenuList({}).then((res) => {
       menuList.value = res.data.list;
     });
   }
 
   formData.value = v as RoleVO;
-  RoleAPI.getRolePermissions({
+  PermissionRoleAPI.getRolePermissions({
     role_id: v.id,
   }).then((res) => {
     roleResources.value = res.data;
@@ -213,7 +213,7 @@ function updateMenus() {
   const isEqual = v1 === v2;
 
   if (!isEqual) {
-    RoleAPI.updateRoleMenuPermissions({
+    PermissionRoleAPI.updateRoleMenuPermissions({
       role_id: roleResources.value.role_id,
       menu_ids: ids,
     }).then((res) => {
@@ -233,7 +233,7 @@ function updateApis() {
   const isEqual = v1 === v2;
 
   if (!isEqual) {
-    RoleAPI.updateRoleApiPermissions({
+    PermissionRoleAPI.updateRoleApiPermissions({
       role_id: roleResources.value.role_id,
       api_ids: ids,
     }).then((res) => {

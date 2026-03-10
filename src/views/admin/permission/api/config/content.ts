@@ -1,6 +1,6 @@
 import type { IContentConfig } from "@/components/CURD/types";
 import type { GetApiListReq } from "@/api/types";
-import { ApiAPI } from "@/api/api";
+import { PermissionApiAPI } from "@/api";
 import { ApiTraceableEnum } from "@/enums";
 
 const contentConfig: IContentConfig<GetApiListReq> = {
@@ -22,7 +22,7 @@ const contentConfig: IContentConfig<GetApiListReq> = {
     pageSizes: [10, 20, 30, 50],
   },
   indexAction: function (params: GetApiListReq) {
-    return ApiAPI.getApiList(params);
+    return PermissionApiAPI.getApiList(params);
   },
   parseData: (res) => {
     return {
@@ -32,10 +32,10 @@ const contentConfig: IContentConfig<GetApiListReq> = {
   },
   modifyAction(row, field, value) {
     const data = Object.assign(row);
-    return ApiAPI.updateApi(data);
+    return PermissionApiAPI.updateApi(data);
   },
   deleteAction: function (ids: string) {
-    return ApiAPI.batchDeleteApis({
+    return PermissionApiAPI.batchDeleteApis({
       ids: ids.split(",").map((id) => parseInt(id)),
     });
   },
