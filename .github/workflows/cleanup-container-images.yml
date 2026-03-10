@@ -1,0 +1,49 @@
+name: Cleanup Container Images
+
+on:
+  workflow_dispatch:
+    inputs:
+      keep_count:
+        description: 'Number of recent versions to keep'
+        required: false
+        default: '5'
+        type: string
+      dry_run:
+        description: 'Dry run (preview only, no deletion)'
+        required: false
+        default: false
+        type: boolean
+
+permissions:
+  packages: write
+  contents: read
+
+env:
+  PACKAGE_NAME: sparkinai-admin-web
+
+jobs:
+  cleanup:
+    name: Cleanup Old Images
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Delete old container images
+        uses: actions/delete-package-versions@v5
+        with:
+          package-name: ${{ env.PACKAGE_NAME }}
+          package-type: 'container'
+          min-versions-to-keep: ${{ github.event.inputs.keep_count || '5' }}
+          delete-only-untagged-versions: false
+          token: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Generate summary
+        run: |
+          echo "## Cleanup Summary :package:" >> $GITHUB_STEP_SUMMARY
+          echo "" >> $GITHUB_STEP_SUMMARY
+          echo "**Package:** \`${{ env.PACKAGE_NAME }}\`" >> $GITHUB_STEP_SUMMARY
+          echo "**Versions Kept:** \`${{ github.event.inputs.keep_count || '5' }}\`" >> $GITHUB_STEP_SUMMARY
+          echo "**Dry Run:** \`${{ github.event.inputs.dry_run || 'false' }}\`" >> $GITHUB_STEP_SUMMARY
+          echo "" >> $GITHUB_STEP_SUMMARY
+          echo "✅ Cleanup completed successfully" >> $GITHUB_STEP_SUMMARY
+          echo "" >> $GITHUB_STEP_SUMMARY
+          echo "Old image versions have been removed, keeping the ${{ github.event.inputs.keep_count || '5' }} most recent versions." >> $GITHUB_STEP_SUMMARY
