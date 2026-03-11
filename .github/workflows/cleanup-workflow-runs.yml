@@ -18,6 +18,11 @@ on:
         required: false
         default: '0'
         type: string
+      keep_minimum_runs:
+        description: 'Minimum number of runs to keep'
+        required: false
+        default: '0'
+        type: string
 
 permissions:
   actions: write
@@ -35,8 +40,8 @@ jobs:
           token: ${{ secrets.GITHUB_TOKEN }}
           repository: ${{ github.repository }}
           retain_days: ${{ github.event.inputs.days || '0' }}
-          keep_minimum_runs: 10
-          delete_workflow_pattern: ${{ github.event.inputs.status == 'all' && '' || github.event.inputs.status || 'failure' }}
+          keep_minimum_runs: ${{ github.event.inputs.keep_minimum_runs || '0' }}
+          delete_workflow_by_state_pattern: ${{ github.event.inputs.status == 'all' && '' || github.event.inputs.status || 'failure' }}
 
       - name: Generate summary
         run: |
@@ -44,6 +49,6 @@ jobs:
           echo "" >> $GITHUB_STEP_SUMMARY
           echo "**Status Filter:** \`${{ github.event.inputs.status || 'failure' }}\`" >> $GITHUB_STEP_SUMMARY
           echo "**Retention Days:** \`${{ github.event.inputs.days || '0' }} days\`" >> $GITHUB_STEP_SUMMARY
-          echo "**Minimum Kept:** \`10 runs\`" >> $GITHUB_STEP_SUMMARY
+          echo "**Minimum Kept:** \`${{ github.event.inputs.keep_minimum_runs || '0' }} runs\`" >> $GITHUB_STEP_SUMMARY
           echo "" >> $GITHUB_STEP_SUMMARY
           echo "✅ Cleanup completed successfully" >> $GITHUB_STEP_SUMMARY
