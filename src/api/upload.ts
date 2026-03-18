@@ -5,7 +5,7 @@ import type {
   GetUploadTokenResp,
   ListFilesReq,
   PageResult,
-  UploadFilesReq,
+  UploadFilesReq
 } from "./types";
 
 /** 文件上传 */
@@ -13,7 +13,7 @@ export const UploadAPI = {
   /** 获取文件列表 */
   listFiles(params?: ListFilesReq): Promise<IApiResponse<PageResult>> {
     return request({
-      url: `/admin-api/v1/upload/files`,
+      url: `/api/v1/upload/files`,
       method: "GET",
       params: params,
     });
@@ -22,7 +22,7 @@ export const UploadAPI = {
   /** 上传文件（服务端上传） */
   uploadFiles(data?: UploadFilesReq): Promise<IApiResponse<FileInfoVO[]>> {
     return request({
-      url: `/admin-api/v1/upload/files`,
+      url: `/api/v1/upload/files`,
       method: "POST",
       data: data,
     });
@@ -31,9 +31,10 @@ export const UploadAPI = {
   /** 获取上传凭证（前端直传） */
   getUploadToken(data?: GetUploadTokenReq): Promise<IApiResponse<GetUploadTokenResp>> {
     return request({
-      url: `/admin-api/v1/upload/upload-token`,
+      url: `/api/v1/upload/upload-token`,
       method: "POST",
       data: data,
     });
   },
+
 };

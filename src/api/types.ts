@@ -143,7 +143,8 @@ export interface CleanApisResp {
   success_count: number; // 清空成功数量
 }
 
-export interface CleanMenusReq {}
+export interface CleanMenusReq {
+}
 
 export interface CleanMenusResp {
   success_count: number; // 清空成功数量
@@ -266,7 +267,7 @@ export interface CreateRechargePackageReq {
   amount: number;
   original_amount: number;
   description: string;
-  features: string[];
+  features?: string[];
   is_hot: boolean;
   status: number;
   sort_order: number;
@@ -418,9 +419,11 @@ export interface EmailMessageItem {
   updated_at: number;
 }
 
-export interface EmptyReq {}
+export interface EmptyReq {
+}
 
-export interface EmptyResp {}
+export interface EmptyResp {
+}
 
 // 引擎配置信息项
 export interface EngineItem {
@@ -543,7 +546,8 @@ export interface GetCaptchaCodeResp {
   captcha_code: string; // 验证码
 }
 
-export interface GetClientInfoReq {}
+export interface GetClientInfoReq {
+}
 
 export interface GetClientInfoResp {
   id: number; // 访客唯一ID
@@ -555,7 +559,8 @@ export interface GetClientInfoResp {
 }
 
 // 获取仪表盘统计数据请求
-export interface GetDashboardStatsReq {}
+export interface GetDashboardStatsReq {
+}
 
 // 仪表盘统计数据响应 - 对应数据库字段
 export interface GetDashboardStatsResp {
@@ -613,7 +618,8 @@ export interface GetGenerationDetailReq {
 }
 
 // 生成记录详情响应
-export interface GetGenerationDetailResp extends GenerationItem {}
+export interface GetGenerationDetailResp extends GenerationItem {
+}
 
 // 生成记录列表查询请求
 export interface GetGenerationListReq extends PageQuery {
@@ -661,7 +667,8 @@ export interface GetModelDetailReq {
 }
 
 // 获取模型详情响应
-export interface GetModelDetailResp extends ModelItem {}
+export interface GetModelDetailResp extends ModelItem {
+}
 
 // 模型列表查询请求
 export interface GetModelListReq extends PageQuery {
@@ -722,7 +729,8 @@ export interface GetPaymentOrderDetailReq {
 }
 
 // 获取支付订单详情响应
-export interface GetPaymentOrderDetailResp extends PaymentOrderDetail {}
+export interface GetPaymentOrderDetailResp extends PaymentOrderDetail {
+}
 
 // ========== 支付订单管理 ==========
 export interface GetPaymentOrderListReq extends PageQuery {
@@ -757,7 +765,8 @@ export interface GetProviderListResp {
 }
 
 // 获取公开配置请求（无需认证）
-export interface GetPublicConfigReq {}
+export interface GetPublicConfigReq {
+}
 
 // 获取公开配置响应
 export interface GetPublicConfigResp {
@@ -827,7 +836,8 @@ export interface GetSystemConfigReq {
 }
 
 // 获取系统配置响应
-export interface GetSystemConfigResp extends SystemConfigItem {}
+export interface GetSystemConfigResp extends SystemConfigItem {
+}
 
 // 文件上传日志列表查询请求
 export interface GetUploadLogListReq extends PageQuery {
@@ -894,12 +904,12 @@ export interface GetUserApisResp {
 }
 
 // 获取用户详情请求
-export interface GetUserProfileReq {
+export interface GetUserDetailReq {
   user_id: string; // 用户ID (UUID)
 }
 
 // 用户详情响应
-export interface GetUserProfileResp extends UserItem {
+export interface GetUserDetailResp extends UserItem {
   account: UserAccount;
   last_login: UserLastLogin;
   updated_at: number; // 更新时间
@@ -940,7 +950,8 @@ export interface GetUserMenusResp {
   list: UserMenu[];
 }
 
-export interface GetUserProfileReq {}
+export interface GetUserProfileReq {
+}
 
 export interface GetUserRolesResp {
   list: UserRole[];
@@ -1124,29 +1135,14 @@ export interface PaymentOrderItem {
   features: string[];
 }
 
-// 支付订单状态枚举
-export enum PaymentOrderStatus {
-  PENDING = 1,    // 待支付
-  PAID = 2,       // 已支付
-  CANCELLED = 3,  // 已取消
-  REFUNDED = 4    // 已退款
-}
-
-// 支付订单状态文本映射
-export const PaymentOrderStatusText: Record<PaymentOrderStatus, string> = {
-  [PaymentOrderStatus.PENDING]: '待支付',
-  [PaymentOrderStatus.PAID]: '已支付',
-  [PaymentOrderStatus.CANCELLED]: '已取消',
-  [PaymentOrderStatus.REFUNDED]: '已退款'
-};
-
 // 手机验证码登录（自动注册）
 export interface PhoneCodeLoginReq {
   phone: string; // 手机号
   verify_code: string; // 验证码
 }
 
-export interface PingReq {}
+export interface PingReq {
+}
 
 export interface PingResp {
   env: string;
@@ -1181,7 +1177,8 @@ export interface ProviderUsageStatsItem {
   avg_latency: number; // 平均延迟（毫秒）
 }
 
-export interface QueryUserLoginHistoryReq extends PageQuery {}
+export interface QueryUserLoginHistoryReq extends PageQuery {
+}
 
 export interface QuotaInfo {
   total: number;
@@ -1203,18 +1200,6 @@ export interface RechargePackageItem {
   sort_order: number;
   created_at: number;
 }
-
-// 充值套餐状态枚举
-export enum RechargePackageStatus {
-  OFFLINE = 0,  // 下架
-  ONLINE = 1    // 上架
-}
-
-// 充值套餐状态文本映射
-export const RechargePackageStatusText: Record<RechargePackageStatus, string> = {
-  [RechargePackageStatus.OFFLINE]: '下架',
-  [RechargePackageStatus.ONLINE]: '上架'
-};
 
 // 用户充值请求
 export interface RechargeUserReq {
@@ -1767,3 +1752,4 @@ export interface UserVO {
   roles: string[];
   perms: string[];
 }
+

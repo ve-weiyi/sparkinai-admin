@@ -9,7 +9,7 @@ import type {
   TestApiKeyReq,
   TestApiKeyResp,
   UpdateApiKeyReq,
-  UpdateApiKeyResp,
+  UpdateApiKeyResp
 } from "./types";
 
 /** API密钥管理 */
@@ -17,7 +17,7 @@ export const AgentApikeyAPI = {
   /** 获取API密钥列表 */
   getApiKeyList(params?: GetApiKeyListReq): Promise<IApiResponse<GetApiKeyListResp>> {
     return request({
-      url: `/admin-api/v1/apikeys`,
+      url: `/api/v1/apikeys`,
       method: "GET",
       params: params,
     });
@@ -26,7 +26,7 @@ export const AgentApikeyAPI = {
   /** 创建API密钥 */
   createApiKey(data?: CreateApiKeyReq): Promise<IApiResponse<CreateApiKeyResp>> {
     return request({
-      url: `/admin-api/v1/apikeys`,
+      url: `/api/v1/apikeys`,
       method: "POST",
       data: data,
     });
@@ -35,7 +35,7 @@ export const AgentApikeyAPI = {
   /** 更新API密钥 */
   updateApiKey(data?: UpdateApiKeyReq): Promise<IApiResponse<UpdateApiKeyResp>> {
     return request({
-      url: `/admin-api/v1/apikeys/${data.id}`,
+      url: `/api/v1/apikeys/${data.id}`,
       method: "PUT",
       data: data,
     });
@@ -44,7 +44,7 @@ export const AgentApikeyAPI = {
   /** 删除API密钥 */
   deleteApiKey(data?: DeleteApiKeyReq): Promise<IApiResponse<DeleteApiKeyResp>> {
     return request({
-      url: `/admin-api/v1/apikeys/${data.id}`,
+      url: `/api/v1/apikeys/${data.id}`,
       method: "DELETE",
       data: data,
     });
@@ -53,9 +53,10 @@ export const AgentApikeyAPI = {
   /** 测试API密钥 */
   testApiKey(data?: TestApiKeyReq): Promise<IApiResponse<TestApiKeyResp>> {
     return request({
-      url: `/admin-api/v1/apikeys/${data.id}/test`,
+      url: `/api/v1/apikeys/${data.id}/test`,
       method: "POST",
       data: data,
     });
   },
+
 };

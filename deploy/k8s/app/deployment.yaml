@@ -5,6 +5,7 @@ apiVersion: v1
 kind: Secret
 metadata:
   name: ghcr-secret
+  namespace: sparkinai
 type: kubernetes.io/dockerconfigjson
 data:
   .dockerconfigjson: eyJhdXRocyI6eyJnaGNyLmlvIjp7InVzZXJuYW1lIjoidmUtd2VpeWkiLCJwYXNzd29yZCI6ImdocF9ZbWI5Z0dnQTNUUDlHenVXRUhsOGhjbkJRMWgwNloxS1kzUlgiLCJlbWFpbCI6InZlLXdlaXlpQGV4YW1wbGUuY29tIiwiYXV0aCI6ImRtVXRkMlZwZVdrNloyaHdYMWx0WWpsblIyZEJNMVJRT1VkNmRWZEZTR3c0YUdOdVFsRXhhREEyV2pGTFdUTlNXQT09In19fQ==
@@ -16,17 +17,19 @@ apiVersion: v1
 kind: Service
 metadata:
   name: sparkinai-admin-web
+  namespace: sparkinai
 spec:
-  clusterIP: None
   selector:
     app: sparkinai-admin-web
   ports:
     - port: 80
+      targetPort: 80
 ---
 apiVersion: apps/v1
 kind: Deployment
 metadata:
   name: sparkinai-admin-web
+  namespace: sparkinai
 spec:
   replicas: 1
   strategy:

@@ -17,7 +17,7 @@ import type {
   RegisterReq,
   ResetPasswordReq,
   SendEmailCodeReq,
-  SendPhoneCodeReq,
+  SendPhoneCodeReq
 } from "./types";
 
 /** 登录认证 */
@@ -25,7 +25,7 @@ export const AuthAPI = {
   /** 获取验证码 */
   getCaptchaCode(params?: GetCaptchaCodeReq): Promise<IApiResponse<GetCaptchaCodeResp>> {
     return request({
-      url: `/admin-api/v1/auth/captcha-code`,
+      url: `/api/v1/auth/captcha-code`,
       method: "GET",
       params: params,
     });
@@ -34,7 +34,7 @@ export const AuthAPI = {
   /** 获取客户端信息 */
   getClientInfo(params?: GetClientInfoReq): Promise<IApiResponse<GetClientInfoResp>> {
     return request({
-      url: `/admin-api/v1/auth/client-info`,
+      url: `/api/v1/auth/client-info`,
       method: "GET",
       params: params,
     });
@@ -43,7 +43,7 @@ export const AuthAPI = {
   /** 邮箱验证码登录（仅登录） */
   emailCodeLogin(data?: EmailCodeLoginReq): Promise<IApiResponse<LoginResp>> {
     return request({
-      url: `/admin-api/v1/auth/email/login/code`,
+      url: `/api/v1/auth/email/login/code`,
       method: "POST",
       data: data,
     });
@@ -52,7 +52,7 @@ export const AuthAPI = {
   /** 发送邮箱验证码 */
   sendEmailCode(data?: SendEmailCodeReq): Promise<IApiResponse<EmptyResp>> {
     return request({
-      url: `/admin-api/v1/auth/email/send-code`,
+      url: `/api/v1/auth/email/send-code`,
       method: "POST",
       data: data,
     });
@@ -61,18 +61,16 @@ export const AuthAPI = {
   /** 密码登录（账号/手机号/邮箱） */
   passwordLogin(data?: PasswordLoginReq): Promise<IApiResponse<LoginResp>> {
     return request({
-      url: `/admin-api/v1/auth/login/password`,
+      url: `/api/v1/auth/login/password`,
       method: "POST",
       data: data,
     });
   },
 
   /** 获取第三方授权URL */
-  getOauthAuthorizeUrl(
-    params?: GetOauthAuthorizeUrlReq
-  ): Promise<IApiResponse<GetOauthAuthorizeUrlResp>> {
+  getOauthAuthorizeUrl(params?: GetOauthAuthorizeUrlReq): Promise<IApiResponse<GetOauthAuthorizeUrlResp>> {
     return request({
-      url: `/admin-api/v1/auth/oauth/${params.platform}/authorize`,
+      url: `/api/v1/auth/oauth/${params.platform}/authorize`,
       method: "GET",
       params: params,
     });
@@ -81,7 +79,7 @@ export const AuthAPI = {
   /** 第三方登录（自动注册） */
   oauthLogin(data?: OauthLoginReq): Promise<IApiResponse<LoginResp>> {
     return request({
-      url: `/admin-api/v1/auth/oauth/${data.platform}/login`,
+      url: `/api/v1/auth/oauth/${data.platform}/login`,
       method: "POST",
       data: data,
     });
@@ -90,7 +88,7 @@ export const AuthAPI = {
   /** 重置密码 */
   resetPassword(data?: ResetPasswordReq): Promise<IApiResponse<EmptyResp>> {
     return request({
-      url: `/admin-api/v1/auth/password/reset`,
+      url: `/api/v1/auth/password/reset`,
       method: "POST",
       data: data,
     });
@@ -99,7 +97,7 @@ export const AuthAPI = {
   /** 手机验证码登录（自动注册） */
   phoneCodeLogin(data?: PhoneCodeLoginReq): Promise<IApiResponse<LoginResp>> {
     return request({
-      url: `/admin-api/v1/auth/phone/login/code`,
+      url: `/api/v1/auth/phone/login/code`,
       method: "POST",
       data: data,
     });
@@ -108,7 +106,7 @@ export const AuthAPI = {
   /** 发送手机验证码 */
   sendPhoneCode(data?: SendPhoneCodeReq): Promise<IApiResponse<EmptyResp>> {
     return request({
-      url: `/admin-api/v1/auth/phone/send-code`,
+      url: `/api/v1/auth/phone/send-code`,
       method: "POST",
       data: data,
     });
@@ -117,7 +115,7 @@ export const AuthAPI = {
   /** 刷新token */
   refreshToken(data?: RefreshTokenReq): Promise<IApiResponse<LoginResp>> {
     return request({
-      url: `/admin-api/v1/auth/refresh-token`,
+      url: `/api/v1/auth/refresh-token`,
       method: "POST",
       data: data,
     });
@@ -126,7 +124,7 @@ export const AuthAPI = {
   /** 邮箱注册 */
   register(data?: RegisterReq): Promise<IApiResponse<EmptyResp>> {
     return request({
-      url: `/admin-api/v1/auth/register`,
+      url: `/api/v1/auth/register`,
       method: "POST",
       data: data,
     });
@@ -135,9 +133,10 @@ export const AuthAPI = {
   /** 退出登录（需登录） */
   logout(data?: EmptyReq): Promise<IApiResponse<EmptyResp>> {
     return request({
-      url: `/admin-api/v1/auth/logout`,
+      url: `/api/v1/auth/logout`,
       method: "POST",
       data: data,
     });
   },
+
 };

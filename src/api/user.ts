@@ -1,7 +1,7 @@
 import request from "@/utils/request";
 import type {
-  GetUserProfileReq,
-  GetUserProfileResp,
+  GetUserDetailReq,
+  GetUserDetailResp,
   GetUserListReq,
   GetUserListResp,
   RechargeUserReq,
@@ -9,7 +9,7 @@ import type {
   ResetUserPasswordReq,
   ResetUserPasswordResp,
   UpdateUserStatusReq,
-  UpdateUserStatusResp,
+  UpdateUserStatusResp
 } from "./types";
 
 /** 用户管理 */
@@ -17,16 +17,16 @@ export const UserAPI = {
   /** 获取用户列表 */
   getUserList(params?: GetUserListReq): Promise<IApiResponse<GetUserListResp>> {
     return request({
-      url: `/admin-api/v1/users`,
+      url: `/api/v1/users`,
       method: "GET",
       params: params,
     });
   },
 
   /** 获取用户详情 */
-  getUserProfile(params?: GetUserProfileReq): Promise<IApiResponse<GetUserProfileResp>> {
+  getUserDetail(params?: GetUserDetailReq): Promise<IApiResponse<GetUserDetailResp>> {
     return request({
-      url: `/admin-api/v1/users/${params.user_id}`,
+      url: `/api/v1/users/${params.user_id}`,
       method: "GET",
       params: params,
     });
@@ -35,7 +35,7 @@ export const UserAPI = {
   /** 用户充值 */
   rechargeUser(data?: RechargeUserReq): Promise<IApiResponse<RechargeUserResp>> {
     return request({
-      url: `/admin-api/v1/users/${data.user_id}/recharge`,
+      url: `/api/v1/users/${data.user_id}/recharge`,
       method: "POST",
       data: data,
     });
@@ -44,7 +44,7 @@ export const UserAPI = {
   /** 重置用户密码 */
   resetUserPassword(data?: ResetUserPasswordReq): Promise<IApiResponse<ResetUserPasswordResp>> {
     return request({
-      url: `/admin-api/v1/users/${data.user_id}/reset-password`,
+      url: `/api/v1/users/${data.user_id}/reset-password`,
       method: "POST",
       data: data,
     });
@@ -53,9 +53,10 @@ export const UserAPI = {
   /** 更新用户状态 */
   updateUserStatus(data?: UpdateUserStatusReq): Promise<IApiResponse<UpdateUserStatusResp>> {
     return request({
-      url: `/admin-api/v1/users/${data.user_id}/status`,
+      url: `/api/v1/users/${data.user_id}/status`,
       method: "PUT",
       data: data,
     });
   },
+
 };
