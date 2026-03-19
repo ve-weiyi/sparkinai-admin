@@ -2,6 +2,8 @@ import request from "@/utils/request";
 import type {
   BatchDeleteSyslogReq,
   BatchDeleteSyslogResp,
+  GetAiLogListReq,
+  GetAiLogListResp,
   GetOperationLogListReq,
   GetOperationLogListResp,
   GetUploadLogListReq,
@@ -12,6 +14,24 @@ import type {
 
 /** 系统日志管理 */
 export const SyslogAPI = {
+  /** 获取AI调用日志列表 */
+  getAiLogList(params?: GetAiLogListReq): Promise<IApiResponse<GetAiLogListResp>> {
+    return request({
+      url: `/api/v1/syslogs/ai_log`,
+      method: "GET",
+      params: params,
+    });
+  },
+
+  /** 批量删除AI调用日志 */
+  batchDeleteAiLogs(data?: BatchDeleteSyslogReq): Promise<IApiResponse<BatchDeleteSyslogResp>> {
+    return request({
+      url: `/api/v1/syslogs/ai_log/batch_delete`,
+      method: "POST",
+      data: data,
+    });
+  },
+
   /** 获取用户登录日志列表 */
   getUserLoginLogList(params?: GetUserLoginLogListReq): Promise<IApiResponse<GetUserLoginLogListResp>> {
     return request({

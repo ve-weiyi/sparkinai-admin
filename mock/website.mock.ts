@@ -2,7 +2,7 @@ import { defineMock } from "./base";
 
 export default defineMock([
   {
-    url: "/admin-api/v1/admin",
+    url: "/api/v1/admin",
     method: ["GET"],
     body: {
       code: 200,
@@ -54,7 +54,7 @@ export default defineMock([
     },
   },
   {
-    url: "/admin-api/v1/admin/get_visit_stats",
+    url: "/api/v1/admin/get_visit_stats",
     method: ["GET"],
     body: {
       code: 200,
@@ -70,7 +70,7 @@ export default defineMock([
     },
   },
   {
-    url: "/admin-api/v1/admin/get_visit_trend",
+    url: "/api/v1/admin/get_visit_trend",
     method: ["POST"],
     body: {
       code: 200,
@@ -89,7 +89,7 @@ export default defineMock([
     },
   },
   {
-    url: "/admin-api/v1/admin/get_user_area_stats",
+    url: "/api/v1/admin/get_user_area_stats",
     method: ["POST"],
     body: {
       code: 200,

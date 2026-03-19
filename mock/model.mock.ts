@@ -3,7 +3,7 @@ import { defineMock } from "./base";
 export default defineMock([
   // 获取模型列表
   {
-    url: "/admin-api/v1/models",
+    url: "/api/v1/models",
     method: ["GET"],
     body: {
       code: 200,
@@ -49,7 +49,7 @@ export default defineMock([
   },
   // 创建模型
   {
-    url: "/admin-api/v1/models",
+    url: "/api/v1/models",
     method: ["POST"],
     body: {
       code: 200,
@@ -61,7 +61,7 @@ export default defineMock([
   },
   // 更新模型
   {
-    url: "/admin-api/v1/models/:id",
+    url: "/api/v1/models/:id",
     method: ["PUT"],
     body: {
       code: 200,
@@ -74,7 +74,7 @@ export default defineMock([
   },
   // 删除模型
   {
-    url: "/admin-api/v1/models/:id",
+    url: "/api/v1/models/:id",
     method: ["DELETE"],
     body: {
       code: 200,

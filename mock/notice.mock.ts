@@ -2,7 +2,7 @@ import { defineMock } from "./base";
 
 export default defineMock([
   {
-    url: "/admin-api/v1/notice/find_user_notice_list",
+    url: "/api/v1/notice/find_user_notice_list",
     method: ["POST"],
     body: {
       code: 200,
@@ -33,7 +33,7 @@ export default defineMock([
     },
   },
   {
-    url: "/admin-api/v1/notice/find_notice_list",
+    url: "/api/v1/notice/find_notice_list",
     method: ["POST"],
     body: {
       code: 200,
@@ -62,7 +62,7 @@ export default defineMock([
     },
   },
   {
-    url: "/admin-api/v1/notice/get_notice",
+    url: "/api/v1/notice/get_notice",
     method: ["GET"],
     body: {
       code: 200,
@@ -84,7 +84,7 @@ export default defineMock([
     },
   },
   {
-    url: "/admin-api/v1/notice/add_notice",
+    url: "/api/v1/notice/add_notice",
     method: ["POST"],
     body: {
       code: 200,
@@ -106,7 +106,7 @@ export default defineMock([
     },
   },
   {
-    url: "/admin-api/v1/notice/update_notice",
+    url: "/api/v1/notice/update_notice",
     method: ["PUT"],
     body: {
       code: 200,
@@ -128,7 +128,7 @@ export default defineMock([
     },
   },
   {
-    url: "/admin-api/v1/notice/update_notice_status",
+    url: "/api/v1/notice/update_notice_status",
     method: ["PUT"],
     body: {
       code: 200,
@@ -150,7 +150,7 @@ export default defineMock([
     },
   },
   {
-    url: "/admin-api/v1/notice/deletes_notice",
+    url: "/api/v1/notice/deletes_notice",
     method: ["DELETE"],
     body: {
       code: 200,

@@ -3,7 +3,7 @@ import { defineMock } from "./base";
 export default defineMock([
   // 获取系统配置列表
   {
-    url: "/admin-api/v1/system/configs",
+    url: "/api/v1/system/configs",
     method: ["GET"],
     body: {
       code: 200,
@@ -31,7 +31,7 @@ export default defineMock([
   },
   // 创建系统配置
   {
-    url: "/admin-api/v1/system/configs",
+    url: "/api/v1/system/configs",
     method: ["POST"],
     body: {
       code: 200,
@@ -43,7 +43,7 @@ export default defineMock([
   },
   // 更新系统配置
   {
-    url: "/admin-api/v1/system/configs/:id",
+    url: "/api/v1/system/configs/:id",
     method: ["PUT"],
     body: {
       code: 200,
@@ -56,7 +56,7 @@ export default defineMock([
   },
   // 删除系统配置
   {
-    url: "/admin-api/v1/system/configs/:id",
+    url: "/api/v1/system/configs/:id",
     method: ["DELETE"],
     body: {
       code: 200,

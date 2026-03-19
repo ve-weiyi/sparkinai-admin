@@ -2,7 +2,7 @@ import { defineMock } from "./base";
 
 export default defineMock([
   {
-    url: "/admin-api/v1/stats/dashboard",
+    url: "/api/v1/stats/dashboard",
     method: ["GET"],
     body: {
       code: 200,

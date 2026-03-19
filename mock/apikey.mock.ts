@@ -3,7 +3,7 @@ import { defineMock } from "./base";
 export default defineMock([
   // 获取API Key列表
   {
-    url: "/admin-api/v1/api-keys",
+    url: "/api/v1/api-keys",
     method: ["GET"],
     body: {
       code: 200,
@@ -35,7 +35,7 @@ export default defineMock([
   },
   // 创建API Key
   {
-    url: "/admin-api/v1/api-keys",
+    url: "/api/v1/api-keys",
     method: ["POST"],
     body: {
       code: 200,
@@ -47,7 +47,7 @@ export default defineMock([
   },
   // 更新API Key
   {
-    url: "/admin-api/v1/api-keys/:id",
+    url: "/api/v1/api-keys/:id",
     method: ["PUT"],
     body: {
       code: 200,
@@ -59,7 +59,7 @@ export default defineMock([
   },
   // 删除API Key
   {
-    url: "/admin-api/v1/api-keys/:id",
+    url: "/api/v1/api-keys/:id",
     method: ["DELETE"],
     body: {
       code: 200,
@@ -71,7 +71,7 @@ export default defineMock([
   },
   // 测试API Key
   {
-    url: "/admin-api/v1/api-keys/:id/test",
+    url: "/api/v1/api-keys/:id/test",
     method: ["POST"],
     body: {
       code: 200,

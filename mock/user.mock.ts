@@ -3,7 +3,7 @@ import { defineMock } from "./base";
 export default defineMock([
   // 获取用户列表
   {
-    url: "/admin-api/v1/users",
+    url: "/api/v1/users",
     method: ["GET"],
     body: {
       code: 200,
@@ -45,7 +45,7 @@ export default defineMock([
   },
   // 获取用户详情
   {
-    url: "/admin-api/v1/users/:id",
+    url: "/api/v1/users/:id",
     method: ["GET"],
     body: {
       code: 200,
@@ -68,7 +68,7 @@ export default defineMock([
   },
   // 创建用户
   {
-    url: "/admin-api/v1/users",
+    url: "/api/v1/users",
     method: ["POST"],
     body: {
       code: 200,
@@ -80,7 +80,7 @@ export default defineMock([
   },
   // 更新用户
   {
-    url: "/admin-api/v1/users/:id",
+    url: "/api/v1/users/:id",
     method: ["PUT"],
     body: {
       code: 200,
@@ -93,7 +93,7 @@ export default defineMock([
   },
   // 用户充值
   {
-    url: "/admin-api/v1/users/:id/recharge",
+    url: "/api/v1/users/:id/recharge",
     method: ["POST"],
     body: {
       code: 200,
@@ -106,7 +106,7 @@ export default defineMock([
   },
   // 重置用户密码
   {
-    url: "/admin-api/v1/users/:id/reset-password",
+    url: "/api/v1/users/:id/reset-password",
     method: ["POST"],
     body: {
       code: 200,
@@ -119,7 +119,7 @@ export default defineMock([
   },
   // 删除用户
   {
-    url: "/admin-api/v1/users/:id",
+    url: "/api/v1/users/:id",
     method: ["DELETE"],
     body: {
       code: 200,
@@ -132,7 +132,7 @@ export default defineMock([
   },
   // 批量删除用户
   {
-    url: "/admin-api/v1/users/batch-delete",
+    url: "/api/v1/users/batch-delete",
     method: ["POST"],
     body: {
       code: 200,
@@ -147,7 +147,7 @@ export default defineMock([
   // ==========================================
   // 获取用户信息
   {
-    url: "/admin-api/v1/user/get_user_info",
+    url: "/api/v1/user/get_user_info",
     method: ["GET"],
     body: {
       code: 200,
@@ -172,7 +172,7 @@ export default defineMock([
   },
   // 获取用户菜单权限
   {
-    url: "/admin-api/v1/user/get_user_menus",
+    url: "/api/v1/user/get_user_menus",
     method: ["GET"],
     body: {
       code: 200,
@@ -224,7 +224,7 @@ export default defineMock([
   },
   // 获取用户角色
   {
-    url: "/admin-api/v1/user/get_user_roles",
+    url: "/api/v1/user/get_user_roles",
     method: ["GET"],
     body: {
       code: 200,
@@ -243,7 +243,7 @@ export default defineMock([
   },
   // 获取用户API权限
   {
-    url: "/admin-api/v1/user/get_user_apis",
+    url: "/api/v1/user/get_user_apis",
     method: ["GET"],
     body: {
       code: 200,
@@ -255,7 +255,7 @@ export default defineMock([
   },
   // 查询用户登录历史
   {
-    url: "/admin-api/v1/user/get_user_login_history_list",
+    url: "/api/v1/user/get_user_login_history_list",
     method: ["POST"],
     body: {
       code: 200,
@@ -281,7 +281,7 @@ export default defineMock([
   },
   // 修改用户头像
   {
-    url: "/admin-api/v1/user/update_user_avatar",
+    url: "/api/v1/user/update_user_avatar",
     method: ["PUT"],
     body: {
       code: 200,
@@ -291,7 +291,7 @@ export default defineMock([
   },
   // 修改用户信息
   {
-    url: "/admin-api/v1/user/update_user_info",
+    url: "/api/v1/user/update_user_info",
     method: ["PUT"],
     body: {
       code: 200,
@@ -301,7 +301,7 @@ export default defineMock([
   },
   // 修改用户密码
   {
-    url: "/admin-api/v1/user/update_user_password",
+    url: "/api/v1/user/update_user_password",
     method: ["PUT"],
     body: {
       code: 200,
@@ -311,7 +311,7 @@ export default defineMock([
   },
   // 修改用户绑定邮箱
   {
-    url: "/admin-api/v1/user/update_user_bind_email",
+    url: "/api/v1/user/update_user_bind_email",
     method: ["PUT"],
     body: {
       code: 200,
@@ -321,7 +321,7 @@ export default defineMock([
   },
   // 修改用户绑定手机号
   {
-    url: "/admin-api/v1/user/update_user_bind_phone",
+    url: "/api/v1/user/update_user_bind_phone",
     method: ["PUT"],
     body: {
       code: 200,
@@ -331,7 +331,7 @@ export default defineMock([
   },
   // 修改用户绑定第三方平台账号
   {
-    url: "/admin-api/v1/user/update_user_bind_third_party",
+    url: "/api/v1/user/update_user_bind_third_party",
     method: ["PUT"],
     body: {
       code: 200,
@@ -341,7 +341,7 @@ export default defineMock([
   },
   // 删除用户绑定第三方平台账号
   {
-    url: "/admin-api/v1/user/delete_user_bind_third_party",
+    url: "/api/v1/user/delete_user_bind_third_party",
     method: ["POST"],
     body: {
       code: 200,

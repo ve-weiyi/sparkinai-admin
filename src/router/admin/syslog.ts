@@ -15,6 +15,12 @@ export default {
   },
   children: [
     {
+      path: "ai",
+      component: () => import("@/views/admin/syslog/ai/index.vue"),
+      name: "AiLog",
+      meta: { title: "AI调用日志", keepAlive: true },
+    },
+    {
       path: "login",
       component: () => import("@/views/admin/syslog/login/index.vue"),
       name: "LoginLog",

@@ -3,7 +3,7 @@ import { defineMock } from "./base";
 export default defineMock([
   // 获取生成记录列表
   {
-    url: "/admin-api/v1/generations",
+    url: "/api/v1/generations",
     method: ["GET"],
     body: {
       code: 200,
@@ -30,7 +30,7 @@ export default defineMock([
   },
   // 删除生成记录
   {
-    url: "/admin-api/v1/generations/:id",
+    url: "/api/v1/generations/:id",
     method: ["DELETE"],
     body: {
       code: 200,
@@ -43,7 +43,7 @@ export default defineMock([
   },
   // 批量删除生成记录
   {
-    url: "/admin-api/v1/generations/batch-delete",
+    url: "/api/v1/generations/batch-delete",
     method: ["POST"],
     body: {
       code: 200,

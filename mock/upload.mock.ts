@@ -2,7 +2,7 @@ import { defineMock } from "./base";
 
 export default defineMock([
   {
-    url: "/admin-api/v1/upload/upload_file",
+    url: "/api/v1/upload/upload_file",
     method: ["POST"],
     body: {
       code: 200,
@@ -18,7 +18,7 @@ export default defineMock([
     },
   },
   {
-    url: "/admin-api/v1/upload/multi_upload_file",
+    url: "/api/v1/upload/multi_upload_file",
     method: ["POST"],
     body: {
       code: 200,
@@ -44,7 +44,7 @@ export default defineMock([
     },
   },
   {
-    url: "/admin-api/v1/upload/list_upload_file",
+    url: "/api/v1/upload/list_upload_file",
     method: ["POST"],
     body: {
       code: 200,
@@ -67,7 +67,7 @@ export default defineMock([
     },
   },
   {
-    url: "/admin-api/v1/upload/deletes_upload_file",
+    url: "/api/v1/upload/deletes_upload_file",
     method: ["DELETE"],
     body: {
       code: 200,

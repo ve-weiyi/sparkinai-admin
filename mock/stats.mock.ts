@@ -3,7 +3,7 @@ import { defineMock } from "./base";
 export default defineMock([
   // 获取仪表盘统计数据
   {
-    url: "/admin-api/v1/dashboard/stats",
+    url: "/api/v1/dashboard/stats",
     method: ["GET"],
     body: {
       code: 200,

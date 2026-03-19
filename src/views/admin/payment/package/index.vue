@@ -193,7 +193,8 @@ import type {
   RechargePackageItem,
   UpdateRechargePackageReq,
 } from "@/api";
-import { PaymentPackageAPI, RechargePackageStatus, RechargePackageStatusText } from "@/api";
+import { PaymentPackageAPI } from "@/api";
+import { RechargePackageStatus, RechargePackageStatusText } from "@/enums";
 
 // 查询参数
 const queryParams = reactive<GetRechargePackageListReq>({

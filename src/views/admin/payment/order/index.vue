@@ -197,7 +197,8 @@ import { onMounted, reactive, ref } from "vue";
 import { ElMessage } from "element-plus";
 import { Refresh, Search } from "@element-plus/icons-vue";
 import type { GetPaymentOrderListReq, PaymentOrderDetail, PaymentOrderItem } from "@/api";
-import { PaymentOrderAPI, PaymentOrderStatus, PaymentOrderStatusText } from "@/api"; // 查询参数
+import { PaymentOrderAPI } from "@/api";
+import { PaymentOrderStatus, PaymentOrderStatusText } from "@/enums";
 
 // 查询参数
 const queryParams = reactive<GetPaymentOrderListReq>({

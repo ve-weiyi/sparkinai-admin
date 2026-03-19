@@ -2,7 +2,7 @@ import { defineMock } from "./base";
 
 export default defineMock([
   {
-    url: "/admin-api/v1/get_client_info",
+    url: "/api/v1/get_client_info",
     method: ["GET"],
     body: {
       code: 200,
@@ -18,7 +18,7 @@ export default defineMock([
     },
   },
   {
-    url: "/admin-api/v1/get_captcha_code",
+    url: "/api/v1/get_captcha_code",
     method: ["POST"],
     body: {
       code: 200,
@@ -32,7 +32,7 @@ export default defineMock([
     },
   },
   {
-    url: "/admin-api/v1/login",
+    url: "/api/v1/login",
     method: ["POST"],
     body: {
       code: 200,
@@ -54,7 +54,7 @@ export default defineMock([
     },
   },
   {
-    url: "/admin-api/v1/email_login",
+    url: "/api/v1/email_login",
     method: ["POST"],
     body: {
       code: 200,
@@ -76,7 +76,7 @@ export default defineMock([
     },
   },
   {
-    url: "/admin-api/v1/phone_login",
+    url: "/api/v1/phone_login",
     method: ["POST"],
     body: {
       code: 200,
@@ -98,7 +98,7 @@ export default defineMock([
     },
   },
   {
-    url: "/admin-api/v1/logout",
+    url: "/api/v1/logout",
     method: ["GET"],
     body: {
       code: 200,
@@ -107,7 +107,7 @@ export default defineMock([
     },
   },
   {
-    url: "/admin-api/v1/register",
+    url: "/api/v1/register",
     method: ["POST"],
     body: {
       code: 200,
@@ -116,7 +116,7 @@ export default defineMock([
     },
   },
   {
-    url: "/admin-api/v1/send_email_verify_code",
+    url: "/api/v1/send_email_verify_code",
     method: ["POST"],
     body: {
       code: 200,
@@ -125,7 +125,7 @@ export default defineMock([
     },
   },
   {
-    url: "/admin-api/v1/send_phone_verify_code",
+    url: "/api/v1/send_phone_verify_code",
     method: ["POST"],
     body: {
       code: 200,
@@ -134,7 +134,7 @@ export default defineMock([
     },
   },
   {
-    url: "/admin-api/v1/reset_password",
+    url: "/api/v1/reset_password",
     method: ["POST"],
     body: {
       code: 200,
@@ -143,7 +143,7 @@ export default defineMock([
     },
   },
   {
-    url: "/admin-api/v1/refresh_token",
+    url: "/api/v1/refresh_token",
     method: ["POST"],
     body: {
       code: 200,
@@ -163,7 +163,7 @@ export default defineMock([
     },
   },
   {
-    url: "/admin-api/v1/get_oauth_authorize_url",
+    url: "/api/v1/get_oauth_authorize_url",
     method: ["POST"],
     body: {
       code: 200,
@@ -174,7 +174,7 @@ export default defineMock([
     },
   },
   {
-    url: "/admin-api/v1/third_login",
+    url: "/api/v1/third_login",
     method: ["POST"],
     body: {
       code: 200,
@@ -194,7 +194,7 @@ export default defineMock([
     },
   },
   {
-    url: "/admin-api/v1/logoff",
+    url: "/api/v1/logoff",
     method: ["POST"],
     body: {
       code: 200,

@@ -3,7 +3,7 @@ import { defineMock } from "./base";
 export default defineMock([
   // 获取服务商列表
   {
-    url: "/admin-api/v1/providers",
+    url: "/api/v1/providers",
     method: ["GET"],
     body: {
       code: 200,
@@ -41,7 +41,7 @@ export default defineMock([
   },
   // 创建服务商
   {
-    url: "/admin-api/v1/providers",
+    url: "/api/v1/providers",
     method: ["POST"],
     body: {
       code: 200,
@@ -53,7 +53,7 @@ export default defineMock([
   },
   // 更新服务商
   {
-    url: "/admin-api/v1/providers/:id",
+    url: "/api/v1/providers/:id",
     method: ["PUT"],
     body: {
       code: 200,
@@ -66,7 +66,7 @@ export default defineMock([
   },
   // 删除服务商
   {
-    url: "/admin-api/v1/providers/:id",
+    url: "/api/v1/providers/:id",
     method: ["DELETE"],
     body: {
       code: 200,

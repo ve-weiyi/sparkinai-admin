@@ -153,14 +153,14 @@ Key features:
 ### Environment Configuration
 
 **Development** (`.env.development`):
-- API proxy: `/admin-api` → `http://localhost:9091`
+- API proxy: `/api` → `http://localhost:9091`
 - Mock server enabled by default
-- WebSocket: `ws://localhost:9091/admin-api/v1/websocket`
+- WebSocket: `ws://localhost:9091/api/v1/websocket`
 
 **Production** (`.env.production`):
 - API: `https://admin.veweiyi.cn`
 - Mock disabled
-- WebSocket: `wss://admin.veweiyi.cn/admin-api/v1/websocket`
+- WebSocket: `wss://admin.veweiyi.cn/api/v1/websocket`
 
 ### Mock Server
 
@@ -211,7 +211,7 @@ import type { ApiResponse, UserInfo } from "./types";
 export const UserAPI = {
   getUserInfo(): Promise<ApiResponse<UserInfo>> {
     return request({
-      url: "/admin-api/v1/user/info",
+      url: "/api/v1/user/info",
       method: "get",
     });
   },

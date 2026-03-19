@@ -38,6 +38,23 @@ export interface AdminInfoDetail {
   roles: string[];
 }
 
+// AI 调用日志信息项
+export interface AiLogItem {
+  id: number; // 日志ID
+  user_id: string; // 用户ID
+  terminal_id: string; // 设备ID
+  engine_id: number; // 引擎ID
+  api_key_id: number; // API Key ID
+  request_body: string; // 请求体
+  response_body: string; // 响应体
+  cost_ms: number; // 耗时（毫秒）
+  status: number; // 0-失败 1-成功
+  error_msg: string; // 错误信息
+  created_at: number; // 创建时间
+  user_info: UserInfoVO; // 用户信息
+  client_info: ClientInfoVO; // 客户端信息
+}
+
 // API密钥信息项
 export interface ApiKeyItem {
   id: number; // API密钥ID
@@ -267,7 +284,7 @@ export interface CreateRechargePackageReq {
   amount: number;
   original_amount: number;
   description: string;
-  features?: string[];
+  features: string[];
   is_hot: boolean;
   status: number;
   sort_order: number;
@@ -493,6 +510,22 @@ export interface GetAdminListReq extends PageQuery {
   phone?: string;
   status?: number; // 状态: -1删除 0正常 1禁用
   user_ids?: string[]; // 管理员ID
+}
+
+// AI 调用日志列表查询请求
+export interface GetAiLogListReq extends PageQuery {
+  user_id?: string; // 用户ID筛选
+  engine_id?: number; // 引擎ID筛选
+  start_date?: string; // 开始日期 YYYY-MM-DD
+  end_date?: string; // 结束日期 YYYY-MM-DD
+}
+
+// AI 调用日志列表响应
+export interface GetAiLogListResp {
+  page: number;
+  page_size: number;
+  total: number;
+  list: AiLogItem[];
 }
 
 // 获取AI使用统计请求

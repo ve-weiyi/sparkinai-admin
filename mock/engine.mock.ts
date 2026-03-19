@@ -3,7 +3,7 @@ import { defineMock } from "./base";
 export default defineMock([
   // 获取引擎配置列表
   {
-    url: "/admin-api/v1/engines",
+    url: "/api/v1/engines",
     method: ["GET"],
     body: {
       code: 200,
@@ -38,7 +38,7 @@ export default defineMock([
   },
   // 创建引擎配置
   {
-    url: "/admin-api/v1/engines",
+    url: "/api/v1/engines",
     method: ["POST"],
     body: {
       code: 200,
@@ -50,7 +50,7 @@ export default defineMock([
   },
   // 更新引擎配置
   {
-    url: "/admin-api/v1/engines/:id",
+    url: "/api/v1/engines/:id",
     method: ["PUT"],
     body: {
       code: 200,
@@ -63,7 +63,7 @@ export default defineMock([
   },
   // 删除引擎配置
   {
-    url: "/admin-api/v1/engines/:id",
+    url: "/api/v1/engines/:id",
     method: ["DELETE"],
     body: {
       code: 200,
