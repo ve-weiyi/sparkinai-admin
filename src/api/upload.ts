@@ -5,7 +5,7 @@ import type {
   GetUploadTokenResp,
   ListFilesReq,
   PageResult,
-  UploadFilesReq
+  UploadFilesReq,
 } from "./types";
 
 /** 文件上传 */

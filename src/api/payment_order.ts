@@ -3,7 +3,7 @@ import type {
   GetPaymentOrderDetailReq,
   GetPaymentOrderDetailResp,
   GetPaymentOrderListReq,
-  GetPaymentOrderListResp
+  GetPaymentOrderListResp,
 } from "./types";
 
 /** 支付订单管理 */

@@ -12,7 +12,7 @@ import type {
   GetApiReq,
   PageResult,
   SyncApisResp,
-  UpdateApiReq
+  UpdateApiReq,
 } from "./types";
 
 /** 接口管理 */

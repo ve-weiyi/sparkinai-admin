@@ -5,7 +5,7 @@ import type {
   PageResult,
   UpdateAdminPasswordReq,
   UpdateAdminRolesReq,
-  UpdateAdminStatusReq
+  UpdateAdminStatusReq,
 } from "./types";
 
 /** 账号管理（Admin） */

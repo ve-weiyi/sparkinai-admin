@@ -7,7 +7,7 @@ import type {
   GetRechargePackageListReq,
   GetRechargePackageListResp,
   UpdateRechargePackageReq,
-  UpdateRechargePackageResp
+  UpdateRechargePackageResp,
 } from "./types";
 
 /** 充值套餐管理 */

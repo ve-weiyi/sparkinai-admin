@@ -5,7 +5,7 @@ import type {
   AdjustUserCreditLimitReq,
   AdjustUserCreditLimitResp,
   GetUserAccountListReq,
-  GetUserAccountListResp
+  GetUserAccountListResp,
 } from "./types";
 
 /** 用户账户管理 */

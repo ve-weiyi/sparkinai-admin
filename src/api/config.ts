@@ -1,19 +1,15 @@
 import request from "@/utils/request";
 import type {
-  BatchUpdateSystemConfigReq,
-  BatchUpdateSystemConfigResp,
   CreateSystemConfigReq,
   CreateSystemConfigResp,
   DeleteSystemConfigReq,
   DeleteSystemConfigResp,
-  GetPublicConfigReq,
-  GetPublicConfigResp,
   GetSystemConfigListReq,
   GetSystemConfigListResp,
   GetSystemConfigReq,
   GetSystemConfigResp,
   UpdateSystemConfigReq,
-  UpdateSystemConfigResp
+  UpdateSystemConfigResp,
 } from "./types";
 
 /** 系统配置管理 */
@@ -60,24 +56,6 @@ export const ConfigAPI = {
       url: `/api/v1/configs/${data.id}`,
       method: "DELETE",
       data: data,
-    });
-  },
-
-  /** 批量更新系统配置 */
-  batchUpdateSystemConfig(data?: BatchUpdateSystemConfigReq): Promise<IApiResponse<BatchUpdateSystemConfigResp>> {
-    return request({
-      url: `/api/v1/configs/batch`,
-      method: "PUT",
-      data: data,
-    });
-  },
-
-  /** 获取公开配置 */
-  getPublicConfig(params?: GetPublicConfigReq): Promise<IApiResponse<GetPublicConfigResp>> {
-    return request({
-      url: `/api/v1/configs/public`,
-      method: "GET",
-      params: params,
     });
   },
 

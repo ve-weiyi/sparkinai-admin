@@ -17,7 +17,7 @@ import type {
   RegisterReq,
   ResetPasswordReq,
   SendEmailCodeReq,
-  SendPhoneCodeReq
+  SendPhoneCodeReq,
 } from "./types";
 
 /** 登录认证 */

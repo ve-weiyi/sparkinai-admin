@@ -1,7 +1,7 @@
 import request from "@/utils/request";
 import type {
   PingReq,
-  PingResp
+  PingResp,
 } from "./types";
 
 export const DefaultAPI = {

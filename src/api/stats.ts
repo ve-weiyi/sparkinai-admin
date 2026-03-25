@@ -7,7 +7,7 @@ import type {
   GetDashboardTrendReq,
   GetDashboardTrendResp,
   GetUserActivityRankingReq,
-  GetUserActivityRankingResp
+  GetUserActivityRankingResp,
 } from "./types";
 
 /** 统计分析 */

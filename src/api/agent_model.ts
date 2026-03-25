@@ -9,7 +9,7 @@ import type {
   GetModelListReq,
   GetModelListResp,
   UpdateModelReq,
-  UpdateModelResp
+  UpdateModelResp,
 } from "./types";
 
 /** AI模型管理 */

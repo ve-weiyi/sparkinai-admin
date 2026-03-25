@@ -9,7 +9,7 @@ import type {
   SetDefaultEngineReq,
   SetDefaultEngineResp,
   UpdateEngineReq,
-  UpdateEngineResp
+  UpdateEngineResp,
 } from "./types";
 
 /** 引擎配置管理 */

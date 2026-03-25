@@ -13,7 +13,7 @@ import type {
   GetSmsMessageListReq,
   GetSmsMessageListResp,
   UpdateNotifyTemplateReq,
-  UpdateNotifyTemplateResp
+  UpdateNotifyTemplateResp,
 } from "./types";
 
 /** 通知管理 */

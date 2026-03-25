@@ -13,7 +13,7 @@ import type {
   RoleVO,
   UpdateRoleApiPermissionsReq,
   UpdateRoleMenuPermissionsReq,
-  UpdateRoleReq
+  UpdateRoleReq,
 } from "./types";
 
 /** 角色管理 */

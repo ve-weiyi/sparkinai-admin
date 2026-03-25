@@ -14,14 +14,14 @@ const contentConfig: IContentConfig = {
     pageSize: 10,
     pageSizes: [10, 20, 30, 50],
   },
-  indexAction: (params) => SyslogAPI.getUserLoginLogList(params),
+  indexAction: (params) => SyslogAPI.getLoginLogList(params),
   parseData: (res) => {
     return {
       total: res.data.total,
       list: res.data.list || [],
     };
   },
-  deleteAction: (ids) => SyslogAPI.batchDeleteUserLoginLogs({ ids: ids.split(",").map(Number) }),
+  deleteAction: (ids) => SyslogAPI.batchDeleteLoginLogs({ ids: ids.split(",").map(Number) }),
   pk: "id",
   toolbar: [
     {

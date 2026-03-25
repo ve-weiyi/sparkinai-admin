@@ -7,7 +7,7 @@ import type {
   GetGenerationDetailReq,
   GetGenerationDetailResp,
   GetGenerationListReq,
-  GetGenerationListResp
+  GetGenerationListResp,
 } from "./types";
 
 /** 生成记录管理 */

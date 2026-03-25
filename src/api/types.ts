@@ -146,16 +146,6 @@ export interface BatchResp {
   success_count: number;
 }
 
-// 批量更新系统配置请求
-export interface BatchUpdateSystemConfigReq {
-  configs: SystemConfigUpdateItem[]; // 配置列表
-}
-
-// 批量更新系统配置响应
-export interface BatchUpdateSystemConfigResp {
-  success_count: number; // 成功更新数量
-}
-
 export interface CleanApisResp {
   success_count: number; // 清空成功数量
 }
@@ -684,6 +674,22 @@ export interface GetInboxMessageListResp {
   list: InboxMessageItem[];
 }
 
+// 用户登录日志列表查询请求
+export interface GetLoginLogListReq extends PageQuery {
+  user_id?: string; // 用户ID筛选
+  status?: number; // 登录状态筛选
+  start_date?: string; // 开始日期 YYYY-MM-DD
+  end_date?: string; // 结束日期 YYYY-MM-DD
+}
+
+// 用户登录日志列表响应
+export interface GetLoginLogListResp {
+  page: number;
+  page_size: number;
+  total: number;
+  list: LoginLogItem[];
+}
+
 export interface GetMenuListReq extends PageQuery {
   name?: string; // 路由名字
   title?: string; // 菜单标题
@@ -795,15 +801,6 @@ export interface GetProviderListResp {
   page_size: number;
   total: number;
   list: ProviderItem[];
-}
-
-// 获取公开配置请求（无需认证）
-export interface GetPublicConfigReq {
-}
-
-// 获取公开配置响应
-export interface GetPublicConfigResp {
-  configs: Record<string, any>; // 公开配置键值对
 }
 
 // ========== 充值套餐管理 ==========
@@ -963,22 +960,6 @@ export interface GetUserListResp {
   list: UserItem[];
 }
 
-// 用户登录日志列表查询请求
-export interface GetUserLoginLogListReq extends PageQuery {
-  user_id?: string; // 用户ID筛选
-  status?: number; // 登录状态筛选
-  start_date?: string; // 开始日期 YYYY-MM-DD
-  end_date?: string; // 结束日期 YYYY-MM-DD
-}
-
-// 用户登录日志列表响应
-export interface GetUserLoginLogListResp {
-  page: number;
-  page_size: number;
-  total: number;
-  list: UserLoginLogItem[];
-}
-
 export interface GetUserMenusResp {
   list: UserMenu[];
 }
@@ -1014,6 +995,20 @@ export interface InboxMessageItem {
 export interface ListFilesReq {
   file_path?: string; // 文件路径
   limit?: number; // 限制
+}
+
+// 用户登录日志信息项
+export interface LoginLogItem {
+  id: number; // 日志ID
+  user_id: string; // 用户ID
+  terminal_id: string; // 设备ID
+  login_type: string; // 登录类型
+  status: number; // 登录状态
+  fail_reason: string; // 失败原因
+  logout_at: number; // 登出时间
+  created_at: number; // 创建时间
+  user_info: UserInfoVO; // 用户信息
+  client_info: ClientInfoVO; // 客户端信息
 }
 
 // 登录响应
@@ -1373,12 +1368,6 @@ export interface SystemConfigItem {
   updated_at: number; // 更新时间
 }
 
-// 系统配置更新项
-export interface SystemConfigUpdateItem {
-  config_key: string; // 配置键
-  config_value: string; // 配置值
-}
-
 // 测试API密钥请求
 export interface TestApiKeyReq {
   id: number; // API密钥ID
@@ -1692,7 +1681,7 @@ export interface UserInfoVO {
 export interface UserItem {
   id: number; // 用户ID (UUID)
   user_id: string; // 用户ID (UUID)
-  usernmae: string; // 用户名
+  username: string; // 用户名
   nickname: string; // 用户昵称
   avatar: string; // 用户头像
   phone?: string; // 用户手机号
@@ -1710,20 +1699,6 @@ export interface UserLastLogin {
   login_at: number; // 最后登录时间（毫秒时间戳）
   login_ip_address: string; // 最后登录IP地址
   login_ip_source: string; // 最后登录IP归属地
-}
-
-// 用户登录日志信息项
-export interface UserLoginLogItem {
-  id: number; // 日志ID
-  user_id: string; // 用户ID
-  terminal_id: string; // 设备ID
-  login_type: string; // 登录类型
-  status: number; // 登录状态
-  fail_reason: string; // 失败原因
-  logout_at: number; // 登出时间
-  created_at: number; // 创建时间
-  user_info: UserInfoVO; // 用户信息
-  client_info: ClientInfoVO; // 客户端信息
 }
 
 export interface UserMenu {

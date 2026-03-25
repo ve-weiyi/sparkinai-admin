@@ -13,7 +13,7 @@ import type {
   PageResult,
   SyncMenusReq,
   SyncMenusResp,
-  UpdateMenuReq
+  UpdateMenuReq,
 } from "./types";
 
 /** 菜单管理 */

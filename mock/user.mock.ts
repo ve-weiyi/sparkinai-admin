@@ -255,7 +255,7 @@ export default defineMock([
   },
   // 查询用户登录历史
   {
-    url: "/api/v1/user/get_user_login_history_list",
+    url: "/api/v1/user/get_login_history_list",
     method: ["POST"],
     body: {
       code: 200,

@@ -9,7 +9,7 @@ import type {
   ResetUserPasswordReq,
   ResetUserPasswordResp,
   UpdateUserStatusReq,
-  UpdateUserStatusResp
+  UpdateUserStatusResp,
 } from "./types";
 
 /** 用户管理 */

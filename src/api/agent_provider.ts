@@ -7,7 +7,7 @@ import type {
   GetProviderListReq,
   GetProviderListResp,
   UpdateProviderReq,
-  UpdateProviderResp
+  UpdateProviderResp,
 } from "./types";
 
 /** AI供应商管理 */
