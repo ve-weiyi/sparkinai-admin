@@ -48,7 +48,7 @@ const props = defineProps({
   },
   uploadPath: {
     type: String,
-    default: "blog/file/",
+    default: "sparkinai/file/",
     required: false,
   },
 });

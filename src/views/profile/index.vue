@@ -121,7 +121,7 @@
             <div class="security-title">绑定第三方账号</div>
             <p class="tip-text">
               使用以下任一方式都可以登录到您的
-              <strong>blog</strong>
+              <strong>sparkinai</strong>
               帐号
             </p>
 

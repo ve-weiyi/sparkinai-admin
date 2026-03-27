@@ -1,7 +1,13 @@
 import request from "@/utils/request";
 import type {
+  BatchMarkInboxMessagesReadReq,
+  BatchMarkInboxMessagesReadResp,
+  CreateInboxMessageReq,
+  CreateInboxMessageResp,
   CreateNotifyTemplateReq,
   CreateNotifyTemplateResp,
+  DeleteInboxMessageReq,
+  DeleteInboxMessageResp,
   DeleteNotifyTemplateReq,
   DeleteNotifyTemplateResp,
   GetEmailMessageListReq,
@@ -12,6 +18,8 @@ import type {
   GetNotifyTemplateListResp,
   GetSmsMessageListReq,
   GetSmsMessageListResp,
+  UpdateInboxMessageReq,
+  UpdateInboxMessageResp,
   UpdateNotifyTemplateReq,
   UpdateNotifyTemplateResp,
 } from "./types";
@@ -33,6 +41,42 @@ export const NotificationAPI = {
       url: `/api/v1/inbox-messages`,
       method: "GET",
       params: params,
+    });
+  },
+
+  /** 创建站内消息 */
+  createInboxMessage(data?: CreateInboxMessageReq): Promise<IApiResponse<CreateInboxMessageResp>> {
+    return request({
+      url: `/api/v1/inbox-messages`,
+      method: "POST",
+      data: data,
+    });
+  },
+
+  /** 更新站内消息 */
+  updateInboxMessage(data?: UpdateInboxMessageReq): Promise<IApiResponse<UpdateInboxMessageResp>> {
+    return request({
+      url: `/api/v1/inbox-messages/${data.id}`,
+      method: "PUT",
+      data: data,
+    });
+  },
+
+  /** 删除站内消息 */
+  deleteInboxMessage(data?: DeleteInboxMessageReq): Promise<IApiResponse<DeleteInboxMessageResp>> {
+    return request({
+      url: `/api/v1/inbox-messages/${data.id}`,
+      method: "DELETE",
+      data: data,
+    });
+  },
+
+  /** 批量标记站内消息已读 */
+  batchMarkInboxMessagesRead(data?: BatchMarkInboxMessagesReadReq): Promise<IApiResponse<BatchMarkInboxMessagesReadResp>> {
+    return request({
+      url: `/api/v1/inbox-messages/batch-read`,
+      method: "POST",
+      data: data,
     });
   },
 

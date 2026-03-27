@@ -41,15 +41,26 @@ export interface AdminInfoDetail {
 // AI 调用日志信息项
 export interface AiLogItem {
   id: number; // 日志ID
+  idempotency_key: string; // 幂等键
   user_id: string; // 用户ID
   terminal_id: string; // 设备ID
   engine_id: number; // 引擎ID
   api_key_id: number; // API Key ID
+  generation_id: string; // 生成记录ID
+  model: string; // 模型名称
+  provider: string; // 供应商
   request_body: string; // 请求体
   response_body: string; // 响应体
   cost_ms: number; // 耗时（毫秒）
   status: number; // 0-失败 1-成功
   error_msg: string; // 错误信息
+  input_tokens: number; // 输入token
+  output_tokens: number; // 输出token
+  total_tokens: number; // 总token
+  cost_charge: number; // 实际费用
+  billing_status: number; // 结算状态
+  transaction_no: string; // 关联流水号
+  billed_at: number; // 结算时间
   created_at: number; // 创建时间
   user_info: UserInfoVO; // 用户信息
   client_info: ClientInfoVO; // 客户端信息
@@ -142,6 +153,14 @@ export interface BatchDeleteSyslogResp {
   success_count: number; // 成功删除数量
 }
 
+export interface BatchMarkInboxMessagesReadReq {
+  ids: number[];
+}
+
+export interface BatchMarkInboxMessagesReadResp {
+  success_count: number;
+}
+
 export interface BatchResp {
   success_count: number;
 }
@@ -211,6 +230,18 @@ export interface CreateEngineReq {
 // 创建引擎配置响应
 export interface CreateEngineResp {
   id: number; // 引擎配置ID
+}
+
+export interface CreateInboxMessageReq {
+  user_id: string;
+  title: string;
+  content: string;
+  type: string;
+  extra?: string;
+}
+
+export interface CreateInboxMessageResp {
+  id: number;
 }
 
 export interface CreateMenuReq extends MenuMeta {
@@ -342,6 +373,14 @@ export interface DeleteGenerationReq {
 
 // 删除生成记录响应
 export interface DeleteGenerationResp {
+  success: boolean;
+}
+
+export interface DeleteInboxMessageReq {
+  id: number;
+}
+
+export interface DeleteInboxMessageResp {
   success: boolean;
 }
 
@@ -957,7 +996,7 @@ export interface GetUserListResp {
   page: number;
   page_size: number;
   total: number;
-  list: UserItem[];
+  list: UserOverview[];
 }
 
 export interface GetUserMenusResp {
@@ -1455,6 +1494,18 @@ export interface UpdateEngineResp {
   success: boolean;
 }
 
+export interface UpdateInboxMessageReq {
+  id: number;
+  title: string;
+  content: string;
+  type: string;
+  extra?: string;
+}
+
+export interface UpdateInboxMessageResp {
+  success: boolean;
+}
+
 export interface UpdateMenuReq extends MenuMeta {
   id: number; // 主键
   parent_id: number; // 父id
@@ -1722,6 +1773,11 @@ export interface UserMenuMeta {
   affix?: boolean;
   keepAlive?: boolean;
   breadcrumb?: boolean;
+}
+
+export interface UserOverview extends UserItem {
+  balance: string; // 账户余额
+  coin: number; // 积分
 }
 
 export interface UserRole {

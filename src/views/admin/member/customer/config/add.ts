@@ -1,7 +1,6 @@
 import type { IModalConfig } from "@/components/CURD/types";
-import { UserAPI } from "@/api/user";
-import { EnableStatusEnum } from "@/enums";
 import { USER_STATUS_OPTIONS } from "@/constants/options";
+import { EnableStatusEnum } from "@/enums";
 
 const modalConfig: IModalConfig = {
   permPrefix: "admin:user",
@@ -34,20 +33,6 @@ const modalConfig: IModalConfig = {
       prop: "nickname",
       type: "input",
       attrs: { placeholder: "请输入昵称" },
-    },
-    {
-      label: "免费次数",
-      prop: "free_usage",
-      type: "input-number",
-      attrs: { min: 0, step: 1 },
-      initialValue: 3,
-    },
-    {
-      label: "Token余额",
-      prop: "token_balance",
-      type: "input-number",
-      attrs: { min: 0, step: 100 },
-      initialValue: 0,
     },
     {
       label: "状态",

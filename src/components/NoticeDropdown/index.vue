@@ -24,7 +24,7 @@
               </el-text>
 
               <div class="text-xs text-gray">
-                {{ item.publishTime }}
+                {{ item.created_at ? new Date(item.created_at).toLocaleString() : '' }}
               </div>
             </div>
           </div>
@@ -59,12 +59,8 @@
     <div v-if="detail" class="p-x-20px">
       <div class="flex-y-center mb-16px text-13px text-color-secondary">
         <span class="flex-y-center">
-          <el-icon><User /></el-icon>
-          {{ detail.publisherName }}
-        </span>
-        <span class="ml-2 flex-y-center">
           <el-icon><Timer /></el-icon>
-          {{ detail.publishTime }}
+          {{ detail.created_at ? new Date(detail.created_at).toLocaleString() : '' }}
         </span>
       </div>
 

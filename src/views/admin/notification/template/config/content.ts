@@ -20,10 +20,7 @@ const contentConfig: IContentConfig = {
     }
     return Promise.all(
       idList.map((id) => NotificationAPI.deleteNotifyTemplate({ id: parseInt(id) }))
-    ).then(() => ({
-      code: 0,
-      message: "success",
-    }));
+    ).then((results) => results[results.length - 1]);
   },
   pk: "id",
   toolbar: ["add", "delete"],
@@ -31,10 +28,12 @@ const contentConfig: IContentConfig = {
   cols: [
     { type: "selection", label: "批量操作", width: 50, align: "center" },
     { label: "ID", prop: "id", width: 80, align: "center" },
-    { label: "模板编码", prop: "code", width: 150, align: "center" },
-    { label: "通知渠道", prop: "channel", width: 120, align: "center" },
-    { label: "使用场景", prop: "scene", width: 120, align: "center" },
+    { label: "模板编码", prop: "code", width: 100, align: "center" },
+    { label: "通知渠道", prop: "channel", width: 100, align: "center" },
+    { label: "使用场景", prop: "scene", width: 100, align: "center" },
     { label: "标题", prop: "title", minWidth: 200, align: "center" },
+    { label: "内容", prop: "content", width: 200, align: "center" },
+    { label: "状态", prop: "enabled", width: 100, align: "center" },
     {
       label: "创建时间",
       prop: "created_at",

@@ -3,26 +3,33 @@
  */
 import { ref, onMounted, onBeforeUnmount } from "vue";
 import router from "@/router";
-
-const PAGE_SIZE = 5;
+import { NotificationAPI } from "@/api/notification";
+import type { InboxMessageItem } from "@/api/types";
 
 export function useNotice() {
-  // 状态
-  const list = ref<any[]>([]);
-  const detail = ref<any | null>(null);
+  const list = ref<InboxMessageItem[]>([]);
+  const detail = ref<InboxMessageItem | null>(null);
   const dialogVisible = ref(false);
 
-  async function fetchList(params?: Partial<any>) {
-    list.value = [];
+  async function fetchList() {
+    const res = await NotificationAPI.getInboxMessageList({ only_unread: 1, page: 1, page_size: 10 });
+    list.value = res.data?.list ?? [];
   }
 
-  async function read(id: string) {
-    dialogVisible.value = true;
-    const idx = list.value.findIndex((item: any) => item.id === id);
-    if (idx >= 0) list.value.splice(idx, 1);
+  async function read(id: number) {
+    const item = list.value.find((m) => m.id === id);
+    if (item) {
+      detail.value = item;
+      dialogVisible.value = true;
+    }
+    await NotificationAPI.batchMarkInboxMessagesRead({ ids: [id] });
+    list.value = list.value.filter((m) => m.id !== id);
   }
 
   async function readAll() {
+    const ids = list.value.map((m) => m.id);
+    if (ids.length === 0) return;
+    await NotificationAPI.batchMarkInboxMessagesRead({ ids });
     list.value = [];
   }
 

@@ -154,6 +154,6 @@ export enum NoticeLevelEnum {
  * 通知应用枚举
  */
 export enum NoticeAppEnum {
-  BLOG = "blog-web", //
+  APP = "app-web", //
   ADMIN = "admin-web", // 管理
 }

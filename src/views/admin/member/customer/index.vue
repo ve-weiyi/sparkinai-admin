@@ -8,12 +8,9 @@
     <PageContent
       ref="contentRef"
       :content-config="contentConfig"
-      @add-click="handleAddClick"
-      @edit-click="handleEditClick"
       @operate-click="handleOperateClick"
       @toolbar-click="handleToolbarClick"
     />
-    <PageModal ref="addModalRef" :modal-config="addConfig" @submit-click="handleSubmitClick" />
     <PageModal ref="editModalRef" :modal-config="editConfig" @submit-click="handleSubmitClick" />
   </div>
 </template>
@@ -24,7 +21,6 @@ import PageContent from "@/components/CURD/PageContent.vue";
 import PageModal from "@/components/CURD/PageModal.vue";
 import searchConfig from "./config/search";
 import contentConfig from "./config/content";
-import addConfig from "./config/add";
 import editConfig from "./config/edit";
 import usePage from "@/components/CURD/usePage";
 import { UserAPI } from "@/api/user";
@@ -32,15 +28,17 @@ import { ElMessage, ElMessageBox } from "element-plus";
 import type { IOperateData } from "@/components/CURD/types";
 
 const {
+  searchRef,
   contentRef,
-  addModalRef,
   editModalRef,
   handleSearchClick,
-  handleResetClick,
-  handleAddClick,
-  handleEditClick,
   handleSubmitClick,
 } = usePage();
+
+function handleResetClick() {
+  const queryParams = searchRef.value?.getQueryParams();
+  contentRef.value?.fetchPageData(queryParams, true);
+}
 
 function handleToolbarClick(name: string) {
   console.log(name);
@@ -70,12 +68,10 @@ const handleOperateClick = (data: IOperateData) => {
         })
         .then(() => {
           ElMessage.success("充值成功");
-          handleSearchClick();
+          handleResetClick();
         })
         .catch((error) => {
-          if (error !== "cancel") {
-            console.error(error);
-          }
+          if (error !== "cancel") console.error(error);
         });
       break;
     case "reset_pwd":
@@ -96,13 +92,14 @@ const handleOperateClick = (data: IOperateData) => {
           ElMessage.success("重置密码成功");
         })
         .catch((error) => {
-          if (error !== "cancel") {
-            console.error(error);
-          }
+          if (error !== "cancel") console.error(error);
         });
       break;
     case "edit":
-      handleEditClick(data.row);
+      editModalRef.value?.setModalVisible();
+      UserAPI.getUserDetail({ user_id: data.row.user_id }).then((res) => {
+        editModalRef.value?.setFormData(res.data);
+      });
       break;
   }
 };

@@ -1,8 +1,9 @@
 import type { IContentConfig } from "@/components/CURD/types";
+import type { GetUserListReq } from "@/api/types";
 import { UserAPI } from "@/api/user";
 import { EnableStatusEnum } from "@/enums";
 
-const contentConfig: IContentConfig = {
+const contentConfig: IContentConfig<GetUserListReq> = {
   pageTitle: "用户管理",
   permPrefix: "admin:user",
   table: { border: true, highlightCurrentRow: true },
@@ -14,32 +15,29 @@ const contentConfig: IContentConfig = {
   },
   indexAction: (query) => UserAPI.getUserList(query),
   parseData: (res) => ({ total: res.data.total, list: res.data.list || [] }),
-  modifyAction(row, field, value) {
-    switch (field) {
-      case "status":
-        return UserAPI.updateUserStatus({
-          user_id: row.id,
-          status: row.status,
-        });
-    }
-    return Promise.reject("unknown action");
+  modifyAction(row) {
+    return UserAPI.updateUserStatus({
+      user_id: row.user_id,
+      status: row.status,
+    });
   },
-  pk: "id",
+  pk: "user_id",
   defaultToolbar: ["refresh", "filter", "search"],
   cols: [
     { type: "selection", label: "批量操作", width: 50, align: "center" },
-    { label: "ID", prop: "id", width: 70, align: "center" },
-    { label: "用户名", prop: "username", width: 100, align: "center" },
+    { label: "ID", prop: "id", width: 70, align: "center", show: false },
+    { label: "用户名", prop: "username", width: 120, align: "center" },
     { label: "昵称", prop: "nickname", width: 120, align: "center" },
-    { label: "头像", prop: "avatar", width: 80, align: "center", templet: "image" },
-    { label: "邮箱", prop: "email", minWidth: 150, align: "center" },
-    { label: "手机号", prop: "phone", minWidth: 150, align: "center" },
-    { label: "免费次数", prop: "free_usage", width: 100, align: "center" },
-    { label: "累计生成", prop: "total_generations", width: 100, align: "center" },
+    { label: "头像", prop: "avatar", width: 70, align: "center", templet: "image" },
+    { label: "邮箱", prop: "email", minWidth: 160, align: "center" },
+    { label: "手机号", prop: "phone", width: 130, align: "center" },
+    { label: "余额", prop: "balance", width: 100, align: "center" },
+    { label: "积分", prop: "coin", width: 80, align: "center" },
+    { label: "注册方式", prop: "register_type", width: 100, align: "center" },
     {
       label: "状态",
       prop: "status",
-      width: 80,
+      width: 90,
       align: "center",
       templet: "switch",
       activeValue: EnableStatusEnum.ENABLED,
@@ -52,24 +50,15 @@ const contentConfig: IContentConfig = {
       prop: "created_at",
       width: 170,
       align: "center",
+      sortable: true,
       templet: "date",
       dateFormat: "YYYY/MM/DD HH:mm:ss",
-      show: false,
-    },
-    {
-      label: "最后登录",
-      prop: "last_login_at",
-      width: 170,
-      align: "center",
-      templet: "date",
-      dateFormat: "YYYY/MM/DD HH:mm:ss",
-      show: false,
     },
     {
       label: "操作",
       align: "center",
       fixed: "right",
-      width: 280,
+      width: 240,
       templet: "tool",
       operat: [
         {
@@ -89,12 +78,6 @@ const contentConfig: IContentConfig = {
           text: "编辑",
           perm: "edit",
           attrs: { icon: "edit", type: "primary" },
-        },
-        {
-          name: "delete",
-          text: "删除",
-          perm: "delete",
-          attrs: { icon: "delete", type: "danger" },
         },
       ],
     },

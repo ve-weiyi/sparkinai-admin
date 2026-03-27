@@ -17,9 +17,9 @@ const contentConfig: IContentConfig = {
   defaultToolbar: ["refresh", "filter", "search"],
   cols: [
     { label: "ID", prop: "id", width: 80, align: "center" },
-    { label: "手机号", prop: "phone", width: 150, align: "center" },
+    { label: "手机号", prop: "phone", width: 180, align: "center" },
     { label: "标题", prop: "title", width: 200, align: "center" },
-    { label: "内容", prop: "content", minWidth: 250, align: "center" },
+    { label: "内容", prop: "content", minWidth: 300, align: "center" },
     { label: "场景", prop: "scene", width: 120, align: "center" },
     { label: "状态", prop: "status", width: 100, align: "center" },
     {
