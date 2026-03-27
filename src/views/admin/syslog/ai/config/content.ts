@@ -70,18 +70,6 @@ const contentConfig: IContentConfig = {
       align: "center",
     },
     {
-      label: "供应商",
-      prop: "provider",
-      width: 100,
-      align: "center",
-    },
-    {
-      label: "引擎ID",
-      prop: "engine_id",
-      width: 90,
-      align: "center",
-    },
-    {
       label: "状态",
       prop: "status",
       width: 80,

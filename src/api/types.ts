@@ -44,11 +44,7 @@ export interface AiLogItem {
   idempotency_key: string; // 幂等键
   user_id: string; // 用户ID
   terminal_id: string; // 设备ID
-  engine_id: number; // 引擎ID
-  api_key_id: number; // API Key ID
-  generation_id: string; // 生成记录ID
   model: string; // 模型名称
-  provider: string; // 供应商
   request_body: string; // 请求体
   response_body: string; // 响应体
   cost_ms: number; // 耗时（毫秒）
@@ -544,7 +540,6 @@ export interface GetAdminListReq extends PageQuery {
 // AI 调用日志列表查询请求
 export interface GetAiLogListReq extends PageQuery {
   user_id?: string; // 用户ID筛选
-  engine_id?: number; // 引擎ID筛选
   start_date?: string; // 开始日期 YYYY-MM-DD
   end_date?: string; // 结束日期 YYYY-MM-DD
 }
