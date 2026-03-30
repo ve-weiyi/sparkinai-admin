@@ -30,15 +30,6 @@
         <el-tag v-if="scope.row.status === 1" type="success">成功</el-tag>
         <el-tag v-else type="danger">失败</el-tag>
       </template>
-      <template #billing_status="scope">
-        <el-tag v-if="scope.row.billing_status === 1" type="success">已结算</el-tag>
-        <el-tag v-else-if="scope.row.billing_status === 2" type="danger">失败</el-tag>
-        <el-tag v-else-if="scope.row.billing_status === 3" type="warning">重试中</el-tag>
-        <el-tag v-else type="info">待结算</el-tag>
-      </template>
-      <template #cost_charge="scope">
-        <span>{{ scope.row.cost_charge?.toFixed(6) }}</span>
-      </template>
       <template #request_body="scope">
         <el-button link type="primary" @click="showJson(scope.row.request_body, '请求体')">查看</el-button>
       </template>

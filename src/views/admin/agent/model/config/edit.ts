@@ -37,6 +37,8 @@ const modalConfig: IModalConfig<any> = {
       options: AI_MODEL_TYPE_OPTIONS,
     },
     { label: "最大Token", prop: "max_tokens", type: "input-number", attrs: { min: 0 } },
+    { label: "输入单价", prop: "input_price", type: "input-number", attrs: { min: 0, precision: 8, step: 0.00001 } },
+    { label: "输出单价", prop: "output_price", type: "input-number", attrs: { min: 0, precision: 8, step: 0.00001 } },
     {
       label: "视觉支持",
       prop: "support_vision",

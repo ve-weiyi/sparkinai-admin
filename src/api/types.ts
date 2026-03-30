@@ -41,7 +41,6 @@ export interface AdminInfoDetail {
 // AI 调用日志信息项
 export interface AiLogItem {
   id: number; // 日志ID
-  idempotency_key: string; // 幂等键
   user_id: string; // 用户ID
   terminal_id: string; // 设备ID
   model: string; // 模型名称
@@ -50,13 +49,6 @@ export interface AiLogItem {
   cost_ms: number; // 耗时（毫秒）
   status: number; // 0-失败 1-成功
   error_msg: string; // 错误信息
-  input_tokens: number; // 输入token
-  output_tokens: number; // 输出token
-  total_tokens: number; // 总token
-  cost_charge: number; // 实际费用
-  billing_status: number; // 结算状态
-  transaction_no: string; // 关联流水号
-  billed_at: number; // 结算时间
   created_at: number; // 创建时间
   user_info: UserInfoVO; // 用户信息
   client_info: ClientInfoVO; // 客户端信息
@@ -511,17 +503,19 @@ export interface FileInfoVO {
 
 // 生成记录信息项
 export interface GenerationItem {
-  id: string; // 生成记录ID
+  id: number; // 自增主键
+  generation_id: string; // 生成记录UUID
   user_id: string; // 用户ID
   product_name: string; // 产品名称
-  description: string; // 产品描述
-  image_url: string; // 上传的产品图片URL
-  copy_result: string; // 生成的文案结果（JSON）
-  image_urls: string[]; // 生成的图片URL列表
+  prompt: string; // 用户输入的提示词
+  result: string; // 生成结果
   generation_type: string; // 生成类型
   status: number; // 生成状态
   error_message: string; // 错误信息
-  cost_tokens: number; // 消耗的token数量
+  input_tokens: number; // 输入token数量
+  output_tokens: number; // 输出token数量
+  cost_tokens: number; // 消耗的token总数
+  cost_charge: number; // AI调用费用
   generation_time: number; // 生成耗时（秒）
   engine_id: number; // 使用的引擎配置ID
   created_at: number; // 创建时间

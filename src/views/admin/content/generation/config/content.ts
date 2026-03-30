@@ -40,7 +40,8 @@ const contentConfig: IContentConfig = {
   pk: "id",
   defaultToolbar: ["refresh", "filter", "imports", "exports", "search"],
   cols: [
-    { label: "ID", prop: "id", width: 150, align: "center" },
+    { label: "ID", prop: "id", width: 80, align: "center", sortable: true },
+    { label: "UUID", prop: "generation_id", width: 150, align: "center", show: false },
     {
       label: "用户",
       prop: "user_info",
@@ -55,8 +56,8 @@ const contentConfig: IContentConfig = {
       align: "center",
     },
     {
-      label: "产品描述",
-      prop: "description",
+      label: "提示词",
+      prop: "prompt",
       width: 200,
       align: "center",
       show: false,
@@ -83,7 +84,17 @@ const contentConfig: IContentConfig = {
       templet: "custom",
       slotName: "status",
     },
-    { label: "Token消耗", prop: "cost_tokens", width: 100, align: "center" },
+    { label: "输入Token", prop: "input_tokens", width: 100, align: "center" },
+    { label: "输出Token", prop: "output_tokens", width: 100, align: "center" },
+    { label: "总Token", prop: "cost_tokens", width: 100, align: "center" },
+    {
+      label: "费用",
+      prop: "cost_charge",
+      width: 100,
+      align: "center",
+      templet: "custom",
+      slotName: "cost_charge",
+    },
     { label: "耗时(s)", prop: "generation_time", width: 100, align: "center" },
     {
       label: "错误信息",
@@ -107,8 +118,7 @@ const contentConfig: IContentConfig = {
       fixed: "right",
       templet: "tool",
       operat: [
-        { name: "view_copy", text: "文案", attrs: { type: "primary", plain: true } },
-        { name: "view_images", text: "图片", attrs: { type: "success", plain: true } },
+        { name: "view_result", text: "结果", attrs: { type: "primary", plain: true } },
         { name: "delete", text: "删除", attrs: { type: "danger", plain: true } },
       ],
     },

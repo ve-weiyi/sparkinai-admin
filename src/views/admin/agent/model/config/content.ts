@@ -46,6 +46,8 @@ const contentConfig: IContentConfig = {
       selectList: AI_MODEL_TYPE_SELECT_LIST,
     },
     { label: "最大Token", prop: "max_tokens", width: 100, align: "center" },
+    { label: "输入单价", prop: "input_price", width: 110, align: "center" },
+    { label: "输出单价", prop: "output_price", width: 110, align: "center" },
     {
       label: "视觉支持",
       prop: "support_vision",
