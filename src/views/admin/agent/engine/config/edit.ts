@@ -41,8 +41,8 @@ const modalConfig: IModalConfig<any> = {
       attrs: { type: "textarea", rows: 3 },
     },
     {
-      label: "用户提示词模板",
-      prop: "user_prompt_template",
+      label: "用户提示词",
+      prop: "user_prompt",
       type: "input",
       attrs: { type: "textarea", rows: 3 },
     },

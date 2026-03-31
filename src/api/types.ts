@@ -204,7 +204,7 @@ export interface CreateEngineReq {
   engine_type: string; // 引擎类型
   model_id: number; // 模型ID
   system_prompt?: string; // 系统提示词
-  user_prompt_template?: string; // 用户提示词模板
+  user_prompt?: string; // 用户提示词
   temperature?: number; // 温度参数
   max_tokens?: number; // 最大生成token数
   top_p?: number; // Top-p采样参数
@@ -248,6 +248,8 @@ export interface CreateModelReq {
   model_type: string; // 模型类型
   description?: string; // 模型描述
   max_tokens?: number; // 最大token数
+  input_price?: number; // 输入单价（每1K token）
+  output_price?: number; // 输出单价（每1K token）
   support_vision?: number; // 是否支持视觉输入
   status?: number; // 状态
   sort_order?: number; // 排序顺序
@@ -467,7 +469,7 @@ export interface EngineItem {
   model_id: number; // 模型ID
   model_name: string; // 模型名称
   system_prompt: string; // 系统提示词
-  user_prompt_template: string; // 用户提示词模板
+  user_prompt: string; // 用户提示词
   temperature: number; // 温度参数
   max_tokens: number; // 最大生成token数
   top_p: number; // Top-p采样参数
@@ -506,8 +508,8 @@ export interface GenerationItem {
   id: number; // 自增主键
   generation_id: string; // 生成记录UUID
   user_id: string; // 用户ID
-  product_name: string; // 产品名称
-  prompt: string; // 用户输入的提示词
+  generation_name: string; // 生成任务名称
+  variables: string; // 输入参数
   result: string; // 生成结果
   generation_type: string; // 生成类型
   status: number; // 生成状态
@@ -516,7 +518,7 @@ export interface GenerationItem {
   output_tokens: number; // 输出token数量
   cost_tokens: number; // 消耗的token总数
   cost_charge: number; // AI调用费用
-  generation_time: number; // 生成耗时（秒）
+  cost_time: number; // 生成耗时（秒）
   engine_id: number; // 使用的引擎配置ID
   created_at: number; // 创建时间
   updated_at: number; // 更新时间
@@ -1088,6 +1090,8 @@ export interface ModelItem {
   model_type: string; // 模型类型
   description: string; // 模型描述
   max_tokens: number; // 最大token数
+  input_price: number; // 输入单价（每1K token）
+  output_price: number; // 输出单价（每1K token）
   support_vision: number; // 是否支持视觉输入
   status: number; // 状态
   sort_order: number; // 排序顺序
@@ -1467,7 +1471,7 @@ export interface UpdateEngineReq {
   engine_type: string; // 引擎类型
   model_id: number; // 模型ID
   system_prompt?: string; // 系统提示词
-  user_prompt_template?: string; // 用户提示词模板
+  user_prompt?: string; // 用户提示词
   temperature?: number; // 温度参数
   max_tokens?: number; // 最大生成token数
   top_p?: number; // Top-p采样参数
@@ -1510,6 +1514,8 @@ export interface UpdateModelReq {
   name?: string; // 模型名称
   description?: string; // 模型描述
   max_tokens?: number; // 最大token数
+  input_price?: number; // 输入单价（每1K token）
+  output_price?: number; // 输出单价（每1K token）
   support_vision?: number; // 是否支持视觉输入
   status?: number; // 状态
   sort_order?: number; // 排序顺序

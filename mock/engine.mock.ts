@@ -16,7 +16,7 @@ export default defineMock([
             model_id: 1,
             model_name: "GPT-4",
             system_prompt: "You are a helpful assistant.",
-            user_prompt_template: "{{query}}",
+            user_prompt: "{{query}}",
             temperature: 0.7,
             max_tokens: 2000,
             top_p: 1.0,

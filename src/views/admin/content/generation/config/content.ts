@@ -50,14 +50,14 @@ const contentConfig: IContentConfig = {
       templet: "custom",
     },
     {
-      label: "产品名称",
-      prop: "product_name",
+      label: "任务名称",
+      prop: "generation_name",
       minWidth: 150,
       align: "center",
     },
     {
-      label: "提示词",
-      prop: "prompt",
+      label: "输入参数",
+      prop: "variables",
       width: 200,
       align: "center",
       show: false,
@@ -95,7 +95,7 @@ const contentConfig: IContentConfig = {
       templet: "custom",
       slotName: "cost_charge",
     },
-    { label: "耗时(s)", prop: "generation_time", width: 100, align: "center" },
+    { label: "耗时(s)", prop: "cost_time", width: 100, align: "center" },
     {
       label: "错误信息",
       prop: "error_message",
