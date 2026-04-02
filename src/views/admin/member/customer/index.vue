@@ -48,27 +48,27 @@ function handleToolbarClick(name: string) {
 const handleOperateClick = (data: IOperateData) => {
   switch (data.name) {
     case "recharge":
-      ElMessageBox.prompt("请输入充值Token数量", "用户充值", {
+      ElMessageBox.prompt("请输入充值金额", "充值金额", {
         confirmButtonText: "确定",
         cancelButtonText: "取消",
         inputType: "number",
-        inputPattern: /^\d+$/,
-        inputErrorMessage: "请输入有效的正整数",
+        inputPattern: /^\d+(\.\d+)?$/,
+        inputErrorMessage: "请输入有效金额",
       })
         .then((result: any) => {
-          const tokenAmount = parseInt(result.value);
-          if (isNaN(tokenAmount) || tokenAmount <= 0) {
-            ElMessage.error("充值数量必须是大于0的整数");
+          const amount = parseFloat(result.value);
+          if (isNaN(amount) || amount <= 0) {
+            ElMessage.error("充值金额必须大于0");
             return;
           }
           return UserAPI.rechargeUser({
             user_id: data.row.user_id,
-            token_amount: tokenAmount,
+            amount: amount,
           });
         })
-        .then(() => {
-          ElMessage.success("充值成功");
-          handleResetClick();
+        .then((resp: any) => {
+          if (!resp) return;
+          ElMessage.success("充值请求已提交，余额将稍后更新");
         })
         .catch((error) => {
           if (error !== "cancel") console.error(error);

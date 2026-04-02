@@ -1264,7 +1264,7 @@ export interface RechargePackageItem {
 // 用户充值请求
 export interface RechargeUserReq {
   user_id: string; // 用户ID (UUID)
-  token_amount: number; // 充值token数量
+  amount: number; // 充值金额
   description?: string; // 充值说明
 }
 
