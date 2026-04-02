@@ -158,9 +158,9 @@ Key features:
 - WebSocket: `ws://localhost:9091/api/v1/websocket`
 
 **Production** (`.env.production`):
-- API: `https://admin.veweiyi.cn`
+- API: `https://admin.sparkinai.com`
 - Mock disabled
-- WebSocket: `wss://admin.veweiyi.cn/api/v1/websocket`
+- WebSocket: `wss://admin.sparkinai.com/api/v1/websocket`
 
 ### Mock Server
 
