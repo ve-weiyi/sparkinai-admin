@@ -71,8 +71,20 @@ const contentConfig: IContentConfig = {
       selectList: GENERATION_TYPE_SELECT_LIST,
     },
     {
-      label: "引擎ID",
-      prop: "engine_id",
+      label: "Agent",
+      prop: "agent",
+      width: 120,
+      align: "center",
+    },
+    {
+      label: "模型",
+      prop: "model",
+      width: 130,
+      align: "center",
+    },
+    {
+      label: "供应商",
+      prop: "provider",
       width: 100,
       align: "center",
     },

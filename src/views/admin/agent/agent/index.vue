@@ -30,16 +30,12 @@ import contentConfig from "./config/content";
 import addConfig from "./config/add";
 import editConfig from "./config/edit";
 import usePage from "@/components/CURD/usePage";
-import { AgentEngineAPI } from "@/api";
-import { ElMessage } from "element-plus";
 import type { IOperateData } from "@/components/CURD/types";
 
 const {
-  searchRef,
   contentRef,
   addModalRef,
   editModalRef,
-  handleQueryClick,
   handleResetClick,
   handleAddClick,
   handleEditClick,
@@ -53,21 +49,9 @@ function handleToolbarClick(name: string) {
   console.log(name);
 }
 
-// 处理自定义操作
-const handleOperateClick = async (data: IOperateData) => {
-  switch (data.name) {
-    case "set_default":
-      try {
-        await AgentEngineAPI.setDefaultEngine({ id: data.row.id });
-        ElMessage.success("设置默认成功");
-        contentRef.value?.handleRefresh();
-      } catch (error) {
-        console.error(error);
-      }
-      break;
-    case "edit":
-      handleEditClick(data.row);
-      break;
+const handleOperateClick = (data: IOperateData) => {
+  if (data.name === "edit") {
+    handleEditClick(data.row);
   }
 };
 </script>

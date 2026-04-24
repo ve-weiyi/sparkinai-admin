@@ -15,21 +15,22 @@ export enum AiModelTypeEnum {
 }
 
 /**
- * AI 引擎类型枚举
+ * Agent 类型枚举
  */
-export enum AiEngineTypeEnum {
-  ANALYSIS = "analysis", // 产品分析
-  COPY = "copy", // 文案生成
-  IMAGE_SET = "image_set", // 套图生成
-  IMAGE = "image", // 图片生成
+export enum AgentTypeEnum {
+  CHAT_MODEL = "chat_model", // 对话模型
+  TRANSFER = "transfer",     // 路由转发
 }
 
 /**
- * 引擎配置类型枚举
+ * Agent 模型 key 枚举（对应 agent.json models）
  */
-export enum EngineConfigTypeEnum {
-  TEXT = "text", // 文案生成
-  IMAGE = "image", // 图片生成
+export enum AgentModelKeyEnum {
+  CHAT = "chat",
+  CHAT_VL = "chat-vl",
+  EMBEDDING = "embedding",
+  IMAGE = "image",
+  NANO_IMAGE = "nano_image",
 }
 
 /**
@@ -45,6 +46,7 @@ export enum GenerationStatusEnum {
  * 生成类型枚举
  */
 export enum GenerationTypeEnum {
+  AGENT = "agent", // Agent 调用
   COPY = "copy", // 文案
   IMAGE = "image", // 图片
   MIXED = "mixed", // 混合

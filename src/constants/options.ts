@@ -1,7 +1,6 @@
 import {
-  AiEngineTypeEnum,
+  AgentTypeEnum,
   AiModelTypeEnum,
-  EngineConfigTypeEnum,
   GenerationStatusEnum,
   GenerationTypeEnum,
 } from "@/enums";
@@ -37,16 +36,17 @@ export const AI_MODEL_TYPE_OPTIONS = [
   { label: "嵌入", value: AiModelTypeEnum.EMBEDDING },
 ];
 
-export const AI_ENGINE_TYPE_OPTIONS = [
-  { label: "产品分析 (Analysis)", value: AiEngineTypeEnum.ANALYSIS },
-  { label: "文案生成 (Copy)", value: AiEngineTypeEnum.COPY },
-  { label: "套图生成 (Image-Set)", value: AiEngineTypeEnum.IMAGE_SET },
-  { label: "图片生成 (Image)", value: AiEngineTypeEnum.IMAGE },
+export const AGENT_TYPE_OPTIONS = [
+  { label: "对话模型 (chat_model)", value: AgentTypeEnum.CHAT_MODEL },
+  { label: "路由转发 (transfer)", value: AgentTypeEnum.TRANSFER },
 ];
 
-export const ENGINE_CONFIG_TYPE_OPTIONS = [
-  { label: "文案生成", value: EngineConfigTypeEnum.TEXT },
-  { label: "图片生成", value: EngineConfigTypeEnum.IMAGE },
+export const AGENT_MODEL_KEY_OPTIONS = [
+  { label: "chat", value: "chat" },
+  { label: "chat-vl", value: "chat-vl" },
+  { label: "embedding", value: "embedding" },
+  { label: "image", value: "image" },
+  { label: "nano_image", value: "nano_image" },
 ];
 
 export const GENERATION_STATUS_OPTIONS = [
@@ -56,6 +56,7 @@ export const GENERATION_STATUS_OPTIONS = [
 ];
 
 export const GENERATION_TYPE_OPTIONS = [
+  { label: "Agent", value: GenerationTypeEnum.AGENT },
   { label: "文案", value: GenerationTypeEnum.COPY },
   { label: "图片", value: GenerationTypeEnum.IMAGE },
   { label: "混合", value: GenerationTypeEnum.MIXED },
@@ -81,8 +82,7 @@ export const ENABLE_STATUS_SELECT_LIST = toSelectList(ENABLE_STATUS_OPTIONS);
 export const USER_STATUS_SELECT_LIST = toSelectList(USER_STATUS_OPTIONS);
 export const LOGIN_STATUS_SELECT_LIST = toSelectList(LOGIN_STATUS_OPTIONS);
 export const AI_MODEL_TYPE_SELECT_LIST = toSelectList(AI_MODEL_TYPE_OPTIONS);
-export const AI_ENGINE_TYPE_SELECT_LIST = toSelectList(AI_ENGINE_TYPE_OPTIONS);
-export const ENGINE_CONFIG_TYPE_SELECT_LIST = toSelectList(ENGINE_CONFIG_TYPE_OPTIONS);
+export const AGENT_TYPE_SELECT_LIST = toSelectList(AGENT_TYPE_OPTIONS);
 export const GENERATION_STATUS_SELECT_LIST = toSelectList(GENERATION_STATUS_OPTIONS);
 export const GENERATION_TYPE_SELECT_LIST = toSelectList(GENERATION_TYPE_OPTIONS);
 export const CONFIG_TYPE_SELECT_LIST = toSelectList(CONFIG_TYPE_OPTIONS);

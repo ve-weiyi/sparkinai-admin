@@ -189,10 +189,10 @@
             <div class="flex-x-between">
               <div class="title">AI使用统计🍉</div>
               <el-radio-group v-model="aiStatsType" size="small">
+                <el-radio-button value="agents">Agent</el-radio-button>
+                <el-radio-button value="apikeys">API密钥</el-radio-button>
                 <el-radio-button value="models">模型</el-radio-button>
                 <el-radio-button value="providers">供应商</el-radio-button>
-                <el-radio-button value="engines">引擎</el-radio-button>
-                <el-radio-button value="apikeys">API密钥</el-radio-button>
               </el-radio-group>
             </div>
           </template>
@@ -213,7 +213,7 @@ import type {
   UserActivityRankingItem,
   ModelUsageStatsItem,
   ProviderUsageStatsItem,
-  EngineUsageStatsItem,
+  AgentUsageStatsItem,
   ApiKeyUsageStatsItem,
   GetAiUsageStatsResp,
 } from "@/api/types";
@@ -237,12 +237,12 @@ const statsData = ref<GetDashboardStatsResp>({
 const trendData = ref<StatsTrendItem[]>([]);
 const trendDateRange = ref(7);
 const userRankingData = ref<UserActivityRankingItem[]>([]);
-const aiStatsType = ref<"models" | "providers" | "engines" | "apikeys">("models");
+const aiStatsType = ref<"agents" | "apikeys" | "models" | "providers">("agents");
 const aiStatsData = ref<GetAiUsageStatsResp>({
+  agents: [],
+  apikeys: [],
   models: [],
   providers: [],
-  engines: [],
-  apikeys: [],
 });
 
 const greetings = computed(() => {
@@ -421,33 +421,33 @@ const aiUsageOptions = computed<EChartsOption>(() => {
   let seriesName = "";
 
   switch (aiStatsType.value) {
+    case "agents":
+      data = (aiStatsData.value.agents || []).map((item) => ({
+        name: item.name,
+        value: item.usage_count,
+      }));
+      seriesName = "Agent 使用统计";
+      break;
+    case "apikeys":
+      data = (aiStatsData.value.apikeys || []).map((item) => ({
+        name: item.name,
+        value: item.total_calls,
+      }));
+      seriesName = "API密钥调用统计";
+      break;
     case "models":
       data = (aiStatsData.value.models || []).map((item) => ({
-        name: item.model_name,
+        name: item.name,
         value: item.usage_count,
       }));
       seriesName = "模型使用统计";
       break;
     case "providers":
       data = (aiStatsData.value.providers || []).map((item) => ({
-        name: item.provider_name,
+        name: item.name,
         value: item.total_calls,
       }));
       seriesName = "供应商调用统计";
-      break;
-    case "engines":
-      data = (aiStatsData.value.engines || []).map((item) => ({
-        name: item.engine_name,
-        value: item.total_generations,
-      }));
-      seriesName = "引擎生成统计";
-      break;
-    case "apikeys":
-      data = (aiStatsData.value.apikeys || []).map((item) => ({
-        name: item.apikey_name,
-        value: item.total_calls,
-      }));
-      seriesName = "API密钥调用统计";
       break;
   }
 

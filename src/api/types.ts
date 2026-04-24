@@ -38,6 +38,37 @@ export interface AdminInfoDetail {
   roles: string[];
 }
 
+// Agent 信息项
+export interface AgentItem {
+  id: number; // Agent ID
+  name: string; // 展示名称
+  alias_name: string; // 别名
+  agent_key: string; // 唯一标识
+  agent_type: string; // Agent 类型：chat_model | transfer
+  description: string; // Agent 描述
+  instruction: string; // 系统提示词
+  skills: string; // 关联 Skill 名称，逗号分隔
+  tools: string; // 关联 Tool 名称，逗号分隔
+  sub_agents: string; // 子 Agent key，逗号分隔
+  model_key: string; // 模型 key，对应 agent.json models 中的 key
+  temperature: number; // 温度参数
+  max_tokens: number; // 最大 token 数
+  sort_order: number; // 排序
+  status: number; // 状态
+  created_at: number; // 创建时间
+  updated_at: number; // 更新时间
+}
+
+// Agent 使用统计数据项
+export interface AgentUsageStatsItem {
+  name: string; // agent_key，如 chat/image_creator
+  usage_count: number; // 使用次数
+  success_count: number; // 成功次数
+  failed_count: number; // 失败次数
+  success_rate: number; // 成功率
+  total_tokens: number; // 总消耗token数
+}
+
 // AI 调用日志信息项
 export interface AiLogItem {
   id: number; // 日志ID
@@ -74,12 +105,12 @@ export interface ApiKeyItem {
 
 // API密钥使用统计数据项
 export interface ApiKeyUsageStatsItem {
-  apikey_id: number; // API密钥ID
-  apikey_name: string; // API密钥名称
-  provider_name: string; // 供应商名称
+  name: string; // apiKey（脱敏）
   total_calls: number; // 总调用次数
-  quota_usage_rate: number; // 配额使用率
-  last_used_at: number; // 最后使用时间
+  success_count: number; // 成功次数
+  failed_count: number; // 失败次数
+  success_rate: number; // 成功率
+  total_tokens: number; // 总消耗token数
 }
 
 export interface ApiVO {
@@ -172,6 +203,29 @@ export interface ClientInfoVO {
   ip_source: string; // IP归属地
 }
 
+// 创建 Agent 请求
+export interface CreateAgentReq {
+  name: string; // 展示名称
+  alias_name?: string; // 别名
+  agent_key: string; // 唯一标识
+  agent_type: string; // Agent 类型
+  description?: string; // Agent 描述
+  instruction?: string; // 系统提示词
+  skills?: string; // 关联 Skill 名称
+  tools?: string; // 关联 Tool 名称
+  sub_agents?: string; // 子 Agent key
+  model_key?: string; // 模型 key
+  temperature?: number; // 温度参数
+  max_tokens?: number; // 最大 token 数
+  sort_order?: number; // 排序
+  status?: number; // 状态
+}
+
+// 创建 Agent 响应
+export interface CreateAgentResp {
+  id: number; // Agent ID
+}
+
 // 创建API密钥请求
 export interface CreateApiKeyReq {
   provider_id: number; // 供应商ID
@@ -196,28 +250,6 @@ export interface CreateApiReq {
   method: string; // api请求方法
   traceable: number; // 是否追溯操作记录 0不需要，1需要
   status: number; // 状态 0正常 1禁用
-}
-
-// 创建引擎配置请求
-export interface CreateEngineReq {
-  name: string; // 配置名称
-  engine_type: string; // 引擎类型
-  model_id: number; // 模型ID
-  system_prompt?: string; // 系统提示词
-  user_prompt?: string; // 用户提示词
-  temperature?: number; // 温度参数
-  max_tokens?: number; // 最大生成token数
-  top_p?: number; // Top-p采样参数
-  frequency_penalty?: number; // 频率惩罚
-  presence_penalty?: number; // 存在惩罚
-  extra_params?: string; // 额外参数（JSON）
-  is_default?: number; // 是否为默认配置
-  status?: number; // 状态
-}
-
-// 创建引擎配置响应
-export interface CreateEngineResp {
-  id: number; // 引擎配置ID
 }
 
 export interface CreateInboxMessageReq {
@@ -332,6 +364,16 @@ export interface CreateSystemConfigResp {
   id: number; // 配置ID
 }
 
+// 删除 Agent 请求
+export interface DeleteAgentReq {
+  id: number; // Agent ID
+}
+
+// 删除 Agent 响应
+export interface DeleteAgentResp {
+  success: boolean;
+}
+
 // 删除API密钥请求
 export interface DeleteApiKeyReq {
   id: number; // API密钥ID
@@ -344,16 +386,6 @@ export interface DeleteApiKeyResp {
 
 export interface DeleteApiReq {
   id: number; // 主键id
-}
-
-// 删除引擎配置请求
-export interface DeleteEngineReq {
-  id: number; // 引擎配置ID
-}
-
-// 删除引擎配置响应
-export interface DeleteEngineResp {
-  success: boolean;
 }
 
 // 删除生成记录请求
@@ -461,39 +493,6 @@ export interface EmptyReq {
 export interface EmptyResp {
 }
 
-// 引擎配置信息项
-export interface EngineItem {
-  id: number; // 引擎配置ID
-  name: string; // 配置名称
-  engine_type: string; // 引擎类型
-  model_id: number; // 模型ID
-  model_name: string; // 模型名称
-  system_prompt: string; // 系统提示词
-  user_prompt: string; // 用户提示词
-  temperature: number; // 温度参数
-  max_tokens: number; // 最大生成token数
-  top_p: number; // Top-p采样参数
-  frequency_penalty: number; // 频率惩罚
-  presence_penalty: number; // 存在惩罚
-  extra_params: string; // 额外参数（JSON）
-  is_default: number; // 是否为默认配置
-  status: number; // 状态
-  created_at: number; // 创建时间
-  updated_at: number; // 更新时间
-}
-
-// 引擎使用统计数据项
-export interface EngineUsageStatsItem {
-  engine_id: number; // 引擎ID
-  engine_name: string; // 引擎名称
-  engine_type: string; // 引擎类型
-  total_generations: number; // 总生成次数
-  success_generations: number; // 成功生成次数
-  failed_generations: number; // 失败生成次数
-  success_rate: number; // 成功率
-  avg_generation_time: number; // 平均生成耗时（秒）
-}
-
 export interface FileInfoVO {
   file_path: string; // 文件路径
   file_name: string; // 文件名称
@@ -508,7 +507,11 @@ export interface GenerationItem {
   id: number; // 自增主键
   generation_id: string; // 生成记录UUID
   user_id: string; // 用户ID
-  generation_name: string; // 生成任务名称
+  generation_name: string; // 生成任务名称（alias_name）
+  agent: string; // agent_key，如 chat/image_creator
+  model: string; // 模型代码，如 qwen-plus
+  provider: string; // 供应商代码，如 qwen
+  api_key: string; // apiKey（脱敏）
   variables: string; // 输入参数
   result: string; // 生成结果
   generation_type: string; // 生成类型
@@ -519,7 +522,6 @@ export interface GenerationItem {
   cost_tokens: number; // 消耗的token总数
   cost_charge: number; // AI调用费用
   cost_time: number; // 生成耗时（秒）
-  engine_id: number; // 使用的引擎配置ID
   created_at: number; // 创建时间
   updated_at: number; // 更新时间
   user_info: UserInfoVO; // 用户信息
@@ -531,6 +533,30 @@ export interface GetAdminListReq extends PageQuery {
   phone?: string;
   status?: number; // 状态: -1删除 0正常 1禁用
   user_ids?: string[]; // 管理员ID
+}
+
+// 获取 Agent 详情请求
+export interface GetAgentDetailReq {
+  id: number; // Agent ID
+}
+
+// 获取 Agent 详情响应
+export interface GetAgentDetailResp extends AgentItem {
+}
+
+// Agent 列表查询请求
+export interface GetAgentListReq extends PageQuery {
+  agent_type?: string; // 类型筛选：chat_model | transfer
+  status?: number; // 状态筛选
+  keyword?: string; // 关键词搜索
+}
+
+// Agent 列表响应
+export interface GetAgentListResp {
+  page: number;
+  page_size: number;
+  total: number;
+  list: AgentItem[];
 }
 
 // AI 调用日志列表查询请求
@@ -556,10 +582,10 @@ export interface GetAiUsageStatsReq {
 
 // 获取AI使用统计响应
 export interface GetAiUsageStatsResp {
+  agents: AgentUsageStatsItem[]; // Agent统计列表
+  apikeys: ApiKeyUsageStatsItem[]; // API密钥统计列表
   models: ModelUsageStatsItem[]; // 模型统计列表
   providers: ProviderUsageStatsItem[]; // 供应商统计列表
-  engines: EngineUsageStatsItem[]; // 引擎统计列表
-  apikeys: ApiKeyUsageStatsItem[]; // API密钥统计列表
 }
 
 // API密钥列表查询请求
@@ -648,21 +674,6 @@ export interface GetEmailMessageListResp {
   page_size: number;
   total: number;
   list: EmailMessageItem[];
-}
-
-// 引擎配置列表查询请求
-export interface GetEngineListReq extends PageQuery {
-  engine_type?: string; // 引擎类型筛选
-  status?: number; // 状态筛选
-  keyword?: string; // 关键词搜索
-}
-
-// 引擎配置列表响应
-export interface GetEngineListResp {
-  page: number;
-  page_size: number;
-  total: number;
-  list: EngineItem[];
 }
 
 // 获取生成记录详情请求
@@ -1101,14 +1112,11 @@ export interface ModelItem {
 
 // 模型使用统计数据项
 export interface ModelUsageStatsItem {
-  model_id: number; // 模型ID
-  model_name: string; // 模型名称
-  provider_name: string; // 供应商名称
+  name: string; // 模型代码，如 qwen-plus
   usage_count: number; // 使用次数
   success_count: number; // 成功次数
   failed_count: number; // 失败次数
   success_rate: number; // 成功率
-  avg_latency: number; // 平均延迟（毫秒）
   total_tokens: number; // 总消耗token数
 }
 
@@ -1227,14 +1235,12 @@ export interface ProviderItem {
 
 // 供应商使用统计数据项
 export interface ProviderUsageStatsItem {
-  provider_id: number; // 供应商ID
-  provider_name: string; // 供应商名称
+  name: string; // 供应商代码，如 qwen
   total_calls: number; // 总调用次数
   success_calls: number; // 成功调用次数
   failed_calls: number; // 失败调用次数
   success_rate: number; // 成功率
   total_tokens: number; // 总消耗token数
-  avg_latency: number; // 平均延迟（毫秒）
 }
 
 export interface QueryUserLoginHistoryReq extends PageQuery {
@@ -1341,17 +1347,6 @@ export interface SendPhoneCodeReq {
   type: string; // login / reset_password / bind_phone
 }
 
-// 设置默认引擎配置请求
-export interface SetDefaultEngineReq {
-  id: number; // 引擎配置ID
-  is_default?: number; // 是否为默认配置
-}
-
-// 设置默认引擎配置响应
-export interface SetDefaultEngineResp {
-  success: boolean;
-}
-
 export interface SmsMessageItem {
   id: number;
   phone: string;
@@ -1438,6 +1433,29 @@ export interface UpdateAdminStatusReq {
   status: number; // 状态: -1删除 0正常 1禁用
 }
 
+// 更新 Agent 请求
+export interface UpdateAgentReq {
+  id: number; // Agent ID
+  name?: string; // 展示名称
+  alias_name?: string; // 别名
+  agent_type?: string; // Agent 类型
+  description?: string; // Agent 描述
+  instruction?: string; // 系统提示词
+  skills?: string; // 关联 Skill 名称
+  tools?: string; // 关联 Tool 名称
+  sub_agents?: string; // 子 Agent key
+  model_key?: string; // 模型 key
+  temperature?: number; // 温度参数
+  max_tokens?: number; // 最大 token 数
+  sort_order?: number; // 排序
+  status?: number; // 状态
+}
+
+// 更新 Agent 响应
+export interface UpdateAgentResp {
+  success: boolean;
+}
+
 // 更新API密钥请求
 export interface UpdateApiKeyReq {
   id: number; // API密钥ID
@@ -1462,29 +1480,6 @@ export interface UpdateApiReq {
   method: string; // api请求方法
   traceable: number; // 是否追溯操作记录 0不需要，1需要
   status: number; // 状态 0正常 1禁用
-}
-
-// 更新引擎配置请求
-export interface UpdateEngineReq {
-  id: number; // 引擎配置ID
-  name?: string; // 配置名称
-  engine_type: string; // 引擎类型
-  model_id: number; // 模型ID
-  system_prompt?: string; // 系统提示词
-  user_prompt?: string; // 用户提示词
-  temperature?: number; // 温度参数
-  max_tokens?: number; // 最大生成token数
-  top_p?: number; // Top-p采样参数
-  frequency_penalty?: number; // 频率惩罚
-  presence_penalty?: number; // 存在惩罚
-  extra_params?: string; // 额外参数（JSON）
-  is_default?: number; // 是否为默认配置
-  status?: number; // 状态
-}
-
-// 更新引擎配置响应
-export interface UpdateEngineResp {
-  success: boolean;
 }
 
 export interface UpdateInboxMessageReq {

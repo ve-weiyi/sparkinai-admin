@@ -32,10 +32,10 @@ export default {
       meta: { title: "密钥管理", keepAlive: true },
     },
     {
-      path: "engine",
-      component: () => import("@/views/admin/agent/engine/index.vue"),
-      name: "Engine",
-      meta: { title: "引擎配置", keepAlive: true },
+      path: "agent",
+      component: () => import("@/views/admin/agent/agent/index.vue"),
+      name: "Agent",
+      meta: { title: "Agent 管理", keepAlive: true },
     },
   ],
 } satisfies RouteRecordRaw;

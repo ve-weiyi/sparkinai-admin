@@ -1,8 +1,8 @@
 export * from './types';
 
 export { AdminuserAPI } from './adminuser';
+export { AgentAgentAPI } from './agent_agent';
 export { AgentApikeyAPI } from './agent_apikey';
-export { AgentEngineAPI } from './agent_engine';
 export { AgentModelAPI } from './agent_model';
 export { AgentProviderAPI } from './agent_provider';
 export { AuthAPI } from './auth';
